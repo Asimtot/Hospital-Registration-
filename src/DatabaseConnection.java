@@ -43,9 +43,24 @@ public class DatabaseConnection {
 
         return true;
     }
+    boolean addDepartment(Department d) throws SQLException{
+        departmentDao.create(d);
 
+        return true;
+    }
+
+    boolean updateDoctor(Doctor d) throws SQLException {
+        doctorDao.update(d);
+
+        return true;
+    }
+    
     Doctor getDoctor(int id) throws SQLException {
         return doctorDao.queryForId( (String.valueOf(id)));
+    }
+
+    Department getDepartment(int id) throws SQLException{
+        return departmentDao.queryForId(String.valueOf(id));
     }
 
     public static void main(String[] args) throws SQLException {
@@ -53,22 +68,19 @@ public class DatabaseConnection {
         database.connectDoctor();
         database.connectDepartment();
 
-        Doctor d= new Doctor(3,"esma","sak");
-        Department c= new Department("ltt","boğaz");
-        d.setDepartment(c);
-        database.addDoctor(d);
 
-        //Doctor d= database.getDoctor(2);
+        Department d= new Department("kbb","kulak çubuğu");
+        database.addDepartment(d);
 
-        //System.out.println(d.toString());
+        Doctor c= database.getDoctor(1);
+        c.setDepartment(d);
 
-
+        database.updateDoctor(c);
 
 
+        //Doctor a= database.getDoctor(4);
 
-
-
-
+        //System.out.println(a.toString());
 
     }
 

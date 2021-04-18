@@ -5,7 +5,7 @@ import com.j256.ormlite.table.DatabaseTable;
 @DatabaseTable(tableName = "Doctor")
 public class Doctor {
 
-    @DatabaseField (id = true)
+    @DatabaseField (generatedId = true)
     private int ID;
     @DatabaseField
     private String name;
@@ -16,11 +16,11 @@ public class Doctor {
         this.department = department;
     }
 
-    @DatabaseField(foreign = true, foreignAutoCreate = true,foreignAutoRefresh = true)
+    @DatabaseField(foreign = true,foreignAutoRefresh = true)
     private Department department;
 
-    public Doctor(int ID, String name, String surname) {
-        this.ID = ID;
+    public Doctor(String name, String surname) {
+
         this.name = name;
         this.surname = surname;
     }

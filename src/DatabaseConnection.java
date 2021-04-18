@@ -1,16 +1,24 @@
 
+import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.dao.DaoManager;
+import com.j256.ormlite.jdbc.JdbcConnectionSource;
+import com.j256.ormlite.support.ConnectionSource;
+
 import java.sql.*;
 
 public class DatabaseConnection {
-    static Connection conn;
-    static Statement statement;
+    ConnectionSource conn;
+    Statement statement;
+
+    Dao<Doctor, String> doctorDao;
+    Dao<Department, String> departmentDao;
 
     DatabaseConnection(){
         String url= "jdbc:sqlite:hospital_db.db";
         conn= null;
 
         try {
-            conn = DriverManager.getConnection(url);
+            conn = new JdbcConnectionSource(url);
             System.out.println("Bağlandı ");
             System.out.println();
         }
@@ -20,50 +28,48 @@ public class DatabaseConnection {
         }
     }
 
-
-    //Test Amaçlı
-    void testListResults() throws SQLException {
-
-        String str= "SELECT * FROM Doctor";
-        statement= conn.createStatement();
-        ResultSet rs= statement.executeQuery(str);
-
-        while(rs.next()){
-            System.out.println(rs.getString("name")+" ID: "+
-                               rs.getInt("ID"));
-        }
-
+    boolean connectDoctor() throws SQLException {
+        doctorDao = DaoManager.createDao((ConnectionSource) conn, Doctor.class);
+        return true;
     }
-    //Test Amaçlı
-    //BOZUK
-    void testListResultsTwo() throws SQLException {
 
-        String str= "SELECT * FROM Doctor";
-        statement= conn.createStatement();
-        ResultSet rs= statement.executeQuery(str);
-
-        while(rs.next()){
-            System.out.println(rs.getString("name"));
-        }
-
+    boolean connectDepartment() throws SQLException{
+        departmentDao= DaoManager.createDao(conn,Department.class);
+        return true;
     }
 
     boolean addDoctor(Doctor d) throws SQLException {
-        int ID= d.getID();
-        String name= "'"+d.getName()+"'";
-        String surname= "'"+d.getSurname()+"'";
+        doctorDao.create(d);
 
-        String str= "INSERT INTO Doctor VALUES ("+ID+","+name+","+surname+")";
-        System.out.println(str);
-       //statement= conn.createStatement();
-        statement.executeUpdate(str);
         return true;
-
     }
+
+    Doctor getDoctor(int id) throws SQLException {
+        return doctorDao.queryForId( (String.valueOf(id)));
+    }
+
     public static void main(String[] args) throws SQLException {
-        DatabaseConnection connection = new DatabaseConnection();
-        connection.testListResultsTwo();
-        connection.testListResults();
+        DatabaseConnection database= new DatabaseConnection();
+        database.connectDoctor();
+        database.connectDepartment();
+
+        Doctor d= new Doctor(3,"esma","sak");
+        Department c= new Department("ltt","boğaz");
+        d.setDepartment(c);
+        database.addDoctor(d);
+
+        //Doctor d= database.getDoctor(2);
+
+        //System.out.println(d.toString());
+
+
+
+
+
+
+
+
+
     }
 
 

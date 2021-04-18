@@ -68,19 +68,12 @@ public class DatabaseConnection {
         database.connectDoctor();
         database.connectDepartment();
 
+        Department d= database.getDepartment(1);
+        System.out.println(d.getDoctors().size());
 
-        Department d= new Department("kbb","kulak çubuğu");
-        database.addDepartment(d);
-
-        Doctor c= database.getDoctor(1);
-        c.setDepartment(d);
-
-        database.updateDoctor(c);
-
-
-        //Doctor a= database.getDoctor(4);
-
-        //System.out.println(a.toString());
+        for(Doctor b: d.getDoctors()){
+            System.out.println(b.toString());
+        }
 
     }
 

@@ -1,5 +1,9 @@
 import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.field.ForeignCollectionField;
 import com.j256.ormlite.table.DatabaseTable;
+
+import java.util.ArrayList;
+import java.util.Collection;
 
 @DatabaseTable(tableName = "Department")
 public class Department {
@@ -12,6 +16,9 @@ public class Department {
     @DatabaseField
     private String equipment;
 
+    @ForeignCollectionField(eager = false)
+    private Collection<Doctor> doctors;
+
     public String getName() {
         return name;
     }
@@ -20,11 +27,14 @@ public class Department {
         return equipment;
     }
 
-
+    public Collection<Doctor> getDoctors() {
+        return doctors;
+    }
 
     public Department(String name, String eguipment) {
         this.name = name;
         this.equipment = eguipment;
+        doctors= new ArrayList<>();
     }
     Department(){}
 
@@ -34,5 +44,8 @@ public class Department {
                 "name='" + name + '\'' +
                 ", eguipment='" + equipment + '\'' +
                 '}';
+    }
+    void addDoctor(Doctor d){
+        doctors.add(d);
     }
 }

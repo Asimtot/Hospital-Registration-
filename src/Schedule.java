@@ -10,7 +10,7 @@ public class Schedule {
     int endingMinute;
 
     // constructor
-
+    // simple
     public Schedule(){
         days = new ArrayList<>();
         startingHour = 8;
@@ -18,13 +18,24 @@ public class Schedule {
         endingHour = 17;
         endingMinute = 0;
     }
+
+    // complete
+    public Schedule(int startingHour, int startingMinute, int endingHour, int endingMinute) {
+        days = new ArrayList<>();
+        this.startingHour = startingHour;
+        this.startingMinute = startingMinute;
+        this.endingHour = endingHour;
+        this.endingMinute = endingMinute;
+    }
+
     // methods
 
     public boolean addAppointment(Appointment app){
-        DailySchedule day = findDay(app.startingTime);
+        DailySchedule day = findDay(app.getStartingTime());
         if (day != null){
             return day.addAppointment(app);
         }
+        // if the day is not in the schedule, create that day and add the appointment
         else{
             LocalDateTime date = app.getStartingTime();
             DailySchedule newDay = new DailySchedule(date.getYear(),date.getMonthValue(), date.getDayOfMonth(),
@@ -50,8 +61,11 @@ public class Schedule {
             return false;
         }
         else{
+            // create a new appointment with a new date
             Appointment newApp = new Appointment(app.getName(), app.getPeople(), app.getPlace(), app.getDepartment(), app.getTimeInterval(),
                     newYear, newMonth, newDayOfMonth, newHour, newMinute);
+
+            // if the appointment was successfully added, then cancel the odd appointment
             if(addAppointment(newApp)){
                 day.cancelAppointment(app);
                 return true;

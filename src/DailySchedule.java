@@ -2,7 +2,11 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 
-
+/**
+ * Simulates one day of the schedule
+ * IMPORTANT: if the simple constructor is used, then the setting order must be:
+ *            setDate - setStartingTime - setEndingTime
+ */
 public class DailySchedule {
     // properties
     LocalDateTime date;
@@ -10,29 +14,34 @@ public class DailySchedule {
     LocalDateTime endingTime;
     ArrayList<Appointment> appointments;
 
-    // constructor
+    // constructors
+    // simple
+    public DailySchedule(){
+        appointments = new ArrayList<>();
+    }
+    // complete
     public DailySchedule(int year, int month, int dayOfMonth, int startingHour, int startingMinute, int endingHour, int endingMinute) {
         date = LocalDateTime.of(year, month, dayOfMonth, 0, 0);
         startingTime = LocalDateTime.of(year, month, dayOfMonth, startingHour, startingMinute);
         endingTime = LocalDateTime.of(year, month, dayOfMonth, endingHour, endingMinute);
-        this.appointments = new ArrayList<>();
+        appointments = new ArrayList<>();
     }
 
     public boolean addAppointment(Appointment app){
-        boolean crashes = false;
+        boolean clashes = false;
         // check if the appointment is during the working hours
         if (app.getStartingTime().isAfter(startingTime) && app.getEndingTime().isBefore(endingTime)){
-            // check if the given appointment crashes with any of the previous appointments
+            // check if the given appointment clashes with any of the previous appointments
             for (Appointment a : appointments) {
                 if (app.getStartingTime().isAfter(a.getStartingTime()) && app.getStartingTime().isBefore(a.getEndingTime())
                         || (app.getEndingTime().isAfter(a.getStartingTime()) && app.getEndingTime().isBefore(a.getStartingTime()))){
-                    crashes = true;
+                    clashes = true;
                     break;
                 }
             }
-            if (!crashes)
+            if (!clashes)
                 appointments.add(app);
-            return crashes;
+            return clashes;
         }
         else
             return false;
@@ -73,6 +82,16 @@ public class DailySchedule {
 
     // setters
 
+
+    // IMPORTANT: the setting order: setDate - setStartingTime - setEndingTime
+
+
+    public void setDate(LocalDateTime date) {
+        this.date = date;
+    }
+
+    // no setAppointments method - use addAppointment instead to prevent clashes
+
     public boolean setStartingTime(LocalDateTime startingTime) {
         if(startingTime.isAfter(date) && startingTime.isBefore(date.plusDays(1))){
             this.startingTime = startingTime;
@@ -91,7 +110,7 @@ public class DailySchedule {
     }
 
     public boolean setEndingTime(LocalDateTime endingTime) {
-        if(endingTime.isAfter(date) && endingTime.isBefore(date.plusDays(1))){
+        if(endingTime.isAfter(startingTime) && endingTime.isBefore(date.plusDays(1))){
             this.endingTime = endingTime;
             return true;
         }
@@ -99,7 +118,7 @@ public class DailySchedule {
     }
 
     public boolean setEndingTime(int year, int month, int dayOfMonth, int hour, int minute) {
-        if(endingTime.isAfter(date) && endingTime.isBefore(date.plusDays(1))){
+        if(endingTime.isAfter(startingTime) && endingTime.isBefore(date.plusDays(1))){
             this.endingTime = LocalDateTime.of(year, month, dayOfMonth, hour, minute);
             return true;
         }

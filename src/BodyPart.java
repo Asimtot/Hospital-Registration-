@@ -6,14 +6,28 @@ import java.util.List;
 public class BodyPart {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
-    //DATABASE için gerekli
+    //DATABASE için gerekliler
     @ManyToMany(mappedBy = "parts")
     private List<Body> bodys;
 
     @OneToMany(mappedBy = "relatedBodyPart")
-    List<Disease> diseases;
+    private List<Disease> diseases;
+
+    @OneToMany(mappedBy = "bodyPart")
+    private List<Consultation> consultations;
+
+        //CONSTRUCTORS
+    BodyPart(){}
+
+        //METHODS
+
+            //GETTERS
+
+    public int getId() {
+        return id;
+    }
 }

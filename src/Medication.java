@@ -1,4 +1,5 @@
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -6,7 +7,7 @@ import java.util.List;
 public class Medication {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
@@ -14,11 +15,26 @@ public class Medication {
     @JoinTable(name = "MedicationDiseaseJoin",
                joinColumns = @JoinColumn(name= "Medication_id"),
                inverseJoinColumns = @JoinColumn(name="Disease_id"))
-    private List<Disease> dClashes;
+    private List<Disease> dClashes= new ArrayList<>();
 
-    //DATABASE için gerekli
+        //DATABASE için gerekli parametreler
     @ManyToMany(mappedBy = "medications")
     private List<Prescription> prescriptions;
 
+        //CONSTRUCTORS
+    Medication(){}
 
+        //METHODS
+    void addClasshingDisease(Disease d){
+        dClashes.add(d);
+    }
+
+            //GETTERS
+    public int getId() {
+        return id;
+    }
+    
+    public List<Disease> getdClashes() {
+        return dClashes;
+    }
 }

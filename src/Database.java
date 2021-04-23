@@ -26,8 +26,23 @@ public class Database {
             System.out.println("Bağlanamadı");
             System.out.println(e.getMessage());
         }
+
+
+    }
+
+    boolean add(){
+        factory= configuration.buildSessionFactory();
+        session= factory.getCurrentSession();
+        session.beginTransaction();
+
+        session.getTransaction().commit();
+        session.close();
+
+        return true;
     }
     public static void main(String[] args) {
         Database database= new Database();
+        database.add();
+
     }
 }

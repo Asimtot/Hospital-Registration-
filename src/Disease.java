@@ -6,7 +6,7 @@ import java.util.List;
 public class Disease {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
@@ -14,14 +14,29 @@ public class Disease {
     @JoinColumn(name = "BodyPart_id")
     private BodyPart relatedBodyPart;
 
-    //DATABASE için gerekli
+    //DATABASE için gerekliler
     @ManyToMany(mappedBy = "dClashes")
     private List<Medication> clashingMedication;
 
-    //DATABASE için gerekli
     @ManyToMany(mappedBy = "diagnosis")
     private List<Consultation> consultations;
 
+        //CONSTRUCTORS
+    Disease(){};
+
+        //METHODS
+    void setRelatedBodyPart(BodyPart bp){
+        relatedBodyPart= bp;
+    }
+
+            //GETTERS
+    public int getId() {
+        return id;
+    }
+
+    public BodyPart getRelatedBodyPart() {
+        return relatedBodyPart;
+    }
 
 
 }

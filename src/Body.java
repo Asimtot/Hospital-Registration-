@@ -1,4 +1,5 @@
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -6,13 +7,36 @@ import java.util.List;
 public class Body {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
     @ManyToMany
     @JoinTable(name = "BodyPartBodyJoin",
             joinColumns = @JoinColumn(name= "Body_id"),
-            inverseJoinColumns = @JoinColumn(name="BodyPart_id_id"))
-    private List<BodyPart> parts;
+            inverseJoinColumns = @JoinColumn(name="BodyPart_id"))
+    private List<BodyPart> parts= new ArrayList<>();
+
+    //DATABASE için gerekliler
+    @OneToOne(mappedBy = "body")
+    private GeneralInfo generalInfo;
+
+        //CONSTRUCTORS
+    Body(){}
+
+        //METHODS
+    void addBodyPart(BodyPart bp){
+        parts.add(bp);
+    }
+
+
+            //GETTERS
+
+    public int getId() {
+        return id;
+    }
+
+    public List<BodyPart> getParts() {
+        return parts;
+    }
 }

@@ -11,6 +11,12 @@ public class Patient { // should implement Sendable and extend Person
     private ArrayList<Disease> activeDiseases;
 
     // constructors
+
+    public Patient(){
+        doctors = new ArrayList<Doctor>();
+        appointment = new ArrayList<Appointment>();
+        activeDiseases = new ArrayList<Disease>();
+    }
     // simple - just initializes
     public Patient(String name, String email, int ID){
         super(name, email); // FIXIT Person class should have createRandomPassword and showPassword methods

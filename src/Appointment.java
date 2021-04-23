@@ -5,7 +5,8 @@ import java.util.ArrayList;
 public class Appointment implements Comparable{
     // properties
     String name;
-    ArrayList<Person> people;
+    Doctor doctor;
+    Patient patient;
     LocalDateTime startingTime;
     LocalDateTime endingTime;
     Hospital place;
@@ -13,15 +14,15 @@ public class Appointment implements Comparable{
     int timeInterval;
 
     // constructor
-    // simple
+    // default
     public Appointment(){
-        people = new ArrayList<Person>();
     }
     // complete
-    public Appointment(String name, ArrayList<Person> people, Hospital place, Department department, int timeInterval,
+    public Appointment(String name, Doctor doctor, Patient patient, Hospital place, Department department, int timeInterval,
                        int year, int month, int dayOfMonth, int hourOfDay, int minute) {
         this.name = name;
-        this.people = people;
+        this.doctor = doctor;
+        this.patient = patient;
         this.place = place;
         this.department = department;
         this.timeInterval = timeInterval;
@@ -42,8 +43,12 @@ public class Appointment implements Comparable{
         return name;
     }
 
-    public ArrayList<Person> getPeople() {
-        return people;
+    public Doctor getDoctor() {
+        return doctor;
+    }
+
+    public Patient getPatient() {
+        return patient;
     }
 
     public Department getDepartment() {
@@ -73,8 +78,12 @@ public class Appointment implements Comparable{
         this.name = name;
     }
 
-    public void setPeople(ArrayList<Person> people) {
-        this.people = people;
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
     }
 
     public void addPerson(Person p){

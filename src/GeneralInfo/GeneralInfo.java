@@ -46,7 +46,7 @@ public class GeneralInfo {
     }
 
     public List<Consultation> getConsultations() {
-        return consultations;
+        return  consultations;
     }
 
     public FamilyTree getFamilyTree() {

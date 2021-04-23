@@ -19,6 +19,10 @@ public class Prescription {
             inverseJoinColumns = @JoinColumn(name="Medication_id"))
     private List<Medication> medications= new ArrayList<>();
 
+    @Column(name = "frequency")
+    private String frequency;
+
+
     //DATABASE için gerekli
     @OneToOne(mappedBy = "prescription")
     private Consultation consultation;
@@ -28,11 +32,15 @@ public class Prescription {
 
 
         //METHODS
-    void addMedication(Medication e){
+    public void addMedication(Medication e){
         medications.add(e);
     }
 
-            //GETTERS
+    public void setFrequency(String frequency) {
+        this.frequency = frequency;
+    }
+
+        //GETTERS
     public int getId() {
         return id;
     }
@@ -40,4 +48,10 @@ public class Prescription {
     public List<Medication> getMedications() {
         return medications;
     }
+
+    public String getFrequency() {
+        return frequency;
+    }
+
+
 }

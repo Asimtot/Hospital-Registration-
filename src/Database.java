@@ -1,8 +1,18 @@
+import java.util.ArrayList;
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-import GeneralInfo.*;
+import GeneralInfo.Body;
+import GeneralInfo.BodyPart;
+import GeneralInfo.Consultation;
+import GeneralInfo.Disease;
+import GeneralInfo.FamilyTree;
+import GeneralInfo.GeneralInfo;
+import GeneralInfo.Medication;
+import GeneralInfo.Prescription;
 
 
 public class Database {
@@ -37,6 +47,24 @@ public class Database {
         factory= configuration.buildSessionFactory();
         session= factory.getCurrentSession();
         session.beginTransaction();
+
+        //Prescription p=session.get(Prescription.class,1);
+
+        //System.out.println(p.getMedications().size());
+
+        Prescription p =session.get(Prescription.class, 1);
+
+        Medication m= session.get(Medication.class,4);
+        Medication n= session.get(Medication.class,5);
+
+        p.addMedication(m);
+        p.addMedication(n);
+
+        p.setFrequency("Gunde bir kere");
+
+
+
+
 
         session.getTransaction().commit();
         session.close();

@@ -8,10 +8,20 @@ import java.util.List;
 @Table(name = "Medication")
 public class Medication {
 
+    //TODO
+    //Department relatedField
+    // Medication[] mClashes
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
+
+    @Column(name = "name")
+    private String name;
+
+    @Column(name= "info")
+    private String info;
 
     @ManyToMany
     @JoinTable(name = "MedicationDiseaseJoin",
@@ -26,9 +36,22 @@ public class Medication {
         //CONSTRUCTORS
     Medication(){}
 
+    public Medication(String name, String info){
+        this.name= name;
+        this.info= info;
+    }
+
         //METHODS
     void addClasshingDisease(Disease d){
         dClashes.add(d);
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
     }
 
             //GETTERS
@@ -38,5 +61,24 @@ public class Medication {
     
     public List<Disease> getdClashes() {
         return dClashes;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getInfo() {
+        return info;
+    }
+             //
+
+
+    @Override
+    public String toString() {
+        return "Medication{" +
+                "id= " + id +
+                "\nname='" + name + '\'' +
+                "\ninfo='" + info + '\'' +
+                '}';
     }
 }

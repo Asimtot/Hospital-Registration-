@@ -1,14 +1,23 @@
 package Person;
 import java.util.*;
 
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+
+
 /**
  * Person class
  * @author Eylul Badem
  * @version 1.0, 21.04.2021
 */ 
+@MappedSuperclass
 public class Person {
     
     // Properties
+    @Id
+    @Column(name = "id")
+    int id;
     
     private String name;
     private String email;
@@ -17,7 +26,15 @@ public class Person {
     
     // Constructor
     
-    public Person()
+    public Person(){}
+
+    public Person ( String name, String email)
+    {
+        this.name = name;
+        this.email = email;
+
+        notifications = new ArrayList<Notification>();
+    }
     public Person ( String name, String email, String password )
     {
         this.name = name;

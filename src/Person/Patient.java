@@ -2,17 +2,32 @@ package Person;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
 import Schedule.*;
 import GeneralInfo.*;
 
-
+@Entity
+@Table(name = "Patient")
 public class Patient { // should implement Sendable and extend Person
     // properties
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int ID;
+    
     private GeneralInfo info;
     private ArrayList<Doctor> doctors;
     private ArrayList<Appointment> appointment;
+    @ManyToOne
+    @JoinColumn(name = "Adress_id")
     private Address address;
+    
     private boolean inICU;
     private ArrayList<Disease> activeDiseases;
 
@@ -25,7 +40,7 @@ public class Patient { // should implement Sendable and extend Person
     }
     // simple - just initializes
     public Patient(String name, String email, int ID){
-        super(name, email); // FIXIT Person class should have createRandomPassword and showPassword methods
+        super(name,email); // FIXIT Person class should have createRandomPassword and showPassword methods
         this.ID = ID;
         info = new GeneralInfo();
         doctors = new ArrayList<Doctor>();

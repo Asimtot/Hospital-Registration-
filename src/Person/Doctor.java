@@ -2,6 +2,13 @@ package Person;
 import java.time.LocalDateTime;
 import java.util.*;
 
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
 import GeneralInfo.*;
 import Schedule.*;
 
@@ -10,16 +17,34 @@ import Schedule.*;
  * @author Eylul Badem
  * @version 1.0, 21.04.2021
 */ 
+@Entity
+@Table(name= "Doctor")
 public class Doctor extends Person {
     
     // Properties
-    
+    @ManyToOne
+    @JoinColumn(name = "Hospital_id")
     private Hospital hospital;
+
+    @ManyToOne
+    @JoinColumn(name = "Department_id")
     private Department department;
+
+    @OneToOne
+    @JoinColumn(name= "Schedule_id")
     private Schedule schedule;
-    private ArrayList<Task> tasks;
+
+    @OneToMany(mappedBy = "reciever")
+    private List<Task> tasks;
+
+
     private ArrayList<Patient> patients;
     
+    //DATABASE için gerekli
+    
+    @OneToMany(mappedBy = "sender")
+    private List<Task> sendTasks;
+
     // Constructors
     public Doctor(){}
     

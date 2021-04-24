@@ -1,6 +1,7 @@
 package Person;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 import Schedule.*;
 import GeneralInfo.*;
@@ -11,11 +12,11 @@ public class Patient extends Person{ // should implement Sendable
     // properties
     private int ID;
     private GeneralInfo info;
-    private ArrayList<Doctor> doctors;
-    private ArrayList<Appointment> appointment;
+    private List<Doctor> doctors;
+    private List<Appointment> appointment;
     private Address address;
     private boolean inICU;
-    private ArrayList<Disease> activeDiseases;
+    private List<Disease> activeDiseases;
 
     // constructors
 
@@ -103,15 +104,15 @@ public class Patient extends Person{ // should implement Sendable
     }
 
     public ArrayList<Appointment> getAppointment() {
-        return appointment;
+        return (ArrayList<Appointment>) appointment;
     }
 
     public ArrayList<Disease> getActiveDiseases() {
-        return activeDiseases;
+        return (ArrayList<Disease>) activeDiseases;
     }
 
     public ArrayList<Doctor> getDoctors() {
-        return doctors;
+        return (ArrayList<Doctor>) doctors;
     }
 
     public GeneralInfo getInfo() {

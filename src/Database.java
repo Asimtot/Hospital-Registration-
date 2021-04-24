@@ -55,7 +55,10 @@ public class Database {
 
         //System.out.println(p.getMedications().size());
 
-        
+        Prescription p =session.get(Prescription.class, 1);
+
+        Medication m= session.get(Medication.class,4);
+        Medication n= session.get(Medication.class,5);
 
         
 

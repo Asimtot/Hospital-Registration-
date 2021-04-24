@@ -1,6 +1,7 @@
 package GeneralInfo;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,13 +29,18 @@ public class Consultation {
     @JoinColumn(name = "BodyPart_id")
     private BodyPart bodyPart;
 
+    // DB eksik
+    private LocalDateTime date;
+
     //DATABASE için gerekli
     @ManyToOne
     @JoinColumn(name = "GeneralInfo_id", referencedColumnName = "id")
     private GeneralInfo generalInfo;
 
+
+
         //CONSTRUCTORS
-    Consultation(){}
+    public Consultation(){}
 
         //METHODS
 
@@ -55,7 +61,10 @@ public class Consultation {
         this.generalInfo= generalInfo;
     }
 
-            //GETTERS
+    public void setDate(LocalDateTime date) {
+        this.date = date;
+    }
+    //GETTERS
 
     public BodyPart getBodyPart() {
         return bodyPart;
@@ -73,5 +82,7 @@ public class Consultation {
         return id;
     }
 
-    
+    public LocalDateTime getDate() {
+        return date;
+    }
 }

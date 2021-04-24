@@ -6,11 +6,8 @@ import Schedule.*;
 import GeneralInfo.*;
 
 
-<<<<<<< Updated upstream
-public class Patient extends Person{ // should implement Sendable and extend Person
-=======
+
 public class Patient extends Person{ // should implement Sendable
->>>>>>> Stashed changes
     // properties
     private int ID;
     private GeneralInfo info;

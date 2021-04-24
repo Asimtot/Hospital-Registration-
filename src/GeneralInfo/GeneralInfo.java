@@ -36,7 +36,9 @@ public class GeneralInfo {
 
     public Consultation getLastConsultation(){
         consultations.trimToSize();
-        return consultations.get(consultations.size() - 1);
+        if (consultations.size() != 0)
+            return consultations.get(consultations.size() - 1);
+        return null;
     }
 
     public void setBody(Body body) {

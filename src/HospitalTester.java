@@ -61,17 +61,17 @@ public class HospitalTester {
         System.out.println();
 
 
-        Tree d1Tree = new Tree( d1);
-        d1Tree.addPartner(d2);
-        Person Ayşe = new Person();
-        Person Rıza = new Person();
+//        Tree d1Tree = new Tree( d1);
+//        d1Tree.addPartner(d2);
+//        Person Ayşe = new Person();
+//        Person Rıza = new Person();
+//
+//        d1Tree.addFather(Rıza);
+//        d1Tree.addMother(Ayşe);
 
-        d1Tree.addFather(Rıza);
-        d1Tree.addMother(Ayşe);
-
-        Tree ayşeTree = new Tree(p5);
-
-        System.out.println(ayşeTree.isRelative(d1Tree));
+//        Tree ayşeTree = new Tree(p5);
+//
+//        System.out.println(ayşeTree.isRelative(d1Tree));
 
     }
 }

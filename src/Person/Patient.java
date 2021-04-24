@@ -43,20 +43,21 @@ public class Patient extends Person{ // should implement Sendable
         this.ID = ID;
         this.inICU = inICU;
 
-        // if any one address field is not null, then create an instance of Address
-        if (city != null || country != null || address != null){
-            address = new Address(city, country, address); // FIXIT check Address constructor
-        }
+        // if any one address field is not null, then create an instance of Address FIXIT
+//        if (city != null || country != null || address != null){
+//            address = new Address(city, country, address); // FIXIT check Address constructor
+//        }
 
         doctors = new ArrayList<Doctor>();
-        addDoctor(Booting.getUser); // user must be the patient's doctor
+//        addDoctor(Booting.getUser); // user must be the patient's doctor FIXIT
 
         appointment = new ArrayList<Appointment>(); // no way to add appointments in the patient creation screen
 
         activeDiseases = new ArrayList<Disease>();
         Collections.addAll(activeDiseases, diseases);
 
-        info = new GeneralInfo(mother, father, partner, siblings, children); // FIXIT check GeneralInfo constructor
+        info = new GeneralInfo(); // FIXIT
+//        info = new GeneralInfo(mother, father, partner, siblings, children); // FIXIT check GeneralInfo constructor
         // ^^ should initialize empty body and consultations
         // ^^ should check if any Patient is null first
     }
@@ -90,9 +91,10 @@ public class Patient extends Person{ // should implement Sendable
         return activeDiseases.remove(disease);
     }
 
-    public void drawBody(){
-        info.drawBody();
-    }
+    // FIXIT
+//    public void drawBody(){
+//        info.drawBody();
+//    }
 
     // *** getters ***
 

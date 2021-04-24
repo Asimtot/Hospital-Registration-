@@ -27,9 +27,10 @@ public class Hospital {
 
     //constructors
     public Hospital(){
-        hospitalDoctors = new ArrayList<Doctor>();
+        hospitalDoctors = new ArrayList<>();
         icuOccupancy = 0;
         normalOccupancy = 0;
+        departments = new ArrayList<>();
 
     }
     public Hospital( String hospitalName, int icuCapacity, int normalCapacity){

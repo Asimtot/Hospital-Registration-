@@ -75,7 +75,11 @@ public class DoctorTester{
                         switch (selection2){
                             case M_SHOW_PATIENTS:
                                 for (Patient p : doctor.getPatients()) {
-                                    System.out.println( p.getName() + p.getLastConsultation().getDate());
+                                    System.out.print(p.getName());
+                                    if(p.getLastConsultation() != null)
+                                        System.out.println(p.getLastConsultation().getDate());
+                                    else
+                                        System.out.println();
                                 }
                                 break;
                             case M_SEARCH_PATIENTS:

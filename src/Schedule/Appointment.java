@@ -145,5 +145,19 @@ public class Appointment implements Comparable{
             endingTime = startingTime.plusMinutes(timeInterval);
         }
     }
+
+    @Override
+    public String toString() {
+        return "Appointment{" +
+                "name='" + name + '\'' +
+                ", doctor=" + doctor +
+                ", patient=" + patient +
+                ", startingTime=" + startingTime +
+                ", endingTime=" + endingTime +
+                ", place=" + place +
+                ", department=" + department +
+                ", timeInterval=" + timeInterval +
+                '}';
+    }
 }
 

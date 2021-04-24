@@ -43,6 +43,8 @@ public class DoctorTester{
         Doctor doctor = new Doctor("Deniz Yılmaz", "denizy@gmail.com", "kırılmazşifre1");
         department.addDocToDepartment(doctor);
 
+        Doctor doctor2 = new Doctor("YETER YETER", "yeteryeter@gmail.com", "doğumtarihi1");
+
         Patient patient1 = new Patient("Baran Soyad", "baranx@yahoo.com", 2565);
         patient1.addDoctor(doctor);
         doctor.assignPatient(patient1);
@@ -51,13 +53,16 @@ public class DoctorTester{
         patient1.addConsultation(cons);
         Patient patient2 = new Patient("Gamze Soyad", "gamzenx@yahoo.com", 2566);
 
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+        DateTimeFormatter fullFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
+
         int selection1;
         int selection2;
 
         do {
             // display menu
-            System.out.println("\n Today's appointments: " + doctor.getDateAppointments(LocalDateTime.now()) +
-                    "\n Options: \n"
+            System.out.println("\nToday's appointments: " + doctor.getDateAppointments(LocalDateTime.now()) +
+                    "\nOptions: \n"
                     + M_SEE_PATIENT + ") See or add patient \n"
                     + M_ADV_SEARCH + ") Advanced search \n"
                     + M_PROFILE + ") See my profile \n"
@@ -82,7 +87,7 @@ public class DoctorTester{
                                 for (Patient p : doctor.getPatients()) {
                                     System.out.print(p.getName() + " Last Consultation:");
                                     if(p.getLastConsultation() != null)
-                                        System.out.println(p.getLastConsultation().getDate());
+                                        System.out.println(p.getLastConsultation().getDate().format(fullFormatter));
                                     else
                                         System.out.println();
                                 }
@@ -92,6 +97,7 @@ public class DoctorTester{
                                 System.out.println("Assuming patient found: ");
                                 Patient patient = patient1;
                                 if (patient.isPatientOf(doctor)){
+                                    System.out.println(patient.getName());
                                     // show patient history
                                     for (Consultation c : patient.getInfo().getConsultations()) {
                                         System.out.println(c);
@@ -131,6 +137,11 @@ public class DoctorTester{
                                 break;
                             case M_SEARCH_DOCTORS:
                                 // TODO Database
+                                // assuming doc found
+                                System.out.println(doctor2.getName());
+                                System.out.println(doctor2.getDateAppointments(LocalDateTime.now()));
+                                // refer patient
+                                doctor2.referPatient(patient1, doctor, false);
                                 break;
                             case M_SEARCH_DISEASES:
                                 // TODO Database
@@ -162,13 +173,13 @@ public class DoctorTester{
                                 int day = scan.nextInt();
                                 scan.nextLine();
                                 System.out.println("Showing that day's available times: ");
-                                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH.mm");
+
                                 ArrayList<LocalDateTime> intervals = doctor.getAvailableIntervals(LocalDateTime.now().withDayOfMonth(day));
                                 for (int i = 0; i < intervals.size(); i++) {
                                     if ( i % 2 == 0)
-                                        System.out.print(intervals.get(i).format(formatter) + "-");
+                                        System.out.print(intervals.get(i).format(timeFormatter) + "-");
                                     else
-                                        System.out.println(intervals.get(i).format(formatter));
+                                        System.out.println(intervals.get(i).format(timeFormatter));
                                 }
                                 System.out.println("\nChoose an hour:");
                                 int hour = scan.nextInt();
@@ -184,6 +195,7 @@ public class DoctorTester{
                                     System.out.println("Please try another time slot.");
                                 break;
                             case M_EDIT_CONTACT:
+                                // TODO
                                 break;
                             case M_EXIT:
                                 break;
@@ -204,8 +216,20 @@ public class DoctorTester{
 
                         switch (selection2){
                             case M_SHOW_SCHEDULE:
+                                LocalDateTime now = LocalDateTime.now();
+                                for (int i = 0; i < 10; i++) {
+                                    for (Appointment app : doctor.getDateAppointments(now.plusDays(i))){
+                                        System.out.println(app);
+                                    }
+                                }
                                 break;
                             case M_SHOW_DATE:
+                                System.out.println("Select day of month: ");
+                                int day = scan.nextInt();
+                                scan.nextLine();
+                                for (Appointment app : doctor.getDateAppointments(LocalDateTime.now().withDayOfMonth(day))){
+                                    System.out.println(app);
+                                }
                                 break;
                             case M_EXIT:
                                 break;

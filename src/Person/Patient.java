@@ -26,7 +26,7 @@ public class Patient extends Person{ // should implement Sendable
     }
     // simple - just initializes
     public Patient(String name, String email, int ID){
-        super(name, email); // FIXIT Person class should have createRandomPassword and showPassword methods
+        super(name, email); // FIXME Person class should have createRandomPassword and showPassword methods
         this.ID = ID;
         info = new GeneralInfo();
         doctors = new ArrayList<Doctor>();
@@ -43,21 +43,21 @@ public class Patient extends Person{ // should implement Sendable
         this.ID = ID;
         this.inICU = inICU;
 
-        // if any one address field is not null, then create an instance of Address FIXIT
+        // if any one address field is not null, then create an instance of Address FIXME
 //        if (city != null || country != null || address != null){
-//            address = new Address(city, country, address); // FIXIT check Address constructor
+//            address = new Address(city, country, address); // FIXME check Address constructor
 //        }
 
         doctors = new ArrayList<Doctor>();
-//        addDoctor(Booting.getUser); // user must be the patient's doctor FIXIT
+//        addDoctor(Booting.getUser); // user must be the patient's doctor FIXME
 
         appointment = new ArrayList<Appointment>(); // no way to add appointments in the patient creation screen
 
         activeDiseases = new ArrayList<Disease>();
         Collections.addAll(activeDiseases, diseases);
 
-        info = new GeneralInfo(); // FIXIT
-//        info = new GeneralInfo(mother, father, partner, siblings, children); // FIXIT check GeneralInfo constructor
+        info = new GeneralInfo(); // FIXME
+//        info = new GeneralInfo(mother, father, partner, siblings, children); // FIXME check GeneralInfo constructor
         // ^^ should initialize empty body and consultations
         // ^^ should check if any Patient is null first
     }
@@ -65,11 +65,11 @@ public class Patient extends Person{ // should implement Sendable
     // methods
 
     public void addConsultation(Consultation consultation){
-        info.addConsultation(consultation); //FIXIT add this method to generalInfo (boolean?)
+        info.addConsultation(consultation); //FIXME add this method to generalInfo (boolean?)
     }
 
     public Consultation getLastConsultation(){
-        return info.getLastConsultation(); //FIXIT add this method to generalInfo
+        return info.getLastConsultation(); //FIXME add this method to generalInfo
     }
 
     public boolean isPatientOf(Doctor doctor){
@@ -81,7 +81,7 @@ public class Patient extends Person{ // should implement Sendable
         return true; // should there be a quota to doctors?
     }
 
-    // FIXIT seeNotifications should be in the Person class (?)
+    // FIXME seeNotifications should be in the Person class (?)
 
     public void addActiveDisease(Disease disease){ // was boolean in the UML
         activeDiseases.add(disease);
@@ -91,7 +91,7 @@ public class Patient extends Person{ // should implement Sendable
         return activeDiseases.remove(disease);
     }
 
-    // FIXIT
+    // FIXME
 //    public void drawBody(){
 //        info.drawBody();
 //    }

@@ -17,13 +17,11 @@ public class Doctor extends Person {
     private Hospital hospital;
     private Department department;
     private Schedule schedule;
-    private List<Task> tasks;
-    private List<Patient> patients;
+    private ArrayList<Task> tasks;
+    private ArrayList<Patient> patients;
     
     // Constructors
-    public Doctor(){
-        tasks = new ArrayList<Task>();
-        patients = new ArrayList<Patient>();}
+    public Doctor(){}
     
     public Doctor ( String name, String email, String password, Hospital hospital, Department department )
     {
@@ -62,12 +60,12 @@ public class Doctor extends Person {
     
     public ArrayList<Task> getTasks()
     {
-        return (ArrayList<Task>) tasks;
+        return tasks;
     }
     
     public ArrayList<Patient> getPatients()
     {
-        return (ArrayList<Patient>) patients;
+        return patients;
     }
     
     public void setHospital( Hospital hospital )

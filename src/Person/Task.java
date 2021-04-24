@@ -14,8 +14,6 @@ public class Task {
     private String fileName;
     
     // Constructor
-
-    public Task(){}
     
     public Task ( String name, Doctor sender, String fileName )
     {
@@ -39,22 +37,6 @@ public class Task {
     public String getFileName()
     {
         return fileName;
-    }
-
-
-    // setters
-
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
-    }
-
-    public void setSender(Doctor sender) {
-        this.sender = sender;
     }
    
 }

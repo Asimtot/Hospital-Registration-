@@ -1,6 +1,6 @@
 package Person;
+import java.awt.*;
 import java.util.ArrayList;
-import java.util.List;
 
 import GeneralInfo.*;
 
@@ -13,8 +13,8 @@ public class Hospital {
 
     //properties
     private String hospitalName;
-    private List<Department> departments;
-    private List<Doctor> hospitalDoctors;
+    private ArrayList<Department> departments;
+    private ArrayList<Doctor> hospitalDoctors;
     private Patient[] icuPatients;
     private Patient[] normalPatients;
     private int icuOccupancy;
@@ -52,10 +52,10 @@ public class Hospital {
         return adress;
     }
     public ArrayList<Department> getDepartments() {
-        return (ArrayList<Department>) departments;
+        return departments;
     }
     public ArrayList<Doctor> getHospitalDoctors() {
-        return (ArrayList<Doctor>) hospitalDoctors;
+        return hospitalDoctors;
     }
     public Patient[] getIcuPatients() {
         return icuPatients;

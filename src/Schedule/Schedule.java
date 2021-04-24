@@ -1,10 +1,11 @@
 package Schedule;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Schedule {
     // properties
-    ArrayList<DailySchedule> days;
+    List<DailySchedule> days;
     int startingHour;
     int startingMinute;
     int endingHour;
@@ -120,7 +121,7 @@ public class Schedule {
 
     private DailySchedule findDay(LocalDateTime appDate){
         LocalDateTime date;
-        days.trimToSize();
+        ((ArrayList<DailySchedule>)days).trimToSize();
         for (int i = days.size() - 1; i >= 0; i--) {
             date = days.get(i).getDate();
             if (date.getDayOfMonth() == appDate.getDayOfMonth() && date.getMonthValue() == appDate.getMonthValue()
@@ -134,7 +135,7 @@ public class Schedule {
     // getters
 
     public ArrayList<DailySchedule> getDays() {
-        return days;
+        return (ArrayList<DailySchedule>) days;
     }
 
     public int getStartingHour() {

@@ -4,6 +4,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 /**
  * Simulates one day of the schedule
@@ -15,7 +16,7 @@ public class DailySchedule {
     LocalDateTime date;
     LocalDateTime startingTime;
     LocalDateTime endingTime;
-    ArrayList<Appointment> appointments;
+    List<Appointment> appointments;
 
     // constructors
     // simple
@@ -137,7 +138,7 @@ public class DailySchedule {
 
     // getters
     public ArrayList<Appointment> getAppointments() {
-        return appointments;
+        return (ArrayList<Appointment>) appointments;
     }
 
     public LocalDateTime getDate() {

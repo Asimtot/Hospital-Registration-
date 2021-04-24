@@ -16,7 +16,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Patient")
-public class Patient extends Person{ // should implement Sendable 
+public class Patient extends Person implements Sendable{
     // properties
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -158,6 +158,20 @@ public class Patient extends Person{ // should implement Sendable
 
     public void setInICU(boolean inICU) {
         this.inICU = inICU;
+    }
+
+    @Override
+    public String showSendable() { //FIXME this is temporary
+        return "Patient{" +
+                "ID=" + ID +
+                ", name=" + getName() +
+                ", info=" + info +
+                ", doctors=" + doctors +
+                ", appointment=" + appointment +
+                ", address=" + address +
+                ", inICU=" + inICU +
+                ", activeDiseases=" + activeDiseases +
+                '}';
     }
 }
 

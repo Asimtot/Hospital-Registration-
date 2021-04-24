@@ -6,7 +6,7 @@ import Schedule.*;
 import GeneralInfo.*;
 
 
-public class Patient { // should implement Sendable and extend Person
+public class Patient extends Person{ // should implement Sendable 
     // properties
     private int ID;
     private GeneralInfo info;

@@ -1,17 +1,31 @@
 package Person;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 import Schedule.*;
 import GeneralInfo.*;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "Patient")
 public class Patient extends Person{ // should implement Sendable 
     // properties
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int ID;
     private GeneralInfo info;
-    private ArrayList<Doctor> doctors;
-    private ArrayList<Appointment> appointment;
+    private List<Doctor> doctors;
+    private List<Appointment> appointment;
+    @ManyToOne
+    @JoinColumn(name = "Adress_id")
     private Address address;
     private boolean inICU;
     private ArrayList<Disease> activeDiseases;
@@ -25,7 +39,7 @@ public class Patient extends Person{ // should implement Sendable
     }
     // simple - just initializes
     public Patient(String name, String email, int ID){
-        super(name, email); // FIXIT Person class should have createRandomPassword and showPassword methods
+        super(name, email); // FIXME Person class should have createRandomPassword and showPassword methods
         this.ID = ID;
         info = new GeneralInfo();
         doctors = new ArrayList<Doctor>();
@@ -44,7 +58,7 @@ public class Patient extends Person{ // should implement Sendable
 
         // if any one address field is not null, then create an instance of Address
         if (city != null || country != null || address != null){
-            address = new Address(city, country, address); // FIXIT check Address constructor
+            address = new Address(city, country, address); // FIXME check Address constructor
         }
 
         doctors = new ArrayList<Doctor>();
@@ -55,31 +69,30 @@ public class Patient extends Person{ // should implement Sendable
         activeDiseases = new ArrayList<Disease>();
         Collections.addAll(activeDiseases, diseases);
 
-        info = new GeneralInfo(mother, father, partner, siblings, children); // FIXIT check GeneralInfo constructor
+        info = new GeneralInfo(mother, father, partner, siblings, children); // FIXME check GeneralInfo constructor
         // ^^ should initialize empty body and consultations
         // ^^ should check if any Patient is null first
     }
 
     // methods
 
-    public boolean addConsultation(Consultation consultation){
-        return info.addConsultation(consultation); //FIXIT add this method to generalInfo (boolean?)
+    public void addConsultation(Consultation consultation){
+        info.addConsultation(consultation); //FIXME add this method to generalInfo (boolean?)
     }
 
     public Consultation getLastConsultation(){
-        return info.getLastConsultation(); //FIXIT add this method to generalInfo
+        return info.getLastConsultation(); //FIXME add this method to generalInfo
     }
 
     public boolean isPatientOf(Doctor doctor){
         return doctors.contains(doctor);
     }
 
-    public boolean addDoctor(Doctor doctor){
+    public void addDoctor(Doctor doctor){
         doctors.add(doctor);
-        return true; // should there be a quota to doctors?
     }
 
-    // FIXIT seeNotifications should be in the Person class (?)
+    // FIXME seeNotifications should be in the Person class (?)
 
     public void addActiveDisease(Disease disease){ // was boolean in the UML
         activeDiseases.add(disease);
@@ -100,7 +113,7 @@ public class Patient extends Person{ // should implement Sendable
     }
 
     public ArrayList<Appointment> getAppointment() {
-        return appointment;
+        return (ArrayList<Appointment>) appointment;
     }
 
     public ArrayList<Disease> getActiveDiseases() {
@@ -108,7 +121,7 @@ public class Patient extends Person{ // should implement Sendable
     }
 
     public ArrayList<Doctor> getDoctors() {
-        return doctors;
+        return (ArrayList<Doctor>) doctors;
     }
 
     public GeneralInfo getInfo() {

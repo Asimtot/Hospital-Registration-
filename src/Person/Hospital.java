@@ -1,6 +1,8 @@
 package Person;
-import java.awt.*;
+import java.util.List;
 import java.util.ArrayList;
+
+import javax.persistence.OneToMany;
 
 import GeneralInfo.*;
 
@@ -13,8 +15,9 @@ public class Hospital {
 
     //properties
     private String hospitalName;
-    private ArrayList<Department> departments;
-    private ArrayList<Doctor> hospitalDoctors;
+    private List<Department> departments;
+    @OneToMany(mappedBy = "hospital")
+    private List<Doctor> hospitalDoctors;
     private Patient[] icuPatients;
     private Patient[] normalPatients;
     private int icuOccupancy;
@@ -52,10 +55,10 @@ public class Hospital {
         return adress;
     }
     public ArrayList<Department> getDepartments() {
-        return departments;
+        return (ArrayList<Department>) departments;
     }
     public ArrayList<Doctor> getHospitalDoctors() {
-        return hospitalDoctors;
+        return (ArrayList<Doctor>) hospitalDoctors;
     }
     public Patient[] getIcuPatients() {
         return icuPatients;

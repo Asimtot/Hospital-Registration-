@@ -14,7 +14,7 @@ public class GeneralInfo {
     private int id;
 
     @OneToMany(mappedBy = "generalInfo")
-    private List<Consultation> consultations= new ArrayList<>();
+    private ArrayList<Consultation> consultations = new ArrayList<>();
 
     @OneToOne
     @JoinColumn(name = "Body_id")
@@ -25,11 +25,18 @@ public class GeneralInfo {
     private FamilyTree familyTree;
 
         //CONSTRUCTORS
-    public GeneralInfo(){}
+    public GeneralInfo(){
+    }
 
         //METHODS
-    void addConsultation(Consultation e){
+    public void addConsultation(Consultation e){
+        consultations.add(e);
         e.setGeneralInfo(this);
+    }
+
+    public Consultation getLastConsultation(){
+        consultations.trimToSize();
+        return consultations.get(consultations.size() - 1);
     }
 
     public void setBody(Body body) {

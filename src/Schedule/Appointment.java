@@ -1,9 +1,26 @@
 package Schedule;
 import java.time.LocalDateTime;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
 import Person.*;
+
+@Entity
+@Table(name = "Appointment")
 public class Appointment implements Comparable{
     // properties
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    int id;
+
     String name;
     Doctor doctor;
     Patient patient;
@@ -12,6 +29,11 @@ public class Appointment implements Comparable{
     Hospital place;
     Department department;
     int timeInterval;
+
+    //DATABASE için gerekli
+    @ManyToOne
+    @JoinColumn(name = "DailySchedule_id")
+    DailySchedule dailySchedule;
 
     // constructor
     // default

@@ -14,6 +14,9 @@ import GeneralInfo.GeneralInfo;
 import GeneralInfo.Medication;
 import GeneralInfo.Prescription;
 
+import Person.*;
+import Schedule.*;
+
 
 public class Database {
 

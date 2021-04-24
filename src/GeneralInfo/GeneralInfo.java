@@ -25,7 +25,7 @@ public class GeneralInfo {
     private FamilyTree familyTree;
 
         //CONSTRUCTORS
-    GeneralInfo(){}
+    public GeneralInfo(){}
 
         //METHODS
     void addConsultation(Consultation e){

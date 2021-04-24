@@ -58,7 +58,7 @@ public class Patient extends Person{ // should implement Sendable
 
         // if any one address field is not null, then create an instance of Address
         if (city != null || country != null || address != null){
-            address = new Address(city, country, address); // FIXME check Address constructor
+            this.address = new Address(city, country, address); // FIXME check Address constructor
         }
 
         doctors = new ArrayList<Doctor>();

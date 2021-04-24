@@ -24,5 +24,44 @@ public class Address {
     @OneToMany(mappedBy = "adress")
     List<Patient> patients= new ArrayList<>();
 
-    //TODO
+    String city;
+    String county;
+    String address;
+
+    // constructors
+    public Address(){}
+
+    public Address(String city, String county, String address) {
+        this.city = city;
+        this.county = county;
+        this.address = address;
+    }
+
+    // getters
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public String getCounty() {
+        return county;
+    }
+// setters
+
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public void setCounty(String county) {
+        this.county = county;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 }

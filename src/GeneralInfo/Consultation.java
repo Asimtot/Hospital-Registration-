@@ -72,4 +72,6 @@ public class Consultation {
     public int getId() {
         return id;
     }
+
+    
 }

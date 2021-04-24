@@ -57,10 +57,7 @@ public class Database {
         Medication m= session.get(Medication.class,4);
         Medication n= session.get(Medication.class,5);
 
-        p.addMedication(m);
-        p.addMedication(n);
-
-        p.setFrequency("Gunde bir kere");
+        
 
 
 

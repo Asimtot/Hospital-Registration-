@@ -122,11 +122,11 @@ public class Schedule {
     public ArrayList<LocalDateTime> getAvailableIntervals(LocalDateTime date){
         DailySchedule day = findDay(date);
         if (day == null){
-            return null;
+            day = new DailySchedule(date.getYear(),date.getMonthValue(), date.getDayOfMonth(),
+                    startingHour, startingMinute, endingHour, endingMinute);
+            days.add(day);
         }
-        else{
-            return day.getAvailableIntervals();
-        }
+        return day.getAvailableIntervals();
     }
 
     public ArrayList<Appointment> getDateAppointments(LocalDateTime date){
@@ -148,7 +148,8 @@ public class Schedule {
         ((ArrayList<DailySchedule>)days).trimToSize();
         for (int i = days.size() - 1; i >= 0; i--) {
             date = days.get(i).getDate();
-            if (date.equals(appDate.withHour(0).withMinute(0))){
+            if (date.getDayOfMonth() == appDate.getDayOfMonth() && date.getMonthValue() == appDate.getMonthValue()
+                    && date.getYear() == appDate.getYear()){
                 return days.get(i);
             }
         }

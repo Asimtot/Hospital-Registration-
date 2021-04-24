@@ -1,6 +1,5 @@
 package Schedule;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 
 import Person.*;
 public class Appointment implements Comparable{

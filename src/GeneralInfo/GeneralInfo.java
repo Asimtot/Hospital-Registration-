@@ -28,9 +28,17 @@ public class GeneralInfo {
     public GeneralInfo(){}
 
         //METHODS
-    void addConsultation(Consultation e){
+    public void addConsultation(Consultation e){
         e.setGeneralInfo(this);
     }
+
+    public Consultation getLastConsultation(){
+        ((ArrayList<Consultation>)consultations).trimToSize();
+        if (consultations.size() != 0)
+            return consultations.get(consultations.size() - 1);
+        return null;
+    }
+
 
     public void setBody(Body body) {
         this.body = body;

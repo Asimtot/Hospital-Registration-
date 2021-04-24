@@ -1,6 +1,7 @@
 package Person;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Department Class
@@ -12,25 +13,25 @@ public class Department {
 
     //properties
     String departmentName;
-    ArrayList<Doctor> departmentDoctors;
+    List<Doctor> departmentDoctors;
+
+    public Department(){
+        departmentDoctors = new ArrayList<Doctor>();
+    }
 
     public Department(String departmentName) {
         departmentDoctors = new ArrayList<Doctor>();
         this.departmentName = departmentName;
     }
 
-    //getter
+    // getters
     public ArrayList<Doctor> getDepartmentDoctors() {
-        return departmentDoctors;
+        return (ArrayList<Doctor>) departmentDoctors;
     }
     public String getDepartmentName() {
         return departmentName;
     }
 
-    /**
-     *
-     * @param d
-     */
     public void addDocToDepartment( Doctor d){
         departmentDoctors.add(d);
     }

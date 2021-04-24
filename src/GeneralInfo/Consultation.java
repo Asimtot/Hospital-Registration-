@@ -85,4 +85,14 @@ public class Consultation {
     public LocalDateTime getDate() {
         return date;
     }
+
+    @Override
+    public String toString() {
+        return "Consultation{" +
+                " diagnosis=" + diagnosis +
+                ", prescription=" + prescription +
+                ", bodyPart=" + bodyPart +
+                ", date=" + date +
+                '}';
+    }
 }

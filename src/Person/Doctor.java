@@ -1,4 +1,5 @@
 package Person;
+import java.time.LocalDateTime;
 import java.util.*;
 
 import GeneralInfo.*;
@@ -142,7 +143,7 @@ public class Doctor extends Person {
     
     /**
      * This method removes a wanted patient from doctor's patients list
-     * @param oldTask any patient in the list
+     * @param oldPatient any patient in the list
      * @return true if the removing process was successful
      */
     public boolean unassignPatient( Patient oldPatient )
@@ -181,16 +182,7 @@ public class Doctor extends Person {
      */
     public boolean addAppointment( Appointment a )
     {
-        boolean check = false;
-        Date day = a.getDateAndTime();
-        ArrayList<Appointment> todaysApps = getDateAppointments( day );
-        
-        if ( !todaysApps.contains( a ) ) {
-            getDateAppointments( day ).add(a);
-            check = true;
-        }
-        
-        return check;
+        schedule.addAppointment(a);
     }
     
      /**
@@ -198,19 +190,9 @@ public class Doctor extends Person {
      * @param a any appointment from the schedule, @param d the date to postpone to
      * @return true if the postponing process was successful
      */
-    public boolean postponeAppointment( Appointment a, Date d )
+    public boolean postponeAppointment(Appointment a, LocalDateTime newDate)
     {
-        boolean check = false;
-        Date day = a.getDateAndTime();
-        ArrayList<Appointment> todaysApps = getDateAppointments( day );
-        
-        if ( todaysApps.contains( a ) ) {
-            getDateAppointments( day ).remove(a);
-            getDateAppointments( d ).add(a);
-            check = true;
-        }
-        
-        return check;
+        return schedule.postponeAppointment(a, newDate);
     }
     
      /**
@@ -220,16 +202,7 @@ public class Doctor extends Person {
      */
     public boolean cancelAppointment( Appointment a )
     {
-        boolean check = false;
-        Date day = a.getDateAndTime();
-        ArrayList<Appointment> todaysApps = getDateAppointments( day );
-        
-        if ( todaysApps.contains( a ) ) {
-            getDateAppointments( day ).remove(a);
-            check = true;
-        }
-        
-        return check;
+        return schedule.cancelAppointment(a);
     }
     
     /**
@@ -237,9 +210,9 @@ public class Doctor extends Person {
      * @param d any date
      * @return the arraylist of appointments of the day
      */
-    public ArrayList<Appointment> getDateAppointments( Date d )
+    public ArrayList<Appointment> getDateAppointments( LocalDateTime d )
     {
-        //??
+        schedule.getDateAppointments(d);
     }
     
     /**
@@ -247,9 +220,9 @@ public class Doctor extends Person {
      * @param d any date
      * @return hour interval as String
      */
-    public String getAvailableIntervals( Date d )
+    public String getAvailableIntervals( LocalDateTime d )
     {
-        //??
+        schedule.getAvailableIntervals(d);
     }
     
     /**

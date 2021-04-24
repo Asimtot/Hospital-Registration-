@@ -32,6 +32,19 @@ public class Appointment implements Comparable{
         endingTime = startingTime.plusMinutes(timeInterval);
     }
 
+    public Appointment(String name, Doctor doctor, Patient patient, Hospital place, Department department, int timeInterval,
+                       LocalDateTime date){
+        this.name = name;
+        this.doctor = doctor;
+        this.patient = patient;
+        this.place = place;
+        this.department = department;
+        this.timeInterval = timeInterval;
+
+        startingTime = date;
+        endingTime = startingTime.plusMinutes(timeInterval);
+    }
+
     @Override
     public int compareTo(Object o) {
         if ( !(o instanceof Appointment))

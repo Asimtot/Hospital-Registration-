@@ -63,7 +63,7 @@ public class Schedule {
         }
         else{
             // create a new appointment with a new date
-            Appointment newApp = new Appointment(app.getName(), app.getPeople(), app.getPlace(), app.getDepartment(), app.getTimeInterval(),
+            Appointment newApp = new Appointment(app.getName(), app.getDoctor(), app.getPatient(), app.getPlace(), app.getDepartment(), app.getTimeInterval(),
                     newYear, newMonth, newDayOfMonth, newHour, newMinute);
 
             // if the appointment was successfully added, then cancel the odd appointment
@@ -75,6 +75,24 @@ public class Schedule {
         }
     }
 
+    public boolean postponeAppointment(Appointment app, LocalDateTime newDate){
+        DailySchedule day = findDay(app.getStartingTime());
+        if (day == null){
+            return false;
+        }
+        else{
+            // create a new appointment with a new date
+            Appointment newApp = new Appointment(app.getName(), app.getDoctor(), app.getPatient(), app.getPlace(), app.getDepartment(), app.getTimeInterval(),
+                   newDate);
+
+            // if the appointment was successfully added, then cancel the odd appointment
+            if(addAppointment(newApp)){
+                day.cancelAppointment(app);
+                return true;
+            }
+            else return false;
+        }
+    }
 
     public ArrayList<LocalDateTime> getAvailableIntervals(LocalDateTime date){
         DailySchedule day = findDay(date);
@@ -83,6 +101,20 @@ public class Schedule {
         }
         else{
             return day.getAvailableIntervals();
+        }
+    }
+
+    public ArrayList<Appointment> getDateAppointments(LocalDateTime date){
+        DailySchedule day = findDay(date);
+        if (day != null){
+            return day.getAppointments();
+        }
+        // if the day is not in the schedule, create that day
+        else{
+            DailySchedule newDay = new DailySchedule(date.getYear(),date.getMonthValue(), date.getDayOfMonth(),
+                    startingHour, startingMinute, endingHour, endingMinute);
+            days.add(newDay);
+            return newDay.getAppointments();
         }
     }
 

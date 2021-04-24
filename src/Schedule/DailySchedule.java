@@ -2,24 +2,51 @@ package Schedule;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
 
 /**
  * Simulates one day of the schedule
  * IMPORTANT: if the simple constructor is used, then the setting order must be:
  *            setDate - setStartingTime - setEndingTime
  */
+@Entity
+@Table(name = "DailySchedule")
 public class DailySchedule {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    int id;
+
     // properties
     LocalDateTime date;
     LocalDateTime startingTime;
     LocalDateTime endingTime;
-    ArrayList<Appointment> appointments;
+
+    @OneToMany(mappedBy = "dailySchedule")
+    List<Appointment> appointments;
 
     // constructors
     // simple
     public DailySchedule(){
         appointments = new ArrayList<>();
     }
+
+    //DATABASE için gerekli
+    @ManyToOne
+    @JoinColumn(name = "Schedule_id")
+    Schedule schedule;
+
     // complete
     public DailySchedule(int year, int month, int dayOfMonth, int startingHour, int startingMinute, int endingHour, int endingMinute) {
         date = LocalDateTime.of(year, month, dayOfMonth, 0, 0);
@@ -128,7 +155,7 @@ public class DailySchedule {
 
     // getters
     public ArrayList<Appointment> getAppointments() {
-        return appointments;
+        return (ArrayList<Appointment>) appointments;
     }
 
     public LocalDateTime getDate() {

@@ -1,14 +1,39 @@
 package Schedule;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
+import Person.*;
+
+@Entity
+@Table(name = "Schedule")
 public class Schedule {
     // properties
-    ArrayList<DailySchedule> days;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id")
+    int id;
+
+    @OneToMany(mappedBy = "schedule")
+    List<DailySchedule> days;
     int startingHour;
     int startingMinute;
     int endingHour;
     int endingMinute;
+
+    //DATABASE için gerekli
+    @OneToOne(mappedBy = "schedule")
+    Doctor doctor;
 
     // constructor
     // simple
@@ -120,7 +145,7 @@ public class Schedule {
 
     private DailySchedule findDay(LocalDateTime appDate){
         LocalDateTime date;
-        days.trimToSize();
+        ((ArrayList<DailySchedule>)days).trimToSize();
         for (int i = days.size() - 1; i >= 0; i--) {
             date = days.get(i).getDate();
             if (date.equals(appDate.withHour(0).withMinute(0))){
@@ -133,7 +158,7 @@ public class Schedule {
     // getters
 
     public ArrayList<DailySchedule> getDays() {
-        return days;
+        return (ArrayList<DailySchedule>) days;
     }
 
     public int getStartingHour() {

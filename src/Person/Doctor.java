@@ -182,7 +182,7 @@ public class Doctor extends Person {
      */
     public boolean addAppointment( Appointment a )
     {
-        schedule.addAppointment(a);
+        return schedule.addAppointment(a);
     }
     
      /**
@@ -212,7 +212,7 @@ public class Doctor extends Person {
      */
     public ArrayList<Appointment> getDateAppointments( LocalDateTime d )
     {
-        schedule.getDateAppointments(d);
+        return schedule.getDateAppointments(d);
     }
     
     /**
@@ -220,28 +220,28 @@ public class Doctor extends Person {
      * @param d any date
      * @return hour interval as String
      */
-    public String getAvailableIntervals( LocalDateTime d )
+    public ArrayList<LocalDateTime> getAvailableIntervals(LocalDateTime d )
     {
-        schedule.getAvailableIntervals(d);
+        return schedule.getAvailableIntervals(d);
     }
     
-    /**
-     * This method sends a document from the doctor to another doctor
-     * @param d a choosen doctor to send the document, 
-     * @return true if the sending process was successful
-     */
-    public boolean sendDocuments( Doctor d,  )
-    {
-        //??
-    }
-    
-    /**
-     * This method views an already sent document to the doctor
-     * @param d any date
-     * @return hour interval as String
-     */
-    public boolean viewDocument(  )
-    {
-        //??
-    }
+//    /**
+//     * This method sends a document from the doctor to another doctor
+//     * @param d a choosen doctor to send the document,
+//     * @return true if the sending process was successful
+//     */
+//    public boolean sendDocuments( Doctor d,  )
+//    {
+//        //??
+//    }
+//
+//    /**
+//     * This method views an already sent document to the doctor
+//     * @param d any date
+//     * @return hour interval as String
+//     */
+//    public boolean viewDocument(  )
+//    {
+//        //??
+//    }
 }

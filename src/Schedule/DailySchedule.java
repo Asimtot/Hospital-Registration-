@@ -78,7 +78,7 @@ public class DailySchedule {
             intervals.add(appointments.get(appointments.size() - 1).getEndingTime());
             intervals.add(endingTime);
         }
-
+        return intervals;
     }
 
     // setters

@@ -1,10 +1,11 @@
 package Schedule;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Schedule {
     // properties
-    ArrayList<DailySchedule> days;
+    List<DailySchedule> days;
     int startingHour;
     int startingMinute;
     int endingHour;
@@ -97,11 +98,11 @@ public class Schedule {
     public ArrayList<LocalDateTime> getAvailableIntervals(LocalDateTime date){
         DailySchedule day = findDay(date);
         if (day == null){
-            return null;
+            day = new DailySchedule(date.getYear(),date.getMonthValue(), date.getDayOfMonth(),
+                    startingHour, startingMinute, endingHour, endingMinute);
+            ((ArrayList<DailySchedule>)days).add(day);
         }
-        else{
-            return day.getAvailableIntervals();
-        }
+        return day.getAvailableIntervals();
     }
 
     public ArrayList<Appointment> getDateAppointments(LocalDateTime date){
@@ -120,10 +121,11 @@ public class Schedule {
 
     private DailySchedule findDay(LocalDateTime appDate){
         LocalDateTime date;
-        days.trimToSize();
+        ((ArrayList<DailySchedule>)days).trimToSize();
         for (int i = days.size() - 1; i >= 0; i--) {
             date = days.get(i).getDate();
-            if (date.equals(appDate.withHour(0).withMinute(0))){
+            if (date.getDayOfMonth() == appDate.getDayOfMonth() && date.getMonthValue() == appDate.getMonthValue()
+                    && date.getYear() == appDate.getYear()){
                 return days.get(i);
             }
         }
@@ -133,7 +135,7 @@ public class Schedule {
     // getters
 
     public ArrayList<DailySchedule> getDays() {
-        return days;
+        return (ArrayList<DailySchedule>) days;
     }
 
     public int getStartingHour() {

@@ -1,7 +1,10 @@
 package Schedule;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 /**
  * Simulates one day of the schedule
@@ -13,7 +16,7 @@ public class DailySchedule {
     LocalDateTime date;
     LocalDateTime startingTime;
     LocalDateTime endingTime;
-    ArrayList<Appointment> appointments;
+    List<Appointment> appointments;
 
     // constructors
     // simple
@@ -60,22 +63,28 @@ public class DailySchedule {
 
     public ArrayList<LocalDateTime> getAvailableIntervals(){
         ArrayList<LocalDateTime> intervals = new ArrayList<>();
-        Collections.sort(appointments);
-        // starting time
-        if (startingTime.isBefore(appointments.get(0).getStartingTime())){
-            intervals.add(startingTime);
-            intervals.add(appointments.get(0).getStartingTime());
-        }
-        // other intervals
-        for (int i = 0; i < appointments.size() - 1; i++) {
-            if (appointments.get(i).getEndingTime().isBefore(appointments.get(i+1).getStartingTime())){
-                intervals.add(appointments.get(i).getEndingTime());
-                intervals.add(appointments.get(i+1).getStartingTime());
+        if (appointments.size() > 0) {
+            Collections.sort(appointments);
+            // starting time
+            if (startingTime.isBefore(appointments.get(0).getStartingTime())) {
+                intervals.add(startingTime);
+                intervals.add(appointments.get(0).getStartingTime());
+            }
+            // other intervals
+            for (int i = 0; i < appointments.size() - 1; i++) {
+                if (appointments.get(i).getEndingTime().isBefore(appointments.get(i + 1).getStartingTime())) {
+                    intervals.add(appointments.get(i).getEndingTime());
+                    intervals.add(appointments.get(i + 1).getStartingTime());
+                }
+            }
+            // ending time
+            if (appointments.get(appointments.size() - 1).getEndingTime().isBefore(endingTime)) {
+                intervals.add(appointments.get(appointments.size() - 1).getEndingTime());
+                intervals.add(endingTime);
             }
         }
-        // ending time
-        if (appointments.get(appointments.size() - 1).getEndingTime().isBefore(endingTime)){
-            intervals.add(appointments.get(appointments.size() - 1).getEndingTime());
+        else{
+            intervals.add(startingTime);
             intervals.add(endingTime);
         }
         return intervals;
@@ -128,7 +137,7 @@ public class DailySchedule {
 
     // getters
     public ArrayList<Appointment> getAppointments() {
-        return appointments;
+        return (ArrayList<Appointment>) appointments;
     }
 
     public LocalDateTime getDate() {

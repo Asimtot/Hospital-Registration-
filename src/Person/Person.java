@@ -17,7 +17,13 @@ public class Person {
     
     // Constructor
     
-    public Person()
+    public Person(){}
+
+    public Person( String name, String email){
+        this.name = name;
+        this.email = email;
+        notifications = new ArrayList<Notification>();
+    }
     public Person ( String name, String email, String password )
     {
         this.name = name;

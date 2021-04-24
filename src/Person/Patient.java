@@ -63,8 +63,8 @@ public class Patient extends Person{ // should implement Sendable
 
     // methods
 
-    public boolean addConsultation(Consultation consultation){
-        return info.addConsultation(consultation); //FIXIT add this method to generalInfo (boolean?)
+    public void addConsultation(Consultation consultation){
+        info.addConsultation(consultation); //FIXIT add this method to generalInfo (boolean?)
     }
 
     public Consultation getLastConsultation(){

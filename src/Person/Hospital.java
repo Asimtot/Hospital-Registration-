@@ -40,8 +40,7 @@ public class Hospital {
     @JoinColumn(name = "Adress_id")
     private Address address;
     
-    //TODO
-    //İcuOccupancy ve normalOccupancy hesaplayan metodlar
+    //TODO İcuOccupancy ve normalOccupancy hesaplayan metodlar
     @Column(name = "icuCapacity")
     private int icuCapacity;
     @Transient
@@ -97,9 +96,6 @@ public class Hospital {
         return (ArrayList<Doctor>) hospitalDoctors;
     }
     
-    public Logo getLogo() {
-        return logo;
-    }
     public int getIcuCapacity() {
         return icuCapacity;
     }
@@ -122,12 +118,10 @@ public class Hospital {
     public void setNormalCapacity( int capacity){
         normalCapacity = capacity;
     }
-    public void setAddress(Address adress) {
+    public void setAddress(Address address) {
         this.address = address;
     }
-    public void setLogo(Logo logo) {
-        this.logo = logo;
-    }
+    
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
@@ -142,7 +136,7 @@ public class Hospital {
      */
     public boolean assignPatientToIcu( Patient p) {
         if(icuOccupancy < icuCapacity) {
-            icuPatients[icuOccupancy] = p;
+            p.setInICU(true);
             icuOccupancy++;
             return true;
         }
@@ -157,7 +151,7 @@ public class Hospital {
      */
     public boolean assignPatientToNormalBeds(Patient p){
         if( normalOccupancy < normalCapacity ){
-            normalPatients[normalOccupancy] = p;
+            p.setInICU(true);
             normalOccupancy++;
             return true;
         }

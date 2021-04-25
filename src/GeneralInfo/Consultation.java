@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 import Person.Doctor;
 
-import java.io.NotSerializableException;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;

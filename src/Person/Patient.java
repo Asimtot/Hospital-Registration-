@@ -66,9 +66,9 @@ public class Patient extends Person implements Sendable{
         activeDiseases = new ArrayList<Disease>();
     }
     // simple - just initializes
-    public Patient(String name, String email, int ID){
+    public Patient(String name, String email){
         super(name, email); // FIXME Person class should have createRandomPassword and showPassword methods
-        this.ID = ID;
+        
         info = new GeneralInfo();
         doctors = new ArrayList<Doctor>();
         appointment = new ArrayList<Appointment>();
@@ -78,10 +78,10 @@ public class Patient extends Person implements Sendable{
     }
 
     // complete constructor - if something does not exist, put null (?)
-    public Patient(String name, String email, int ID, boolean inICU, String city, String country, String address, Disease[] diseases,
+    public Patient(String name, String email, boolean inICU, String city, String country, String address, Disease[] diseases,
                    Patient mother, Patient father, Patient partner, Patient[] siblings, Patient[] children){
         super(name, email);
-        this.ID = ID;
+        
         this.inICU = inICU;
 
         // if any one address field is not null, then create an instance of Address
@@ -90,14 +90,15 @@ public class Patient extends Person implements Sendable{
         }
 
         doctors = new ArrayList<Doctor>();
-        addDoctor(Booting.getUser); // user must be the patient's doctor
+       // addDoctor(Booting.getUser); // user must be the patient's doctor//TODO implement booting
 
         appointment = new ArrayList<Appointment>(); // no way to add appointments in the patient creation screen
 
         activeDiseases = new ArrayList<Disease>();
         Collections.addAll(activeDiseases, diseases);
 
-        info = new GeneralInfo(mother, father, partner, siblings, children); // FIXME check GeneralInfo constructor
+        //info = new GeneralInfo(mother, father, partner, siblings, children);
+        info= new GeneralInfo(); // FIXME check GeneralInfo constructor
         // ^^ should initialize empty body and consultations
         // ^^ should check if any Patient is null first
     }
@@ -190,7 +191,7 @@ public class Patient extends Person implements Sendable{
     @Override
     public String showSendable() { //FIXME this is temporary
         return "Patient{" +
-                "ID=" + ID +
+                "ID=" + id +
                 ", name=" + getName() +
                 ", info=" + info +
                 ", doctors=" + doctors +

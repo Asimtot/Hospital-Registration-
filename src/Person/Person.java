@@ -34,9 +34,13 @@ public class Person {
     @Column(name = "id")
     int id;
     
+    @Column(name = "name")
     private String name;
+    @Column(name = "email")
     private String email;
+    @Column(name = "password")
     private String password;
+    
     @OneToMany(mappedBy = "receiver")
     private List<Notification> notifications;
 

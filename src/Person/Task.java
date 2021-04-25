@@ -1,5 +1,7 @@
 package Person;
 
+
+import javax.lang.model.element.Name;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  * Task class
@@ -23,7 +26,7 @@ public class Task {
     int id;
 
     // Properties
-    
+    @Column(name= "name")
     private String name;
 
     @ManyToOne
@@ -33,6 +36,7 @@ public class Task {
     @ManyToOne
     @JoinColumn(name = "SenderDoctor_id")
     private Doctor sender;
+    @Transient //TODO
     private String fileName;
     
     // Constructor

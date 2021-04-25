@@ -4,6 +4,7 @@ import javax.persistence.*;
 
 import Person.Doctor;
 
+import java.io.NotSerializableException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,8 +37,20 @@ public class Consultation implements Sendable{
     @JoinColumn(name = "Doctor_id")
     private Doctor doctor;
 
-    // DB eksik
+    
+    @Column(name = "date")
+    private String datePre;// örnek: 21-2-20201:13:30 (SQL dateTime format)
+    //TODO 
+    //string dateden dateTime objesi yaratan method
+    @Transient
     private LocalDateTime date;
+
+    @Column(name = "notes")
+    private String notes;
+    @Column(name = "type")
+    private String type;
+
+
 
     //DATABASE için gerekli
     @ManyToOne

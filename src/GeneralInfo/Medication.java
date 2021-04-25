@@ -1,6 +1,9 @@
 package GeneralInfo;
 
 import javax.persistence.*;
+
+import Person.Department;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,9 +11,17 @@ import java.util.List;
 @Table(name = "Medication")
 public class Medication {
 
-    //TODO
-    //Department relatedField
-    // Medication[] mClashes
+
+    @ManyToMany
+    @JoinTable(name = "MedicationMedicationJoin",
+                joinColumns = @JoinColumn(name= "Medication_id"),
+                inverseJoinColumns= @JoinColumn(name= "Medication_id1") )
+    List<Medication> mClashes;
+
+
+    @ManyToOne
+    @JoinColumn(name = "Department_id")
+    private Department relatedField;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

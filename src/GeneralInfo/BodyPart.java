@@ -23,7 +23,7 @@ public class BodyPart {
     private List<Consultation> consultations;
 
         //CONSTRUCTORS
-    BodyPart(){}
+    public BodyPart(){}
 
         //METHODS
 

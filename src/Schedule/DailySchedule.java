@@ -29,6 +29,13 @@ public class DailySchedule {
     int id;
 
     // properties
+    //TODO 
+    //MAP 
+    String sDate; //date 21-2-1212
+    String sStartingTime; //datetime 12-12-2222:13:35
+    String sEndingTime;//datetime
+
+
     LocalDateTime date;
     LocalDateTime startingTime;
     LocalDateTime endingTime;

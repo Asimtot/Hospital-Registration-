@@ -6,6 +6,7 @@ import java.util.List;
 import Schedule.*;
 import GeneralInfo.*;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,7 +25,8 @@ import javax.persistence.Table;
 @Table(name = "Patient")
 public class Patient extends Person implements Sendable{
     // properties
-  
+    @OneToOne
+    @JoinColumn(name = "GeneralInfo_id")
     private GeneralInfo info;
 
     @ManyToMany
@@ -40,6 +42,7 @@ public class Patient extends Person implements Sendable{
     @JoinColumn(name = "Adress_id")
     private Address address;
     
+    @Column(name = "inIcu")
     private boolean inICU;
 
     @ManyToMany
@@ -57,7 +60,6 @@ public class Patient extends Person implements Sendable{
     private Hospital hospital;
 
     // constructors
-
     public Patient(){
         doctors = new ArrayList<Doctor>();
         appointment = new ArrayList<Appointment>();
@@ -129,7 +131,8 @@ public class Patient extends Person implements Sendable{
     }
 
     public void drawBody(){
-        info.drawBody();
+        //info.drawBody()
+        //TODO;
     }
 
     // *** getters ***
@@ -155,7 +158,7 @@ public class Patient extends Person implements Sendable{
     }
 
     public int getID() {
-        return ID;
+        return super.id;
     }
 
     // *** setters ***
@@ -174,9 +177,7 @@ public class Patient extends Person implements Sendable{
         this.doctors = doctors;
     }
 
-    public void setID(int ID) { // should it be allowed?
-        this.ID = ID;
-    }
+   
 
     public void setInfo(GeneralInfo info) {
         this.info = info;

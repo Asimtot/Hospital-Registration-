@@ -2,9 +2,11 @@ package Person;
 import java.util.List;
 import java.util.ArrayList;
 
+import javax.persistence.Column;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 
 import GeneralInfo.*;
 import Schedule.Appointment;
@@ -17,30 +19,43 @@ import Schedule.Appointment;
 public class Hospital {
 
     //properties
+    @Column(name = "name")
     private String hospitalName;
+
+    @OneToMany(mappedBy = "hospital")
     private List<Department> departments;
 
     @OneToMany(mappedBy = "hospital")
     private List<Doctor> hospitalDoctors;
 
     @OneToMany(mappedBy = "hospital")
-    List<Patient> patients;
+    List<Patient> patients= new ArrayList<>();
     //TODO patients dan icuPatients ve NormalPatients arrayListi yaratan method
-    private ArrayList<Patient> icuPatients;
-    private ArrayList<Patient> normalPatients;
+    @Transient
+    private ArrayList<Patient> icuPatients= new ArrayList<>();
+    @Transient
+    private ArrayList<Patient> normalPatients= new ArrayList<>();
 
     @OneToOne
     @JoinColumn(name = "Adress_id")
     private Address address;
-
-
-    private int icuOccupancy;
-    private int normalOccupancy; //Occupied bed on the hospital other than icu beds
-    private int normalCapacity;
-    private int icuCapacity;
     
+    //TODO
+    //İcuOccupancy ve normalOccupancy hesaplayan metodlar
+    @Column(name = "icuCapacity")
+    private int icuCapacity;
+    @Transient
+    private int icuOccupancy;
+    @Column(name= "normalCapacity")
+    private int normalCapacity;
+    @Transient
+    private int normalOccupancy; //Occupied bed on the hospital other than icu beds
+    
+    
+    @Column(name= "phoneNumber")
     private String phoneNumber;
-    private Logo logo;
+    @Transient//şimdilik db e eklemedim
+    private String logo;
 
     //DATABASE için gerekli
     @OneToMany(mappedBy = "place")
@@ -63,8 +78,8 @@ public class Hospital {
 
         this.icuCapacity = icuCapacity;
         this.normalCapacity = normalCapacity;
-        icuPatients = new Patient[icuCapacity];
-        normalPatients = new Patient[normalCapacity];
+
+
         icuOccupancy = 0;
         normalOccupancy = 0;
 
@@ -73,7 +88,7 @@ public class Hospital {
 
     //getters
     public Address getAdress() {
-        return adress;
+        return address;
     }
     public ArrayList<Department> getDepartments() {
         return (ArrayList<Department>) departments;
@@ -81,23 +96,18 @@ public class Hospital {
     public ArrayList<Doctor> getHospitalDoctors() {
         return (ArrayList<Doctor>) hospitalDoctors;
     }
-    public Patient[] getIcuPatients() {
-        return icuPatients;
-    }
-    public Patient[] getNormalPatients() {
-        return normalPatients;
-    }
+    
     public Logo getLogo() {
         return logo;
     }
     public int getIcuCapacity() {
-        return icuPatients.length;
+        return icuCapacity;
     }
     public int getNormalCapacity() {
         return normalCapacity;
     }
     public int getOccupancy() {
-        return normalPatients.length;
+        return normalOccupancy;
     }
     public String getPhoneNumber() {
         return phoneNumber;
@@ -107,15 +117,13 @@ public class Hospital {
     //setters
     public void setIcuCapacity( int capacity){
         icuCapacity = capacity;
-        icuPatients = new Patient[icuCapacity];
 
     }
     public void setNormalCapacity( int capacity){
         normalCapacity = capacity;
-        normalPatients = new Patient[ normalCapacity];
     }
     public void setAddress(Address adress) {
-        this.adress = adress;
+        this.address = address;
     }
     public void setLogo(Logo logo) {
         this.logo = logo;
@@ -200,35 +208,6 @@ public class Hospital {
         return ( (double) normalOccupancy /(double) normalCapacity) * 100;
     }
 
-    public void incrementIcuCapacity( int incrementPercentage){
-        int newCapacity = icuCapacity +(int)((double)icuCapacity * (double) incrementPercentage / 100);
-        Patient[] ptnt = new Patient[newCapacity];
-        int j=0;
-
-        //transferring patients from small array to larger one
-        for ( int i = 0; i < getIcuPatients().length ; i++){
-            if( getIcuPatients()[i] != null){
-                ptnt[j] = getIcuPatients()[i];
-                j++;
-            }
-        }
-        this.icuCapacity = newCapacity;
-        this.icuPatients = ptnt;
-    }
-    public void incrementNormalBedCapacity( int incrementPercentage){
-        int newCapacity = normalCapacity +(int)((double)normalCapacity * (double) incrementPercentage / 100);
-        Patient[] ptnt = new Patient[newCapacity];
-        int j =0;
-
-        //transferring patients from small array to larger one
-        for ( int i = 0; i < getNormalPatients().length ; i++){
-            if( getNormalPatients()[i] != null){
-                ptnt[j] = getNormalPatients()[i];
-                j++;
-            }
-        }
-        this.normalCapacity = newCapacity;
-        this.normalPatients = ptnt;
-
-    }
+    
+    
 }

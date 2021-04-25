@@ -3,6 +3,7 @@ package GeneralInfo;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,8 +22,11 @@ public class Address {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
 
+    @Column(name = "city")
     String city;
+    @Column(name= "country")
     String county;
+    @Column(name = "address")
     String address;
 
     //DATABASE için gerekli

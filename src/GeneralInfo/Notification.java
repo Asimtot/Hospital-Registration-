@@ -25,7 +25,13 @@ class Notification{
     @Column(name= "id")
     int id;
     
+    @Column(name = "date")
+    String datePre; // 22-2-2222:22:22 (SQL DateTime fromat)
+    //TODO
+    //String dateden obje daten yaratan method
     LocalDateTime date;
+
+    @Column(name = "text")
     String text;
 
     @ManyToOne
@@ -36,6 +42,7 @@ class Notification{
     @JoinColumn(name = "reciever_id")
     Person receiver;
     
+    //TODO
     Sendable sendable;
 
     public Notification(){}

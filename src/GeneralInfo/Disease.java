@@ -2,6 +2,7 @@ package GeneralInfo;
 
 import javax.persistence.*;
 
+import Person.Department;
 import Person.Patient;
 
 import java.util.List;
@@ -19,7 +20,19 @@ public class Disease {
     @JoinColumn(name = "BodyPart_id")
     private BodyPart relatedBodyPart;
 
-    //DATABASE için gerekliler
+    @Column(name = "info")
+    private String info;
+
+    @Column(name = "name")
+    private String name;
+
+
+    @ManyToOne
+    @JoinColumn(name = "Department_id")
+    private Department relatedField;
+
+
+        //DATABASE için gerekliler
     @ManyToMany(mappedBy = "dClashes")
     private List<Medication> clashingMedication;
 
@@ -28,6 +41,8 @@ public class Disease {
 
     @ManyToMany(mappedBy = "activeDiseases")
     private List<Patient> patients;
+
+    
 
         //CONSTRUCTORS
     Disease(){};

@@ -9,8 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-
+import javax.persistence.Transient;
 
 import Person.*;
 
@@ -23,6 +22,7 @@ public class Appointment implements Comparable{
     @Column(name = "id")
     int id;
 
+    @Column(name = "name")
     String name;
     
     @ManyToOne
@@ -33,8 +33,19 @@ public class Appointment implements Comparable{
     @JoinColumn(name = "Patient_id")
     Patient patient;
 
+    @Column(name = "start")
+    String startPre;     
+    @Transient
+    String endPre;
+    //TODO 
+    //String start, end den obje startingTime, endingTime yaratan metod
     LocalDateTime startingTime;
+    
+    @Transient
     LocalDateTime endingTime;
+
+    @Column(name = "timeInterval")
+    int timeInterval;
 
     @ManyToOne
     @JoinColumn(name = "Hospital_id")
@@ -44,7 +55,7 @@ public class Appointment implements Comparable{
     @JoinColumn(name = "Department_id")
     Department department;
 
-    int timeInterval;
+    
 
     //DATABASE için gerekli
     @ManyToOne

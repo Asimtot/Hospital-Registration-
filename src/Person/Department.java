@@ -3,13 +3,17 @@ package Person;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import GeneralInfo.Disease;
 import Schedule.Appointment;
 
 /**
@@ -27,7 +31,11 @@ public class Department {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
 
+    @Column(name= "name")
     String departmentName;
+
+    @Column(name= "equipment")
+    String equipment;
 
     @OneToMany(mappedBy = "department")
     List<Doctor> doctors;
@@ -35,6 +43,16 @@ public class Department {
     //DATABASE için gerekli
     @OneToMany(mappedBy = "department")
     List<Appointment> appointments;
+
+    @OneToMany(mappedBy = "relatedField")
+    List<Disease> diseases;
+
+    @OneToMany(mappedBy = "relatedField")
+    List<Disease> medications;
+
+    @ManyToOne
+    @JoinColumn(name = "Hospital_id")
+    Hospital hospital;
     
     public Department(String departmentName) {
         doctors = new ArrayList<Doctor>();

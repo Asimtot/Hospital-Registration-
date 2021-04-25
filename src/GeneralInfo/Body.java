@@ -16,6 +16,10 @@ public class Body {
     @Column(name = "id")
     private int id;
 
+    @OneToOne
+        @JoinColumn(name = "Patient_id")
+        private Patient owner;
+
     @ManyToMany
     @JoinTable(name = "BodyPartBodyJoin",
             joinColumns = @JoinColumn(name= "Body_id"),
@@ -26,12 +30,21 @@ public class Body {
     @OneToOne(mappedBy = "body")
     private GeneralInfo generalInfo;
 
-    @OneToOne
-    @JoinColumn(name = "Patient_id")
-    private Patient owner;
-
         //CONSTRUCTORS
-    Body(){}
+    public Body(){}
+
+
+    public Body(int id, Patient owner, List<BodyPart> parts, GeneralInfo generalInfo) {
+        this.id = id;
+        this.owner = owner;
+        this.parts = parts;
+        this.generalInfo = generalInfo;
+    }
+
+    public Body(Patient owner) {
+        this.owner = owner;
+    }
+    
 
         //METHODS
     void addBodyPart(BodyPart bp){

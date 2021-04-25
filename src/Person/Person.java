@@ -1,8 +1,21 @@
 package Person;
 import java.util.*;
+
+import javax.management.Notification;
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import GeneralInfo.FamilyTree;
 
 
 /**
@@ -10,19 +23,31 @@ import javax.persistence.MappedSuperclass;
  * @author Eylul Badem
  * @version 1.0, 21.04.2021
 */
-@MappedSuperclass
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
+@Table(name = "Person")
 public class Person {
     
     // Properties
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     int id;
     
     private String name;
     private String email;
     private String password;
+    @OneToMany(mappedBy = "receiver")
     private List<Notification> notifications;
+
+    //DATABASE için gerekli
+    @ManyToOne
+    @JoinColumn(name = "FamilyTree_id")
+    FamilyTree familyTree;
     
+    @OneToMany(mappedBy = "sender")
+    List<Notification> sendNotifications;
+
     // Constructor
 
     public Person(){}

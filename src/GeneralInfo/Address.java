@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import Person.*;
@@ -20,13 +21,17 @@ public class Address {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
 
-    //DATABASE için gerekli
-    @OneToMany(mappedBy = "adress")
-    List<Patient> patients= new ArrayList<>();
-
     String city;
     String county;
     String address;
+
+    //DATABASE için gerekli
+    @OneToMany(mappedBy = "address")
+    List<Patient> patients= new ArrayList<>();
+
+    @OneToOne(mappedBy= "address")
+    Hospital hospital;
+
 
     // constructors
     public Address(){}

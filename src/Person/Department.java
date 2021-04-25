@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import Schedule.Appointment;
+
 /**
  * Department Class
  * @author Yusuf Doğan
@@ -24,10 +26,16 @@ public class Department {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
+
     String departmentName;
+
     @OneToMany(mappedBy = "department")
     List<Doctor> doctors;
 
+    //DATABASE için gerekli
+    @OneToMany(mappedBy = "department")
+    List<Appointment> appointments;
+    
     public Department(String departmentName) {
         doctors = new ArrayList<Doctor>();
         this.departmentName = departmentName;

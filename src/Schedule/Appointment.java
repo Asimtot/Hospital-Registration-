@@ -11,6 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 
+
 import Person.*;
 
 @Entity
@@ -23,12 +24,26 @@ public class Appointment implements Comparable{
     int id;
 
     String name;
+    
+    @ManyToOne
+    @JoinColumn(name = "Doctor_id")
     Doctor doctor;
+
+    @ManyToOne
+    @JoinColumn(name = "Patient_id")
     Patient patient;
+
     LocalDateTime startingTime;
     LocalDateTime endingTime;
+
+    @ManyToOne
+    @JoinColumn(name = "Hospital_id")
     Hospital place;
+
+    @ManyToOne
+    @JoinColumn(name = "Department_id")
     Department department;
+
     int timeInterval;
 
     //DATABASE için gerekli

@@ -1,14 +1,41 @@
 package GeneralInfo;
 
 import java.time.LocalDateTime;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
 import Person.*;
 
+@Entity
+@Table(name = "Notification")
 class Notification{
+
+
     // properties
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name= "id")
+    int id;
+    
     LocalDateTime date;
     String text;
+
+    @ManyToOne
+    @JoinColumn(name = "sender_id")
     Person sender;
+
+    @ManyToOne
+    @JoinColumn(name = "reciever_id")
     Person receiver;
+    
     Sendable sendable;
 
     public Notification(){}

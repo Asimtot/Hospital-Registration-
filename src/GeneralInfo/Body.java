@@ -1,6 +1,9 @@
 package GeneralInfo;
 
 import javax.persistence.*;
+
+import Person.Patient;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +25,10 @@ public class Body {
     //DATABASE için gerekliler
     @OneToOne(mappedBy = "body")
     private GeneralInfo generalInfo;
+
+    @OneToOne
+    @JoinColumn(name = "Patient_id")
+    private Patient owner;
 
         //CONSTRUCTORS
     Body(){}

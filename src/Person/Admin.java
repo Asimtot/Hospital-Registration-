@@ -3,10 +3,13 @@ package Person;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
+
 @Entity
-@Table(name= "Admin")
+@PrimaryKeyJoinColumn(name = "Admin.id")
+@Table(name = "Admin")
 public class Admin extends Person{
 
     // properties

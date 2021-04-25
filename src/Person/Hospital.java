@@ -2,9 +2,12 @@ package Person;
 import java.util.List;
 import java.util.ArrayList;
 
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import GeneralInfo.*;
+import Schedule.Appointment;
 
 /**
  * Hospital Class
@@ -16,17 +19,35 @@ public class Hospital {
     //properties
     private String hospitalName;
     private List<Department> departments;
+
     @OneToMany(mappedBy = "hospital")
     private List<Doctor> hospitalDoctors;
-    private Patient[] icuPatients;
-    private Patient[] normalPatients;
+
+    @OneToMany(mappedBy = "hospital")
+    List<Patient> patients;
+    //TODO patients dan icuPatients ve NormalPatients arrayListi yaratan method
+    private ArrayList<Patient> icuPatients;
+    private ArrayList<Patient> normalPatients;
+
+    @OneToOne
+    @JoinColumn(name = "Adress_id")
+    private Address address;
+
+
     private int icuOccupancy;
     private int normalOccupancy; //Occupied bed on the hospital other than icu beds
     private int normalCapacity;
     private int icuCapacity;
-    private Address adress;
+    
     private String phoneNumber;
     private Logo logo;
+
+    //DATABASE için gerekli
+    @OneToMany(mappedBy = "place")
+    private List<Appointment> appointments;
+
+    @OneToOne(mappedBy = "hospital")
+    private Admin admin;
 
     //constructors
     public Hospital(){

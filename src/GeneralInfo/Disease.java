@@ -1,6 +1,9 @@
 package GeneralInfo;
 
 import javax.persistence.*;
+
+import Person.Patient;
+
 import java.util.List;
 
 @Entity
@@ -22,6 +25,9 @@ public class Disease {
 
     @ManyToMany(mappedBy = "diagnosis")
     private List<Consultation> consultations;
+
+    @ManyToMany(mappedBy = "activeDiseases")
+    private List<Patient> patients;
 
         //CONSTRUCTORS
     Disease(){};

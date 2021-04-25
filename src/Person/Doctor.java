@@ -7,9 +7,11 @@ import Schedule.*;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 
@@ -19,6 +21,7 @@ import javax.persistence.Table;
  * @version 1.0, 21.04.2021
 */
 @Entity
+@PrimaryKeyJoinColumn(name = "Doctor.id")
 @Table(name= "Doctor")
 public class Doctor extends Person {
     
@@ -34,11 +37,20 @@ public class Doctor extends Person {
     private Schedule schedule;
     @OneToMany(mappedBy = "receiver")
     private List<Task> tasks;
+
+    @ManyToMany(mappedBy = "doctors")
     private List<Patient> patients;
 
     //DATABASE için gerekli
     @OneToMany(mappedBy = "sender")
     private List<Task> sendTasks;
+
+    //DATABASE için gerekliler
+    @OneToMany(mappedBy = "doctor")
+    List<Consultation> consultations;
+
+    @OneToMany(mappedBy = "doctor")
+    List<Appointment> appointments;
 
     // Constructors
     public Doctor(){}

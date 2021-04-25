@@ -1,6 +1,9 @@
 package GeneralInfo;
 
 import javax.persistence.*;
+
+import Person.Doctor;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +31,10 @@ public class Consultation implements Sendable{
     @ManyToOne
     @JoinColumn(name = "BodyPart_id")
     private BodyPart bodyPart;
+
+    @ManyToOne
+    @JoinColumn(name = "Doctor_id")
+    private Doctor doctor;
 
     // DB eksik
     private LocalDateTime date;

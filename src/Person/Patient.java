@@ -11,24 +11,50 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
+@PrimaryKeyJoinColumn(name = "Patient.id")
 @Table(name = "Patient")
 public class Patient extends Person implements Sendable{
     // properties
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int ID;
+  
     private GeneralInfo info;
+
+    @ManyToMany
+    @JoinTable(name = "DoctorPatientJoin",
+                joinColumns = @JoinColumn(name= "Patient_id"),
+                inverseJoinColumns= @JoinColumn(name = "Doctor_id"))
     private List<Doctor> doctors;
+
+    @OneToMany(mappedBy = "patient")
     private List<Appointment> appointment;
+    
     @ManyToOne
     @JoinColumn(name = "Adress_id")
     private Address address;
+    
     private boolean inICU;
+
+    @ManyToMany
+    @JoinTable(name = "PatientDiseaseJoin",
+                        joinColumns = @JoinColumn(name= "Patient_id"),
+                        inverseJoinColumns = @JoinColumn(name= "Disease_id"))
     private ArrayList<Disease> activeDiseases;
+
+    //DATABASE için gerekliler
+    @OneToOne(mappedBy = "owner")
+    private Body body;
+
+    @ManyToOne
+    @JoinColumn(name = "Hospital_id")
+    private Hospital hospital;
 
     // constructors
 

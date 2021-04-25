@@ -1,6 +1,10 @@
 package GeneralInfo;
 
 import javax.persistence.*;
+
+import Person.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -11,6 +15,9 @@ public class FamilyTree {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
+
+    @OneToMany(mappedBy = "familyTree")
+    private List<Person> allowedRelatives= new ArrayList<>();
     
     //DATABASE için gerekli
     @OneToMany(mappedBy = "familyTree")

@@ -3,6 +3,7 @@ package GeneralInfo;
 import javax.persistence.*;
 
 import Person.Doctor;
+import Schedule.Converter;
 
 
 import java.time.LocalDateTime;
@@ -39,9 +40,8 @@ public class Consultation implements Sendable{
 
     
     @Column(name = "date")
-    private String datePre;// örnek: 21-2-20201:13:30 (SQL dateTime format)
-    //TODO 
-    //string dateden dateTime objesi yaratan method
+    private String dateStr; //YYYY-MM-DD hh:mm:ss[.nnn] (SQL dateTime format)
+
     @Transient
     private LocalDateTime date;
 
@@ -59,11 +59,23 @@ public class Consultation implements Sendable{
 
 
 
-        //CONSTRUCTORS
+    // CONSTRUCTORS
     public Consultation(){}
 
-        //METHODS
+    // METHODS
 
+    public void addDiseaseToDiagnosis(Disease d){
+        diagnosis.add(d);
+    }
+
+    public void setDate(){
+        date = Converter.toLocalDateTime(dateStr);
+    }
+    public void setDateStr(){
+        dateStr = Converter.toString(date);
+    }
+
+    // setters
     public void setBodyPart(BodyPart bodyPart) {
         this.bodyPart = bodyPart;
     }
@@ -72,20 +84,19 @@ public class Consultation implements Sendable{
         this.prescription = prescription;
 
     }
-
-    public void addDiseaseToDiagnosis(Disease d){
-        diagnosis.add(d);
-    }
-
-    void setGeneralInfo(GeneralInfo generalInfo){
+    public void setGeneralInfo(GeneralInfo generalInfo){
         this.generalInfo= generalInfo;
     }
 
     public void setDate(LocalDateTime date) {
         this.date = date;
     }
-    //GETTERS
 
+    public void setDateStr(String dateStr) {
+        this.dateStr = dateStr;
+    }
+
+    //GETTERS
     public BodyPart getBodyPart() {
         return bodyPart;
     }
@@ -105,6 +116,8 @@ public class Consultation implements Sendable{
     public LocalDateTime getDate() {
         return date;
     }
+
+    //****
 
     @Override
     public String showSendable() { //FIXME (not everything has toString)

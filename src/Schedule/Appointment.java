@@ -34,11 +34,10 @@ public class Appointment implements Comparable{
     Patient patient;
 
     @Column(name = "start")
-    String startPre;     
+    String startStr;
     @Transient
-    String endPre;
-    //TODO 
-    //String start, end den obje startingTime, endingTime yaratan metod
+    String endStr;
+
     LocalDateTime startingTime;
     
     @Transient
@@ -137,6 +136,19 @@ public class Appointment implements Comparable{
     // setters
 
 
+    public void setStartingTime(){
+        startingTime = Converter.toLocalDateTime(startStr);
+    }
+    public void setStartStr(){
+        startStr = Converter.toString(startingTime);
+    }
+    public void setEndingTime(){
+        endingTime = Converter.toLocalDateTime(endStr);
+    }
+    public void setEndStr() {
+        endStr = Converter.toString(endingTime);
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -155,6 +167,13 @@ public class Appointment implements Comparable{
 
     public void setDepartment(Department department) {
         this.department = department;
+    }
+
+    public void setStartStr(String startStr) {
+        this.startStr = startStr;
+    }
+    public void setEndStr(String endStr) {
+        this.endStr = endStr;
     }
 
     public void setStartingTime(LocalDateTime startingTime) {

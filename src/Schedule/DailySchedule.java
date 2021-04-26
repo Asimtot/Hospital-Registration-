@@ -29,12 +29,10 @@ public class DailySchedule {
     int id;
 
     // properties
-    //TODO 
-    //MAP 
-    String sDate; //date 21-2-1212
-    String sStartingTime; //datetime 12-12-2222:13:35
-    String sEndingTime;//datetime
-
+    //TODO MAP
+    String dateStr;
+    String startingTimeStr;
+    String endingTimeStr;
 
     LocalDateTime date;
     LocalDateTime startingTime;
@@ -164,6 +162,38 @@ public class DailySchedule {
             return true;
         }
         return false;
+    }
+
+    public void setDate(){
+        date = Converter.toLocalDateTime(dateStr);
+    }
+    public void setStartingTime(){
+        startingTime = Converter.toLocalDateTime(startingTimeStr);
+    }
+    public void setEndingTime(){
+        endingTime = Converter.toLocalDateTime(endingTimeStr);
+    }
+
+    public void setDateStr(){
+        dateStr = Converter.toString(date);
+    }
+    public void setStartingTimeStr(){
+        startingTimeStr = Converter.toString(startingTime);
+    }
+    public void setEndingTimeStr(){
+        endingTimeStr = Converter.toString(endingTime);
+    }
+
+    public void setDateStr(String dateStr) {
+        this.dateStr = dateStr;
+    }
+
+    public void setStartingTimeStr(String startingTimeStr) {
+        this.startingTimeStr = startingTimeStr;
+    }
+
+    public void setEndingTimeStr(String endingTimeStr) {
+        this.endingTimeStr = endingTimeStr;
     }
 
     // getters

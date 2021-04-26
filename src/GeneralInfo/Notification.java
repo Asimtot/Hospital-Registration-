@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import Person.*;
+import Schedule.Converter;
 
 @Entity
 @Table(name = "Notification")
@@ -26,9 +27,7 @@ class Notification{
     int id;
     
     @Column(name = "date")
-    String datePre; // 22-2-2222:22:22 (SQL DateTime fromat)
-    //TODO
-    //String dateden obje daten yaratan method
+    String dateStr; //YYYY-MM-DD hh:mm:ss[.nnn] (SQL dateTime format)
     LocalDateTime date;
 
     @Column(name = "text")
@@ -80,8 +79,19 @@ class Notification{
     public String getText() {
         return text;
     }
-// setters
 
+    // setters
+
+    public void setDate(){
+    date = Converter.toLocalDateTime(dateStr);
+}
+    public void setDateStr(){
+        dateStr = Converter.toString(date);
+    }
+
+    public void setDateStr(String dateStr) {
+        this.dateStr = dateStr;
+    }
 
     public void setDate(LocalDateTime date) {
         this.date = date;

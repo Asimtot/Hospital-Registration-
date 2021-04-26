@@ -26,8 +26,7 @@ public class Schedule {
 
     @OneToMany(mappedBy = "schedule")
     List<DailySchedule> days;
-    //TODO
-    //MAP
+    //TODO MAP
     int startingHour;
     int startingMinute;
     int endingHour;

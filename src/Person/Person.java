@@ -88,7 +88,7 @@ public class Person {
         return password;
     }
     
-    public ArrayList<Notification> getNot()
+    public ArrayList<Notification> getNotifications()
     {
         return (ArrayList<Notification>) notifications;
     }
@@ -101,12 +101,36 @@ public class Person {
     public boolean sendNotification( Person p, Notification n )
     {
         boolean check = false;
-        p.getNot().add(n);
+        p.getNotifications().add(n);
         
-        if ( p.getNot().contains(n))
+        if ( p.getNotifications().contains(n))
             check = true;
         
         return check;
+    }
+
+    public void setRandomPassword(){
+        password = createRandomPassword(12);
+    }
+
+    public void setRandomPassword(int length){
+        password = createRandomPassword(length);
+    }
+
+    private String createRandomPassword(int length){
+        final char[] CHARS = {'0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f','g','h','j','k',
+                'l','m','n','o', 'p','q','r','s','t','u','v','w','x','y','z', 'A','B','C','D','E','F','G','H','J',
+                'K','L','M', 'N','O','P','Q','R','S','T','U','V','W','X','Y','Y','Z'};
+
+        int random;
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 0; i < length; i++) {
+            random = (int)(Math.random() * CHARS.length);
+            sb.append(CHARS[random]);
+        }
+
+        return sb.toString();
     }
     
 }

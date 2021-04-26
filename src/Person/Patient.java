@@ -67,7 +67,7 @@ public class Patient extends Person implements Sendable{
     }
     // simple - just initializes
     public Patient(String name, String email){
-        super(name, email); // FIXME Person class should have createRandomPassword and showPassword methods
+        super(name, email);
         
         info = new GeneralInfo();
         doctors = new ArrayList<Doctor>();
@@ -78,15 +78,14 @@ public class Patient extends Person implements Sendable{
     }
 
     // complete constructor - if something does not exist, put null (?)
-    public Patient(String name, String email, boolean inICU, String city, String country, String address, Disease[] diseases,
-                   Patient mother, Patient father, Patient partner, Patient[] siblings, Patient[] children){
+    public Patient(String name, String email, boolean inICU, String city, String country, String address, Disease[] diseases){
         super(name, email);
         
         this.inICU = inICU;
 
         // if any one address field is not null, then create an instance of Address
         if (city != null || country != null || address != null){
-            this.address = new Address(city, country, address); // FIXME check Address constructor
+            this.address = new Address(city, country, address);
         }
 
         doctors = new ArrayList<Doctor>();
@@ -97,8 +96,7 @@ public class Patient extends Person implements Sendable{
         activeDiseases = new ArrayList<Disease>();
         Collections.addAll(activeDiseases, diseases);
 
-        //info = new GeneralInfo(mother, father, partner, siblings, children);
-        info= new GeneralInfo(); // FIXME check GeneralInfo constructor
+        info= new GeneralInfo();
         // ^^ should initialize empty body and consultations
         // ^^ should check if any Patient is null first
     }
@@ -106,11 +104,11 @@ public class Patient extends Person implements Sendable{
     // methods
 
     public void addConsultation(Consultation consultation){
-        info.addConsultation(consultation); //FIXME add this method to generalInfo (boolean?)
+        info.addConsultation(consultation);
     }
 
     public Consultation getLastConsultation(){
-        return info.getLastConsultation(); //FIXME add this method to generalInfo
+        return info.getLastConsultation();
     }
 
     public boolean isPatientOf(Doctor doctor){
@@ -120,8 +118,6 @@ public class Patient extends Person implements Sendable{
     public void addDoctor(Doctor doctor){
         doctors.add(doctor);
     }
-
-    // FIXME seeNotifications should be in the Person class (?)
 
     public void addActiveDisease(Disease disease){ // was boolean in the UML
         activeDiseases.add(disease);
@@ -133,7 +129,7 @@ public class Patient extends Person implements Sendable{
 
     public void drawBody(){
         //info.drawBody()
-        //TODO;
+        //TODO drawBody method
     }
 
     // *** getters ***

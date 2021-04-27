@@ -32,26 +32,20 @@ public class Hospital {
     private List<Doctor> hospitalDoctors;
 
     @OneToMany(mappedBy = "hospital")
-    List<Patient> patients= new ArrayList<>();
-    //TODO patients dan icuPatients ve NormalPatients arrayListi yaratan method
+    List<Patient> patients= new ArrayList<>(); // needed?
+
     @Transient
-    private ArrayList<Patient> icuPatients= new ArrayList<>();
-    @Transient
-    private ArrayList<Patient> normalPatients= new ArrayList<>();
+    private List<Patient> icuPatients;
 
     @OneToOne
     @JoinColumn(name = "Adress_id")
     private Address address;
-    
-    //TODO İcuOccupancy ve normalOccupancy hesaplayan metodlar
+
+
     @Column(name = "icuCapacity")
     private int icuCapacity;
     @Transient
     private int icuOccupancy;
-    @Column(name= "normalCapacity")
-    private int normalCapacity;
-    @Transient
-    private int normalOccupancy; //Occupied bed on the hospital other than icu beds
     
     
     @Column(name= "phoneNumber")
@@ -68,28 +62,24 @@ public class Hospital {
 
     //constructors
     public Hospital(){
+        departments = new ArrayList<Department>();
         hospitalDoctors = new ArrayList<Doctor>();
+        icuPatients = new ArrayList<Patient>();
         icuOccupancy = 0;
-        normalOccupancy = 0;
-
-    }
-    public Hospital( String hospitalName, int icuCapacity, int normalCapacity){
+    }//TODO patients dan icuPatients ve NormalPatients arrayListi yaratan method
+    public Hospital( String hospitalName, int icuCapacity){
         this.hospitalName = hospitalName;
         departments = new ArrayList<Department>();
         hospitalDoctors = new ArrayList<Doctor>();
+        icuPatients = new ArrayList<Patient>();
 
         this.icuCapacity = icuCapacity;
-        this.normalCapacity = normalCapacity;
-
-
         icuOccupancy = 0;
-        normalOccupancy = 0;
-
     }
 
 
     //getters
-    public Address getAdress() {
+    public Address getAddress() {
         return address;
     }
     public ArrayList<Department> getDepartments() {
@@ -102,24 +92,26 @@ public class Hospital {
     public int getIcuCapacity() {
         return icuCapacity;
     }
-    public int getNormalCapacity() {
-        return normalCapacity;
-    }
-    public int getOccupancy() {
-        return normalOccupancy;
-    }
     public String getPhoneNumber() {
         return phoneNumber;
     }
 
+    public int getIcuOccupancy() {
+        return icuOccupancy;
+    }
+
+    public ArrayList<Patient> getIcuPatients() {
+        return (ArrayList<Patient>) icuPatients;
+    }
+
+    public String getHospitalName() {
+        return hospitalName;
+    }
 
     //setters
     public void setIcuCapacity( int capacity){
         icuCapacity = capacity;
 
-    }
-    public void setNormalCapacity( int capacity){
-        normalCapacity = capacity;
     }
     public void setAddress(Address address) {
         this.address = address;
@@ -132,6 +124,14 @@ public class Hospital {
 
     //methods
 
+    public ArrayList<Patient> getAllPatients(){
+        ArrayList<Patient> patients = new ArrayList<Patient>();
+        for(Doctor doctor : hospitalDoctors){
+            patients.addAll(doctor.getPatients());
+        }
+        return patients;
+    }
+
     /**
      *
      * @param p
@@ -139,27 +139,23 @@ public class Hospital {
      */
     public boolean assignPatientToIcu( Patient p) {
         if(icuOccupancy < icuCapacity) {
-            p.setInICU(true);
+            p.privateSetInIcu(true,this);
+            icuPatients.add(p);
             icuOccupancy++;
             return true;
         }
         return false;
-
     }
 
-    /**
-     *
-     * @param p
-     * @return
-     */
-    public boolean assignPatientToNormalBeds(Patient p){
-        if( normalOccupancy < normalCapacity ){
-            p.setInICU(true);
-            normalOccupancy++;
+    public boolean unassignPatientFromIcu(Patient p){
+        if(icuPatients.remove(p)){
+            icuOccupancy--;
+            p.privateSetInIcu(false,this);
             return true;
         }
         return false;
     }
+
 
     /**
      *
@@ -195,14 +191,6 @@ public class Hospital {
      */
     public double calculateIcuOccupancyPercentage(){
         return ( (double) icuOccupancy / (double) icuCapacity ) * 100;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public double calculateNormalBedOccupancy(){
-        return ( (double) normalOccupancy /(double) normalCapacity) * 100;
     }
 
     

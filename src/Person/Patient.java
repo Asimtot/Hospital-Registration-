@@ -43,7 +43,7 @@ public class Patient extends Person {
     private Address address;
     
     @Column(name = "inIcu")
-    private boolean inICU;
+    private boolean inIcu;
 
     @ManyToMany
     @JoinTable(name = "PatientDiseaseJoin",
@@ -57,7 +57,10 @@ public class Patient extends Person {
 
     @ManyToOne
     @JoinColumn(name = "Hospital_id")
-    private Hospital hospital;
+    private Hospital hospital; // TODO Potential problem here (a patient may go to multiple hospitals)
+
+    //TODO Database
+    private Hospital icuHospital;
 
     // constructors
     public Patient(){
@@ -73,15 +76,18 @@ public class Patient extends Person {
         doctors = new ArrayList<Doctor>();
         appointment = new ArrayList<Appointment>();
         address = new Address();
-        inICU = false;
+        inIcu = false;
         activeDiseases = new ArrayList<Disease>();
     }
 
     // complete constructor - if something does not exist, put null (?)
-    public Patient(String name, String email, boolean inICU, String city, String country, String address, Disease[] diseases){
+    public Patient(String name, String email, boolean inIcu, Hospital icuHospital, String city, String country, String address, Disease[] diseases){
         super(name, email);
         
-        this.inICU = inICU;
+        this.inIcu = inIcu;
+        if(inIcu && icuHospital != null){
+            this.icuHospital = icuHospital;
+        }
 
         // if any one address field is not null, then create an instance of Address
         if (city != null || country != null || address != null){
@@ -178,8 +184,22 @@ public class Patient extends Person {
         this.info = info;
     }
 
-    public void setInICU(boolean inICU) {
-        this.inICU = inICU;
+    public boolean setInIcu(boolean inIcu, Hospital icuHospital) {
+        this.inIcu = inIcu;
+
+        if (inIcu)
+            return icuHospital.assignPatientToIcu(this);
+        else if (icuHospital != null)
+            return icuHospital.unassignPatientFromIcu(this);
+        else
+            // if the icuHospital is null (i.e. if the patient was never in ICU)  return true;
+            return true;
+    }
+    /**
+     * This method is only for the Hospital class to use
+     */
+    void setInIcu(boolean inIcu){
+        this.inIcu = inIcu;
     }
 
 }

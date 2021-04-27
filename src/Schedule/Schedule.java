@@ -26,10 +26,14 @@ public class Schedule {
 
     @OneToMany(mappedBy = "schedule")
     List<DailySchedule> days;
-    //TODO MAP
+
+    @Column(name = "startingH")
     int startingHour;
+    @Column(name = "startingM")
     int startingMinute;
+    @Column(name = "endingH")
     int endingHour;
+    @Column(name = "endingM")
     int endingMinute;
 
     //DATABASE için gerekli

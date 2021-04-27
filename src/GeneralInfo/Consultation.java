@@ -12,7 +12,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "Consultation")
-public class Consultation implements Sendable{
+public class Consultation{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -119,7 +119,7 @@ public class Consultation implements Sendable{
 
     //****
 
-    @Override
+    
     public String showSendable() { //FIXME (not everything has toString)
         return "Consultation{" +
                 "diagnosis=" + diagnosis +

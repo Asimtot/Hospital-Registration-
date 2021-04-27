@@ -1,5 +1,7 @@
 package GeneralInfo;
 
+import Person.Patient;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +25,9 @@ public class GeneralInfo {
     @ManyToOne
     @JoinColumn(name = "FamilyTree_id")
     private FamilyTree familyTree;
+
+    @OneToOne(mappedBy = "info")
+    Patient patient;
 
         //CONSTRUCTORS
     public GeneralInfo(){}

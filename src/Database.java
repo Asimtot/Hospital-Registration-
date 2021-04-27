@@ -5,17 +5,12 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-import GeneralInfo.Body;
-import GeneralInfo.BodyPart;
-import GeneralInfo.Consultation;
-import GeneralInfo.Disease;
-import GeneralInfo.FamilyTree;
-import GeneralInfo.GeneralInfo;
-import GeneralInfo.Medication;
-import GeneralInfo.Prescription;
 
 import Person.*;
 import Schedule.*;
+import GeneralInfo.*;
+
+
 
 
 public class Database {
@@ -28,21 +23,34 @@ public class Database {
         try {
             configuration = new Configuration();
             configuration.configure("hibernate.cfg.xml");
+
             configuration.addAnnotatedClass(Medication.class);
             configuration.addAnnotatedClass(Disease.class);
             configuration.addAnnotatedClass(Prescription.class);
             configuration.addAnnotatedClass(Consultation.class);
             configuration.addAnnotatedClass(BodyPart.class);
             configuration.addAnnotatedClass(Body.class);
+            configuration.addAnnotatedClass(Person.class);
             configuration.addAnnotatedClass(GeneralInfo.class);
             configuration.addAnnotatedClass(FamilyTree.class);
+            configuration.addAnnotatedClass(Address.class);
+            configuration.addAnnotatedClass(Notification.class);
+            configuration.addAnnotatedClass(Admin.class);
+            configuration.addAnnotatedClass(Department.class);
+            configuration.addAnnotatedClass(Doctor.class);
+            configuration.addAnnotatedClass(Hospital.class);
+            configuration.addAnnotatedClass(Patient.class);
+            configuration.addAnnotatedClass(Task.class);
+            configuration.addAnnotatedClass(Appointment.class);
+            configuration.addAnnotatedClass(DailySchedule.class);
+            configuration.addAnnotatedClass(Schedule.class);
+
             System.out.println("Bağlandı");
         }
         catch (Exception e){
             System.out.println("Bağlanamadı");
             System.out.println(e.getMessage());
         }
-
 
     }
 
@@ -51,18 +59,7 @@ public class Database {
         session= factory.getCurrentSession();
         session.beginTransaction();
 
-        //Prescription p=session.get(Prescription.class,1);
-
-        //System.out.println(p.getMedications().size());
-
-
-
-        
-
-
-
-
-
+        session.save(new Patient("arı","mail",false,"Ankara","Turkey","Yaşamkent",null));
         session.getTransaction().commit();
         session.close();
 
@@ -71,6 +68,7 @@ public class Database {
     public static void main(String[] args) {
         Database database= new Database();
         database.add();
+
 
     }
 }

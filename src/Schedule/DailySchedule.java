@@ -1,4 +1,5 @@
 package Schedule;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -12,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 
 /**
@@ -28,14 +30,19 @@ public class DailySchedule {
     @Column(name = "id")
     int id;
 
-    // properties
-    //TODO MAP
+    @Column(name = "date")
     String dateStr;
+    @Column(name = "start")
     String startingTimeStr;
+    @Column(name = "end")
     String endingTimeStr;
 
+
+    @Transient
     LocalDateTime date;
+    @Transient
     LocalDateTime startingTime;
+    @Transient
     LocalDateTime endingTime;
 
     @OneToMany(mappedBy = "dailySchedule")

@@ -40,23 +40,17 @@ class Notification{
     @ManyToOne
     @JoinColumn(name = "reciever_id")
     Person receiver;
-    
-    //TODO
-    Sendable sendable;
+
 
     public Notification(){}
 
-    public Notification(LocalDateTime date, String text, Person sender, Person receiver, Sendable sendable) {
+    public Notification(LocalDateTime date, String text, Person sender, Person receiver) {
         this.date = date;
         this.text = text;
         this.sender = sender;
         this.receiver = receiver;
-        this.sendable = sendable;
     }
 
-    public String show(){
-        return sendable.showSendable();
-    }
 
     // getters
 
@@ -72,10 +66,6 @@ class Notification{
         return sender;
     }
 
-    public Sendable getSendable() {
-        return sendable;
-    }
-
     public String getText() {
         return text;
     }
@@ -85,6 +75,7 @@ class Notification{
     public void setDate(){
     date = Converter.toLocalDateTime(dateStr);
 }
+
     public void setDateStr(){
         dateStr = Converter.toString(date);
     }
@@ -99,10 +90,6 @@ class Notification{
 
     public void setReceiver(Person receiver) {
         this.receiver = receiver;
-    }
-
-    public void setSendable(Sendable sendable) {
-        this.sendable = sendable;
     }
 
     public void setSender(Person sender) {

@@ -23,7 +23,7 @@ import javax.persistence.Table;
 @Entity
 @PrimaryKeyJoinColumn(name = "Patient.id")
 @Table(name = "Patient")
-public class Patient extends Person implements Sendable{
+public class Patient extends Person {
     // properties
     @OneToOne
     @JoinColumn(name = "GeneralInfo_id")
@@ -174,8 +174,6 @@ public class Patient extends Person implements Sendable{
         this.doctors = doctors;
     }
 
-   
-
     public void setInfo(GeneralInfo info) {
         this.info = info;
     }
@@ -184,18 +182,5 @@ public class Patient extends Person implements Sendable{
         this.inICU = inICU;
     }
 
-    @Override
-    public String showSendable() { //FIXME this is temporary
-        return "Patient{" +
-                "ID=" + id +
-                ", name=" + getName() +
-                ", info=" + info +
-                ", doctors=" + doctors +
-                ", appointment=" + appointment +
-                ", address=" + address +
-                ", inICU=" + inICU +
-                ", activeDiseases=" + activeDiseases +
-                '}';
-    }
 }
 

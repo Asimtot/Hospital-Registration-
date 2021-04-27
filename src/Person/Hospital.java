@@ -2,11 +2,7 @@ package Person;
 import java.util.List;
 import java.util.ArrayList;
 
-import javax.persistence.Column;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Transient;
+import javax.persistence.*;
 
 import GeneralInfo.*;
 import Schedule.Appointment;
@@ -16,9 +12,16 @@ import Schedule.Appointment;
  * @author Yusuf Doğan
  * @version 20/04/2021
  */
+@Entity
+@Table(name = "Hospital")
 public class Hospital {
 
     //properties
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    int id;
+
     @Column(name = "name")
     private String hospitalName;
 

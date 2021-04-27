@@ -117,4 +117,17 @@ public class Consultation{
         return date;
     }
 
+    //****
+
+    
+    public String showSendable() { //FIXME (not everything has toString)
+        return "Consultation{" +
+                "diagnosis=" + diagnosis +
+                ", prescription=" + prescription +
+                ", bodyPart=" + bodyPart +
+                ", date=" + date +
+                '}';
+    }
+
+
 }

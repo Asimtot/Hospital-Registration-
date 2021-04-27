@@ -17,11 +17,11 @@ public class FamilyTree {
     private int id;
 
     @OneToMany(mappedBy = "familyTree")
-    private List<Person> allowedRelatives= new ArrayList<>();
+    List<Person> allowedRelatives= new ArrayList<>();
     
     //DATABASE için gerekli
     @OneToMany(mappedBy = "familyTree")
-    private List<GeneralInfo> generalInfoList;
+    List<GeneralInfo> generalInfoList;
 
         //CONSTRUCTORS
 

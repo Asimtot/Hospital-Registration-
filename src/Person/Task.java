@@ -1,7 +1,7 @@
 package Person;
 
 
-import javax.lang.model.element.Name;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

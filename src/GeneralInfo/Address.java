@@ -16,7 +16,7 @@ import Person.*;
 
 
 @Entity
-@Table(name = "Adress")
+@Table(name = "Address")
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

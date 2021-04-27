@@ -53,10 +53,15 @@ public class Department {
     @ManyToOne
     @JoinColumn(name = "Hospital_id")
     Hospital hospital;
-    
+
+        //CONSTRUCTORS
     public Department(String departmentName) {
         doctors = new ArrayList<Doctor>();
         this.departmentName = departmentName;
+    }
+
+    public Department(){
+
     }
 
     //getter

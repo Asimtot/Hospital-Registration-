@@ -10,13 +10,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import Person.*;
 import Schedule.Converter;
 
 @Entity
 @Table(name = "Notification")
-class Notification{
+public class Notification{
 
 
     // properties
@@ -28,6 +29,7 @@ class Notification{
     
     @Column(name = "date")
     String dateStr; //YYYY-MM-DD hh:mm:ss[.nnn] (SQL dateTime format)
+    @Transient
     LocalDateTime date;
 
     @Column(name = "text")
@@ -40,7 +42,9 @@ class Notification{
     @ManyToOne
     @JoinColumn(name = "reciever_id")
     Person receiver;
-
+    
+    
+    
 
     public Notification(){}
 
@@ -49,8 +53,13 @@ class Notification{
         this.text = text;
         this.sender = sender;
         this.receiver = receiver;
+        
     }
 
+    public String show(){
+        //return sendable.showSendable();//TODO
+        return "";
+    }
 
     // getters
 
@@ -65,6 +74,8 @@ class Notification{
     public Person getSender() {
         return sender;
     }
+
+    
 
     public String getText() {
         return text;

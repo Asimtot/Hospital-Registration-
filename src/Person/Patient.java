@@ -6,26 +6,15 @@ import java.util.List;
 import Schedule.*;
 import GeneralInfo.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
-@PrimaryKeyJoinColumn(name = "Patient.id")
+@PrimaryKeyJoinColumn(name = "id")
 @Table(name = "Patient")
-public class Patient extends Person {
+public class Patient extends Person{
     // properties
-    @OneToOne
+
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "GeneralInfo_id")
     private GeneralInfo info;
 
@@ -38,8 +27,8 @@ public class Patient extends Person {
     @OneToMany(mappedBy = "patient")
     private List<Appointment> appointment;
     
-    @ManyToOne
-    @JoinColumn(name = "Adress_id")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "Address_id")
     private Address address;
     
     @Column(name = "inIcu")
@@ -49,7 +38,7 @@ public class Patient extends Person {
     @JoinTable(name = "PatientDiseaseJoin",
                         joinColumns = @JoinColumn(name= "Patient_id"),
                         inverseJoinColumns = @JoinColumn(name= "Disease_id"))
-    private ArrayList<Disease> activeDiseases;
+    private List<Disease> activeDiseases;
 
     //DATABASE için gerekliler
     @OneToOne(mappedBy = "owner")
@@ -63,16 +52,12 @@ public class Patient extends Person {
     private Hospital icuHospital;
 
     // constructors
-    public Patient(){
-        doctors = new ArrayList<Doctor>();
-        appointment = new ArrayList<Appointment>();
-        activeDiseases = new ArrayList<Disease>();
-    }
+    public Patient(){}
     // simple - just initializes
     public Patient(String name, String email){
         super(name, email);
         
-        info = new GeneralInfo();
+        //info = new GeneralInfo();
         doctors = new ArrayList<Doctor>();
         appointment = new ArrayList<Appointment>();
         address = new Address();
@@ -100,7 +85,9 @@ public class Patient extends Person {
         appointment = new ArrayList<Appointment>(); // no way to add appointments in the patient creation screen
 
         activeDiseases = new ArrayList<Disease>();
-        Collections.addAll(activeDiseases, diseases);
+        //TODO burada noluyor
+        //Collections.addAll(activeDiseases, diseases);
+        
 
         info= new GeneralInfo();
         // ^^ should initialize empty body and consultations
@@ -149,7 +136,7 @@ public class Patient extends Person {
     }
 
     public ArrayList<Disease> getActiveDiseases() {
-        return activeDiseases;
+        return (ArrayList<Disease>) activeDiseases;
     }
 
     public ArrayList<Doctor> getDoctors() {
@@ -208,5 +195,18 @@ public class Patient extends Person {
             icuHospital = null;
     }
 
+  
+    public String showSendable() { //FIXME this is temporary
+        return "Patient{" +
+                "ID=" + id +
+                ", name=" + getName() +
+                ", info=" + info +
+                ", doctors=" + doctors +
+                ", appointment=" + appointment +
+                ", address=" + address +
+                ", inICU=" + inICU +
+                ", activeDiseases=" + activeDiseases +
+                '}';
+    }
 }
 

@@ -161,8 +161,6 @@ public class Patient extends Person{
         this.doctors = doctors;
     }
 
-   
-
     public void setInfo(GeneralInfo info) {
         this.info = info;
     }

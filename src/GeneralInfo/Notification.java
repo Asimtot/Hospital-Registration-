@@ -86,6 +86,7 @@ public class Notification{
     public void setDate(){
     date = Converter.toLocalDateTime(dateStr);
 }
+
     public void setDateStr(){
         dateStr = Converter.toString(date);
     }
@@ -101,8 +102,6 @@ public class Notification{
     public void setReceiver(Person receiver) {
         this.receiver = receiver;
     }
-
-    
 
     public void setSender(Person sender) {
         this.sender = sender;

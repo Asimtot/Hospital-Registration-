@@ -63,7 +63,7 @@ public class Hospital {
         hospitalDoctors = new ArrayList<Doctor>();
         icuPatients = new ArrayList<Patient>();
         icuOccupancy = 0;
-    }
+    }//TODO patients dan icuPatients ve NormalPatients arrayListi yaratan method
     public Hospital( String hospitalName, int icuCapacity){
         this.hospitalName = hospitalName;
         departments = new ArrayList<Department>();
@@ -136,7 +136,7 @@ public class Hospital {
      */
     public boolean assignPatientToIcu( Patient p) {
         if(icuOccupancy < icuCapacity) {
-            p.setInIcu(true);
+            p.privateSetInIcu(true,this);
             icuPatients.add(p);
             icuOccupancy++;
             return true;
@@ -147,7 +147,7 @@ public class Hospital {
     public boolean unassignPatientFromIcu(Patient p){
         if(icuPatients.remove(p)){
             icuOccupancy--;
-            p.setInIcu(false);
+            p.privateSetInIcu(false,this);
             return true;
         }
         return false;

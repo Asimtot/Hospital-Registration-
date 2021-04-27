@@ -185,21 +185,27 @@ public class Patient extends Person {
     }
 
     public boolean setInIcu(boolean inIcu, Hospital icuHospital) {
-        this.inIcu = inIcu;
 
         if (inIcu)
             return icuHospital.assignPatientToIcu(this);
         else if (icuHospital != null)
             return icuHospital.unassignPatientFromIcu(this);
-        else
-            // if the icuHospital is null (i.e. if the patient was never in ICU)  return true;
+        else{
+            this.inIcu = inIcu;
+            // if the icuHospital is null (i.e. if the patient was never in ICU)  return true
             return true;
+        }
+
     }
     /**
      * This method is only for the Hospital class to use
      */
-    void setInIcu(boolean inIcu){
+    void privateSetInIcu(boolean inIcu, Hospital icuHospital){
         this.inIcu = inIcu;
+        if(inIcu)
+            this.icuHospital = icuHospital;
+        else
+            icuHospital = null;
     }
 
 }

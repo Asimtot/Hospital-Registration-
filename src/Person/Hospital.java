@@ -31,22 +31,17 @@ public class Hospital {
     @OneToMany(mappedBy = "hospital")
     private List<Doctor> hospitalDoctors;
 
-    @OneToMany(mappedBy = "hospital")
-    List<Patient> patients= new ArrayList<>(); // needed?
-
-    @Transient
-    private List<Patient> icuPatients;
+    @OneToMany(mappedBy = "icuHospital")
+    List<Patient> icuPatients= new ArrayList<>(); // needed?
 
     @OneToOne
     @JoinColumn(name = "Adress_id")
     private Address address;
 
-
     @Column(name = "icuCapacity")
     private int icuCapacity;
     @Transient
     private int icuOccupancy;
-    
     
     @Column(name= "phoneNumber")
     private String phoneNumber;
@@ -66,6 +61,7 @@ public class Hospital {
         hospitalDoctors = new ArrayList<Doctor>();
         icuPatients = new ArrayList<Patient>();
         icuOccupancy = 0;
+
     }//TODO patients dan icuPatients ve NormalPatients arrayListi yaratan method
     public Hospital( String hospitalName, int icuCapacity){
         this.hospitalName = hospitalName;
@@ -86,7 +82,7 @@ public class Hospital {
         return (ArrayList<Department>) departments;
     }
     public ArrayList<Doctor> getHospitalDoctors() {
-        return (ArrayList<Doctor>) hospitalDoctors;
+        return (ArrayList<Doctor>)hospitalDoctors;
     }
     
     public int getIcuCapacity() {
@@ -139,6 +135,7 @@ public class Hospital {
      */
     public boolean assignPatientToIcu( Patient p) {
         if(icuOccupancy < icuCapacity) {
+
             p.privateSetInIcu(true,this);
             icuPatients.add(p);
             icuOccupancy++;
@@ -167,10 +164,10 @@ public class Hospital {
         //adding doctors of department  to hospital doctor list
         ArrayList<Doctor> dDoctors = d.getDepartmentDoctors();
         for( int i = 0; i < dDoctors.size(); i++){
+
             hospitalDoctors.add(dDoctors.get(i));
         }
     }
-
     /**
      *
      * @param doctor

@@ -38,7 +38,7 @@ public class Department {
     String equipment;
 
     @OneToMany(mappedBy = "department")
-    List<Doctor> doctors;
+    List<Doctor> doctors= new ArrayList<>();
 
     //DATABASE için gerekli
     @OneToMany(mappedBy = "department")
@@ -60,13 +60,12 @@ public class Department {
         this.departmentName = departmentName;
     }
 
-    public Department(){
-
-    }
+    public Department(){}
+    
 
     //getter
     public ArrayList<Doctor> getDepartmentDoctors() {
-        return (ArrayList<Doctor>) doctors;
+        return (ArrayList<Doctor>)doctors;
     }
     public String getDepartmentName() {
         return departmentName;

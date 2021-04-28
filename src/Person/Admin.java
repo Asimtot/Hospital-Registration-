@@ -4,13 +4,11 @@ import javax.persistence.*;
 
 
 @Entity
-@PrimaryKeyJoinColumn(name = "Admin.id")
+@PrimaryKeyJoinColumn(name = "id")
 @Table(name = "Admin")
 public class Admin extends Person{
 
     // properties
-
-    
 
     @OneToOne
     @JoinColumn(name = "Hospital_id")

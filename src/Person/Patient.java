@@ -25,7 +25,7 @@ public class Patient extends Person{
     private List<Doctor> doctors;
 
     @OneToMany(mappedBy = "patient")
-    private List<Appointment> appointment;
+    private List<Appointment> appointments;
     
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "Address_id")
@@ -44,11 +44,9 @@ public class Patient extends Person{
     @OneToOne(mappedBy = "owner")
     private Body body;
 
+
     @ManyToOne
     @JoinColumn(name = "Hospital_id")
-    private Hospital hospital; // TODO Potential problem here (a patient may go to multiple hospitals)
-
-    //TODO Database
     private Hospital icuHospital;
 
     // constructors
@@ -82,7 +80,7 @@ public class Patient extends Person{
         doctors = new ArrayList<Doctor>();
        // addDoctor(Booting.getUser); // user must be the patient's doctor//TODO implement booting
 
-        appointment = new ArrayList<Appointment>(); // no way to add appointments in the patient creation screen
+        appointments = new ArrayList<Appointment>(); // no way to add appointments in the patient creation screen
 
         activeDiseases = new ArrayList<Disease>();
         //TODO burada noluyor
@@ -132,7 +130,8 @@ public class Patient extends Person{
     }
 
     public ArrayList<Appointment> getAppointment() {
-        return (ArrayList<Appointment>) appointment;
+
+        return (ArrayList<Appointment>)(appointments);
     }
 
     public ArrayList<Disease> getActiveDiseases() {
@@ -140,7 +139,7 @@ public class Patient extends Person{
     }
 
     public ArrayList<Doctor> getDoctors() {
-        return (ArrayList<Doctor>) doctors;
+        return (ArrayList<Doctor>)doctors;
     }
 
     public GeneralInfo getInfo() {

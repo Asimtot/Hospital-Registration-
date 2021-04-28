@@ -59,7 +59,12 @@ public class Database {
         session= factory.getCurrentSession();
         session.beginTransaction();
 
-        session.save(new Patient("arı","mail",false,"Ankara","Turkey","Yaşamkent",null));
+        Hospital h= session.get(Hospital.class, 1);
+
+        h.addDepartment(session.get(Department.class, 1));
+        h.addDepartment(session.get(Department.class, 2));
+        h.addDepartment(session.get(Department.class, 3));
+
         session.getTransaction().commit();
         session.close();
 
@@ -68,7 +73,5 @@ public class Database {
     public static void main(String[] args) {
         Database database= new Database();
         database.add();
-
-
     }
 }

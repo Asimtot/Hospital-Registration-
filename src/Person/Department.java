@@ -78,4 +78,8 @@ public class Department {
     public void addDocToDepartment( Doctor d){
         doctors.add(d);
     }
+    //SEETTER
+    public void setHospital(Hospital hospital) {
+        this.hospital = hospital;
+    }
 }

@@ -47,6 +47,15 @@ public class Disease {
         //CONSTRUCTORS
     Disease(){};
 
+
+    public Disease(String info, String name) {
+        this.info = info;
+        this.name = name;
+    }
+
+
+    
+
         //METHODS
     void setRelatedBodyPart(BodyPart bp){
         relatedBodyPart= bp;
@@ -59,6 +68,10 @@ public class Disease {
 
     public BodyPart getRelatedBodyPart() {
         return relatedBodyPart;
+    }
+
+    public List<Medication> getClashingMedication() {
+        return clashingMedication;
     }
 
 

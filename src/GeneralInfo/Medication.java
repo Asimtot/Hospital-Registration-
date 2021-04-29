@@ -53,8 +53,12 @@ public class Medication {
     }
 
         //METHODS
-    void addClasshingDisease(Disease d){
+    public void addClasshingDisease(Disease d){
         dClashes.add(d);
+    }
+
+    public void addClashingMedication(Medication m){
+        mClashes.add(m);
     }
 
     public void setName(String name) {
@@ -63,6 +67,10 @@ public class Medication {
 
     public void setInfo(String info) {
         this.info = info;
+    }
+
+    public void setRelatedField(Department relatedField) {
+        this.relatedField = relatedField;
     }
 
             //GETTERS
@@ -81,7 +89,10 @@ public class Medication {
     public String getInfo() {
         return info;
     }
-             //
+
+    public List<Medication> getmClashes() {
+        return mClashes;
+    }
 
 
     @Override

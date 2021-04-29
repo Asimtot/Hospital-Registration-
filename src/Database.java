@@ -59,11 +59,23 @@ public class Database {
         session= factory.getCurrentSession();
         session.beginTransaction();
 
-        Hospital h= session.get(Hospital.class, 1);
+        Medication m= session.get(Medication.class,8);
+        Medication n= session.get(Medication.class,9);
 
-        h.addDepartment(session.get(Department.class, 1));
-        h.addDepartment(session.get(Department.class, 2));
-        h.addDepartment(session.get(Department.class, 3));
+        Department d= session.get(Department.class,4);
+        Department b= session.get(Department.class,5);
+
+        Hospital p= session.get(Hospital.class, 2);
+
+       System.out.println(p.getDepartments().size());
+        
+
+        session.save(new Hospital("Hastane",122));
+        
+
+        
+
+        
 
         session.getTransaction().commit();
         session.close();

@@ -78,8 +78,8 @@ public class Hospital {
     public Address getAddress() {
         return address;
     }
-    public ArrayList<Department> getDepartments() {
-        return (ArrayList<Department>) departments;
+    public List<Department> getDepartments() {
+        return departments;
     }
     public ArrayList<Doctor> getHospitalDoctors() {
         return (ArrayList<Doctor>)hospitalDoctors;
@@ -143,7 +143,7 @@ public class Hospital {
         }
         return false;
     }
-
+    //TODO 
     public boolean unassignPatientFromIcu(Patient p){
         if(icuPatients.remove(p)){
             icuOccupancy--;
@@ -160,13 +160,8 @@ public class Hospital {
      */
     public void addDepartment( Department d){
         departments.add(d);
+        d.setHospital(this);
 
-        //adding doctors of department  to hospital doctor list
-        ArrayList<Doctor> dDoctors = d.getDepartmentDoctors();
-        for( int i = 0; i < dDoctors.size(); i++){
-
-            hospitalDoctors.add(dDoctors.get(i));
-        }
     }
     /**
      *

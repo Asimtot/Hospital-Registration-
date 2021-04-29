@@ -81,6 +81,7 @@ public class Hospital {
     public List<Department> getDepartments() {
         return departments;
     }
+    
     public ArrayList<Doctor> getHospitalDoctors() {
         return (ArrayList<Doctor>)hospitalDoctors;
     }

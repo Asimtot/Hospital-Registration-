@@ -1,5 +1,4 @@
-import java.util.ArrayList;
-import java.util.List;
+
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -73,9 +72,6 @@ public class Database {
         session.save(new Hospital("Hastane",122));
         
 
-        
-
-        
 
         session.getTransaction().commit();
         session.close();

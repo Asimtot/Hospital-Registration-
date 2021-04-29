@@ -59,6 +59,8 @@ public class Address {
     public String getCounty() {
         return county;
     }
+
+
 // setters
 
 
@@ -72,5 +74,9 @@ public class Address {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public void setHospital(Hospital hospital) {
+        this.hospital = hospital;
     }
 }

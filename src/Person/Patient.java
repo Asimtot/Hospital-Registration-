@@ -1,6 +1,6 @@
 package Person;
 import java.util.ArrayList;
-import java.util.Collections;
+
 import java.util.List;
 
 import Schedule.*;
@@ -57,7 +57,7 @@ public class Patient extends Person{
         
         //info = new GeneralInfo();
         doctors = new ArrayList<Doctor>();
-        appointment = new ArrayList<Appointment>();
+        appointments = new ArrayList<Appointment>();
         address = new Address();
         inIcu = false;
         activeDiseases = new ArrayList<Disease>();
@@ -201,9 +201,9 @@ public class Patient extends Person{
                 ", name=" + getName() +
                 ", info=" + info +
                 ", doctors=" + doctors +
-                ", appointment=" + appointment +
+                ", appointment=" + appointments +
                 ", address=" + address +
-                ", inICU=" + inICU +
+                ", inICU=" + inIcu +
                 ", activeDiseases=" + activeDiseases +
                 '}';
     }

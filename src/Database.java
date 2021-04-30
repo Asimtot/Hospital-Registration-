@@ -31,7 +31,6 @@ public class Database {
             configuration.addAnnotatedClass(Body.class);
             configuration.addAnnotatedClass(Person.class);
             configuration.addAnnotatedClass(GeneralInfo.class);
-            configuration.addAnnotatedClass(FamilyTree.class);
             configuration.addAnnotatedClass(Address.class);
             configuration.addAnnotatedClass(Notification.class);
             configuration.addAnnotatedClass(Admin.class);

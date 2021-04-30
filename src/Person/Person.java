@@ -9,8 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+
 
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -45,9 +44,7 @@ public class Person {
     private List<Notification> notifications;
 
     //DATABASE için gerekli
-    @ManyToOne
-    @JoinColumn(name = "FamilyTree_id")
-    FamilyTree familyTree;
+    
     
     @OneToMany(mappedBy = "sender")
     List<Notification> sendNotifications;

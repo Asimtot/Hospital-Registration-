@@ -22,9 +22,6 @@ public class GeneralInfo {
     @JoinColumn(name = "Body_id")
     private Body body;
 
-    @ManyToOne
-    @JoinColumn(name = "FamilyTree_id")
-    private FamilyTree familyTree;
 
     @OneToOne(mappedBy = "info")
     Patient patient;
@@ -48,9 +45,7 @@ public class GeneralInfo {
         this.body = body;
     }
 
-    public void setFamilyTree(FamilyTree familyTree) {
-        this.familyTree = familyTree;
-    }
+    
             //GETTERS
 
     public Body getBody() {
@@ -61,10 +56,7 @@ public class GeneralInfo {
         return  consultations;
     }
 
-    public FamilyTree getFamilyTree() {
-        return familyTree;
-    }
-
+    
     public int getId() {
         return id;
     }

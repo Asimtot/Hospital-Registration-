@@ -29,6 +29,9 @@ public class Task {
     @Column(name= "name")
     private String name;
 
+    @Column(name = "done")
+    private boolean done;
+
     @ManyToOne
     @JoinColumn(name = "Doctor_id")
     private Doctor receiver;
@@ -43,12 +46,13 @@ public class Task {
 
     public Task(){}
     
-    public Task ( String name, Doctor receiver, Doctor sender, String fileName )
+    public Task ( String name, Doctor receiver, Doctor sender, String fileName, boolean done )
     {
         this.name = name;
         this.receiver = receiver;
         this.sender = sender;
         this.fileName = fileName;
+        this.done = done;
     }
     
     // Methods
@@ -68,6 +72,8 @@ public class Task {
         return fileName;
     }
 
+    public boolean getDone(){return done;}
+
     // setters
 
 
@@ -85,5 +91,9 @@ public class Task {
 
     public void setSender(Doctor sender) {
         this.sender = sender;
+    }
+
+    public void setDone(boolean done) {
+        this.done = done;
     }
 }

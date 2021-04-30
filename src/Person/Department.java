@@ -75,8 +75,10 @@ public class Department {
      *
      * @param d
      */
-    public void addDocToDepartment( Doctor d){
+    void addDocToDepartment( Doctor d){
         doctors.add(d);
+        d.setDepartment(this);
+        d.setHospital(hospital);
     }
     //SEETTER
     public void setHospital(Hospital hospital) {

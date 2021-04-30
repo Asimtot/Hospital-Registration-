@@ -57,18 +57,10 @@ public class Database {
         session= factory.getCurrentSession();
         session.beginTransaction();
 
-        Medication m= session.get(Medication.class,8);
-        Medication n= session.get(Medication.class,9);
-
-        Department d= session.get(Department.class,4);
-        Department b= session.get(Department.class,5);
-
-        Hospital p= session.get(Hospital.class, 2);
-
-       System.out.println(p.getDepartments().size());
+        session.save(new Medication("Ilaç","aaaa"));
         
 
-        session.save(new Hospital("Hastane",122));
+        
         
 
 
@@ -80,5 +72,8 @@ public class Database {
     public static void main(String[] args) {
         Database database= new Database();
         database.add();
+
+
+
     }
 }

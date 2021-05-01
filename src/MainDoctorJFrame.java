@@ -12,9 +12,15 @@ import javax.swing.*;
 
 import java.awt.event.*;
 import java.awt.*;
+
+import GUI.frmDisease;
+import GUI.frmDoctorData;
+import GeneralInfo.Disease;
+import GeneralInfo.Medication;
 import Person.*;
 import Schedule.*;
 
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -32,11 +38,11 @@ public class MainDoctorJFrame extends javax.swing.JFrame {
     DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
     Database database;
     
-    public MainDoctorJFrame(Doctor doctor, Database database) {
+    public MainDoctorJFrame(Doctor doctor, Database database) throws SQLException {
         this.doctor = doctor;
+        this.database = database;
         initComponents();
         cl = (CardLayout) HolderPanel.getLayout();
-        this.database = database;
     }
 
     /**
@@ -46,7 +52,7 @@ public class MainDoctorJFrame extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
-    private void initComponents() {
+    private void initComponents() throws SQLException {
 
         MainJFrameDoctor = new javax.swing.JPanel();
         HolderPanel = new javax.swing.JPanel();
@@ -69,7 +75,6 @@ public class MainDoctorJFrame extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jPanel1 = new javax.swing.JPanel();
@@ -205,6 +210,30 @@ public class MainDoctorJFrame extends javax.swing.JFrame {
             }
         };
 
+        jTable3 = new updatedTable<Doctor>() {
+            List<Doctor> doctorList;
+            @Override
+            void updateTable() {
+                doctorList  = doctor.getHospital().getHospitalDoctors();
+                String[][] doctorTable = new String[doctorList.size()][2];
+                for (int i = 0; i < doctorTable.length; i++) {
+                    doctorTable[i][0] = doctorList.get(i).getName();
+                    doctorTable[i][1] = doctorList.get(i).getDepartment().getDepartmentName();
+                }
+
+                jTable3.setModel(new javax.swing.table.DefaultTableModel(
+                        doctorTable,
+                        new String [] {
+                                "Hospital Staff", "Department"
+                        }
+                ));
+            }
+
+            @Override
+            List<Doctor> getList() {
+                return null;
+            }
+        };
         jTable5 = new updatedTable<Appointment>() {
             List<Appointment> appointmentList = doctor.getDateAppointments(LocalDateTime.now());
             @Override
@@ -401,8 +430,7 @@ public class MainDoctorJFrame extends javax.swing.JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 int row = jTable2.getSelectedRow();
-                //doctor.getTasks().get(row).setDone((boolean)(jTable2.getValueAt(row, 1)));
-                doctor.getTasks().get(row).setDone(true);
+                doctor.getTasks().get(row).setDone((boolean)(jTable2.getValueAt(row, 1)));
                 database.update(doctor);
             }
         });
@@ -415,19 +443,22 @@ public class MainDoctorJFrame extends javax.swing.JFrame {
 
         jTable3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        List<Doctor> doctorList = doctor.getHospital().getHospitalDoctors();
-        String[][] doctorTable = new String[doctorList.size()][2];
-        for (int i = 0; i < doctorTable.length; i++) {
-            doctorTable[i][0] = doctorList.get(i).getName();
-            doctorTable[i][1] = doctorList.get(i).getDepartment().getDepartmentName();
-        }
-
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
-                doctorTable,
-            new String [] {
-                "Hospital Staff", "Department"
+        jTable3.updateTable();
+        jTable3.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int row = jTable3.getSelectedRow();
+                String name = (String) jTable3.getModel().getValueAt(row,0);
+                try {
+                    Doctor doctorFromDepartment = database.getDoctor(name);
+                    JFrame frame = new frmDoctorData(doctorFromDepartment);
+                    frame.setVisible(true);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
             }
-        ));
+        });
+
         jTable3.setGridColor(new java.awt.Color(204, 204, 204));
         jTable3.setRowHeight(25);
         jScrollPane2.setViewportView(jTable3);
@@ -916,24 +947,84 @@ public class MainDoctorJFrame extends javax.swing.JFrame {
         group.add(jRadioButton4);
 
         jRadioButton1.setText("Hospital");
+        jRadioButton1.setActionCommand("Hospital");
 
         jRadioButton2.setText("Doctor");
+        jRadioButton2.setActionCommand("Doctor");
 
         jRadioButton3.setText("Disease");
+        jRadioButton3.setActionCommand("Disease");
 
         jRadioButton4.setText("Medication");
+        jRadioButton4.setActionCommand("Medication");
 
         jButton11.setText("⌕");
         jButton11.setMargin(new java.awt.Insets(2, 2, 2, 2));
+        jButton11.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String selection = group.getSelection().getActionCommand();
+                String name = jTextField11.getText();
+                switch (selection){
+                    case "Hospital":
+
+                        break;
+                    case "Doctor":
+                        try {
+                            Doctor doctorFound = database.getDoctor(name);
+                            JFrame doctorDataFrame = new frmDoctorData(doctorFound);
+                            doctorDataFrame.setVisible(true);
+                        } catch (SQLException throwables) {
+                            throwables.printStackTrace();
+                        }
+                        break;
+                    case "Disease":
+                        try {
+                            Disease diseaseFound = database.getDisease(name);
+                            JFrame diseaseFrame = new frmDisease(diseaseFound);
+                            diseaseFrame.setVisible(true);
+                        } catch (SQLException throwables) {
+                            throwables.printStackTrace();
+                        }
+                        break;
+                    case "Medication":
+//                        try {
+//                            Medication medicationFound = database.getMedication(name);
+//                            JFrame diseaseFrame = new frmDisease(medicationFound);
+//                            diseaseFrame.setVisible(true);
+//                        } catch (SQLException throwables) {
+//                            throwables.printStackTrace();
+//                        }
+                        break;
+                    default:
+                        break;
+                }
+
+            }
+        });
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel12.setText("Search By Name:");
 
         jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "*City*", "Item 2", "Item 3", "Item 4" }));
+        String[] cities = database.getAvailableCity("Hospital").toArray(new String[0]);
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(cities));
+        jComboBox1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    String[] counties = database.getAvailableCounty("Hospital",
+                            (String) jComboBox1.getSelectedItem()).toArray(new String[0]);
+                    jComboBox2.setModel(new DefaultComboBoxModel<>(counties));
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        });
 
         jComboBox2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "*Country*", "Item 2", "Item 3", "Item 4" }));
+
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "*County*"}));
 
         jComboBox3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "*Department*", "Item 2", "Item 3", "Item 4" }));
@@ -1412,10 +1503,11 @@ public class MainDoctorJFrame extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {
         int row = jTable2.getSelectedRow();
-        List<Task> list = doctor.getTasks();
-        list.remove(row);
-        doctor.setTasks(list);
+        System.out.println(row);
+
+        doctor.getTasks().get(row).setReciever(null);
         database.update(doctor);
+        doctor.removeTask(doctor.getTasks().get(row));
         jTable2.updateTable();
     }                                        
 
@@ -1682,7 +1774,7 @@ public class MainDoctorJFrame extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator4;
     private updatedTable jTable2;
-    private javax.swing.JTable jTable3;
+    private updatedTable jTable3;
     private updatedTable jTable5;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea3;

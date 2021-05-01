@@ -1,3 +1,4 @@
+import GeneralInfo.Address;
 import Person.*;
 import Schedule.Appointment;
 
@@ -46,6 +47,9 @@ public class MainData {
         database.add(hospital);
         database.add(department1);
         database.add(doctor1);
+        Address address = new Address("Ankara", "Çankaya", "Açık adres");
+        hospital.setAddress(address);
+        database.update(hospital);
     }
 }
 

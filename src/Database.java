@@ -121,7 +121,6 @@ public class Database {
         Statement statement= connection.createStatement();
         
         String sql= "SELECT Address.city FROM "+objectName+" JOIN Address ON "+objectName+".Address_id = Address.id;" ;
-        System.out.println(sql);
 
         ResultSet rs= statement.executeQuery(sql);
         ArrayList<String> citys= new ArrayList<>();

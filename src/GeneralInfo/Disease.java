@@ -83,5 +83,11 @@ public class Disease {
         return info;
     }
 
+    public String getName() {
+        return name;
+    }
 
+    public Department getRelatedField() {
+        return relatedField;
+    }
 }

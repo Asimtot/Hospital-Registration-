@@ -48,7 +48,7 @@ public class Main {
         Database database = new Database();
         Doctor doctor = database.getDoctor("Deniz Yılmaz");
 
-        JFrame frame = new MainDoctorJFrame(doctor);
+        JFrame frame = new MainDoctorJFrame(doctor, database);
         frame.setVisible(true);
         frame.setLocationRelativeTo(null); // centers the window
     }

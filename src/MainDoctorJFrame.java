@@ -30,11 +30,13 @@ public class MainDoctorJFrame extends javax.swing.JFrame {
     DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
     DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
     DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
+    Database database;
     
-    public MainDoctorJFrame(Doctor doctor) {
+    public MainDoctorJFrame(Doctor doctor, Database database) {
         this.doctor = doctor;
         initComponents();
         cl = (CardLayout) HolderPanel.getLayout();
+        this.database = database;
     }
 
     /**
@@ -194,6 +196,7 @@ public class MainDoctorJFrame extends javax.swing.JFrame {
                         return types [columnIndex];
                     }
                 });
+
             }
 
             @Override
@@ -398,7 +401,9 @@ public class MainDoctorJFrame extends javax.swing.JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 int row = jTable2.getSelectedRow();
-                ((List<Task>)jTable2.getList()).get(row).setDone((boolean)(jTable2.getValueAt(row, 1)));
+                //doctor.getTasks().get(row).setDone((boolean)(jTable2.getValueAt(row, 1)));
+                doctor.getTasks().get(row).setDone(true);
+                database.update(doctor);
             }
         });
         jTable2.setToolTipText("");
@@ -1399,13 +1404,18 @@ public class MainDoctorJFrame extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {
         Task task = new Task(jTextArea1.getText(),doctor,doctor,false);
-        task.send();
+        doctor.addTask(task);
+        database.update(doctor);
+//        task.send();
         jTable2.updateTable();
     }
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {
         int row = jTable2.getSelectedRow();
-        jTable2.getList().remove(row);
+        List<Task> list = doctor.getTasks();
+        list.remove(row);
+        doctor.setTasks(list);
+        database.update(doctor);
         jTable2.updateTable();
     }                                        
 

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -134,7 +135,7 @@ public class Schedule {
         return day.getAvailableIntervals();
     }
 
-    public ArrayList<Appointment> getDateAppointments(LocalDateTime date){
+    public List<Appointment> getDateAppointments(LocalDateTime date){
         DailySchedule day = findDay(date);
         if (day != null){
             return day.getAppointments();
@@ -150,7 +151,7 @@ public class Schedule {
 
     private DailySchedule findDay(LocalDateTime appDate){
         LocalDateTime date;
-        ((ArrayList<DailySchedule>)days).trimToSize();
+        //((List<DailySchedule>)days).trimToSize();
         for (int i = days.size() - 1; i >= 0; i--) {
             date = days.get(i).getDate();
             if (date.getDayOfMonth() == appDate.getDayOfMonth() && date.getMonthValue() == appDate.getMonthValue()

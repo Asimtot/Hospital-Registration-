@@ -181,6 +181,12 @@ public class Database {
         return true;
     }
 
+    void open(){session= factory.getCurrentSession();
+        session.beginTransaction();}
+
+    void close(){session.getTransaction().commit();
+        session.close();}
+
     public Address getAddress(int i){
         session= factory.getCurrentSession();
         session.beginTransaction();

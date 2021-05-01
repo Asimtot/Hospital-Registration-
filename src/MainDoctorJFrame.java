@@ -9,6 +9,7 @@
  * @author Lenovo
  */
 import javax.swing.*;
+
 import java.awt.event.*;
 import java.awt.*;
 import Person.*;
@@ -168,7 +169,9 @@ public class MainDoctorJFrame extends javax.swing.JFrame {
 
 
         jTable2 = new updatedTable<Task>() {
+            
             List<Task> taskList = doctor.getTasks();
+            
             @Override
             void updateTable() {
                 Object[][] taskTable = new Object[taskList.size()][2];

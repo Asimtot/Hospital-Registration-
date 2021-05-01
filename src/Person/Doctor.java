@@ -7,6 +7,8 @@ import Schedule.*;
 
 import javax.persistence.*;
 
+import org.hibernate.Hibernate;
+
 
 /**
  * Doctor class
@@ -89,9 +91,9 @@ public class Doctor extends Person {
         return tasks;
     }
     
-    public ArrayList<Patient> getPatients()
+    public List<Patient> getPatients()
     {
-        return (ArrayList<Patient>) patients;
+        return  patients;
     }
     
     public void setHospital( Hospital hospital )
@@ -109,7 +111,7 @@ public class Doctor extends Person {
         this.schedule = schedule;
     }
     
-    public void setTasks( ArrayList<Task> tasks )
+    public void setTasks(List<Task> tasks )
     {
         this.tasks = tasks;
     }
@@ -126,11 +128,13 @@ public class Doctor extends Person {
      */
     public boolean addTask( Task newTask )
     {
+        
         boolean check = false;
         tasks.add(newTask);
         
         if ( tasks.contains( newTask ))
             check = true;
+        
         
         return check;
     }
@@ -142,11 +146,13 @@ public class Doctor extends Person {
      */
     public boolean removeTask( Task oldTask )
     {
+        
         boolean check = true;
         tasks.remove(oldTask);
         
         if ( tasks.contains( oldTask ))
             check = false;
+
         
         return check;
     }
@@ -236,7 +242,7 @@ public class Doctor extends Person {
      * @param d any date
      * @return the arraylist of appointments of the day
      */
-    public ArrayList<Appointment> getDateAppointments( LocalDateTime d )
+    public List<Appointment> getDateAppointments( LocalDateTime d )
     {
         return schedule.getDateAppointments(d);
     }

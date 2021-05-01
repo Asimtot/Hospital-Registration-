@@ -82,8 +82,8 @@ public class Hospital {
         return departments;
     }
     
-    public ArrayList<Doctor> getHospitalDoctors() {
-        return (ArrayList<Doctor>)hospitalDoctors;
+    public List<Doctor> getHospitalDoctors() {
+        return hospitalDoctors;
     }
     
     public int getIcuCapacity() {

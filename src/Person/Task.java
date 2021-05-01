@@ -45,6 +45,13 @@ public class Task {
     // Constructor
 
     public Task(){}
+
+    public Task(String name, Doctor receiver, Doctor sender, boolean done){
+        this.name = name;
+        this.receiver = receiver;
+        this.sender = sender;
+        this.done = done;
+    }
     
     public Task ( String name, Doctor receiver, Doctor sender, String fileName, boolean done )
     {
@@ -56,6 +63,10 @@ public class Task {
     }
     
     // Methods
+
+    public void send(){
+        receiver.addTask(this);
+    }
     
     public String getName()
     {

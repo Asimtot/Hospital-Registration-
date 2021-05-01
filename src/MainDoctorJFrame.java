@@ -55,7 +55,6 @@ public class MainDoctorJFrame extends javax.swing.JFrame {
         jLabel23 = new javax.swing.JLabel();
         createStatistics = new javax.swing.JButton();
         jScrollPane5 = new javax.swing.JScrollPane();
-        jTable5 = new javax.swing.JTable();
         jLabel24 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
         jButton23 = new javax.swing.JButton();
@@ -67,7 +66,6 @@ public class MainDoctorJFrame extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable3 = new javax.swing.JTable();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -84,7 +82,7 @@ public class MainDoctorJFrame extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
+
         jScrollPane4 = new javax.swing.JScrollPane();
         jLayeredPane11 = new javax.swing.JLayeredPane();
         jLayeredPane12 = new javax.swing.JLayeredPane();
@@ -169,6 +167,65 @@ public class MainDoctorJFrame extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         home = new javax.swing.JMenu();
 
+
+        jTable2 = new updatedTable<Task>() {
+            List<Task> taskList = doctor.getTasks();
+            @Override
+            void updateTable() {
+                Object[][] taskTable = new Object[taskList.size()][2];
+                for (int i = 0; i < taskTable.length; i++) {
+                    taskTable[i][0] = taskList.get(i).getName();
+                    taskTable[i][1] = taskList.get(i).getDone();
+                }
+
+                this.setModel(new javax.swing.table.DefaultTableModel(
+                        taskTable,
+                        new String [] {
+                                "To-Do", "Status"
+                        }
+                ) {
+                    Class[] types = new Class [] {
+                            java.lang.Object.class, java.lang.Boolean.class
+                    };
+
+                    public Class getColumnClass(int columnIndex) {
+                        return types [columnIndex];
+                    }
+                });
+            }
+
+            @Override
+            List<Task> getList() {
+                return taskList;
+            }
+        };
+
+        jTable5 = new updatedTable<Appointment>() {
+            List<Appointment> appointmentList = doctor.getDateAppointments(LocalDateTime.now());
+            @Override
+            void updateTable() {
+                String[][] appointmentTable = new String[appointmentList.size()][2];
+                for (int i = 0; i < appointmentTable.length; i++) {
+                    appointmentTable[i][0] = appointmentList.get(i).getPatient().getName();
+                    appointmentTable[i][1] = appointmentList.get(i).getStartingTime().format(timeFormatter) + " - "
+                            + appointmentList.get(i).getEndingTime().format(timeFormatter);
+                }
+
+                setModel(new javax.swing.table.DefaultTableModel(
+                        appointmentTable,
+                        new String [] {
+                                "Patient", "Time"
+                        }
+                ));
+            }
+
+            @Override
+            List<Appointment> getList() {
+                return appointmentList;
+            }
+        };
+
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         MainJFrameDoctor.setLayout(new java.awt.CardLayout());
@@ -206,21 +263,8 @@ public class MainDoctorJFrame extends javax.swing.JFrame {
             }
         });
 
+        jTable5.updateTable();
 
-        List<Appointment> appointmentList = doctor.getDateAppointments(LocalDateTime.now());
-        String[][] appointmentTable = new String[appointmentList.size()][2];
-        for (int i = 0; i < appointmentTable.length; i++) {
-            appointmentTable[i][0] = appointmentList.get(i).getPatient().getName();
-            appointmentTable[i][1] = appointmentList.get(i).getStartingTime().format(timeFormatter) + " - "
-                    + appointmentList.get(i).getEndingTime().format(timeFormatter);
-        }
-
-        jTable5.setModel(new javax.swing.table.DefaultTableModel(
-            appointmentTable,
-            new String [] {
-                "Patient", "Time"
-            }
-        ));
         jTable5.setRowHeight(25);
         jScrollPane5.setViewportView(jTable5);
 
@@ -346,34 +390,13 @@ public class MainDoctorJFrame extends javax.swing.JFrame {
         jTable2.setAutoCreateRowSorter(true);
         jTable2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-
-        List<Task> taskList = doctor.getTasks();
-        Object[][] taskTable = new Object[taskList.size()][2];
-        for (int i = 0; i < taskTable.length; i++) {
-            taskTable[i][0] = taskList.get(i).getName();
-            taskTable[i][1] = taskList.get(i).getDone();
-        }
-
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
-            taskTable,
-            new String [] {
-                "To-Do", "Status"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Boolean.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
+        jTable2.updateTable();
 
         jTable2.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 int row = jTable2.getSelectedRow();
-                taskList.get(row).setDone((boolean)(jTable2.getValueAt(row, 1)));
+                ((List<Task>)jTable2.getList()).get(row).setDone((boolean)(jTable2.getValueAt(row, 1)));
             }
         });
         jTable2.setToolTipText("");
@@ -439,15 +462,12 @@ public class MainDoctorJFrame extends javax.swing.JFrame {
         jLabel6.setText("Contact Info:");
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel7.setText("Phone Number");
+        jLabel7.setText("Phone Number:");
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel8.setText("E-mail");
+        jLabel8.setText("E-mail: " + doctor.getEmail());
 
-        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel9.setText("Address");
-
-        jLayeredPane12.setBackground(new java.awt.Color(255, 255, 255));
+                jLayeredPane12.setBackground(new java.awt.Color(255, 255, 255));
         jLayeredPane12.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -752,13 +772,12 @@ public class MainDoctorJFrame extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(61, 61, 61)
                                 .addComponent(jLabel4))
-                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                     .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 33, Short.MAX_VALUE)
@@ -813,7 +832,6 @@ public class MainDoctorJFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel9)
                 .addGap(21, 21, 21)
                 .addComponent(jButton1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -882,6 +900,12 @@ public class MainDoctorJFrame extends javax.swing.JFrame {
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel11.setText("Advanced Search");
+
+        ButtonGroup group = new ButtonGroup();
+        group.add(jRadioButton1);
+        group.add(jRadioButton2);
+        group.add(jRadioButton3);
+        group.add(jRadioButton4);
 
         jRadioButton1.setText("Hospital");
 
@@ -1370,12 +1394,16 @@ public class MainDoctorJFrame extends javax.swing.JFrame {
         cl.show(HolderPanel, "card6");
     }                                                 
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // TODO add your handling code here:
-    }                                        
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {
+        Task task = new Task(jTextArea1.getText(),doctor,doctor,false);
+        task.send();
+        jTable2.updateTable();
+    }
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // TODO add your handling code here:
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {
+        int row = jTable2.getSelectedRow();
+        jTable2.getList().remove(row);
+        jTable2.updateTable();
     }                                        
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
@@ -1616,7 +1644,7 @@ public class MainDoctorJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
+
     private javax.swing.JLayeredPane jLayeredPane11;
     private javax.swing.JLayeredPane jLayeredPane12;
     private javax.swing.JLayeredPane jLayeredPane15;
@@ -1640,9 +1668,9 @@ public class MainDoctorJFrame extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator4;
-    private javax.swing.JTable jTable2;
+    private updatedTable jTable2;
     private javax.swing.JTable jTable3;
-    private javax.swing.JTable jTable5;
+    private updatedTable jTable5;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea3;
     private javax.swing.JTextField jTextField1;
@@ -1665,5 +1693,10 @@ public class MainDoctorJFrame extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;
     private javax.swing.JPanel newPatient;
-    // End of variables declaration                   
+    // End of variables declaration
+
+    abstract class updatedTable<E> extends JTable{
+        abstract void updateTable();
+        abstract List<E> getList();
+    }
 }

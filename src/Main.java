@@ -46,5 +46,6 @@ public class Main {
 
         JFrame frame = new MainDoctorJFrame(doctor1);
         frame.setVisible(true);
+        frame.setLocationRelativeTo(null); // centers the window
     }
 }

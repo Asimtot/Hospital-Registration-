@@ -5,6 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -143,9 +145,29 @@ public class Database {
             citys.add(rs.getString("city"));
         }
         statement.close();
-        return citys;
+        
+        return (ArrayList<String>)citys.stream().distinct().collect(Collectors.toList());
 
     }
+    public ArrayList<String> getAvailableCounty(String objectName,String city) throws SQLException{
+
+        Statement statement= connection.createStatement();
+
+        String sql= "SELECT Address.county FROM "+objectName+" JOIN Address ON "+objectName+".Address_id = Address.id WHERE Address.city= '"+city+"';" ;
+        System.out.println(sql);
+
+        ResultSet rs= statement.executeQuery(sql);
+        ArrayList<String> countys= new ArrayList<>();
+
+        while(rs.next()){
+            countys.add(rs.getString("county"));
+        }
+        statement.close();
+        
+        return (ArrayList<String>)countys.stream().distinct().collect(Collectors.toList());
+
+    }
+    
 
     boolean add(Object o){
         session= factory.getCurrentSession();
@@ -221,6 +243,16 @@ public class Database {
         return d;
     }
 
+    public Disease getDisease(String name) throws SQLException{
+        session= factory.getCurrentSession();
+        session.beginTransaction();
+        Disease d= session.get(Disease.class, getIdByName(name,"Disease"));
+        session.getTransaction().commit();
+        session.close();
+        return d;
+    }
+
+
 
     public GeneralInfo getGeneralInfo(int i){
         session= factory.getCurrentSession();
@@ -242,6 +274,15 @@ public class Database {
         session.close();
         return  m;
     }
+    public Medication getMedication(String name) throws SQLException{
+        session= factory.getCurrentSession();
+        session.beginTransaction();
+        Medication m= session.get(Medication.class,getIdByName(name, "Medication"));
+        session.getTransaction().commit();
+        session.close();
+        return  m;
+    }
+    
 
     public Prescription getPrescription(int i){
         session= factory.getCurrentSession();
@@ -284,6 +325,15 @@ public class Database {
         session.close();
         return p;
     }
+    public Doctor getDoctor(String name, String surname) throws SQLException{
+        session= factory.getCurrentSession();
+        session.beginTransaction();
+        Doctor p= session.get(Doctor.class, getIdByNameSurname(name, surname, "Doctor"));
+
+        session.getTransaction().commit();
+        session.close();
+        return p;
+    }
 
     public Hospital getHospital(int i){
         session= factory.getCurrentSession();
@@ -294,6 +344,17 @@ public class Database {
         session.close();
         return p;
     }
+    public Hospital getHospital(String name) throws SQLException{
+        session= factory.getCurrentSession();
+        session.beginTransaction();
+        Hospital p= session.get(Hospital.class, getIdByName(name, "Hospital"));
+
+        session.getTransaction().commit();
+        session.close();
+        return p;
+    }
+
+    
 
 
 
@@ -301,6 +362,15 @@ public class Database {
         session= factory.getCurrentSession();
         session.beginTransaction();
         Patient p= session.get(Patient.class, i);
+
+        session.getTransaction().commit();
+        session.close();
+        return p;
+    }
+    public Patient getPatient(String name, String surname) throws SQLException{
+        session= factory.getCurrentSession();
+        session.beginTransaction();
+        Patient p= session.get(Patient.class, getIdByNameSurname(name,surname, "Patient"));
 
         session.getTransaction().commit();
         session.close();
@@ -364,6 +434,6 @@ public class Database {
     public static void main(String[] args) throws SQLException {
         Database database= new Database();
 
-        database.add(new Doctor("Emre","emremail","12121212"));
+        System.out.println(database.getAvailableCounty("Hospital","Ankara"));
     }
 }

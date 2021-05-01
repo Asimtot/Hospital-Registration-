@@ -91,29 +91,14 @@ public class Database {
         ResultSet rs= statement.executeQuery(sql);
 
         while(rs.next()){
-            statement.close();
+            
             String sId= rs.getString("id");
+            statement.close();
             return Integer.parseInt(sId);
         }
         statement.close();
         return -1;
         
-    }
-    public int getIdByNameSurname(String name,String surname ,String objectName) throws SQLException{
-        Statement statement= connection.createStatement();
-
-        String sql= "SELECT id From "+objectName+" WHERE name="+name+ " AND surname="+surname;
-
-        ResultSet rs= statement.executeQuery(sql);
-
-        
-        while(rs.next()){
-            statement.close();
-            String sId= rs.getString("id");
-            return Integer.parseInt(sId);
-        }
-        statement.close();
-        return -1;
     }
     public String getPassword(String mail) throws SQLException{
         Statement statement= connection.createStatement();
@@ -325,10 +310,10 @@ public class Database {
         session.close();
         return p;
     }
-    public Doctor getDoctor(String name, String surname) throws SQLException{
+    public Doctor getDoctor(String name) throws SQLException{
         session= factory.getCurrentSession();
         session.beginTransaction();
-        Doctor p= session.get(Doctor.class, getIdByNameSurname(name, surname, "Doctor"));
+        Doctor p= session.get(Doctor.class, getIdByName(name, "Person")) ;
 
         session.getTransaction().commit();
         session.close();
@@ -370,7 +355,7 @@ public class Database {
     public Patient getPatient(String name, String surname) throws SQLException{
         session= factory.getCurrentSession();
         session.beginTransaction();
-        Patient p= session.get(Patient.class, getIdByNameSurname(name,surname, "Patient"));
+        Patient p= session.get(Patient.class, getIdByName(name, "Person"));
 
         session.getTransaction().commit();
         session.close();
@@ -434,6 +419,8 @@ public class Database {
     public static void main(String[] args) throws SQLException {
         Database database= new Database();
 
-        System.out.println(database.getAvailableCounty("Hospital","Ankara"));
-    }
+
+        System.out.println(database.getDoctor("Deniz Yılmaz").getName());
+
+    } 
 }

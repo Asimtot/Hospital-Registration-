@@ -14,7 +14,7 @@ import javax.persistence.*;
  * @version 1.0, 21.04.2021
 */
 @Entity
-@PrimaryKeyJoinColumn(name = "Doctor.id")
+@PrimaryKeyJoinColumn(name = "id")
 @Table(name= "Doctor")
 public class Doctor extends Person {
     

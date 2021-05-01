@@ -26,7 +26,7 @@ public class Doctor extends Person {
     @ManyToOne
     @JoinColumn(name = "Department_id")
     private Department department;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name= "Schedule_id")
     private Schedule schedule;
     @OneToMany(mappedBy = "receiver")

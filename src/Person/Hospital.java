@@ -35,7 +35,7 @@ public class Hospital {
     List<Patient> icuPatients= new ArrayList<>(); // needed?
 
     @OneToOne
-    @JoinColumn(name = "Adress_id")
+    @JoinColumn(name = "Address_id")
     private Address address;
 
     @Column(name = "icuCapacity")

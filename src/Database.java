@@ -4,6 +4,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -79,7 +80,7 @@ public class Database {
     *Sadece name olanlarda kullanın
     * hem name hem surnamei olanlarda name uyuşan ilk idyi verir
     */
-    int getIdByName(String name,String objectName) throws SQLException{
+    public int getIdByName(String name,String objectName) throws SQLException{
         Statement statement= connection.createStatement();
 
         String sql= "SELECT id FROM "+objectName+" WHERE name="+"'"+name+"';";
@@ -96,7 +97,7 @@ public class Database {
         return -1;
         
     }
-    int getIdByNameSurname(String name,String surname ,String objectName) throws SQLException{
+    public int getIdByNameSurname(String name,String surname ,String objectName) throws SQLException{
         Statement statement= connection.createStatement();
 
         String sql= "SELECT id From "+objectName+" WHERE name="+name+ " AND surname="+surname;
@@ -112,7 +113,7 @@ public class Database {
         statement.close();
         return -1;
     }
-    String getPassword(String mail) throws SQLException{
+    public String getPassword(String mail) throws SQLException{
         Statement statement= connection.createStatement();
 
         String sql= "SELECT password FROM Person WHERE email= '"+mail+"';";
@@ -127,6 +128,23 @@ public class Database {
         }
         statement.close();
         return "";
+    }
+    
+    public ArrayList<String> getAvailableCity(String objectName) throws SQLException{
+        Statement statement= connection.createStatement();
+        
+        String sql= "SELECT Address.city FROM "+objectName+" JOIN Address ON "+objectName+".Address_id = Address.id;" ;
+        System.out.println(sql);
+
+        ResultSet rs= statement.executeQuery(sql);
+        ArrayList<String> citys= new ArrayList<>();
+
+        while(rs.next()){
+            citys.add(rs.getString("city"));
+        }
+        statement.close();
+        return citys;
+
     }
 
     boolean add(Object o){
@@ -205,12 +223,16 @@ public class Database {
 
 
     public GeneralInfo getGeneralInfo(int i){
-        return session.get(GeneralInfo.class, i);
+        session= factory.getCurrentSession();
+        session.beginTransaction();
+        GeneralInfo gı= session.get(GeneralInfo.class, i);
+        session.getTransaction().commit();
+        session.close();
+
+        return gı;
     }
 
-    public Notification getNotification(int i){
-        return session.get(Notification.class, i);
-    }
+    
 
     public Medication getMedication(int i){
         session= factory.getCurrentSession();
@@ -222,47 +244,117 @@ public class Database {
     }
 
     public Prescription getPrescription(int i){
-        return session.get(Prescription.class, i);
+        session= factory.getCurrentSession();
+        session.beginTransaction();
+        Prescription p= session.get(Prescription.class, i);
+
+        session.getTransaction().commit();
+        session.close();
+        return p;
     }
+    
 
     public Admin getAdmin(int i){
-        return session.get(Admin.class, i);
+
+        session= factory.getCurrentSession();
+        session.beginTransaction();
+        Admin p= session.get(Admin.class, i);
+
+        session.getTransaction().commit();
+        session.close();
+        return p;
     }
 
     public Department getDepartment(int i){
-        return session.get(Department.class, i);
+        session= factory.getCurrentSession();
+        session.beginTransaction();
+        Department p= session.get(Department.class, i);
+
+        session.getTransaction().commit();
+        session.close();
+        return p;
     }
 
     public Doctor getDoctor(int i){
-        return session.get(Doctor.class, i);
+        session= factory.getCurrentSession();
+        session.beginTransaction();
+        Doctor p= session.get(Doctor.class, i);
+
+        session.getTransaction().commit();
+        session.close();
+        return p;
     }
 
     public Hospital getHospital(int i){
-        return session.get(Hospital.class, i);
+        session= factory.getCurrentSession();
+        session.beginTransaction();
+        Hospital p= session.get(Hospital.class, i);
+
+        session.getTransaction().commit();
+        session.close();
+        return p;
     }
 
+
+
     public Patient getPatient(int i){
-        return session.get(Patient.class, i);
+        session= factory.getCurrentSession();
+        session.beginTransaction();
+        Patient p= session.get(Patient.class, i);
+
+        session.getTransaction().commit();
+        session.close();
+        return p;
     }
 
     public Person getPerson(int i){
-        return session.get(Person.class, i);
+        session= factory.getCurrentSession();
+        session.beginTransaction();
+        Person p= session.get(Person.class, i);
+
+        session.getTransaction().commit();
+        session.close();
+        return p;
     }
 
     public Task getTask(int i){
-        return session.get(Task.class, i);
+        session= factory.getCurrentSession();
+        session.beginTransaction();
+        Task p= session.get(Task.class, i);
+
+        session.getTransaction().commit();
+        session.close();
+        return p;
     }
 
     public Appointment getAppointment(int i){
-        return session.get(Appointment.class, i);
+        session= factory.getCurrentSession();
+        session.beginTransaction();
+        Appointment p= session.get(Appointment.class, i);
+
+        session.getTransaction().commit();
+        session.close();
+        return p;
     }
 
     public DailySchedule getDailySchedule(int i){
-        return session.get(DailySchedule.class, i);
+        session= factory.getCurrentSession();
+        session.beginTransaction();
+        DailySchedule p= session.get(DailySchedule.class, i);
+
+        session.getTransaction().commit();
+        session.close();
+        return p;
     }
 
     public Schedule getSchedule(int i){
-        return session.get(Schedule.class, i);
+        session= factory.getCurrentSession();
+        session.beginTransaction();
+        Schedule p= session.get(Schedule.class, i);
+
+        session.getTransaction().commit();
+        session.close();
+        return p;
     }
 
 
@@ -272,7 +364,6 @@ public class Database {
     public static void main(String[] args) throws SQLException {
         Database database= new Database();
 
-        System.out.println(database.getIdByName("Cance", "Disease"));
- 
+        database.add(new Doctor("Emre","emremail","12121212"));
     }
 }

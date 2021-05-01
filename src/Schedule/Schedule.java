@@ -163,8 +163,8 @@ public class Schedule {
 
     // getters
 
-    public ArrayList<DailySchedule> getDays() {
-        return (ArrayList<DailySchedule>) days;
+    public List<DailySchedule> getDays() {
+        return days;
     }
 
     public int getStartingHour() {

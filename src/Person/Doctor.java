@@ -84,9 +84,9 @@ public class Doctor extends Person {
         return schedule;
     }
     
-    public ArrayList<Task> getTasks()
+    public List<Task> getTasks()
     {
-        return (ArrayList<Task>) tasks;
+        return tasks;
     }
     
     public ArrayList<Patient> getPatients()

@@ -12,7 +12,6 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
 import Person.*;
-import GeneralInfo.*;
 import Schedule.*;
 
 import java.time.LocalDateTime;
@@ -235,7 +234,7 @@ public class MainDoctorJFrame extends javax.swing.JFrame {
         DoctorPanel.setBackground(new java.awt.Color(52, 88, 130));
         DoctorPanel.setPreferredSize(new java.awt.Dimension(1000, 1000));
 
-        jLabel21.setText("jLabel4");
+        jLabel21.setIcon(new ImageIcon(this.getClass().getResource("GUI/images/HospitalLogo.png")));
 
         jButton21.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton21.setText("See My Schedule");
@@ -761,7 +760,8 @@ public class MainDoctorJFrame extends javax.swing.JFrame {
             }
         });
 
-        jLabel10.setText("jLabel10");
+        // Import ImageIcon
+        jLabel10.setIcon(new ImageIcon(this.getClass().getResource("GUI/images/ProfilePic.png")));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

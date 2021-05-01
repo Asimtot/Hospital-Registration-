@@ -43,6 +43,8 @@ public class Database {
             configuration.addAnnotatedClass(DailySchedule.class);
             configuration.addAnnotatedClass(Schedule.class);
 
+            factory= configuration.buildSessionFactory();
+
             System.out.println("Bağlandı");
         }
         catch (Exception e){
@@ -52,28 +54,35 @@ public class Database {
 
     }
 
-    boolean add(){
-        factory= configuration.buildSessionFactory();
+    boolean add(Object o){
         session= factory.getCurrentSession();
         session.beginTransaction();
 
-        session.save(new Medication("Ilaç","aaaa"));
-        
-
+        session.save(o);
         
         
-
-
         session.getTransaction().commit();
         session.close();
 
         return true;
     }
+
+    boolean save(Object o){
+        
+        session= factory.getCurrentSession();
+        session.beginTransaction();
+
+        session.update(o);
+        
+        
+        session.getTransaction().commit();
+        session.close();
+
+        return true;
+    }
+
     public static void main(String[] args) {
         Database database= new Database();
-        database.add();
-
-
-
+        
     }
 }

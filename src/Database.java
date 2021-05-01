@@ -426,7 +426,15 @@ public class Database {
         Database database= new Database();
 
 
-        System.out.println(database.getDoctor("Deniz Yılmaz").getName());
+        database.add(new Doctor("Ali kerim","mailmail","asasasas"));
+
+        Doctor d= database.getDoctor("Ali kerim");
+
+        d.addTask(new Task("asas",d,d,false));
+
+        database.update(d);
 
     } 
+
+
 }

@@ -31,7 +31,7 @@ public class Doctor extends Person {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name= "Schedule_id")
     private Schedule schedule;
-    @OneToMany(mappedBy = "receiver")
+    @OneToMany(mappedBy = "receiver",cascade = CascadeType.ALL)
     private List<Task> tasks;
 
     @ManyToMany(mappedBy = "doctors")
@@ -131,6 +131,7 @@ public class Doctor extends Person {
         
         boolean check = false;
         tasks.add(newTask);
+        newTask.setReciever(this);
         
         if ( tasks.contains( newTask ))
             check = true;

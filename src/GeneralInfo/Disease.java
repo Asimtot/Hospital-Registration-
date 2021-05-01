@@ -57,9 +57,14 @@ public class Disease {
     
 
         //METHODS
-    void setRelatedBodyPart(BodyPart bp){
+    public void setRelatedBodyPart(BodyPart bp){
         relatedBodyPart= bp;
     }
+
+    public void setInfo(String s){
+        info= s;
+    }
+
 
             //GETTERS
     public int getId() {
@@ -72,6 +77,10 @@ public class Disease {
 
     public List<Medication> getClashingMedication() {
         return clashingMedication;
+    }
+
+    public String getInfo() {
+        return info;
     }
 
 

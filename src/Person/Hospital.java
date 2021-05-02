@@ -105,6 +105,10 @@ public class Hospital {
         return hospitalName;
     }
 
+    public int getId() {
+        return id;
+    }
+
     //setters
     public void setIcuCapacity( int capacity){
         icuCapacity = capacity;

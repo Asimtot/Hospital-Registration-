@@ -151,17 +151,6 @@ public class Database {
         return (ArrayList<String>)countys.stream().distinct().collect(Collectors.toList());
 
     }
-    void delete() throws SQLException{
-
-        Doctor h= getDoctor(31);
-        session= factory.getCurrentSession();
-        session.beginTransaction();
-
-        session.delete(h);
-
-        session.getTransaction().commit();
-        session.close();
-    }
     
 
     public boolean add(Object o){
@@ -314,6 +303,18 @@ public class Database {
         return p;
     }
 
+    public Department getDepartment(String s) throws SQLException{
+        session= factory.getCurrentSession();
+        session.beginTransaction();
+
+        Department d= session.get(Department.class, getIdByName(s, "Department"));
+
+        session.getTransaction().commit();
+        session.close();
+        return d;
+
+    }
+
     public Doctor getDoctor(int i){
         session= factory.getCurrentSession();
         session.beginTransaction();
@@ -351,10 +352,6 @@ public class Database {
         session.close();
         return p;
     }
-
-    
-
-
 
     public Patient getPatient(int i){
         session= factory.getCurrentSession();

@@ -84,4 +84,8 @@ public class Department {
     public void setHospital(Hospital hospital) {
         this.hospital = hospital;
     }
+
+    public int getDoctorNumber() {
+        return doctors.size();
+    }
 }

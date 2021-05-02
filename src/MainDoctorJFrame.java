@@ -13,10 +13,10 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
 
-import GUI.frmDisease;
-import GUI.frmDoctorData;
+import Database.Database;
+import GUI.DoctorGUI.frmDisease;
+import GUI.DoctorGUI.frmDoctorData;
 import GeneralInfo.Disease;
-import GeneralInfo.Medication;
 import Person.*;
 import Schedule.*;
 

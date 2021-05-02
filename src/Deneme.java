@@ -1,3 +1,5 @@
+import Database.Database;
+
 import java.sql.SQLException;
 
 public class Deneme {

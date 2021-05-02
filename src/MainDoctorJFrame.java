@@ -14,8 +14,7 @@ import java.awt.event.*;
 import java.awt.*;
 
 import Database.Database;
-import GUI.DoctorGUI.frmDisease;
-import GUI.DoctorGUI.frmDoctorData;
+
 import GeneralInfo.Disease;
 import Person.*;
 import Schedule.*;
@@ -451,8 +450,8 @@ public class MainDoctorJFrame extends javax.swing.JFrame {
                 String name = (String) jTable3.getModel().getValueAt(row,0);
                 try {
                     Doctor doctorFromDepartment = database.getDoctor(name);
-                    JFrame frame = new frmDoctorData(doctorFromDepartment);
-                    frame.setVisible(true);
+                    //JFrame frame = new frmDoctorData(doctorFromDepartment);
+                    //frame.setVisible(true);
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }
@@ -972,8 +971,8 @@ public class MainDoctorJFrame extends javax.swing.JFrame {
                     case "Doctor":
                         try {
                             Doctor doctorFound = database.getDoctor(name);
-                            JFrame doctorDataFrame = new frmDoctorData(doctorFound);
-                            doctorDataFrame.setVisible(true);
+                            //JFrame doctorDataFrame = new frmDoctorData(doctorFound);
+                            //doctorDataFrame.setVisible(true);
                         } catch (SQLException throwables) {
                             throwables.printStackTrace();
                         }
@@ -981,8 +980,8 @@ public class MainDoctorJFrame extends javax.swing.JFrame {
                     case "Disease":
                         try {
                             Disease diseaseFound = database.getDisease(name);
-                            JFrame diseaseFrame = new frmDisease(diseaseFound);
-                            diseaseFrame.setVisible(true);
+                            //JFrame diseaseFrame = new frmDisease(diseaseFound);
+                            //diseaseFrame.setVisible(true);
                         } catch (SQLException throwables) {
                             throwables.printStackTrace();
                         }

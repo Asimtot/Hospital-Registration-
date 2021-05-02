@@ -16,7 +16,7 @@ public class Patient extends Person{
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "GeneralInfo_id")
-    private GeneralInfo info;
+    private GeneralInfo info = new GeneralInfo(this);
 
     @ManyToMany
     @JoinTable(name = "DoctorPatientJoin",
@@ -55,7 +55,7 @@ public class Patient extends Person{
     public Patient(String name, String email){
         super(name, email);
         
-        //info = new GeneralInfo();
+        //info = new GeneralInfo(this);
         doctors = new ArrayList<Doctor>();
         appointments = new ArrayList<Appointment>();
         address = new Address();
@@ -87,7 +87,7 @@ public class Patient extends Person{
         //Collections.addAll(activeDiseases, diseases);
         
 
-        info= new GeneralInfo();
+        info= new GeneralInfo(this);
         // ^^ should initialize empty body and consultations
         // ^^ should check if any Patient is null first
     }

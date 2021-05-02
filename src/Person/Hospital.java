@@ -187,7 +187,10 @@ public class Hospital {
      * @return
      */
     public double calculateIcuOccupancyPercentage(){
-        return ( (double) icuOccupancy / (double) icuCapacity ) * 100;
+        if (icuCapacity != 0)
+            return ( (double) icuOccupancy / (double) icuCapacity ) * 100;
+        else
+            return 0;
     }
 
     

@@ -65,8 +65,8 @@ public class Department {
     
 
     //getter
-    public ArrayList<Doctor> getDepartmentDoctors() {
-        return (ArrayList<Doctor>)doctors;
+    public List<Doctor> getDepartmentDoctors() {
+        return doctors;
     }
     public String getDepartmentName() {
         return departmentName;

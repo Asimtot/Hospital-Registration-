@@ -408,7 +408,7 @@ public class HospitalMainFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("LOG OUT");
+
 
         javax.swing.GroupLayout pnlProfileLayout = new javax.swing.GroupLayout(pnlProfile);
         pnlProfile.setLayout(pnlProfileLayout);
@@ -1831,7 +1831,7 @@ public class HospitalMainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable5MouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       JFrame ps =  new FrmNewPasworrd();
+       JFrame ps =  new FrmNewPasworrd(admin, database);
        ps.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -2232,6 +2232,23 @@ public class HospitalMainFrame extends javax.swing.JFrame {
             public void keyReleased(KeyEvent e) {
                 String searchKey = jTextField9.getText();
                 jTable3.search(searchKey);
+            }
+        });
+
+        // profile
+        jButton2.setText("Log Out");
+        jButton2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+            }
+        });
+
+        jToggleButton1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                admin.setEmail(jTextField12.getText());
+                database.update(admin); // FIXME test this
             }
         });
 

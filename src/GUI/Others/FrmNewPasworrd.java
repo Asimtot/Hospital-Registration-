@@ -5,17 +5,29 @@
  */
 package GUI.Others;
 
+import Database.Database;
+import Person.Admin;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 /**
  *
  * @author yusuf
  */
 public class FrmNewPasworrd extends javax.swing.JFrame {
 
+    Admin admin;
+    Database database;
     /**
      * Creates new form FrmNewPasworrd
      */
-    public FrmNewPasworrd() {
+    public FrmNewPasworrd(Admin admin, Database database) {
+        this.admin = admin;
+        this.database = database;
+        componentInitializer();
         initComponents();
+        listenerInitializer();
     }
 
     /**
@@ -62,10 +74,6 @@ public class FrmNewPasworrd extends javax.swing.JFrame {
                 jTextField3ActionPerformed(evt);
             }
         });
-
-        jButton1.setText("OK");
-
-        jLabel4.setText("SUCCESFUL/UNSUCCESSFUL");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -134,37 +142,24 @@ public class FrmNewPasworrd extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField3ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmNewPasworrd.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmNewPasworrd.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmNewPasworrd.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmNewPasworrd.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void componentInitializer(){}
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new FrmNewPasworrd().setVisible(true);
+    private void listenerInitializer(){
+        jButton1.setText("Set");
+
+        jButton1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String currentPassword = jTextField1.getText();
+                String newPassword = jTextField2.getText();
+                if (currentPassword.equals(admin.getPassword()) && newPassword.equals(jTextField3.getText())){
+                    admin.setPassword(newPassword); //FIXME test this
+                    database.update(admin);
+                    jLabel4.setText("Successful");
+                }
+                else{
+                    jLabel4.setText("Unsuccessful");
+                }
             }
         });
     }

@@ -1,6 +1,8 @@
-package GUIHelpers;
+package GUI.Helpers;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 import java.util.Arrays;
 import java.util.List;
 
@@ -9,6 +11,7 @@ public abstract class UpdatedTable<E> extends JTable {
     private List<E> list;
     private String[][] table;
     private boolean[] editable;
+    private TableRowSorter<DefaultTableModel> tableRowSorter;
 
     public UpdatedTable(String[] headers, boolean editable, int rowNumber) {
         this.headers = headers;
@@ -19,6 +22,11 @@ public abstract class UpdatedTable<E> extends JTable {
         table = createTable();
         putTable();
     };
+
+    public void update(String[][] table){
+        setTable(table);
+        putTable();
+    }
 
     public abstract String[][] createTable();
 
@@ -40,6 +48,17 @@ public abstract class UpdatedTable<E> extends JTable {
         this.editable = booleans;
     }
 
+    public void search(String searchKey){
+        DefaultTableModel model = (DefaultTableModel) this.getModel();
+        tableRowSorter = new TableRowSorter<>(model);
+        this.setRowSorter(tableRowSorter);
+        tableRowSorter.setRowFilter(RowFilter.regexFilter(searchKey));
+    }
+
+    public int getRow(){
+        return convertRowIndexToModel(this.getSelectedRow());
+    }
+
     public void setEditableByRow(boolean[] editable) {
         this.editable = editable;
     }
@@ -58,5 +77,9 @@ public abstract class UpdatedTable<E> extends JTable {
 
     public List<E> getList() {
         return list;
+    }
+
+    public TableRowSorter<DefaultTableModel> getTableRowSorter() {
+        return tableRowSorter;
     }
 }

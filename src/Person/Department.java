@@ -89,4 +89,8 @@ public class Department {
     public int getDoctorNumber() {
         return doctors.size();
     }
+
+    public Hospital getHospital() {
+        return hospital;
+    }
 }

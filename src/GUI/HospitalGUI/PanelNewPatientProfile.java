@@ -5,17 +5,38 @@
  */
 package GUI.HospitalGUI;
 
+import Database.Database;
+import GUI.Helpers.UpdatedComboBox;
+import GUI.Helpers.UpdatedTable;
+import GeneralInfo.Consultation;
+import GeneralInfo.Disease;
+import GeneralInfo.Prescription;
+import Person.Department;
+import Person.Patient;
+
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author yusuf
  */
 public class PanelNewPatientProfile extends javax.swing.JPanel {
 
+    Patient patient;
+    Database database;
+
+    DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
     /**
      * Creates new form PanelNewPatientProfile
      */
-    public PanelNewPatientProfile() {
+    public PanelNewPatientProfile(Patient patient, Database database) {
+        this.patient = patient;
+        this.database = database;
+        componentInitializer();
         initComponents();
+        listenerInitializer();
     }
 
     /**
@@ -30,15 +51,15 @@ public class PanelNewPatientProfile extends javax.swing.JPanel {
         pnlPatientProfile = new javax.swing.JPanel();
         pnlPatientProfilee = new javax.swing.JPanel();
         jScrollPane7 = new javax.swing.JScrollPane();
-        jTable4 = new javax.swing.JTable();
+
         jLabel24 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
         jScrollPane6 = new javax.swing.JScrollPane();
-        jTable6 = new javax.swing.JTable();
+
         jScrollPane12 = new javax.swing.JScrollPane();
-        jTable7 = new javax.swing.JTable();
+
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
@@ -47,39 +68,12 @@ public class PanelNewPatientProfile extends javax.swing.JPanel {
 
         pnlPatientProfilee.setBackground(new java.awt.Color(52, 88, 130));
 
-        jTable4.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
-            },
-            new String [] {
-                "Disease", "Date"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
         jTable4.setRowHeight(25);
         jScrollPane7.setViewportView(jTable4);
 
         jLabel24.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel24.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel24.setText("Patient Name, Age, Sex, Dead (If so)");
+
 
         jLabel25.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel25.setForeground(new java.awt.Color(255, 255, 255));
@@ -93,72 +87,23 @@ public class PanelNewPatientProfile extends javax.swing.JPanel {
         jLabel27.setForeground(new java.awt.Color(255, 255, 255));
         jLabel27.setText("Recent Medical History:");
 
-        jTable6.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null}
-            },
-            new String [] {
-                "Diseases"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false
-            };
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
         jScrollPane6.setViewportView(jTable6);
 
-        jTable7.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null}
-            },
-            new String [] {
-                "Current Medication"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
         jScrollPane12.setViewportView(jTable7);
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jLabel17.setText("Contact Info:");
+
 
         jLabel18.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel18.setText("E-mail");
+
 
         jLabel19.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel19.setText("Phone Number");
+
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
-        jTextArea1.setText("ADRESS\n");
+
         jScrollPane8.setViewportView(jTextArea1);
 
         javax.swing.GroupLayout pnlPatientProfileeLayout = new javax.swing.GroupLayout(pnlPatientProfilee);
@@ -257,6 +202,70 @@ public class PanelNewPatientProfile extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void componentInitializer(){
+
+        jTable4 = new UpdatedTable<Consultation>(new String [] {"Disease", "Date"}, false,2) {
+            @Override
+            public String[][] createTable() {
+                List<Consultation> consultationList = patient.getInfo().getConsultations();
+                setList(consultationList);
+                String[][] consultationTable = new String[consultationList.size()][2];
+                for (int i = 0; i < consultationTable.length; i++) {
+                    //consultationTable[i][0] = consultationList.get(i).getDiagnosis().get(0).getName(); //FIXME (multiple diagnosis)
+                    consultationTable[i][0] = "deneme"; //FIXME Diagnosis
+                    consultationTable[i][1] = consultationList.get(i).getDate().format(dateTimeFormatter);
+                }
+                return consultationTable;
+            }
+        };
+
+        jTable6 = new UpdatedTable<Disease>(new String [] { "Diseases" }, false, 1) {
+            @Override
+            public String[][] createTable() {
+                List<Disease> diseaseList = patient.getActiveDiseases(); //FIXME how do we know it's active?
+                setList(diseaseList);
+                String[][] diseaseTable = new String[diseaseList.size()][1];
+                for (int i = 0; i < diseaseTable.length; i++) {
+                    diseaseTable[i][0] = diseaseList.get(i).getName();
+                }
+                return diseaseTable;
+            }
+        };
+
+        jTable7 = new UpdatedTable<Prescription>(new String[]{"Current Medication"}, false, 1) {
+            @Override
+            public String[][] createTable() {
+                List<Consultation> consultationList = patient.getInfo().getConsultations();
+                List<Prescription> prescriptionList = new ArrayList<>();
+                for(Consultation consultation : consultationList){
+                    prescriptionList.add(consultation.getPrescription());
+                }
+                setList(prescriptionList);
+                String[][] prescriptionTable = new String[prescriptionList.size()][1];
+                for (int i = 0; i < prescriptionTable.length; i++) {
+                    //prescriptionTable[i][0] = prescriptionList.get(i).getMedications().get(0).getName(); //FIXME multiple medi
+                    prescriptionTable[i][0] = "deneme"; //FIXME prescription
+                }
+                return prescriptionTable;
+            }
+        };
+    }
+
+    private void listenerInitializer(){
+
+        jTable4.update();
+        jTable6.update();
+        jTable7.update();
+
+        jLabel24.setText(patient.getName());
+        jLabel17.setText("Contact Info:");
+        jLabel18.setText("E-mail" + patient.getEmail());
+        jLabel19.setText("Phone Number"); //FIXME
+        jTextArea1.setText("ADRESS\n");
+
+
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel17;
@@ -270,9 +279,9 @@ public class PanelNewPatientProfile extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
-    private javax.swing.JTable jTable4;
-    private javax.swing.JTable jTable6;
-    private javax.swing.JTable jTable7;
+    private UpdatedTable<Consultation> jTable4;
+    private UpdatedTable<Disease> jTable6;
+    private UpdatedTable<Prescription> jTable7;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JPanel pnlPatientProfile;
     private javax.swing.JPanel pnlPatientProfilee;

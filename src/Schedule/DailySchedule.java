@@ -79,8 +79,9 @@ public class DailySchedule {
                     break;
                 }
             }
-            if (!clashes)
+            if (!clashes){
                 appointments.add(app);
+            }
             return clashes;
         }
         else

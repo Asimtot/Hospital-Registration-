@@ -125,8 +125,8 @@ public class Hospital {
 
     //methods
 
-    public ArrayList<Patient> getAllPatients(){
-        ArrayList<Patient> patients = new ArrayList<Patient>();
+    public List<Patient> getAllPatients(){
+        List<Patient> patients = new ArrayList<Patient>();
         for(Doctor doctor : hospitalDoctors){
             patients.addAll(doctor.getPatients());
         }

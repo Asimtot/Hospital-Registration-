@@ -79,6 +79,10 @@ public class Appointment implements Comparable{
 
         startingTime = LocalDateTime.of(year,month,dayOfMonth,hourOfDay,minute);
         endingTime = startingTime.plusMinutes(timeInterval);
+
+        setStartStr();
+        setEndStr();
+
     }
 
     public Appointment(String name, Doctor doctor, Patient patient, Hospital place, Department department, int timeInterval,
@@ -92,6 +96,9 @@ public class Appointment implements Comparable{
 
         startingTime = date;
         endingTime = startingTime.plusMinutes(timeInterval);
+
+        setStartStr();
+        setEndStr();
     }
 
     @Override
@@ -101,6 +108,11 @@ public class Appointment implements Comparable{
         return this.getStartingTime().compareTo(((Appointment) o).getStartingTime());
     }
 
+    public void calculateEndingTime(){
+        setStartingTime();
+        endingTime = startingTime.plusMinutes(timeInterval);
+        setEndStr();
+    }
     // getters
     public String getName() {
         return name;
@@ -123,10 +135,12 @@ public class Appointment implements Comparable{
     }
 
     public LocalDateTime getStartingTime() {
+        setStartingTime();
         return startingTime;
     }
 
     public LocalDateTime getEndingTime() {
+        setEndingTime();
         return endingTime;
     }
 

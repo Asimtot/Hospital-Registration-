@@ -61,7 +61,8 @@ public class Consultation implements Comparable{
 
 
     // CONSTRUCTORS
-    public Consultation(){}
+    public Consultation(){
+    }
 
     // METHODS
 
@@ -91,6 +92,7 @@ public class Consultation implements Comparable{
 
     public void setDate(LocalDateTime date) {
         this.date = date;
+        setDateStr();
     }
 
     public void setDateStr(String dateStr) {
@@ -131,6 +133,7 @@ public class Consultation implements Comparable{
     }
 
     public LocalDateTime getDate() {
+        setDate();
         return date;
     }
 

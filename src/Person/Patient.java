@@ -129,13 +129,13 @@ public class Patient extends Person{
         return address;
     }
 
-    public ArrayList<Appointment> getAppointment() {
+    public List<Appointment> getAppointment() {
 
-        return (ArrayList<Appointment>)(appointments);
+        return (appointments);
     }
 
-    public ArrayList<Disease> getActiveDiseases() {
-        return (ArrayList<Disease>) activeDiseases;
+    public List<Disease> getActiveDiseases() {
+        return activeDiseases;
     }
 
     public ArrayList<Doctor> getDoctors() {

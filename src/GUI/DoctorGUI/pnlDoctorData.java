@@ -7,6 +7,12 @@ package GUI.DoctorGUI;/*
 import Database.Database;
 import Person.Doctor;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+
 /**
  *
  * @author enbadem
@@ -15,12 +21,17 @@ public class pnlDoctorData extends javax.swing.JPanel {
 
     Doctor doctor;
     Database database;
+
+    DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
     /**
      * Creates new form pnlDoctorData
      */
     public pnlDoctorData(Doctor doctor, Database database) {
         this.doctor = doctor;
+        this.database = database;
+        componentInitializer();
         initComponents();
+        listenerInitializer();
     }
 
     /**
@@ -61,13 +72,13 @@ public class pnlDoctorData extends javax.swing.JPanel {
         jLabel5.setIcon(new javax.swing.ImageIcon("C:\\Users\\enbadem\\Desktop\\ProjeDeneme\\src\\main\\java\\images\\Webp.net-resizeimage.png")); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel2.setText(doctor.getName());
+
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel3.setText("Hospital");
+
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel4.setText("Department");
+
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -119,11 +130,7 @@ public class pnlDoctorData extends javax.swing.JPanel {
         );
 
         jList1.setFont(new java.awt.Font("Univers", 0, 18)); // NOI18N
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "    00:00", "    00:00", "    00:00", "    00:00", "    00:00" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
+
         jScrollPane1.setViewportView(jList1);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
@@ -231,6 +238,32 @@ public class pnlDoctorData extends javax.swing.JPanel {
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox2ActionPerformed
+
+    private void componentInitializer(){
+
+    }
+    private void listenerInitializer(){
+        jLabel3.setText(doctor.getHospital().getHospitalName());
+        jLabel2.setText(doctor.getName());
+        jLabel4.setText(doctor.getDepartment().getDepartmentName() + "Department");
+
+        jButton2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ArrayList<LocalDateTime> intervals = doctor.getAvailableIntervals(LocalDateTime.of(Integer.parseInt((String) (jComboBox3.getSelectedItem())),
+                        jComboBox2.getSelectedIndex(), jComboBox1.getSelectedIndex(), 0, 0));
+                String[] intervalStr = new String[intervals.size() / 2 + 1];
+                for (int i = 0, j = 0; i < intervals.size(); i = i + 2, j++) {
+                    intervalStr[j] = intervals.get(i).format(timeFormatter) + "-" + intervals.get(i + 1).format(timeFormatter);
+                }
+                jList1.setModel(new javax.swing.AbstractListModel<String>() {
+                    String[] strings = intervalStr;
+                    public int getSize() { return strings.length; }
+                    public String getElementAt(int i) { return strings[i]; }
+                });
+            }
+        });
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

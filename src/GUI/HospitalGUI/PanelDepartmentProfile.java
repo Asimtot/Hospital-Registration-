@@ -7,11 +7,13 @@ package GUI.HospitalGUI;
 
 import Database.Database;
 import GUI.DoctorGUI.pnlDoctorData;
-import GUIHelpers.UpdatedTable;
+import GUI.Helpers.UpdatedTable;
 import Person.Department;
 import Person.Doctor;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
 /**
@@ -62,14 +64,14 @@ public class PanelDepartmentProfile extends javax.swing.JPanel {
         });
         jScrollPane3.setViewportView(jTableDepartmentDoctors);
 
-        jButton3.setText("ADD NEW DOCTOR TO DEPARTMENT");
+
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
 
-        jButton4.setText("REMOVE DOCTOR");
+        jButton4.setText("Remove Doctor");
 
         javax.swing.GroupLayout pnlDepartmentPageLayout = new javax.swing.GroupLayout(pnlDepartmentPage);
         pnlDepartmentPage.setLayout(pnlDepartmentPageLayout);
@@ -126,7 +128,7 @@ public class PanelDepartmentProfile extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTableDepartmentDoctorsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableDepartmentDoctorsMouseClicked
-        int row = jTableDepartmentDoctors.getSelectedRow();
+        int row = jTableDepartmentDoctors.getRow();
         PnlHolder.removeAll();
         PnlHolder.add(new pnlDoctorData(jTableDepartmentDoctors.getList().get(row),database));
         PnlHolder.repaint();
@@ -135,12 +137,12 @@ public class PanelDepartmentProfile extends javax.swing.JPanel {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         PnlHolder.removeAll();
-        PnlHolder.add(new PanelAddDoctorPage());
+        PnlHolder.add(new PanelAddDoctorPage(department,database, PnlHolder));
         PnlHolder.repaint();
         PnlHolder.revalidate();
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    public void componentInitializer(){
+    private void componentInitializer(){
         jTableDepartmentDoctors = new UpdatedTable<Doctor>(new String[]{"Department Doctors"}, false, 1) {
             @Override
             public String[][] createTable() {
@@ -156,9 +158,17 @@ public class PanelDepartmentProfile extends javax.swing.JPanel {
 
     }
 
-    public void listenerInitializer(){
+    private void listenerInitializer(){
         jLabel16.setText(department.getDepartmentName());
+        jButton3.setText("Add New Doctor to " + department.getDepartmentName() + " Department");
         jTableDepartmentDoctors.update();
+
+        jButton4.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int row = jTableDepartmentDoctors.getRow();
+            }
+        });
     }
 
 
@@ -167,7 +177,7 @@ public class PanelDepartmentProfile extends javax.swing.JPanel {
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JScrollPane jScrollPane3;
-    private GUIHelpers.UpdatedTable<Doctor> jTableDepartmentDoctors;
+    private GUI.Helpers.UpdatedTable<Doctor> jTableDepartmentDoctors;
     private javax.swing.JPanel pnlDepartmentPage;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,17 +5,38 @@
  */
 package GUI.HospitalGUI;
 
+import Database.Database;
+import GUI.DoctorGUI.pnlDoctorData;
+import GUI.Helpers.UpdatedTable;
+import Person.Department;
+import Person.Doctor;
+import Person.Person;
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
+
 /**
  *
  * @author yusuf
  */
 public class PanelAddDoctorPage extends javax.swing.JPanel {
 
+    Department department;
+    Database database;
+    JPanel PnlHolder;
+
     /**
      * Creates new form PanelAddDoctorPage
      */
-    public PanelAddDoctorPage() {
+    public PanelAddDoctorPage(Department department, Database database, JPanel PnlHolder) {
+        this.department = department;
+        this.database = database;
+        this.PnlHolder = PnlHolder;
+        componentInitializer();
         initComponents();
+        listenerInitializer();
     }
 
     /**
@@ -30,7 +51,6 @@ public class PanelAddDoctorPage extends javax.swing.JPanel {
         pnlAddDoc = new javax.swing.JPanel();
         jLabel38 = new javax.swing.JLabel();
         jScrollPane10 = new javax.swing.JScrollPane();
-        jTableDepartmentDoctors1 = new javax.swing.JTable();
         jButton8 = new javax.swing.JButton();
         jButton14 = new javax.swing.JButton();
         pnlAddDoctorr1 = new javax.swing.JPanel();
@@ -53,73 +73,8 @@ public class PanelAddDoctorPage extends javax.swing.JPanel {
         pnlAddDoc.setBackground(new java.awt.Color(52, 88, 130));
 
         jLabel38.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 18)); // NOI18N
-        jLabel38.setText("Department Name");
 
-        jTableDepartmentDoctors1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null}
-            },
-            new String [] {
-                "DEPARTMENT DOCTORS"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false
-            };
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
         jTableDepartmentDoctors1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTableDepartmentDoctors1MouseClicked(evt);
@@ -150,7 +105,7 @@ public class PanelAddDoctorPage extends javax.swing.JPanel {
 
         jLabel41.setText("Mail");
 
-        jLabel42.setText("Inıtıal PassWord");
+        jLabel42.setText("Initial PassWord");
 
         jLabel43.setText("ID");
 
@@ -158,7 +113,7 @@ public class PanelAddDoctorPage extends javax.swing.JPanel {
 
         jLabel45.setText("Tel");
 
-        jButton16.setText("GO");
+
 
         javax.swing.GroupLayout pnlAddDoctorr1Layout = new javax.swing.GroupLayout(pnlAddDoctorr1);
         pnlAddDoctorr1.setLayout(pnlAddDoctorr1Layout);
@@ -291,7 +246,11 @@ public class PanelAddDoctorPage extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTableDepartmentDoctors1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableDepartmentDoctors1MouseClicked
-        // TODO add your handling code here:
+        int row = jTableDepartmentDoctors1.getRow();
+        PnlHolder.removeAll();
+        PnlHolder.add(new pnlDoctorData(jTableDepartmentDoctors1.getList().get(row),database));
+        PnlHolder.repaint();
+        PnlHolder.revalidate();
     }//GEN-LAST:event_jTableDepartmentDoctors1MouseClicked
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
@@ -302,6 +261,44 @@ public class PanelAddDoctorPage extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField33ActionPerformed
 
+    private void componentInitializer(){
+
+        jTableDepartmentDoctors1 = new UpdatedTable<Doctor>(new String[]{"Department Doctors"}, false, 1) {
+            @Override
+            public String[][] createTable() {
+                List<Doctor> doctorList = department.getDepartmentDoctors();
+                setList(doctorList);
+                String[][] doctorTable = new String[doctorList.size()][1];
+                for (int i = 0; i < doctorTable.length; i++) {
+                    doctorTable[i][0] = doctorList.get(i).getName();
+                }
+                return doctorTable;
+            }
+        };
+    }
+
+    private void listenerInitializer(){
+        jTableDepartmentDoctors1.update();
+
+        jLabel38.setText(department.getDepartmentName());
+        jButton16.setText("Add");
+        jTextField36.setText(Person.createRandomPassword(10));
+
+        jButton16.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Doctor doctor = new Doctor();
+                doctor.setName(jTextField33.getText() + " " + jTextField34.getText());
+                doctor.setEmail(jTextField35.getText());
+                doctor.setPassword(jTextField36.getText());
+                //doctor.setID() //FIXME Doctor ID, phoneNumber, Nationality
+                department.getHospital().addDoctor(doctor,department);
+                database.add(doctor);
+                jTableDepartmentDoctors1.update();
+            }
+        });
+
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton14;
@@ -316,7 +313,7 @@ public class PanelAddDoctorPage extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;
     private javax.swing.JScrollPane jScrollPane10;
-    private javax.swing.JTable jTableDepartmentDoctors1;
+    private UpdatedTable<Doctor> jTableDepartmentDoctors1;
     private javax.swing.JTextField jTextField33;
     private javax.swing.JTextField jTextField34;
     private javax.swing.JTextField jTextField35;

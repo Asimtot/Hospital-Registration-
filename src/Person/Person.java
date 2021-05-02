@@ -106,6 +106,18 @@ public class Person {
         return check;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public void setRandomPassword(){
         password = createRandomPassword(12);
     }
@@ -114,7 +126,7 @@ public class Person {
         password = createRandomPassword(length);
     }
 
-    private String createRandomPassword(int length){
+    public static String createRandomPassword(int length){
         final char[] CHARS = {'0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f','g','h','j','k',
                 'l','m','n','o', 'p','q','r','s','t','u','v','w','x','y','z', 'A','B','C','D','E','F','G','H','J',
                 'K','L','M', 'N','O','P','Q','R','S','T','U','V','W','X','Y','Y','Z'};

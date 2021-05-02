@@ -39,7 +39,7 @@ public class GeneralInfo {
     }
 
     public Consultation getLastConsultation(){
-        ((ArrayList<Consultation>)consultations).trimToSize();
+//        ((ArrayList<Consultation>)consultations).trimToSize();
         if (consultations.size() != 0)
             return consultations.get(consultations.size() - 1);
         return null;

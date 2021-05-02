@@ -15,6 +15,7 @@ import org.hibernate.cfg.Configuration;
 
 import Person.*;
 import Schedule.*;
+import jdk.javadoc.internal.doclets.formats.html.SourceToHTMLConverter;
 import GeneralInfo.*;
 
 public class Database {
@@ -303,16 +304,27 @@ public class Database {
         return p;
     }
 
-    public Department getDepartment(String s) throws SQLException{
-        session= factory.getCurrentSession();
-        session.beginTransaction();
+    public Department getDepartment(String s,Hospital h) throws SQLException{
+        Statement statement= connection.createStatement();
 
-        Department d= session.get(Department.class, getIdByName(s, "Department"));
+        String sql= "SELECT id FROM Department WHERE name= '"+s+"' AND Hospital_id= '"+h.getId()+"';";
 
-        session.getTransaction().commit();
-        session.close();
-        return d;
+        System.out.println(sql);
 
+        ResultSet rs= statement.executeQuery(sql);
+        int id= 0;
+
+        while(rs.next()){
+            id= rs.getInt("id");
+            break;
+        }
+        statement.close();
+        
+        if(id==0){
+            return null;
+        }
+
+        return getDepartment(id);
     }
 
     public Doctor getDoctor(int i){
@@ -366,7 +378,7 @@ public class Database {
     public Patient getPatient(String name) throws SQLException{
         session= factory.getCurrentSession();
         session.beginTransaction();
-        
+
         Patient p= session.get(Patient.class, getIdByName(name, "Person"));
 
         session.getTransaction().commit();
@@ -431,6 +443,10 @@ public class Database {
     public static void main(String[] args) throws SQLException {
         Database database= new Database();
 
+
+        Department p= database.getDepartment("Oncology", database.getHospital(18));
+
+        System.out.println(p.getDepartmentName());
         
 
         

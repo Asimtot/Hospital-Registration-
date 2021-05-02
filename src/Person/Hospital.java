@@ -25,7 +25,7 @@ public class Hospital {
     @Column(name = "name")
     private String hospitalName;
 
-    @OneToMany(mappedBy = "hospital")
+    @OneToMany(mappedBy = "hospital",cascade = CascadeType.ALL)
     private List<Department> departments;
 
     @OneToMany(mappedBy = "hospital")

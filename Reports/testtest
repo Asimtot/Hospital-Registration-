@@ -1,0 +1,89 @@
+Hospital s= database.getHospital("Bayındır");
+
+        Department orthopedi= new Department("Ortopedi");
+            Disease backPain= new Disease("Back pain can range from a muscle aching to a shooting, burning or stabbing sensation. In addition, the pain may radiate down your leg or worsen with bending, twisting, lifting, standing or walking.","Bel Ağrısı");
+                Medication b1= new Medication("CATAFLAM", "20mg");
+                Medication b2= new Medication("NORVASC", "10mg");
+                Medication b3= new Medication("VOLTREN", "75mg");
+                Medication b4= new Medication("DICOFLAM", "50mg");
+                Medication b5= new Medication("BRUFEN", "400mg");
+            Disease sinirSıkışması= new Disease("Sinir sıkışması bir sinirin çevresindeki kemik, kıkırdak, kas veya tendon gibi dokular tarafından oluşturulan basınç nedeniyle meydana gelen durumdur. Bu baskı etkisi sonucunda sinir fonksiyonları olumsuz yönde etkilenir ve ağrı, karıncalanma, uyuşma ya da güçsüzlük gibi belirtiler meydana gelebilir.", "Sinir Sıkışması");
+                Medication s1= new Medication("ROMATEM","100mg");
+
+            Disease romatizma = new Disease("Romatizma","klem iltihabının sık görülen formudur ve eklemlerin içindeki zarda (sinoviyumda) ve/veya diğer iç organlarda iltihaba yol açar. Eklem hattı kalınlaşır ve eklemde ısı artışı, şişme ve ağrıya yol açabilir. ");
+                Medication r1= new Medication("Apranax","100mg");
+                Medication r2= new Medication("Naprosyn","500mg");
+                Medication r3= new Medication("Evalon","500mg");
+
+
+        Medication[] mmm1= {b1,b2,b3,b4,b5,s1,r1,r2,r3};
+
+        for(Medication sas: mmm1){
+            sas.setRelatedField(orthopedi);
+        }
+        backPain.setRelatedField(orthopedi);
+        sinirSıkışması.setRelatedField(orthopedi);
+        romatizma.setRelatedField(orthopedi);
+
+        orthopedi.setHospital(s);
+
+        database.add(orthopedi);
+
+        
+
+
+
+
+
+
+
+
+
+        Department kbb= new Department("KBB");
+            Disease kenfeksiyon= new Disease("Tıp literatüründe otitis media olarak adlandırılan orta kulak iltihabı, kulak zarının arkasında yer alan ve içinde insanların sesleri duymasını sağlayan küçük kemiklerin titreştiği orta kulak adı verilen kulak odacığında meydana gelen iltihaplanma durumudur.", "Orta kulak enfeksiyonu");
+            Disease kenfeksiyon2= new Disease("Dış kulak iltihabı, kulak kanalı derisinde tipik olarak bakterilerin neden olduğu akut bir enfeksiyondur. Dış kulak yolu enfeksiyonu özellikle havuz ve denizden ya da kirli sulardan geçen “Psödomanas aeruginosa” ve benzeri bazı bakteriler, bazen de mantarlardır.", "Dış kuşlak enfeksiyonu");
+            Disease vertigo= new Disease("Baş dönmesi diğer bir adıyla vertigo, denge kaybı ve sersemlik hissi olarak tanımlanır. Bu durum özellikle hareket ederken ya da eğilip, kalkarken hızlı hareket etmeye bağlı durumlarda sıklıkla ortaya çıkabilir", "Vertigo");
+            Disease sinuzit= new Disease("Sinüzit denince burun ve göz etrafındaki normalde hava ile dolu olması gereken boşlukların iltihabını anlıyoruz. Sinüzit enfeksiyonları oldukça sık görülen enfeksiyonlardır ve her insan vakit vakit sinüzit olmaktadır. Ancak bu enfeksiyonların çok büyük kısmı ilaçlar yardımıyla tedavi edilebilir. ", "Sinüzit");
+            
+            Medication k1= new Medication("DESMONT","16mg");
+            Medication k2= new Medication("DELTACORITRIL","32mg");
+            Medication k3= new Medication("Prednol","16mg");
+            Medication k4= new Medication("NOTTA","100mg");
+            Medication k5= new Medication("DMT","16mg");
+            Medication m= new Medication("Arveles","25mg");
+            Medication n= new Medication("Augmentin","100mg");
+            Medication a= new Medication("Apranax","550mg");
+            Medication b= new Medication("Arveles","25mg");
+            Medication c= new Medication("Apıreks","200mg");
+            Medication d= new Medication("Aerius","5mg");
+            Medication e= new Medication("Atarax","30mg");
+            Medication m8= new Medication("Apranax","20mg");
+
+        Department radyoloj= new Department("Radyoloji");
+            Disease ra1= new Disease("","Cancer");
+            Disease ra2= new Disease("","Osteporoz");
+            
+
+        Department dermatoloji= new Department("Dermatoloji");
+            Disease d1= new Disease("Akne, kıl köklerinin ve yağ bezlerinin (deri altındaki yağ üreten bezlerin) tıkanmasıyla sonuçlanan ve sivilcelere neden olan yaygın bir cilt durumudur .","Akne");
+            Disease d2= new Disease("Halk arasında kurdeşen adıyla bilinen ürtiker farklı koşullar nedeniyle ciltte görülen reaksiyonlardan kaynaklanan kabarık, kaşıntılı ve kızarık lekelerle karakterize edilen bir cilt hastalığıdır. ","Kurdeşen");
+            Disease d3= new Disease("Sedef hastalığı, cilt hücrelerinin normalden bir kaç kat daha hızlı çoğalmasına neden olan bir cilt bozukluğudur. Bir diğer adı da psoriasis olan sedef hastalığı sırasında ciltte beyaz pullarla kaplı engebeli kırmızı lekeler görülmeye başlanır.","Sedef");
+            Disease d4= new Disease("Terleme, vücudun serin kalmasına yardımcı olur ve çoğunlukla doğaldır. İnsanlar daha çok sıcak havalarda, egzersiz yaptıkları zaman ve kendilerini geren, kızdıran, utandıran veya korkutan durumlarda metabolizma tepkisi olarak terlerler","Hiperhidroz");
+            Disease d5= new Disease("Nasır, genellikle ayakların kemikli bölgelerinde oluşan ve bu bölgelerin ayak yapısına uygun olmayan ayakkabılar ile sürekli olarak sürtünmeye ve basınca maruz kalması sonucunda oluşan bir cilt hastalığıdır.","Nasırlar");
+
+            Medication dd1= new Medication("Acnedur","20mg");
+            Medication dd2= new Medication("Imex","40mg");
+            Medication dd3= new Medication("Polimisin","100mg");
+            Medication dd4= new Medication("Acyl","25mg");
+            Medication dd5= new Medication("Asiviral","75mg");
+
+        Department kardiyoloji = new Department("Kardiyoloji");
+            Disease ka1= new Disease("Hipertansiyon, kalpten vücuda taşınan kanın atardamar duvarlarına uyguladığı kuvvetin, kalp hastalığı gibi sağlık sorunlarına neden olabilecek kadar yüksek olduğu yaygın bir tıbbi duruma verilen isimdir.", "Hipertansiyon");
+            Disease ka2= new Disease("İlerleyen yaşlarda ortaya çıkan romatizmal kalp hastalıklarına bağlı olarak gelişen triküspit stenozu, kalbin sağ tarafında yer alan sağ kulakçık ile sağ karıncık arasında yer alır. Kanın geçişini kontrol eden bu 3 yaprakcıklı kapaklarda darlık veya yetersizlik ortaya çıkabili", "Trisküspit stenozu");
+            Disease ka3= new Disease("Göğsünüzde aniden ortaya çıkan ağrı ve sıkışma hissiyle başlayan kalp krizinde erken müdahale çok önemli. Erken müdahale hem hayati riskin azaltılmasını hem de kalp kasının zarar görmeden kurtulabilmesini sağlayabiliyor.", "Kalp Krizi");
+            Disease ka4= new Disease("Aort darlığı (AD), normalde tamamen açılarak kanın ileri doğru gitmesine izin veren aort kapağının, çeşitli nedenlerle daralarak kanı ileri doğru geçişine engel oluşturmasıdır.", "Aort Darlığı");
+
+
+            Medication mm1= new Medication("Calpol","10mg");
+            Medication mm2= new Medication("Majstar","100");
+            Medication mm3= new Medication("Ofsitnal","100mg");

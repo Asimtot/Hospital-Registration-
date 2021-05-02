@@ -19,10 +19,10 @@ import GeneralInfo.*;
 
 public class Database {
 
-    private Configuration configuration;
-    private SessionFactory factory;
-    private Session session;
-    private Connection connection;
+    Configuration configuration;
+    SessionFactory factory;
+    Session session;
+    Connection connection;
 
     public Database(){
         try {
@@ -435,16 +435,22 @@ public class Database {
         return p;
     }
 
-    public boolean addPatientToDoctor(Doctor d, Patient p){
+    
+
+    public void deneme(){
         session= factory.getCurrentSession();
         session.beginTransaction();
 
-        boolean b= d.assignPatient(p);
+       
+        Doctor d= session.get(Doctor.class, 31);
+        Patient p= session.get(Patient.class,34);
 
+        p.addDoctor(d);
+        
 
         session.getTransaction().commit();
         session.close();
-        return b;
+
 
     }
 
@@ -456,11 +462,15 @@ public class Database {
         Database database= new Database();
 
 
-        Department p= database.getDepartment("Oncology", database.getHospital(18));
 
-        System.out.println(p.getDepartmentName());
         
+        
+        Doctor d= database.getDoctor(31);
+        Patient p= database.getPatient(34);
 
+        p.addDoctor(d);
+
+        database.update(p);
         
 
             

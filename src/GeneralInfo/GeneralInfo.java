@@ -31,6 +31,7 @@ public class GeneralInfo {
         this.patient = patient;
     }
 
+    public GeneralInfo(){}
         //METHODS
     public void addConsultation(Consultation e){
         e.setGeneralInfo(this);

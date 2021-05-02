@@ -15,7 +15,6 @@ import org.hibernate.cfg.Configuration;
 
 import Person.*;
 import Schedule.*;
-import jdk.javadoc.internal.doclets.formats.html.SourceToHTMLConverter;
 import GeneralInfo.*;
 
 public class Database {
@@ -319,7 +318,7 @@ public class Database {
             break;
         }
         statement.close();
-        
+
         if(id==0){
             return null;
         }
@@ -434,6 +433,19 @@ public class Database {
         session.getTransaction().commit();
         session.close();
         return p;
+    }
+
+    public boolean addPatientToDoctor(Doctor d, Patient p){
+        session= factory.getCurrentSession();
+        session.beginTransaction();
+
+        boolean b= d.assignPatient(p);
+
+
+        session.getTransaction().commit();
+        session.close();
+        return b;
+
     }
 
 

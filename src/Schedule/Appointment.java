@@ -38,6 +38,7 @@ public class Appointment implements Comparable{
     @Transient
     String endStr;
 
+    @Transient
     LocalDateTime startingTime;
     
     @Transient

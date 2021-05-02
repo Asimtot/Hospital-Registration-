@@ -356,6 +356,7 @@ public class Database {
     public Patient getPatient(int i){
         session= factory.getCurrentSession();
         session.beginTransaction();
+
         Patient p= session.get(Patient.class, i);
 
         session.getTransaction().commit();
@@ -365,6 +366,7 @@ public class Database {
     public Patient getPatient(String name) throws SQLException{
         session= factory.getCurrentSession();
         session.beginTransaction();
+        
         Patient p= session.get(Patient.class, getIdByName(name, "Person"));
 
         session.getTransaction().commit();

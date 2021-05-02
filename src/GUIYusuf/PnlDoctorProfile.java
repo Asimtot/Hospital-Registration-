@@ -4,16 +4,20 @@ package GUIYusuf;/*
  * and open the template in the editor.
  */
 
+import Person.Doctor;
+
 /**
  *
  * @author yusuf
  */
 public class PnlDoctorProfile extends javax.swing.JPanel {
 
+    private Doctor doctor;
     /**
      * Creates new form PnlDoctorProfile
      */
-    public PnlDoctorProfile() {
+    public PnlDoctorProfile(Doctor doctor) {
+        this.doctor = doctor;
         initComponents();
     }
 
@@ -70,7 +74,7 @@ public class PnlDoctorProfile extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel2.setText("Name, Surname");
+        jLabel2.setText(doctor.getName());
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Hospital");

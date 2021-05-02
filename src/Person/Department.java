@@ -71,16 +71,16 @@ public class Department {
         return departmentName;
     }
 
-    /**
-     *
-     * @param d
-     */
     void addDocToDepartment( Doctor d){
         doctors.add(d);
         d.setDepartment(this);
         d.setHospital(hospital);
     }
-    //SEETTER
+    public int getDoctorNumber(){
+        return doctors.size();
+    }
+
+    //SETTER
     public void setHospital(Hospital hospital) {
         this.hospital = hospital;
     }

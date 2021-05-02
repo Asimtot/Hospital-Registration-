@@ -1,0 +1,472 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+  <Properties>
+    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+      <Color blue="82" green="58" red="34" type="rgb"/>
+    </Property>
+  </Properties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="0" pref="88" max="32767" attributes="0"/>
+                      <Component id="jLabel2" min="-2" pref="149" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="jTextField1" min="-2" pref="242" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="181" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
+                              <Component id="jSeparator1" min="-2" pref="260" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="jLabel3" min="-2" pref="23" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="jSeparator2" min="-2" pref="256" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="136" max="-2" attributes="0"/>
+                                      <Component id="jComboBox2" min="-2" pref="108" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                                      <Component id="jComboBox1" min="-2" pref="103" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                                      <Component id="jComboBox3" min="-2" pref="125" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="212" max="-2" attributes="0"/>
+                                      <Component id="jLabel4" min="-2" pref="300" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                              <Component id="jButton3" min="-2" pref="50" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="191" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="jLabel1" alignment="1" min="-2" pref="358" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jRadioButton1" alignment="0" min="-2" pref="93" max="-2" attributes="0"/>
+                                          <Component id="jRadioButton2" alignment="0" min="-2" pref="93" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="159" max="32767" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jRadioButton4" min="-2" pref="93" max="-2" attributes="0"/>
+                                          <Component id="jRadioButton3" min="-2" pref="93" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+              <Component id="jScrollPane2" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace pref="50" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jScrollPane2" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Component id="jLabel1" min="-2" pref="42" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jRadioButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jRadioButton3" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jRadioButton2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jRadioButton4" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextField1" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jSeparator2" alignment="1" min="-2" pref="10" max="-2" attributes="0"/>
+                          <Component id="jLabel3" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="jSeparator1" alignment="1" min="-2" pref="10" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jButton3" alignment="3" min="-2" pref="47" max="-2" attributes="0"/>
+                          <Component id="jComboBox3" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
+                          <Component id="jComboBox2" alignment="3" min="-2" pref="46" max="-2" attributes="0"/>
+                          <Component id="jComboBox1" alignment="3" min="-2" pref="47" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                      <Component id="jLabel4" min="-2" pref="30" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace min="-2" pref="166" max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JSeparator" name="jSeparator2">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel1">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="36" style="0"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
+        <Property name="horizontalAlignment" type="int" value="0"/>
+        <Property name="text" type="java.lang.String" value="Advanced Search"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="jRadioButton1">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="82" green="58" red="34" type="rgb"/>
+        </Property>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="14" style="0"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Hospital"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="jComboBox2">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="14" style="0"/>
+        </Property>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="2">
+            <StringItem index="0" value="*Country*"/>
+            <StringItem index="1" value="Turkey"/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButton3">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&#x2315;"/>
+        <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
+          <Insets value="[2, 2, 2, 2]"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton3ActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="jRadioButton2">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="82" green="58" red="34" type="rgb"/>
+        </Property>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="14" style="0"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Doctor"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="jRadioButton4">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="82" green="58" red="34" type="rgb"/>
+        </Property>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="14" style="0"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Medication"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="jComboBox3">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="14" style="0"/>
+        </Property>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="61">
+            <StringItem index="0" value="*Department*"/>
+            <StringItem index="1" value="Accident and Emergency"/>
+            <StringItem index="2" value="Audiology"/>
+            <StringItem index="3" value="Blood Pressure Unit"/>
+            <StringItem index="4" value="Blood Transfusion"/>
+            <StringItem index="5" value="Breast Imaging Unit"/>
+            <StringItem index="6" value="Cancer (See Oncology)"/>
+            <StringItem index="7" value="Cardiology Department"/>
+            <StringItem index="8" value="Chemical Pathology"/>
+            <StringItem index="9" value="Cochlear Implant"/>
+            <StringItem index="10" value="Colorectal Surgery"/>
+            <StringItem index="11" value="Dermatology"/>
+            <StringItem index="12" value="Diabetes Centre"/>
+            <StringItem index="13" value="Emergency"/>
+            <StringItem index="14" value="Endocrinology / General Medicine"/>
+            <StringItem index="15" value="Endoscopy"/>
+            <StringItem index="16" value="Geriatric and Stroke Medicine"/>
+            <StringItem index="17" value="Haematology"/>
+            <StringItem index="18" value="Haemovigilance"/>
+            <StringItem index="19" value="Hepatology"/>
+            <StringItem index="20" value="Histocompatibilty and Immunogenetics"/>
+            <StringItem index="21" value="Histopathology Department"/>
+            <StringItem index="22" value="Hygiene and General Services"/>
+            <StringItem index="23" value="Infection Prevention and Control"/>
+            <StringItem index="24" value="Infectious Diseases"/>
+            <StringItem index="25" value="Intensive Care Unit"/>
+            <StringItem index="26" value="Kidney Centre"/>
+            <StringItem index="27" value="Microbiology"/>
+            <StringItem index="28" value="Mindfulness and Relaxation Centre"/>
+            <StringItem index="29" value="Neurophysics"/>
+            <StringItem index="30" value="Neurophysiology"/>
+            <StringItem index="31" value="Neurosciences, Cochlear Implant, and ENT Directorate"/>
+            <StringItem index="32" value="Non-Invasive Vascular Unit"/>
+            <StringItem index="33" value="Nursing"/>
+            <StringItem index="34" value="Nutrition and Dietetics"/>
+            <StringItem index="35" value="Occupational Therapy"/>
+            <StringItem index="36" value="Oncology"/>
+            <StringItem index="37" value="Ophthalmology"/>
+            <StringItem index="38" value="Organisational Development"/>
+            <StringItem index="39" value="Orthoptic"/>
+            <StringItem index="40" value="Outpatients"/>
+            <StringItem index="41" value="Pain Clinic"/>
+            <StringItem index="42" value="Palliative Care"/>
+            <StringItem index="43" value="Patient Representatives Department"/>
+            <StringItem index="44" value="Phlebotomy Department"/>
+            <StringItem index="45" value="Physiotherapy"/>
+            <StringItem index="46" value="Podiatry and Chiropody"/>
+            <StringItem index="47" value="Portering"/>
+            <StringItem index="48" value="Psychiatry"/>
+            <StringItem index="49" value="Psychology"/>
+            <StringItem index="50" value="Pulmonary Function"/>
+            <StringItem index="51" value="Radiology"/>
+            <StringItem index="52" value="Raheny Community Nursing Unit"/>
+            <StringItem index="53" value="Rheumatology"/>
+            <StringItem index="54" value="Speech and Language Therapy"/>
+            <StringItem index="55" value="Stomacare"/>
+            <StringItem index="56" value="Transplant Co-ordinators"/>
+            <StringItem index="57" value="Transplant Laboratories"/>
+            <StringItem index="58" value="Upper GI Surgery"/>
+            <StringItem index="59" value="Urodynamics"/>
+            <StringItem index="60" value="Urology"/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel4">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="14" style="0"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
+        <Property name="horizontalAlignment" type="int" value="0"/>
+        <Property name="text" type="java.lang.String" value="(Only usable for hospital/doctor)"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="jRadioButton3">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="82" green="58" red="34" type="rgb"/>
+        </Property>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="14" style="0"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Disease"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel2">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="18" style="0"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Search By Name:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JSeparator" name="jSeparator1">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel3">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="16" style="2"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="99" green="99" red="99" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="or"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jTextField1">
+    </Component>
+    <Component class="javax.swing.JComboBox" name="jComboBox1">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="14" style="0"/>
+        </Property>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="82">
+            <StringItem index="0" value="*City*"/>
+            <StringItem index="1" value="Adana"/>
+            <StringItem index="2" value="Ad&#x131;yaman"/>
+            <StringItem index="3" value="Afyon"/>
+            <StringItem index="4" value="A&#x11f;r&#x131;"/>
+            <StringItem index="5" value="Amasya"/>
+            <StringItem index="6" value="Ankara"/>
+            <StringItem index="7" value="Antalya"/>
+            <StringItem index="8" value="Artvin"/>
+            <StringItem index="9" value="Ayd&#x131;n"/>
+            <StringItem index="10" value="Bal&#x131;kesir"/>
+            <StringItem index="11" value="Bilecik"/>
+            <StringItem index="12" value="Bing&#xf6;l"/>
+            <StringItem index="13" value="Bitlis"/>
+            <StringItem index="14" value="Bolu"/>
+            <StringItem index="15" value="Burdur"/>
+            <StringItem index="16" value="Bursa"/>
+            <StringItem index="17" value="&#xc7;anakkale"/>
+            <StringItem index="18" value="&#xc7;ank&#x131;r&#x131;"/>
+            <StringItem index="19" value="&#xc7;orum"/>
+            <StringItem index="20" value="Denizli"/>
+            <StringItem index="21" value="Diyarbak&#x131;r"/>
+            <StringItem index="22" value="Edirne"/>
+            <StringItem index="23" value="Elaz&#x131;&#x11f;"/>
+            <StringItem index="24" value="Erzincan"/>
+            <StringItem index="25" value="Erzurum"/>
+            <StringItem index="26" value="Eski&#x15f;ehir"/>
+            <StringItem index="27" value="Gaziantep"/>
+            <StringItem index="28" value="Giresun"/>
+            <StringItem index="29" value="G&#xfc;m&#xfc;&#x15f;hane"/>
+            <StringItem index="30" value="Hakkari"/>
+            <StringItem index="31" value="Hatay"/>
+            <StringItem index="32" value="Isparta"/>
+            <StringItem index="33" value="&#x130;&#xe7;el (Mersin)"/>
+            <StringItem index="34" value="&#x130;stanbul"/>
+            <StringItem index="35" value="&#x130;zmir"/>
+            <StringItem index="36" value="Kars"/>
+            <StringItem index="37" value="Kastamonu"/>
+            <StringItem index="38" value="Kayseri"/>
+            <StringItem index="39" value="K&#x131;rklareli"/>
+            <StringItem index="40" value="K&#x131;r&#x15f;ehir"/>
+            <StringItem index="41" value="Kocaeli"/>
+            <StringItem index="42" value="Konya"/>
+            <StringItem index="43" value="K&#xfc;tahya"/>
+            <StringItem index="44" value="Malatya"/>
+            <StringItem index="45" value="Manisa"/>
+            <StringItem index="46" value="K.mara&#x15f;"/>
+            <StringItem index="47" value="Mardin"/>
+            <StringItem index="48" value="Mu&#x11f;la"/>
+            <StringItem index="49" value="Mu&#x15f;"/>
+            <StringItem index="50" value="Nev&#x15f;ehir"/>
+            <StringItem index="51" value="Ni&#x11f;de"/>
+            <StringItem index="52" value="Ordu"/>
+            <StringItem index="53" value="Rize"/>
+            <StringItem index="54" value="Sakarya"/>
+            <StringItem index="55" value="Samsun"/>
+            <StringItem index="56" value="Siirt"/>
+            <StringItem index="57" value="Sinop"/>
+            <StringItem index="58" value="Sivas"/>
+            <StringItem index="59" value="Tekirda&#x11f;"/>
+            <StringItem index="60" value="Tokat"/>
+            <StringItem index="61" value="Trabzon"/>
+            <StringItem index="62" value="Tunceli"/>
+            <StringItem index="63" value="&#x15e;anl&#x131;urfa"/>
+            <StringItem index="64" value="U&#x15f;ak"/>
+            <StringItem index="65" value="Van"/>
+            <StringItem index="66" value="Yozgat"/>
+            <StringItem index="67" value="Zonguldak"/>
+            <StringItem index="68" value="Aksaray"/>
+            <StringItem index="69" value="Bayburt"/>
+            <StringItem index="70" value="Karaman"/>
+            <StringItem index="71" value="K&#x131;r&#x131;kkale"/>
+            <StringItem index="72" value="Batman"/>
+            <StringItem index="73" value="&#x15e;&#x131;rnak"/>
+            <StringItem index="74" value="Bart&#x131;n"/>
+            <StringItem index="75" value="Ardahan"/>
+            <StringItem index="76" value="I&#x11f;d&#x131;r"/>
+            <StringItem index="77" value="Yalova"/>
+            <StringItem index="78" value="Karab&#xfc;k"/>
+            <StringItem index="79" value="Kilis"/>
+            <StringItem index="80" value="Osmaniye"/>
+            <StringItem index="81" value="D&#xfc;zce"/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPane2">
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTable" name="jTable1">
+          <Properties>
+            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+              <Table columnCount="1" rowCount="22">
+                <Column editable="false" title="Results" type="java.lang.Object"/>
+              </Table>
+            </Property>
+            <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+              <TableColumnModel selectionModel="0">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+              </TableColumnModel>
+            </Property>
+            <Property name="rowHeight" type="int" value="25"/>
+            <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+              <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
+            </Property>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+  </SubComponents>
+</Form>

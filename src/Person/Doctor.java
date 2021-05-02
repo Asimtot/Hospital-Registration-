@@ -49,7 +49,10 @@ public class Doctor extends Person {
     List<Appointment> appointments;
 
     // Constructors
-    public Doctor(){}
+    public Doctor(){
+        tasks = new ArrayList<Task>();
+        patients = new ArrayList<Patient>();
+    }
     
     public Doctor ( String name, String email, String password, Hospital hospital, Department department )
     {

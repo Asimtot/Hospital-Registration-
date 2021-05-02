@@ -3,6 +3,7 @@ package GeneralInfo;
 import javax.persistence.*;
 
 import Person.Doctor;
+import Schedule.Appointment;
 import Schedule.Converter;
 
 
@@ -12,7 +13,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "Consultation")
-public class Consultation{
+public class Consultation implements Comparable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -96,6 +97,22 @@ public class Consultation{
         this.dateStr = dateStr;
     }
 
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
+    }
+
+    public void setDiagnosis(List<Disease> diagnosis) {
+        this.diagnosis = diagnosis;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     //GETTERS
     public BodyPart getBodyPart() {
         return bodyPart;
@@ -117,6 +134,13 @@ public class Consultation{
         return date;
     }
 
+    public Doctor getDoctor() {
+        return doctor;
+    }
+
+    public GeneralInfo getGeneralInfo() {
+        return generalInfo;
+    }
     //****
 
     
@@ -130,4 +154,10 @@ public class Consultation{
     }
 
 
+    @Override
+    public int compareTo(Object o) {
+        if ( !(o instanceof Consultation))
+            return 0;
+        return this.getDate().compareTo(((Consultation) o).getDate());
+    }
 }

@@ -27,11 +27,14 @@ public class GeneralInfo {
     Patient patient;
 
         //CONSTRUCTORS
-    public GeneralInfo(){}
+    public GeneralInfo(Patient patient){
+        this.patient = patient;
+    }
 
         //METHODS
     public void addConsultation(Consultation e){
         e.setGeneralInfo(this);
+        consultations.add(e);
     }
 
     public Consultation getLastConsultation(){
@@ -56,7 +59,10 @@ public class GeneralInfo {
         return  consultations;
     }
 
-    
+    public Patient getPatient() {
+        return patient;
+    }
+
     public int getId() {
         return id;
     }

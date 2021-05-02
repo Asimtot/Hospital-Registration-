@@ -151,6 +151,17 @@ public class Database {
         return (ArrayList<String>)countys.stream().distinct().collect(Collectors.toList());
 
     }
+    void delete() throws SQLException{
+
+        Doctor h= getDoctor(31);
+        session= factory.getCurrentSession();
+        session.beginTransaction();
+
+        session.delete(h);
+
+        session.getTransaction().commit();
+        session.close();
+    }
     
 
     boolean add(Object o){
@@ -180,11 +191,8 @@ public class Database {
         return true;
     }
 
-    void open(){session= factory.getCurrentSession();
-        session.beginTransaction();}
+    
 
-    void close(){session.getTransaction().commit();
-        session.close();}
 
     public Address getAddress(int i){
         session= factory.getCurrentSession();
@@ -357,7 +365,7 @@ public class Database {
         session.close();
         return p;
     }
-    public Patient getPatient(String name, String surname) throws SQLException{
+    public Patient getPatient(String name) throws SQLException{
         session= factory.getCurrentSession();
         session.beginTransaction();
         Patient p= session.get(Patient.class, getIdByName(name, "Person"));
@@ -424,15 +432,11 @@ public class Database {
     public static void main(String[] args) throws SQLException {
         Database database= new Database();
 
+        
 
-        database.add(new Doctor("Ali kerim","mailmail","asasasas"));
+        
 
-        Doctor d= database.getDoctor("Ali kerim");
-
-        d.addTask(new Task("asas",d,d,false));
-
-        database.update(d);
-
+            
     } 
 
 

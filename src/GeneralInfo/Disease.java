@@ -65,6 +65,9 @@ public class Disease {
         info= s;
     }
 
+    public void setRelatedField(Department relatedField) {
+        this.relatedField = relatedField;
+    }
 
             //GETTERS
     public int getId() {

@@ -3,6 +3,7 @@ package Person;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -44,10 +45,10 @@ public class Department {
     @OneToMany(mappedBy = "department")
     List<Appointment> appointments;
 
-    @OneToMany(mappedBy = "relatedField")
+    @OneToMany(mappedBy = "relatedField",cascade = CascadeType.ALL)
     List<Disease> diseases;
 
-    @OneToMany(mappedBy = "relatedField")
+    @OneToMany(mappedBy = "relatedField",cascade = CascadeType.ALL)
     List<Disease> medications;
 
     @ManyToOne

@@ -45,8 +45,8 @@ public class Hospital {
     
     @Column(name= "phoneNumber")
     private String phoneNumber;
-    @Transient//şimdilik db e eklemedim
-    private String logo;
+    @Column(name= "email")
+    private String email;
 
     //DATABASE için gerekli
     @OneToMany(mappedBy = "place")
@@ -72,6 +72,14 @@ public class Hospital {
         this.icuCapacity = icuCapacity;
         icuOccupancy = 0;
     }
+
+    public Hospital(String hospitalName, int icuCapacity, String phoneNumber, String email) {
+        this.hospitalName = hospitalName;
+        this.icuCapacity = icuCapacity;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+    }
+
 
 
     //getters

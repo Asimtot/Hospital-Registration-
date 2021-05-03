@@ -54,9 +54,9 @@ public class Doctor extends Person {
         
     }
     
-    public Doctor ( String name, String email, String password, Hospital hospital, Department department )
+    public Doctor ( String name, String email, String password, Hospital hospital, Department department,String telNo )
     {
-        super( name, email, password );
+        super( name, email, password ,telNo);
         this.hospital = hospital;
         this.department = department;
         schedule = new Schedule();
@@ -64,9 +64,9 @@ public class Doctor extends Person {
         ;
     }
     
-    public Doctor ( String name, String email, String password )
+    public Doctor ( String name, String email, String password ,String telNo)
     {
-        super( name, email, password );
+        super( name, email, password,telNo );
         schedule = new Schedule();
         tasks = new ArrayList<Task>();
         

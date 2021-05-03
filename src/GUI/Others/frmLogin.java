@@ -240,17 +240,6 @@ public class frmLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPatientActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        if( btnAdmin.isSelected()){
-            
-        }
-        else if( btnDoctor.isSelected()){
-
-        }
-        else if( btnAdmin.isSelected()){
-
-        }
-
 
     }//GEN-LAST:event_jButton1ActionPerformed
 

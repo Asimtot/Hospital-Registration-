@@ -71,7 +71,7 @@ public class MainData {
         Appointment appointment = new Appointment("App", doctor, patient, doctor.getHospital(), doctor.getDepartment(), 50, 2021,5,3,14,30);
         doctor.addAppointment(appointment);
 
-        database.update(patient);
+
 
     }
 }

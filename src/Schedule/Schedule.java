@@ -6,7 +6,6 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,7 +13,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
+import Database.Database;
 import Person.*;
 
 @Entity
@@ -43,6 +44,9 @@ public class Schedule {
     @OneToOne(mappedBy = "schedule")
     Doctor doctor;
 
+    @Transient 
+    Database db;
+
     // constructor
     // simple
     public Schedule(){
@@ -65,6 +69,7 @@ public class Schedule {
     // methods
 
     public boolean addAppointment(Appointment app){
+        
         DailySchedule day = findDay(app.getStartingTime());
         if (day != null){
             return day.addAppointment(app);
@@ -72,9 +77,11 @@ public class Schedule {
         // if the day is not in the schedule, create that day and add the appointment
         else{
             LocalDateTime date = app.getStartingTime();
+            System.out.println(date.getYear());
             DailySchedule newDay = new DailySchedule(date.getYear(),date.getMonthValue(), date.getDayOfMonth(),
                     startingHour, startingMinute, endingHour, endingMinute);
             days.add(newDay);
+            newDay.setSchedule(this);
             return newDay.addAppointment(app);
         }
     }
@@ -146,6 +153,7 @@ public class Schedule {
         else{
             DailySchedule newDay = new DailySchedule(date.getYear(),date.getMonthValue(), date.getDayOfMonth(),
                     startingHour, startingMinute, endingHour, endingMinute);
+            
             days.add(newDay);
             return newDay.getAppointments();
         }
@@ -155,7 +163,12 @@ public class Schedule {
         LocalDateTime date;
         //((List<DailySchedule>)days).trimToSize();
         for (int i = days.size() - 1; i >= 0; i--) {
-            date = days.get(i).getDate();
+            DailySchedule day= days.get(i);
+            day.convertBack();
+
+
+            date = day.getDate();
+            
             if (date.getDayOfMonth() == appDate.getDayOfMonth() && date.getMonthValue() == appDate.getMonthValue()
                     && date.getYear() == appDate.getYear()){
                 return days.get(i);
@@ -201,5 +214,9 @@ public class Schedule {
 
     public void setEndingMinute(int endingMinute) {
         this.endingMinute = endingMinute;
+    }
+
+    public void setDb(Database db) {
+        this.db = db;
     }
 }

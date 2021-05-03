@@ -1,6 +1,7 @@
 package Database;
 
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
@@ -540,12 +541,26 @@ public class Database {
 
         
         
-        Doctor d= database.getDoctor(31);
-        Patient p= database.getPatient(34);
+        Doctor d= database.getDoctor(40);
 
-        p.addDoctor(d);
+        Hospital h= database.getHospital(18);
+        Department department= database.getDepartment("KBB", h);
 
-        database.update(p);
+        
+
+        Patient patient= database.getPatient("Kemal Ak");
+
+       // LocalDateTime date= LocalDateTime.of(2030, 02, 22, 12, 30, 00);
+
+        //Appointment appointment= getAppointment
+
+        d.addAppointment(appointment);
+        
+        database.update(d.getSchedule());
+        
+        
+        
+
         
 
             

@@ -48,20 +48,22 @@ public class MainData {
 //        doctor1.addTask(task1);
 //        doctor1.addTask(task2);
 
-        Doctor doctor = database.getDoctor("Deniz Yılmaz");
-        Patient patient = database.getPatient("Selin Gündüz");
-        Appointment appointment = new Appointment("App", doctor, patient, doctor.getHospital(), doctor.getDepartment(), 50, 2021,5,2,9,30);
+//        Doctor doctor = database.getDoctor("Deniz Yılmaz");
+//        Patient patient = database.getPatient("Selin Gündüz");
+//        Appointment appointment = new Appointment("App", doctor, patient, doctor.getHospital(), doctor.getDepartment(), 50, 2021,5,2,9,30);
+//
+//
+//        Appointment appointment1 = database.getAppointment(5);
+//        System.out.println(appointment1.getStartingTime());
+//        appointment1.calculateEndingTime();
+//        doctor.addAppointment(appointment1);
+//        appointment.setDoctor(doctor);
+//
+//        System.out.println(doctor.getDateAppointments(LocalDateTime.of(2021,5,2,0,0)).get(0).getName());
+//        database.update(doctor);
+//        database.update(appointment1);
 
-
-        Appointment appointment1 = database.getAppointment(5);
-        System.out.println(appointment1.getStartingTime());
-        appointment1.calculateEndingTime();
-        doctor.addAppointment(appointment1);
-        appointment.setDoctor(doctor);
-
-        System.out.println(doctor.getDateAppointments(LocalDateTime.of(2021,5,2,0,0)).get(0).getName());
-        database.update(doctor);
-        database.update(appointment1);
+        database.deleteDoctor("Deniz Yılmaz");
 
     }
 }

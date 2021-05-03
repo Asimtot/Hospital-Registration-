@@ -1,10 +1,6 @@
 package Database;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
@@ -150,6 +146,20 @@ public class Database {
         
         return (ArrayList<String>)countys.stream().distinct().collect(Collectors.toList());
 
+    }
+
+    public void deleteDoctor(String name) throws SQLException {
+
+            String sql = "DELETE FROM Person WHERE name = ?";
+            String isbn = name;
+
+            PreparedStatement statement = connection.prepareStatement(sql);
+
+            statement.setString(1, isbn);
+
+            int rows = statement.executeUpdate();
+
+            System.out.println(rows + " record(s) deleted.");
     }
     
 

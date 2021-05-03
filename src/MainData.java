@@ -20,7 +20,7 @@ public class MainData {
 //
 //        Patient patient1 = new Patient("Selin Gündüz", "jddkdkdk");
 //        Patient patient2 = new Patient("Ali Gündüz", "jddkdkdk");
-        Patient patient3 = new Patient("Berk Gündüz", "jddkdkdk");
+        //Patient patient3 = new Patient("Berk Gündüz", "jddkdkdk");
 //        Patient patient4 = new Patient("Buse Gündüz", "jddkdkdk");
 //
 //        Hospital hospital = new Hospital("FirstHospital", 22);

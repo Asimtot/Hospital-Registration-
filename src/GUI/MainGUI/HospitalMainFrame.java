@@ -2167,24 +2167,6 @@ public class HospitalMainFrame extends javax.swing.JFrame {
 
         // Hospital doctors
         jComboBox1.update();
-        // Filter button below for the department doctors
-//        jButton6.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                try {
-//                    Department department = database.getDepartment((String)jComboBox1.getSelectedItem());
-//                    List<Doctor> doctorList = department.getDepartmentDoctors();
-//                    String[][] doctorTable = new String[doctorList.size()][2];
-//                    for (int i = 0; i < doctorTable.length; i++) {
-//                        doctorTable[i][0] = doctorList.get(i).getName();
-//                        doctorTable[i][1] = doctorList.get(i).getDepartment().getDepartmentName();
-//                    }
-//                    jTable2.update(doctorTable);
-//                } catch (SQLException throwables) {
-//                    throwables.printStackTrace();
-//                }
-//            }
-//        });
 
         jTextField1.addKeyListener(new KeyAdapter() {
             @Override
@@ -2300,7 +2282,9 @@ public class HospitalMainFrame extends javax.swing.JFrame {
 //                consultation.setDate(LocalDateTime.now());
 //                consultation.setDoctor(doctor);
 //                patient.addConsultation(consultation);
-                new HospitalMainFrame(null, hospital,database).setVisible(true);
+                JFrame frame = new HospitalMainFrame(null, hospital,database);
+                frame.setVisible(true);
+                frame.setLocationRelativeTo(null); // centers the window
                 //System.out.println(hospital.getAllPatients().get(0).getLastConsultation().getDate());
             }
         });

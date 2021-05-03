@@ -1,3 +1,5 @@
+import Database.*;
+import Person.*;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -9,6 +11,10 @@
  * @author enbadem
  */
 public class frmLogin extends javax.swing.JFrame {
+
+    Admin admin;
+    Hospital hospital;
+    Database database;
 
     /**
      * Creates new form frmLogin
@@ -192,24 +198,65 @@ public class frmLogin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    String userName;
+    char[] password;
+
     private void txtUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsernameActionPerformed
         // TODO add your handling code here:
+        userName = txtUsername.getText();
     }//GEN-LAST:event_txtUsernameActionPerformed
+
+    private void TxtPasswordActionPerformed(java.awt.event.ActionEvent evt){
+        // TODO add your handling code here:
+        password = txtPassword.getPassword();
+    }
 
     private void btnAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminActionPerformed
         // TODO add your handling code here:
+
+        btnDoctor.setSelected(false);
+        btnPatient.setSelected(false);
+
+
+
     }//GEN-LAST:event_btnAdminActionPerformed
+
+    private void btnDoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminActionPerformed
+        // TODO add your handling code here:
+
+            btnAdmin.setSelected(false);
+            btnPatient.setSelected(false);
+
+
+    }//GEN-LAST:event_btnDoctorActionPerformed
 
     private void btnPatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPatientActionPerformed
         // TODO add your handling code here:
+
+            btnDoctor.setSelected(false);
+            btnAdmin.setSelected(false);
+
+
     }//GEN-LAST:event_btnPatientActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        if( btnAdmin.isSelected()){
+            
+        }
+        else if( btnDoctor.isSelected()){
+
+        }
+        else if( btnAdmin.isSelected()){
+
+        }
+
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
@@ -244,7 +291,8 @@ public class frmLogin extends javax.swing.JFrame {
             public void run() {
                 new frmLogin().setVisible(true);
             }
-        });
+        }
+        );
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

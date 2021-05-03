@@ -149,6 +149,40 @@ public class Database {
 
     }
 
+    public ArrayList<String> getAllDepartments() throws SQLException{
+        Statement statement= connection.createStatement();
+        String sql= "SELECT name FROM Department";
+
+        ResultSet rs= statement.executeQuery(sql);
+        ArrayList<String> departments= new ArrayList<>();
+
+        while(rs.next()){
+                departments.add(rs.getString("name"));
+        }
+
+        statement.close();
+        return (ArrayList<String>)departments.stream().distinct().collect(Collectors.toList());
+
+    }
+
+    public ArrayList<Hospital> getAllHospitalsIn(String city, String county) throws SQLException {
+        Statement statement= connection.createStatement();
+        String sql= "SELECT Hospital.id FROM Hospital JOIN Address ON Hospital.Address_id = Address.id WHERE city= '"+city+"' AND county='"+county+"';";
+        System.err.println(sql);
+
+        ResultSet rs= statement.executeQuery(sql);
+        ArrayList<Hospital> arr= new ArrayList<>();
+
+        while(rs.next()){
+            arr.add(getHospital(rs.getInt("id")));
+        }
+
+        statement.close();
+        
+        
+        return arr;
+    }
+
     public void deleteDoctor(String name) throws SQLException {
 
             String sql = "DELETE FROM Person WHERE name = ? LIMIT 1 ";
@@ -174,6 +208,8 @@ public class Database {
         int rows = statement.executeUpdate();
 
     }
+
+    public 
     
 
     public boolean add(Object o){
@@ -541,22 +577,25 @@ public class Database {
 
         
         
-        Doctor d= database.getDoctor(40);
+        //Doctor d= database.getDoctor(40);
 
-        Hospital h= database.getHospital(18);
-        Department department= database.getDepartment("KBB", h);
+        //Hospital h= database.getHospital(18);
+        //Department department= database.getDepartment("KBB", h);
 
         
 
-        Patient patient= database.getPatient("Kemal Ak");
+        //Patient patient= database.getPatient("Kemal Ak");
 
        // LocalDateTime date= LocalDateTime.of(2030, 02, 22, 12, 30, 00);
 
         //Appointment appointment= getAppointment
 
-        d.addAppointment(appointment);
+        //d.addAppointment(appointment);
         
-        database.update(d.getSchedule());
+        //database.update(d.getSchedule());
+
+        database.getAllHospitalsIn("Ankara", "Balgat");
+        System.out.println(database.getAllHospitalsIn("Ankara", "Balgat").size());
         
         
         

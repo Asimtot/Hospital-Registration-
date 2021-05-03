@@ -46,6 +46,10 @@ public class Address {
         this.address = address;
     }
 
+    public Address(String address) {
+        this.address = address;
+    }
+
     // getters
 
     public String getAddress() {

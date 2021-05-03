@@ -3,6 +3,8 @@ import java.util.ArrayList;
 
 import java.util.List;
 
+import GUI.Helpers.UpdatedTable;
+import GUI.MainGUI.frmDoctor;
 import Schedule.*;
 import GeneralInfo.*;
 
@@ -50,12 +52,17 @@ public class Patient extends Person{
     private Hospital icuHospital;
 
     // constructors
-    public Patient(){}
+    public Patient(){
+        doctors = new ArrayList<Doctor>();
+        appointments = new ArrayList<Appointment>();
+        address = new Address();
+        inIcu = false;
+        activeDiseases = new ArrayList<Disease>();
+    }
     // simple - just initializes
     public Patient(String name, String email,String telNo){
         super(name, email,telNo);
-        
-        //info = new GeneralInfo(this);
+
         doctors = new ArrayList<Doctor>();
         appointments = new ArrayList<Appointment>();
         address = new Address();
@@ -94,14 +101,11 @@ public class Patient extends Person{
 
     // methods
 
-    public void addConsultation(Consultation consultation){
+    public void addConsultation(Consultation consultation) {
         info.addConsultation(consultation);
     }
 
-    public Consultation getLastConsultation(){
-        return info.getLastConsultation();
-    }
-
+    public Consultation getLastConsultation() { return info.getLastConsultation(); }
     public boolean isPatientOf(Doctor doctor){
         return doctors.contains(doctor);
     }

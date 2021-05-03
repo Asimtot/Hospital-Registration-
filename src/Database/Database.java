@@ -113,6 +113,24 @@ public class Database {
         statement.close();
         return "";
     }
+
+    public Person getPersonByMail(String mail) throws SQLException{
+        Statement statement= connection.createStatement();
+
+        String sql= "SELECT id FROM Person WHERE email= '"+mail+"';";
+
+        ResultSet rs= statement.executeQuery(sql);
+
+        while(rs.next()){
+            
+            int id= rs.getInt("id");
+            statement.close();
+            return getPerson(id);
+        }
+        
+        statement.close();
+        return null;
+    }
     
     public ArrayList<String> getAvailableCity(String objectName) throws SQLException{
         Statement statement= connection.createStatement();

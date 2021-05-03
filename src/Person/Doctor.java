@@ -35,7 +35,7 @@ public class Doctor extends Person {
     private List<Task> tasks;
 
     @ManyToMany(mappedBy = "doctors",cascade = CascadeType.ALL)
-    private List<Patient> patients= new ArrayList<>();
+    private List<Patient> patients;
 
     //DATABASE için gerekli
     @OneToMany(mappedBy = "sender")
@@ -50,8 +50,9 @@ public class Doctor extends Person {
 
     // Constructors
     public Doctor(){
-        tasks = new ArrayList<Task>();
-        
+        tasks = new ArrayList<>();
+        schedule = new Schedule();
+        patients = new ArrayList<>();
     }
     
     public Doctor ( String name, String email, String password, Hospital hospital, Department department,String telNo )
@@ -60,16 +61,16 @@ public class Doctor extends Person {
         this.hospital = hospital;
         this.department = department;
         schedule = new Schedule();
-        tasks = new ArrayList<Task>();
-        ;
+        tasks = new ArrayList<>();
+        patients = new ArrayList<>();
     }
     
     public Doctor ( String name, String email, String password ,String telNo)
     {
         super( name, email, password,telNo );
         schedule = new Schedule();
-        tasks = new ArrayList<Task>();
-        
+        tasks = new ArrayList<>();
+        patients = new ArrayList<>();
     }
     
     // Methods

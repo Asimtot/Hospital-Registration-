@@ -4,17 +4,40 @@ package GUI.MainGUI;/*
  * and open the template in the editor.
  */
 
+import Database.Database;
+import GUI.Helpers.UpdatedTable;
+import Person.Doctor;
+import Person.Task;
+import Schedule.Appointment;
+
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+
 /**
  *
  * @author enbadem
  */
 public class frmDoctor extends javax.swing.JFrame {
+    Doctor doctor;
+    Database database;
+
+    DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+    DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+    DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
 
     /**
      * Creates new form frmDoctor
      */
-    public frmDoctor() {
-        initComponents();
+    public frmDoctor(Doctor doctor, Database database) {
+        this.doctor = doctor;
+        this.database = database;
+        componentInitializer();
+        initComponents(); // automatic design code
+        listenerInitializer();
     }
 
     /**
@@ -34,7 +57,6 @@ public class frmDoctor extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
         btnViewCreateStatistics = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         btnSeeOrAdd = new javax.swing.JButton();
@@ -102,9 +124,9 @@ public class frmDoctor extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+
         jScrollPane6 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+
         jScrollPane7 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jPanel3 = new javax.swing.JPanel();
@@ -295,11 +317,11 @@ public class frmDoctor extends javax.swing.JFrame {
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel14.setText("Name");
+
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel15.setText(" Today's Date");
+
 
         btnViewCreateStatistics.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnViewCreateStatistics.setText("View/Create Statistics");
@@ -343,7 +365,7 @@ public class frmDoctor extends javax.swing.JFrame {
         jLabel16.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(255, 255, 255));
         jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel16.setText("Hello -name-, what would you like to");
+
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(255, 255, 255));
@@ -389,7 +411,7 @@ public class frmDoctor extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pnlDoctorMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlDoctorMainLayout.createSequentialGroup()
@@ -1041,28 +1063,6 @@ public class frmDoctor extends javax.swing.JFrame {
 
         jTable2.setAutoCreateRowSorter(true);
         jTable2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {"Task", null},
-                {"Task",  new Boolean(true)},
-                {"Task",  new Boolean(false)},
-                {"Task", null},
-                {"Task",  new Boolean(true)},
-                {"Task",  new Boolean(true)},
-                {"Task", null}
-            },
-            new String [] {
-                "To-Do", "Status"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Boolean.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
         jTable2.setToolTipText("");
         jTable2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jTable2.setDropMode(javax.swing.DropMode.INSERT);
@@ -1071,32 +1071,7 @@ public class frmDoctor extends javax.swing.JFrame {
         jScrollPane4.setViewportView(jTable2);
 
         jTable3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {"Doctor"},
-                {"Doctor"},
-                {"Doctor"},
-                {"Doctor"},
-                {"Doctor"},
-                {"Doctor"},
-                {"Doctor"},
-                {"Doctor"},
-                {"Doctor"},
-                {"Doctor"},
-                {"Doctor"}
-            },
-            new String [] {
-                "      Hospital Staff"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false
-            };
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
         jTable3.setGridColor(new java.awt.Color(204, 204, 204));
         jTable3.setRowHeight(25);
         jScrollPane6.setViewportView(jTable3);
@@ -2837,11 +2812,16 @@ public class frmDoctor extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox8ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
+        Task task = new Task(jTextArea1.getText(),doctor,doctor,false);
+        doctor.addTask(task);
+        jTable2.update();
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
+        int row = jTable2.getSelectedRow();
+        jTable2.getList().get(row).setReciever(null); //FIXME remove?
+        doctor.removeTask(jTable2.getList().get(row));
+        jTable2.update();
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
@@ -2853,7 +2833,7 @@ public class frmDoctor extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
-        // TODO add your handling code here:
+        database.update(doctor);
     }//GEN-LAST:event_jButton12ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
@@ -2908,14 +2888,111 @@ public class frmDoctor extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField17ActionPerformed
 
+    private void componentInitializer(){
+        jTable1 = new UpdatedTable<Appointment>(new String [] {"Patient", "Time"}, false, 2) {
+            @Override
+            public String[][] createTable() {
+                List<Appointment> appointmentList = doctor.getDateAppointments(LocalDateTime.now());
+                String[][] appointmentTable = new String[appointmentList.size()][2];
+                setList(appointmentList);
+                for (int i = 0; i < appointmentTable.length; i++) {
+                    appointmentTable[i][0] = appointmentList.get(i).getPatient().getName();
+                    appointmentTable[i][1] = appointmentList.get(i).getStartingTime().format(timeFormatter) + " - "
+                            + appointmentList.get(i).getEndingTime().format(timeFormatter);
+                }
+                return appointmentTable;
+            }
+        };
+
+        jTable2 = new UpdatedTable<Task>(new String [] { "To-Do", "Status" }, true, 2) {
+            @Override
+            // this table takes both String and boolean values, so the implementation is different: update() creates the table
+            public String[][] createTable() {
+                return new String[0][];
+            }
+
+            @Override
+            public void update() {
+                List<Task> taskList = doctor.getTasks();
+                setList(taskList);
+                Object[][] taskTable = new Object[taskList.size()][2];
+                for (int i = 0; i < taskTable.length; i++) {
+                    taskTable[i][0] = taskList.get(i).getName();
+                    taskTable[i][1] = taskList.get(i).getDone();
+                }
+                setTable(taskTable);
+                putTable();
+            }
+
+            @Override
+            protected void putTable() {
+                this.setModel(new javax.swing.table.DefaultTableModel(
+                        getTable(),
+                        getHeaders()
+                ) {
+                    boolean[] canEdit = getEditable();
+                    public boolean isCellEditable(int rowIndex, int columnIndex) {
+                        return canEdit [columnIndex];
+                    }
+                    Class[] types = new Class [] {
+                            java.lang.Object.class, java.lang.Boolean.class
+                    };
+                    public Class getColumnClass(int columnIndex) {
+                        return types [columnIndex];
+                    }
+                });
+            }
+        };
+
+        jTable3 = new UpdatedTable<Doctor>(new String [] {"Hospital Staff", "Department"}, false, 2) {
+            @Override
+            public String[][] createTable() {
+                List<Doctor> doctorList = doctor.getHospital().getHospitalDoctors();
+                String[][] doctorTable = new String[doctorList.size()][2];
+                setList(doctorList);
+                for (int i = 0; i < doctorTable.length; i++) {
+                    doctorTable[i][0] = doctorList.get(i).getName();
+                    doctorTable[i][1] = doctorList.get(i).getDepartment().getDepartmentName();
+                }
+                return doctorTable;
+            }
+        };
+    }
+
+    private void listenerInitializer(){
+        updateTables();
+        // doctorMain
+        jLabel14.setText(doctor.getHospital().getHospitalName());
+        jLabel15.setText("Today's Appointments " + LocalDateTime.now().format(dateFormatter));
+        jLabel16.setText("Hello " + doctor.getName() + " what would you like to");
+
+        // doctor profile
+
+        jTable2.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int row = jTable2.getSelectedRow();
+                jTable2.getList().get(row).setDone((boolean)(jTable2.getValueAt(row, 1)));
+            }
+        });
+
+    }
+
+    private void updateTables(){
+        jTable1.update();
+        jTable2.update();
+        jTable3.update();
+    }
+
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String args[]) throws SQLException {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -2937,8 +3014,10 @@ public class frmDoctor extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            Database database = new Database();
+            Doctor doctor = database.getDoctor("Elif Albayrak");
             public void run() {
-                new frmDoctor().setVisible(true);
+                new frmDoctor(doctor, database).setVisible(true);
             }
         });
     }
@@ -3147,12 +3226,12 @@ public class frmDoctor extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator7;
     private javax.swing.JSeparator jSeparator8;
     private javax.swing.JSeparator jSeparator9;
-    private javax.swing.JTable jTable1;
+    private UpdatedTable<Appointment> jTable1;
     private javax.swing.JTable jTable10;
     private javax.swing.JTable jTable11;
     private javax.swing.JTable jTable12;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
+    private UpdatedTable<Task> jTable2;
+    private UpdatedTable<Doctor> jTable3;
     private javax.swing.JTable jTable4;
     private javax.swing.JTable jTable5;
     private javax.swing.JTable jTable6;

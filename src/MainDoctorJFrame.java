@@ -1599,68 +1599,15 @@ public class MainDoctorJFrame extends javax.swing.JFrame {
 
     // in case initComponents get regenerated
     private void initializer(){
-        jLabel23.setText(LocalDateTime.now().format(dateFormatter) + " Today's Appointments");
-
-        List<Appointment> appointmentList = doctor.getDateAppointments(LocalDateTime.now());
-        String[][] appointmentTable = new String[appointmentList.size()][2];
-        for (int i = 0; i < appointmentTable.length; i++) {
-            appointmentTable[i][0] = appointmentList.get(i).getPatient().getName();
-            appointmentTable[i][1] = appointmentList.get(i).getStartingTime().format(timeFormatter) + " - "
-                    + appointmentList.get(i).getEndingTime().format(timeFormatter);
-        }
-
-        jTable5.setModel(new javax.swing.table.DefaultTableModel(
-                appointmentTable,
-                new String [] {
-                        "Patient", "Time"
-                }
-        ));
-
-        jLabel24.setText("Hello " + doctor.getName() + " what would you like to");
 
         jLabel22.setText(doctor.getHospital().getHospitalName());
 
-        List<Doctor> doctorList = doctor.getHospital().getHospitalDoctors();
-        String[][] doctorTable = new String[doctorList.size()][2];
-        for (int i = 0; i < doctorTable.length; i++) {
-            doctorTable[i][0] = doctorList.get(i).getName();
-            doctorTable[i][1] = doctorList.get(i).getDepartment().getDepartmentName();
-        }
-
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
-                doctorTable,
-                new String [] {
-                        "Hospital Staff", "Department"
-                }
-        ));
-
-        List<Task> taskList = doctor.getTasks();
-        Object[][] taskTable = new Object[taskList.size()][2];
-        for (int i = 0; i < taskTable.length; i++) {
-            taskTable[i][0] = taskList.get(i).getName();
-            taskTable[i][1] = taskList.get(i).getDone();
-        }
-
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
-                taskTable,
-                new String [] {
-                        "To-Do", "Status"
-                }
-        ) {
-            Class[] types = new Class [] {
-                    java.lang.Object.class, java.lang.Boolean.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
 
         jTable2.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 int row = jTable2.getSelectedRow();
-                taskList.get(row).setDone((boolean)(jTable2.getValueAt(row, 1)));
+                //taskList.get(row).setDone((boolean)(jTable2.getValueAt(row, 1)));
             }
         });
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N

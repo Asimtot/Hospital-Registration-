@@ -19,6 +19,7 @@ public class frmDisease extends javax.swing.JFrame {
     public frmDisease(Disease disease) {
         this.disease = disease;
         initComponents();
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 
     /**
@@ -44,7 +45,8 @@ public class frmDisease extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel3.setText("Related Field: " + disease.getRelatedField().getDepartmentName());
+        if(disease.getRelatedField() != null)
+            jLabel3.setText("Related Field: " + disease.getRelatedField().getDepartmentName());
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);

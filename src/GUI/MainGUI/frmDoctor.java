@@ -40,7 +40,7 @@ public class frmDoctor extends javax.swing.JFrame {
     /**
      * Creates new form frmDoctor
      */
-    public frmDoctor(Doctor doctor, Database database) {
+    public frmDoctor(Doctor doctor, Database database) throws SQLException {
         this.doctor = doctor;
         this.database = database;
         componentInitializer();
@@ -2550,7 +2550,6 @@ public class frmDoctor extends javax.swing.JFrame {
         jLabel1.setText("Advanced Search");
 
         jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "*City*", "Adana", "Adıyaman", "Afyon", "Ağrı", "Amasya", "Ankara", "Antalya", "Artvin", "Aydın", "Balıkesir", "Bilecik", "Bingöl", "Bitlis", "Bolu", "Burdur", "Bursa", "Çanakkale", "Çankırı", "Çorum", "Denizli", "Diyarbakır", "Edirne", "Elazığ", "Erzincan", "Erzurum", "Eskişehir", "Gaziantep", "Giresun", "Gümüşhane", "Hakkari", "Hatay", "Isparta", "İçel (Mersin)", "İstanbul", "İzmir", "Kars", "Kastamonu", "Kayseri", "Kırklareli", "Kırşehir", "Kocaeli", "Konya", "Kütahya", "Malatya", "Manisa", "K.maraş", "Mardin", "Muğla", "Muş", "Nevşehir", "Niğde", "Ordu", "Rize", "Sakarya", "Samsun", "Siirt", "Sinop", "Sivas", "Tekirdağ", "Tokat", "Trabzon", "Tunceli", "Şanlıurfa", "Uşak", "Van", "Yozgat", "Zonguldak", "Aksaray", "Bayburt", "Karaman", "Kırıkkale", "Batman", "Şırnak", "Bartın", "Ardahan", "Iğdır", "Yalova", "Karabük", "Kilis", "Osmaniye", "Düzce" }));
 
         jRadioButton1.setBackground(new java.awt.Color(52, 88, 130));
         jRadioButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -2960,7 +2959,7 @@ public class frmDoctor extends javax.swing.JFrame {
             }
         };
 
-        jTable5 = new UpdatedTable(new String [] {"Değiştir"}, false, 2) {
+        jTable5 = new UpdatedTable(new String [] {"Results"}, false, 2) {
             @Override
             public String[][] createTable() {
                 return new String[0][];
@@ -3027,7 +3026,7 @@ public class frmDoctor extends javax.swing.JFrame {
         };
     }
 
-    private void listenerInitializer(){
+    private void listenerInitializer() throws SQLException {
         updateTables();
         // doctorMain
         jLabel14.setText(doctor.getHospital().getHospitalName());
@@ -3068,6 +3067,7 @@ public class frmDoctor extends javax.swing.JFrame {
         group.add(jRadioButton2);
         group.add(jRadioButton3);
         group.add(jRadioButton4);
+        jRadioButton1.setSelected(true);
 
         jRadioButton1.setText("Hospital");
         jRadioButton1.setActionCommand("Hospital");
@@ -3081,7 +3081,7 @@ public class frmDoctor extends javax.swing.JFrame {
         jRadioButton4.setText("Medication");
         jRadioButton4.setActionCommand("Medication");
 
-        jButton3.addActionListener(new ActionListener() {
+        jTextField1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String selection = group.getSelection().getActionCommand();
@@ -3115,6 +3115,7 @@ public class frmDoctor extends javax.swing.JFrame {
                             Disease diseaseFound = database.getDisease(name);
                             JFrame diseaseFrame = new frmDisease(diseaseFound);
                             diseaseFrame.setVisible(true);
+                            diseaseFrame.setLocationRelativeTo(null);
                         } catch (SQLException throwables) {
                             throwables.printStackTrace();
                         }
@@ -3122,8 +3123,9 @@ public class frmDoctor extends javax.swing.JFrame {
                     case "Medication":
                         try {
                             Medication medicationFound = database.getMedication(name);
-                            JFrame diseaseFrame = new frmMedication(medicationFound);
-                            diseaseFrame.setVisible(true);
+                            JFrame medicationFrame = new frmMedication(medicationFound);
+                            medicationFrame.setVisible(true);
+                            medicationFrame.setLocationRelativeTo(null);
                         } catch (SQLException throwables) {
                             throwables.printStackTrace();
                         }
@@ -3131,6 +3133,63 @@ public class frmDoctor extends javax.swing.JFrame {
                     default:
                         break;
                 }
+
+            }
+        });
+
+        jButton3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String department = (String) jComboBox3.getSelectedItem();
+
+                String selection = group.getSelection().getActionCommand();
+                switch (selection) {
+                    case "Hospital":
+                        String city = (String) jComboBox2.getSelectedItem();
+                        String county = (String) jComboBox1.getSelectedItem();
+                        System.out.println("ss");
+                        try {
+                            jTable5.setHeaders(new String[]{"Hospitals"});
+                            List<Hospital> hospitalList = database.getAllHospitalsIn(city,county);
+                            String[][] hospitalTable = new String[hospitalList.size()][];
+                            for (int i = 0; i < hospitalTable.length; i++) {
+                                hospitalTable[i][0] = hospitalList.get(i).getHospitalName();
+                            }
+                            jTable5.update(hospitalTable);
+                        } catch (SQLException throwables) {
+                            throwables.printStackTrace();
+                        }
+                        break;
+                    case "Doctor":
+
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
+
+        String[] cities = database.getAvailableCity("Hospital").toArray(new String[0]);
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(cities));
+        jComboBox2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    String[] counties = database.getAvailableCounty("Hospital",
+                            (String) jComboBox2.getSelectedItem()).toArray(new String[0]);
+                    jComboBox1.setModel(new DefaultComboBoxModel<>(counties));
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        });
+
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(database.getAllDepartments().toArray(new String[0])));
+
+
+        jButton3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
 
             }
         });
@@ -3273,9 +3332,15 @@ public class frmDoctor extends javax.swing.JFrame {
             Database database = new Database();
             Doctor doctor = database.getDoctor("Elif Albayrak");
             public void run() {
-                JFrame frame = new frmDoctor(doctor, database);
-                frame.setVisible(true);
-                frame.setLocationRelativeTo(null);
+                JFrame frame = null;
+                try {
+                    frame = new frmDoctor(doctor, database);
+                    frame.setVisible(true);
+                    frame.setLocationRelativeTo(null);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+
             }
         });
     }

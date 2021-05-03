@@ -19,6 +19,7 @@ public class frmMedication extends javax.swing.JFrame {
     public frmMedication(Medication medication) {
         this.medication = medication;
         initComponents();
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 
     /**

@@ -3140,14 +3140,12 @@ public class frmDoctor extends javax.swing.JFrame {
         jButton3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String department = (String) jComboBox3.getSelectedItem();
-
+                String city = (String) jComboBox2.getSelectedItem();
+                String county = (String) jComboBox1.getSelectedItem();
                 String selection = group.getSelection().getActionCommand();
+
                 switch (selection) {
                     case "Hospital":
-                        String city = (String) jComboBox2.getSelectedItem();
-                        String county = (String) jComboBox1.getSelectedItem();
-                        System.out.println("ss");
                         try {
                             jTable5.setHeaders(new String[]{"Hospitals"});
                             List<Hospital> hospitalList = database.getAllHospitalsIn(city,county);
@@ -3161,6 +3159,18 @@ public class frmDoctor extends javax.swing.JFrame {
                         }
                         break;
                     case "Doctor":
+                        String department = (String) jComboBox3.getSelectedItem();
+                        try {
+                            jTable5.setHeaders(new String[]{"Doctors"});
+                            List<Hospital> hospitalList = database.getAllHospitalsIn(city,county);
+                            String[][] hospitalTable = new String[hospitalList.size()][];
+                            for (int i = 0; i < hospitalTable.length; i++) {
+                                hospitalTable[i][0] = hospitalList.get(i).getHospitalName();
+                            }
+                            jTable5.update(hospitalTable);
+                        } catch (SQLException throwables) {
+                            throwables.printStackTrace();
+                        }
 
                         break;
                     default:

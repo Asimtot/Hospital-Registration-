@@ -9,6 +9,7 @@ import GUI.DoctorGUI.pnlDoctorData;
 import GUI.DoctorGUI.pnlPatientData;
 
 import GUI.Helpers.UpdatedTable;
+import GeneralInfo.Consultation;
 import Person.Doctor;
 import Person.Patient;
 import Person.Task;
@@ -2938,7 +2939,7 @@ public class frmDoctor extends javax.swing.JFrame {
             }
         };
 
-        jTable4 =  new UpdatedTable<Appointment>(new String [] {"Patient Name", "Time", "Patient's Last Consultation"}, false, 3) {
+            jTable4 =  new UpdatedTable<Appointment>(new String [] {"Patient Name", "Time", "Patient's Last Consultation"}, false, 3) {
             @Override
             public String[][] createTable() {
                 List<Appointment> appointmentList = doctor.getDateAppointments(LocalDateTime.now());

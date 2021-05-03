@@ -15,7 +15,7 @@ public class GeneralInfo {
     @Column(name = "id")
     private int id;
 
-    @OneToMany(mappedBy = "generalInfo")
+    @OneToMany(mappedBy = "generalInfo", cascade = CascadeType.ALL)
     private List<Consultation> consultations= new ArrayList<>();
 
     @OneToOne
@@ -33,6 +33,7 @@ public class GeneralInfo {
 
     public GeneralInfo(){}
         //METHODS
+
     public void addConsultation(Consultation e){
         e.setGeneralInfo(this);
         consultations.add(e);

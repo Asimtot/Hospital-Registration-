@@ -593,8 +593,16 @@ public class Database {
         
         //database.update(d.getSchedule());
 
-        database.getAllHospitalsIn("Ankara", "Balgat");
-        System.out.println(database.getAllHospitalsIn("Ankara", "Balgat").size());
+        Doctor doctor= database.getDoctor(40);
+        Patient p= database.getPatient("Kemal Ak");
+
+        Consultation c= new Consultation(doctor, LocalDateTime.now(), "Very Bad", "Cancer");
+
+        p.addConsultation(c);
+
+        database.update(p.getInfo());
+
+        
         
         
         

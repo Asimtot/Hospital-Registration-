@@ -64,6 +64,16 @@ public class Consultation implements Comparable{
     public Consultation(){
     }
 
+    public Consultation(Doctor d, LocalDateTime date, String notes, String type){
+        this.date= date;
+        dateStr= Converter.toString(date);
+
+        doctor= d;
+        this.notes= notes;
+        this.type= type;
+
+    }
+
     // METHODS
 
     public void addDiseaseToDiagnosis(Disease d){

@@ -4,17 +4,27 @@ package GUI.DoctorGUI;/*
  * and open the template in the editor.
  */
 
+import Database.Database;
+import Person.Patient;
+
 /**
  *
  * @author enbadem
  */
 public class pnlPatientData extends javax.swing.JPanel {
 
+    Patient patient;
+    Database database;
+
     /**
      * Creates new form pnlPatientData
      */
-    public pnlPatientData() {
-        initComponents();
+    public pnlPatientData(Patient patient, Database database) {
+        this.patient = patient;
+        this.database = database;
+        componentInitializer();
+        initComponents(); // automatic design code
+        listenerInitializer();
     }
 
     /**
@@ -265,6 +275,13 @@ public class pnlPatientData extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void componentInitializer(){
+
+    }
+
+    private void listenerInitializer(){
+
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton5;

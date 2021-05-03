@@ -14,13 +14,13 @@ public class MainData {
 
 //        Doctor doctor1 = new Doctor("Deniz Yılmaz", "fkfkkf", "dkdkdkd");
 //        Doctor doctor2 = new Doctor("Gamze Yılmaz", "fkfkkf", "dkdkdkd");
-        Doctor doctor3 = new Doctor("Okan Yılmaz", "fkfkkf", "dkdkdkd");
+        //Doctor doctor3 = new Doctor("Okan Yılmaz", "fkfkkf", "dkdkdkd");
 //        Doctor doctor4 = new Doctor("Tekman Yılmaz", "fkfkkf", "dkdkdkd");
 //        Doctor doctor5 = new Doctor("Selçuk Yılmaz", "fkfkkf", "dkdkdkd");
 //
 //        Patient patient1 = new Patient("Selin Gündüz", "jddkdkdk");
 //        Patient patient2 = new Patient("Ali Gündüz", "jddkdkdk");
-//        Patient patient3 = new Patient("Berk Gündüz", "jddkdkdk");
+        Patient patient3 = new Patient("Berk Gündüz", "jddkdkdk");
 //        Patient patient4 = new Patient("Buse Gündüz", "jddkdkdk");
 //
 //        Hospital hospital = new Hospital("FirstHospital", 22);
@@ -63,7 +63,15 @@ public class MainData {
 //        database.update(doctor);
 //        database.update(appointment1);
 
-        database.deleteDoctor("Deniz Yılmaz");
+        Doctor doctor = database.getDoctor("Elif Albayrak");
+        Patient patient = database.getPatient("Berk Gündüz");
+
+        patient.addDoctor(doctor);
+
+        Appointment appointment = new Appointment("App", doctor, patient, doctor.getHospital(), doctor.getDepartment(), 50, 2021,5,3,14,30);
+        doctor.addAppointment(appointment);
+
+        database.update(patient);
 
     }
 }

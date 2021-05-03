@@ -2026,10 +2026,10 @@ public class HospitalMainFrame extends javax.swing.JFrame {
                 Collections.sort(consultationList);
                 setList(consultationList);
                 String[][] consultationTable = new String[consultationList.size()][3];
-                for (int i = 0; i < consultationTable.length; i++) {
-                    consultationTable[i][0] = consultationList.get(i).getDate().format(dateTimeFormatter);
-                    consultationTable[i][1] = consultationList.get(i).getDoctor().getName();
-                    consultationTable[i][2] = consultationList.get(i).getGeneralInfo().getPatient().getName();
+                for (int i = 0; i < consultationTable.length; i++) { //FIXME
+//                    consultationTable[i][0] = consultationList.get(i).getDate().format(dateTimeFormatter);
+//                    consultationTable[i][1] = consultationList.get(i).getDoctor().getName();
+//                    consultationTable[i][2] = consultationList.get(i).getGeneralInfo().getPatient().getName();
                 }
                 return consultationTable;
             }

@@ -174,6 +174,7 @@ public class MainDoctorJFrame extends javax.swing.JFrame {
         home = new javax.swing.JMenu();
 
 
+        // done
         jTable2 = new updatedTable<Task>() {
             
             List<Task> taskList = doctor.getTasks();
@@ -209,6 +210,7 @@ public class MainDoctorJFrame extends javax.swing.JFrame {
             }
         };
 
+        // done
         jTable3 = new updatedTable<Doctor>() {
             List<Doctor> doctorList;
             @Override
@@ -233,6 +235,7 @@ public class MainDoctorJFrame extends javax.swing.JFrame {
                 return null;
             }
         };
+        // done
         jTable5 = new updatedTable<Appointment>() {
             List<Appointment> appointmentList = doctor.getDateAppointments(LocalDateTime.now());
             @Override

@@ -5,16 +5,19 @@ package GUI.MainGUI;/*
  */
 
 import Database.Database;
+import GUI.DoctorGUI.pnlPatientData;
 import GUI.Helpers.UpdatedTable;
+import GUI.HospitalGUI.PanelNewPatientProfile;
 import Person.Doctor;
+import Person.Patient;
 import Person.Task;
 import Schedule.Appointment;
 
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -78,10 +81,10 @@ public class frmDoctor extends javax.swing.JFrame {
         jSeparator3 = new javax.swing.JSeparator();
         jButton5 = new javax.swing.JButton();
         jScrollPane17 = new javax.swing.JScrollPane();
-        jTable12 = new javax.swing.JTable();
+
         pnlPatientData = new javax.swing.JPanel();
         jScrollPane23 = new javax.swing.JScrollPane();
-        jTable9 = new javax.swing.JTable();
+
         jLabel29 = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
         jLabel31 = new javax.swing.JLabel();
@@ -97,9 +100,9 @@ public class frmDoctor extends javax.swing.JFrame {
         jLabel90 = new javax.swing.JLabel();
         jLabel91 = new javax.swing.JLabel();
         jScrollPane24 = new javax.swing.JScrollPane();
-        jTable10 = new javax.swing.JTable();
+
         jScrollPane25 = new javax.swing.JScrollPane();
-        jTable11 = new javax.swing.JTable();
+
         pnlConsultation = new javax.swing.JPanel();
         jComboBox4 = new javax.swing.JComboBox<>();
         jTextField4 = new javax.swing.JTextField();
@@ -142,7 +145,7 @@ public class frmDoctor extends javax.swing.JFrame {
         jScrollPane8 = new javax.swing.JScrollPane();
         jLabel32 = new javax.swing.JLabel();
         jScrollPane9 = new javax.swing.JScrollPane();
-        jTable4 = new javax.swing.JTable();
+
         jButton11 = new javax.swing.JButton();
         jTextField16 = new javax.swing.JTextField();
         jTextField17 = new javax.swing.JTextField();
@@ -222,9 +225,9 @@ public class frmDoctor extends javax.swing.JFrame {
         jLabel61 = new javax.swing.JLabel();
         pnlPatientSearch = new javax.swing.JPanel();
         jScrollPane19 = new javax.swing.JScrollPane();
-        jTable6 = new javax.swing.JTable();
+
         jButton17 = new javax.swing.JButton();
-        jButton18 = new javax.swing.JButton();
+
         jTextField14 = new javax.swing.JTextField();
         pnlSchedule = new javax.swing.JPanel();
         jPanel17 = new javax.swing.JPanel();
@@ -235,7 +238,7 @@ public class frmDoctor extends javax.swing.JFrame {
         jButton20 = new javax.swing.JButton();
         jLabel73 = new javax.swing.JLabel();
         jScrollPane20 = new javax.swing.JScrollPane();
-        jTable7 = new javax.swing.JTable();
+
         jButton21 = new javax.swing.JButton();
         pnlStatistics = new javax.swing.JPanel();
         jLabel74 = new javax.swing.JLabel();
@@ -272,7 +275,7 @@ public class frmDoctor extends javax.swing.JFrame {
         jLabel81 = new javax.swing.JLabel();
         jComboBox22 = new javax.swing.JComboBox<>();
         jScrollPane22 = new javax.swing.JScrollPane();
-        jTable8 = new javax.swing.JTable();
+
         jLabel82 = new javax.swing.JLabel();
         jLabel83 = new javax.swing.JLabel();
         jCheckBox1 = new javax.swing.JCheckBox();
@@ -293,7 +296,7 @@ public class frmDoctor extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jScrollPane16 = new javax.swing.JScrollPane();
-        jTable5 = new javax.swing.JTable();
+
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
 
@@ -308,7 +311,7 @@ public class frmDoctor extends javax.swing.JFrame {
 
         btnSeeSchedule.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnSeeSchedule.setText("See My Schedule");
-        btnSeeSchedule.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
         btnSeeSchedule.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSeeScheduleActionPerformed(evt);
@@ -325,7 +328,7 @@ public class frmDoctor extends javax.swing.JFrame {
 
         btnViewCreateStatistics.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnViewCreateStatistics.setText("View/Create Statistics");
-        btnViewCreateStatistics.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
         btnViewCreateStatistics.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnViewCreateStatisticsActionPerformed(evt);
@@ -373,7 +376,7 @@ public class frmDoctor extends javax.swing.JFrame {
 
         btnSeeOrAdd.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnSeeOrAdd.setText("See or Add Patient");
-        btnSeeOrAdd.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
         btnSeeOrAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSeeOrAddActionPerformed(evt);
@@ -382,7 +385,6 @@ public class frmDoctor extends javax.swing.JFrame {
 
         btnAdvanced.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnAdvanced.setText("Advanced Search");
-        btnAdvanced.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnAdvanced.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAdvancedActionPerformed(evt);
@@ -391,7 +393,7 @@ public class frmDoctor extends javax.swing.JFrame {
 
         btnSeeProfile.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnSeeProfile.setText("See My Profile");
-        btnSeeProfile.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
         btnSeeProfile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSeeProfileActionPerformed(evt);
@@ -1057,7 +1059,11 @@ public class frmDoctor extends javax.swing.JFrame {
         jButton7.setText("Delete");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                try {
+                    jButton7ActionPerformed(evt);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
             }
         });
 
@@ -1117,33 +1123,6 @@ public class frmDoctor extends javax.swing.JFrame {
 
         jLabel32.setText("jLabel10");
 
-        jTable4.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Patient Name", "Appointment Info", "Time"
-            }
-        ));
         jTable4.setRowHeight(25);
         jScrollPane9.setViewportView(jTable4);
 
@@ -1263,7 +1242,11 @@ public class frmDoctor extends javax.swing.JFrame {
         jButton12.setText("Apply");
         jButton12.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton12ActionPerformed(evt);
+                try {
+                    jButton12ActionPerformed(evt);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
             }
         });
 
@@ -2019,9 +2002,6 @@ public class frmDoctor extends javax.swing.JFrame {
 
         jButton17.setText("⌕");
 
-        jButton18.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton18.setText("Add New Consultation");
-
         jTextField14.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         javax.swing.GroupLayout pnlPatientSearchLayout = new javax.swing.GroupLayout(pnlPatientSearch);
@@ -2031,7 +2011,6 @@ public class frmDoctor extends javax.swing.JFrame {
             .addGroup(pnlPatientSearchLayout.createSequentialGroup()
                 .addGap(297, 297, 297)
                 .addGroup(pnlPatientSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton18, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(pnlPatientSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(pnlPatientSearchLayout.createSequentialGroup()
                             .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, 642, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -2050,7 +2029,6 @@ public class frmDoctor extends javax.swing.JFrame {
                 .addGap(28, 28, 28)
                 .addComponent(jScrollPane19, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton18, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(74, 74, 74))
         );
 
@@ -2817,9 +2795,9 @@ public class frmDoctor extends javax.swing.JFrame {
         jTable2.update();
     }//GEN-LAST:event_jButton6ActionPerformed
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {//GEN-FIRST:event_jButton7ActionPerformed
         int row = jTable2.getSelectedRow();
-        jTable2.getList().get(row).setReciever(null); //FIXME remove?
+        deletedTasks.add(jTable2.getList().get(row).getName());
         doctor.removeTask(jTable2.getList().get(row));
         jTable2.update();
     }//GEN-LAST:event_jButton7ActionPerformed
@@ -2832,8 +2810,12 @@ public class frmDoctor extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton11ActionPerformed
 
-    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {//GEN-FIRST:event_jButton12ActionPerformed
         database.update(doctor);
+        for (String name : deletedTasks) {
+            database.deleteTask(name);
+        }
+        deletedTasks.removeAll(deletedTasks);
     }//GEN-LAST:event_jButton12ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
@@ -2889,6 +2871,8 @@ public class frmDoctor extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField17ActionPerformed
 
     private void componentInitializer(){
+        deletedTasks = new ArrayList<>();
+
         jTable1 = new UpdatedTable<Appointment>(new String [] {"Patient", "Time"}, false, 2) {
             @Override
             public String[][] createTable() {
@@ -2957,6 +2941,91 @@ public class frmDoctor extends javax.swing.JFrame {
                 return doctorTable;
             }
         };
+
+        jTable4 =  new UpdatedTable(new String [] {"Patient Name", "Time", "Patient's Last Consultation"}, false, 3) {
+            @Override
+            public String[][] createTable() {
+                List<Appointment> appointmentList = doctor.getDateAppointments(LocalDateTime.now());
+                String[][] appointmentTable = new String[appointmentList.size()][2];
+                setList(appointmentList);
+                for (int i = 0; i < appointmentTable.length; i++) {
+                    appointmentTable[i][0] = appointmentList.get(i).getPatient().getName();
+                    appointmentTable[i][1] = appointmentList.get(i).getStartingTime().format(timeFormatter) + " - "
+                            + appointmentList.get(i).getEndingTime().format(timeFormatter);
+                    if (appointmentList.get(i).getPatient().getLastConsultation()!= null)
+                        appointmentTable[i][2] = appointmentList.get(i).getPatient().getLastConsultation().getDate().format(dateTimeFormatter);
+                    else
+                        appointmentTable[i][2] = "No consultations so far";
+                }
+                return appointmentTable;
+            }
+        };
+
+        jTable5 = new UpdatedTable(new String [] {"Değiştir"}, false, 2) {
+            @Override
+            public String[][] createTable() {
+                return new String[0][];
+            }
+        };
+
+        jTable6 = new UpdatedTable<Patient>(new String[]{"Your Patients", "Last Consultation"}, false, 2) {
+            @Override
+            public String[][] createTable() {
+                List<Patient> patientList = doctor.getPatients();
+                String[][] patientTable = new String[patientList.size()][2];
+                setList(patientList);
+                for (int i = 0; i < patientTable.length; i++) {
+                    patientTable[i][0] = patientList.get(i).getName();
+                    if (patientList.get(i).getLastConsultation() != null)
+                        patientTable[i][1] = patientList.get(i).getLastConsultation().getDate().format(dateTimeFormatter);
+                    else
+                        patientTable[i][1] = "No consultations so far";
+                }
+                return patientTable;
+            }
+        };
+
+        jTable7 = new UpdatedTable(new String [] {"Değiştir"}, false, 2) {
+            @Override
+            public String[][] createTable() {
+                return new String[0][];
+            }
+        };
+
+        jTable8 = new UpdatedTable(new String [] {"Değiştir"}, false, 2) {
+            @Override
+            public String[][] createTable() {
+                return new String[0][];
+            }
+        };
+
+        jTable9 = new UpdatedTable(new String [] {"Değiştir"}, false, 2) {
+            @Override
+            public String[][] createTable() {
+                return new String[0][];
+            }
+        };
+
+        jTable10 = new UpdatedTable(new String [] {"Değiştir"}, false, 2) {
+            @Override
+            public String[][] createTable() {
+                return new String[0][];
+            }
+        };
+
+        jTable11 = new UpdatedTable(new String [] {"Değiştir"}, false, 2) {
+            @Override
+            public String[][] createTable() {
+                return new String[0][];
+            }
+        };
+
+        jTable12 = new UpdatedTable(new String [] {"Değiştir"}, false, 2) {
+            @Override
+            public String[][] createTable() {
+                return new String[0][];
+            }
+        };
     }
 
     private void listenerInitializer(){
@@ -2966,7 +3035,40 @@ public class frmDoctor extends javax.swing.JFrame {
         jLabel15.setText("Today's Appointments " + LocalDateTime.now().format(dateFormatter));
         jLabel16.setText("Hello " + doctor.getName() + " what would you like to");
 
+        // search patient
+        jTable6.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int row = jTable6.getRow();
+                HolderPanel.removeAll();
+                HolderPanel.add(new pnlPatientData(jTable6.getList().get(row), database));
+                HolderPanel.repaint();
+                HolderPanel.revalidate();
+            }
+        });
+
+        jButton17.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String name = jTextField14.getText();
+                try {
+                    HolderPanel.removeAll();
+                    HolderPanel.add(new pnlPatientData(database.getPatient(name), database));
+                    HolderPanel.repaint();
+                    HolderPanel.revalidate();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        });
+
+
         // doctor profile
+        jLabel24.setText(doctor.getName());
+        jLabel25.setText(doctor.getHospital().getHospitalName());
+        jLabel26.setText(doctor.getDepartment().getDepartmentName());
+
+        
 
         jTable2.addMouseListener(new MouseAdapter() {
             @Override
@@ -2976,12 +3078,31 @@ public class frmDoctor extends javax.swing.JFrame {
             }
         });
 
+        // patient page
+
+        jTextField14.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                String searchKey = jTextField14.getText();
+                jTable6.search(searchKey);
+            }
+        });
+
     }
 
     private void updateTables(){
         jTable1.update();
         jTable2.update();
         jTable3.update();
+        jTable4.update();
+        jTable5.update();
+        jTable6.update();
+        jTable7.update();
+        jTable8.update();
+        jTable9.update();
+        jTable10.update();
+        jTable11.update();
+        jTable12.update();
     }
 
 
@@ -3023,6 +3144,7 @@ public class frmDoctor extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    List<String> deletedTasks;
     private javax.swing.JPanel HolderPanel;
     private javax.swing.JButton btnAdvanced;
     private javax.swing.JButton btnSeeOrAdd;
@@ -3035,7 +3157,7 @@ public class frmDoctor extends javax.swing.JFrame {
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton17;
-    private javax.swing.JButton jButton18;
+
     private javax.swing.JButton jButton19;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton20;
@@ -3227,17 +3349,17 @@ public class frmDoctor extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator8;
     private javax.swing.JSeparator jSeparator9;
     private UpdatedTable<Appointment> jTable1;
-    private javax.swing.JTable jTable10;
-    private javax.swing.JTable jTable11;
-    private javax.swing.JTable jTable12;
+    private UpdatedTable jTable10;
+    private UpdatedTable jTable11;
+    private UpdatedTable jTable12;
     private UpdatedTable<Task> jTable2;
     private UpdatedTable<Doctor> jTable3;
-    private javax.swing.JTable jTable4;
-    private javax.swing.JTable jTable5;
-    private javax.swing.JTable jTable6;
-    private javax.swing.JTable jTable7;
-    private javax.swing.JTable jTable8;
-    private javax.swing.JTable jTable9;
+    private UpdatedTable<Appointment> jTable4;
+    private UpdatedTable jTable5;
+    private UpdatedTable<Patient> jTable6;
+    private UpdatedTable jTable7;
+    private UpdatedTable jTable8;
+    private UpdatedTable jTable9;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea3;
     private javax.swing.JTextField jTextField1;

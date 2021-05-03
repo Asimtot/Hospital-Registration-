@@ -150,7 +150,7 @@ public class Database {
 
     public void deleteDoctor(String name) throws SQLException {
 
-            String sql = "DELETE FROM Person WHERE name = ?";
+            String sql = "DELETE FROM Person WHERE name = ? LIMIT 1 ";
             String isbn = name;
 
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -159,7 +159,19 @@ public class Database {
 
             int rows = statement.executeUpdate();
 
-            System.out.println(rows + " record(s) deleted.");
+    }
+
+    public void deleteTask(String name) throws SQLException {
+
+        String sql = "DELETE FROM Task WHERE name = ? LIMIT 1";
+        String isbn = name;
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+
+        statement.setString(1, isbn);
+
+        int rows = statement.executeUpdate();
+
     }
     
 

@@ -98,6 +98,9 @@ public class Medication {
         return prescriptions;
     }
 
+    public Department getRelatedField() {
+        return relatedField;
+    }
 
     @Override
     public String toString() {

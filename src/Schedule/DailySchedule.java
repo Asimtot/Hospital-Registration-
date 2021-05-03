@@ -41,11 +41,17 @@ public class DailySchedule {
 
 
     @Transient
-    LocalDateTime date;
+    private LocalDateTime date;
     @Transient
     LocalDateTime startingTime;
     @Transient
     LocalDateTime endingTime;
+
+    //DATABASE için gerekli
+
+    @ManyToOne
+    @JoinColumn(name = "Schedule_id")
+    Schedule schedule;
 
     @OneToMany(mappedBy = "dailySchedule",cascade = CascadeType.ALL)
     List<Appointment> appointments;
@@ -56,24 +62,28 @@ public class DailySchedule {
         appointments = new ArrayList<>();
     }
 
-    //DATABASE için gerekli
-    @ManyToOne
-    @JoinColumn(name = "Schedule_id")
-    Schedule schedule;
+    
 
     // complete
     public DailySchedule(int year, int month, int dayOfMonth, int startingHour, int startingMinute, int endingHour, int endingMinute) {
         date = LocalDateTime.of(year, month, dayOfMonth, 0, 0);
+        
         startingTime = LocalDateTime.of(year, month, dayOfMonth, startingHour, startingMinute);
         endingTime = LocalDateTime.of(year, month, dayOfMonth, endingHour, endingMinute);
         appointments = new ArrayList<>();
+
+        startingTimeStr= Converter.toString(startingTime);
+        endingTimeStr= Converter.toString(endingTime);
+        dateStr= Converter.toString(date);
     }
 
     public boolean addAppointment(Appointment app){
+        System.out.println("AAAAAAAAAAAÂBBBBBBBBBB");
         boolean clashes = false;
         // check if the appointment is during the working hours
         if (app.getStartingTime().isAfter(startingTime) && app.getEndingTime().isBefore(endingTime)){
             // check if the given appointment clashes with any of the previous appointments
+            
             for (Appointment a : appointments) {
                 if (app.getStartingTime().isAfter(a.getStartingTime()) && app.getStartingTime().isBefore(a.getEndingTime())
                         || (app.getEndingTime().isAfter(a.getStartingTime()) && app.getEndingTime().isBefore(a.getStartingTime()))){
@@ -82,6 +92,7 @@ public class DailySchedule {
                 }
             }
             if (!clashes){
+                System.out.println("AAAAAAAAAAAAAAAAAAAAA");
                 appointments.add(app);
                 app.setDailySchedule(this);
             }
@@ -128,6 +139,11 @@ public class DailySchedule {
             intervals.add(endingTime);
         }
         return intervals;
+    }
+    public void convertBack(){
+        date= Converter.toLocalDateTime(dateStr);
+        startingTime= Converter.toLocalDateTime(startingTimeStr);
+        endingTime= Converter.toLocalDateTime(endingTimeStr);
     }
 
     // setters
@@ -205,6 +221,10 @@ public class DailySchedule {
 
     public void setEndingTimeStr(String endingTimeStr) {
         this.endingTimeStr = endingTimeStr;
+    }
+
+    public void setSchedule(Schedule schedule) {
+        this.schedule = schedule;
     }
 
     // getters

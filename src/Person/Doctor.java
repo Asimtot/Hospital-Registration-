@@ -9,6 +9,8 @@ import javax.persistence.*;
 
 import org.hibernate.Hibernate;
 
+import Database.Database;
+
 
 /**
  * Doctor class
@@ -28,9 +30,11 @@ public class Doctor extends Person {
     @ManyToOne
     @JoinColumn(name = "Department_id")
     private Department department;
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name= "Schedule_id")
     private Schedule schedule;
+    
     @OneToMany(mappedBy = "receiver",cascade = CascadeType.ALL)
     private List<Task> tasks;
 
@@ -124,6 +128,10 @@ public class Doctor extends Person {
     {
         this.patients = patients;
     }
+
+    public void setDb(Database db){
+        schedule.setDb(db);
+    }
     
     /**
      * This method adds a wanted task to doctor's tasks list
@@ -171,6 +179,7 @@ public class Doctor extends Person {
     {
         boolean check = false;
         patients.add(newPatient);
+        newPatient.addDoctor(this);
         
         if ( patients.contains( newPatient ))
             check = true;

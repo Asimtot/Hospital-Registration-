@@ -113,6 +113,24 @@ public class Database {
         statement.close();
         return "";
     }
+
+    public Person getPersonByMail(String mail) throws SQLException{
+        Statement statement= connection.createStatement();
+
+        String sql= "SELECT id FROM Person WHERE email= '"+mail+"';";
+
+        ResultSet rs= statement.executeQuery(sql);
+
+        while(rs.next()){
+            
+            int id= rs.getInt("id");
+            statement.close();
+            return getPerson(id);
+        }
+        
+        statement.close();
+        return null;
+    }
     
     public ArrayList<String> getAvailableCity(String objectName) throws SQLException{
         Statement statement= connection.createStatement();
@@ -593,8 +611,16 @@ public class Database {
         
         //database.update(d.getSchedule());
 
-        database.getAllHospitalsIn("Ankara", "Balgat");
-        System.out.println(database.getAllHospitalsIn("Ankara", "Balgat").size());
+        Doctor doctor= database.getDoctor(40);
+        Patient p= database.getPatient("Kemal Ak");
+
+        Consultation c= new Consultation(doctor, LocalDateTime.now(), "Very Bad", "Cancer");
+
+        p.addConsultation(c);
+
+        database.update(p.getInfo());
+
+        
         
         
         

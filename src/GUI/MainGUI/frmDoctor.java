@@ -11,10 +11,7 @@ import GUI.Helpers.UpdatedTable;
 import GeneralInfo.Consultation;
 import GeneralInfo.Disease;
 import GeneralInfo.Medication;
-import Person.Doctor;
-import Person.Hospital;
-import Person.Patient;
-import Person.Task;
+import Person.*;
 import Schedule.Appointment;
 
 import javax.swing.*;
@@ -3081,6 +3078,24 @@ public class frmDoctor extends javax.swing.JFrame {
         jRadioButton4.setText("Medication");
         jRadioButton4.setActionCommand("Medication");
 
+
+
+        String[] cities = database.getAvailableCity("Hospital").toArray(new String[0]);
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(cities));
+        jComboBox2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    String[] counties = database.getAvailableCounty("Hospital",
+                            (String) jComboBox2.getSelectedItem()).toArray(new String[0]);
+                    jComboBox1.setModel(new DefaultComboBoxModel<>(counties));
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        });
+
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(database.getAllDepartments().toArray(new String[0])));
         jTextField1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -3143,16 +3158,28 @@ public class frmDoctor extends javax.swing.JFrame {
                 String city = (String) jComboBox2.getSelectedItem();
                 String county = (String) jComboBox1.getSelectedItem();
                 String selection = group.getSelection().getActionCommand();
-
+                List<Hospital> hospitalList;
                 switch (selection) {
                     case "Hospital":
                         try {
                             jTable5.setHeaders(new String[]{"Hospitals"});
-                            List<Hospital> hospitalList = database.getAllHospitalsIn(city,county);
-                            String[][] hospitalTable = new String[hospitalList.size()][];
+                            hospitalList = database.getAllHospitalsIn(city,county);
+                            jTable5.setList(hospitalList);
+                            String[][] hospitalTable = new String[hospitalList.size()][1];
                             for (int i = 0; i < hospitalTable.length; i++) {
                                 hospitalTable[i][0] = hospitalList.get(i).getHospitalName();
                             }
+                            jTable5.addMouseListener(new MouseAdapter() {
+                                @Override
+                                public void mouseReleased(MouseEvent e) {
+                                    super.mouseReleased(e);
+                                    int row = jTable5.getRow();
+                                    HolderPanel.removeAll();
+                                    HolderPanel.add(new pnlHospitalData(jTable5.getList().get(row),database));
+                                    HolderPanel.repaint();
+                                    HolderPanel.revalidate();
+                                }
+                            });
                             jTable5.update(hospitalTable);
                         } catch (SQLException throwables) {
                             throwables.printStackTrace();
@@ -3161,13 +3188,40 @@ public class frmDoctor extends javax.swing.JFrame {
                     case "Doctor":
                         String department = (String) jComboBox3.getSelectedItem();
                         try {
-                            jTable5.setHeaders(new String[]{"Doctors"});
-                            List<Hospital> hospitalList = database.getAllHospitalsIn(city,county);
-                            String[][] hospitalTable = new String[hospitalList.size()][];
-                            for (int i = 0; i < hospitalTable.length; i++) {
-                                hospitalTable[i][0] = hospitalList.get(i).getHospitalName();
+                            hospitalList = database.getAllHospitalsIn(city,county);
+                            jTable5.setHeaders(new String[]{"Doctors", "Hospital"});
+                            jTable5.setEditable(false,2);
+                            List<Doctor> doctorList = new ArrayList<Doctor>();
+                            String[][] doctorTable = new String[150][2];
+                            int k = 0;
+                            for (int i = 0; i < hospitalList.size(); i++) {
+                                Department department1 = database.getDepartment(department,hospitalList.get(i));
+                                if (department1 != null){
+                                    List<Doctor> departmentDoctorList = department1.getDepartmentDoctors();
+                                    for (int j = 0; j < departmentDoctorList.size(); j++) {
+                                        doctorTable[k][0] = departmentDoctorList.get(j).getName();
+                                        doctorTable[k][1] = department1.getDepartmentName();
+                                        k++;
+                                        doctorList.add(departmentDoctorList.get(j));
+                                    }
+                                }
+                                else{
+                                    doctorTable[0][0] = "No doctor found";
+                                }
                             }
-                            jTable5.update(hospitalTable);
+
+                            jTable5.addMouseListener(new MouseAdapter() {
+                                @Override
+                                public void mouseReleased(MouseEvent e) {
+                                    super.mouseReleased(e);
+                                    int row = jTable5.getRow();
+                                    HolderPanel.removeAll();
+                                    HolderPanel.add(new pnlDoctorData(doctorList.get(row),database));
+                                    HolderPanel.repaint();
+                                    HolderPanel.revalidate();
+                                }
+                            });
+                            jTable5.update(doctorTable);
                         } catch (SQLException throwables) {
                             throwables.printStackTrace();
                         }
@@ -3179,23 +3233,13 @@ public class frmDoctor extends javax.swing.JFrame {
             }
         });
 
-        String[] cities = database.getAvailableCity("Hospital").toArray(new String[0]);
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(cities));
-        jComboBox2.addActionListener(new ActionListener() {
+        jTable5.addMouseListener(new MouseAdapter() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    String[] counties = database.getAvailableCounty("Hospital",
-                            (String) jComboBox2.getSelectedItem()).toArray(new String[0]);
-                    jComboBox1.setModel(new DefaultComboBoxModel<>(counties));
-                } catch (SQLException throwables) {
-                    throwables.printStackTrace();
-                }
+            public void mouseReleased(MouseEvent e) {
+                super.mouseReleased(e);
+
             }
         });
-
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(database.getAllDepartments().toArray(new String[0])));
-
 
         jButton3.addActionListener(new ActionListener() {
             @Override
@@ -3567,7 +3611,7 @@ public class frmDoctor extends javax.swing.JFrame {
     private UpdatedTable<Task> jTable2;
     private UpdatedTable<Doctor> jTable3;
     private UpdatedTable<Appointment> jTable4;
-    private UpdatedTable jTable5;
+    private UpdatedTable<Hospital> jTable5;
     private UpdatedTable<Patient> jTable6;
     private UpdatedTable<Appointment> jTable7;
     private UpdatedTable jTable8;

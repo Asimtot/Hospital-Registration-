@@ -48,6 +48,7 @@ public class HospitalMainFrame extends javax.swing.JFrame {
         componentInitializer();
         initComponents(); // automatic design code
         listenerInitializer();
+        pack();
     }
 
     /**
@@ -2271,7 +2272,7 @@ public class HospitalMainFrame extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 Database database = new Database();
-                Hospital hospital = database.getHospital(18);
+                Hospital hospital = database.getHospital(13);
 //                Hospital hospital = new Hospital();
 //                Department department = new Department();
 //                Doctor doctor = new Doctor();

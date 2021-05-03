@@ -52,8 +52,8 @@ public class Patient extends Person{
     // constructors
     public Patient(){}
     // simple - just initializes
-    public Patient(String name, String email){
-        super(name, email);
+    public Patient(String name, String email,String telNo){
+        super(name, email,telNo);
         
         //info = new GeneralInfo(this);
         doctors = new ArrayList<Doctor>();
@@ -64,8 +64,8 @@ public class Patient extends Person{
     }
 
     // complete constructor - if something does not exist, put null (?)
-    public Patient(String name, String email, boolean inIcu, Hospital icuHospital, String city, String country, String address, Disease[] diseases){
-        super(name, email);
+    public Patient(String name, String email, boolean inIcu, Hospital icuHospital, String city, String country, String address, Disease[] diseases,String telNo){
+        super(name, email,telNo);
         
         this.inIcu = inIcu;
         if(inIcu && icuHospital != null){

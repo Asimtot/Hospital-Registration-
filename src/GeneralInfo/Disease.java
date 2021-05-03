@@ -93,4 +93,8 @@ public class Disease {
     public Department getRelatedField() {
         return relatedField;
     }
+     
+    public List<Patient> getPatients() {
+        return patients;
+    }
 }

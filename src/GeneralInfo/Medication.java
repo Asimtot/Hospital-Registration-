@@ -94,6 +94,10 @@ public class Medication {
         return mClashes;
     }
 
+    public List<Prescription> getPrescriptions() {
+        return prescriptions;
+    }
+
 
     @Override
     public String toString() {

@@ -456,25 +456,78 @@ public class Database {
         session.close();
         return p;
     }
+    /**
+    * Kapasite almak için hospital.getIcu
+    * Doktor sayısı için hospital.getHospitalDoctors.size()
+    * Departman sayısı için hospital.getDepartments.size()
+    */
+    public ArrayList<Hospital>getAllHospital() throws SQLException{
+        Statement statement= connection.createStatement();
+
+        String sql= "SELECT id FROM Hospital;";
+        
+
+        ResultSet rs= statement.executeQuery(sql);
+        ArrayList<Hospital> arr= new ArrayList<>();
+
+        while(rs.next()){
+            arr.add(getHospital(rs.getInt("id")));
+        }
+        statement.close();
+
+        return arr;
+
+    }
+    /**
+    * Hasta sayısı için disease.getPatients.size()
+    * 
+    * 
+    */
+    public ArrayList<Disease>getAllDisease( )throws SQLException{
+        Statement statement= connection.createStatement();
+
+        String sql= "SELECT id FROM Disease;";
+        
+
+        ResultSet rs= statement.executeQuery(sql);
+        ArrayList<Disease> arr= new ArrayList<>();
+
+        while(rs.next()){
+            arr.add(getDisease(rs.getInt("id")));
+        }
+        statement.close();
+
+        return arr;
+    }
+    /**
+    * kullanan hasta sayısı için medication.getPrescriptions.size()
+    * 
+    * 
+    */
+    public ArrayList<Medication> getAllMedication() throws SQLException{
+        Statement statement= connection.createStatement();
+
+        String sql= "SELECT id FROM Medication;";
+        
+
+        ResultSet rs= statement.executeQuery(sql);
+        ArrayList<Medication> arr= new ArrayList<>();
+
+        while(rs.next()){
+            arr.add(getMedication(rs.getInt("id")));
+        }
+        statement.close();
+
+        return arr;
+    }
 
     
 
-    public void deneme(){
-        session= factory.getCurrentSession();
-        session.beginTransaction();
-
-       
-        Doctor d= session.get(Doctor.class, 31);
-        Patient p= session.get(Patient.class,34);
-
-        p.addDoctor(d);
-        
-
-        session.getTransaction().commit();
-        session.close();
 
 
-    }
+    
+
+    
 
 
 

@@ -35,7 +35,7 @@ public class Appointment implements Comparable{
 
     @Column(name = "start")
     String startStr;
-    @Transient
+    @Column(name = "end")
     String endStr;
 
     @Transient

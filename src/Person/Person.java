@@ -39,6 +39,8 @@ public class Person {
     private String email;
     @Column(name = "password")
     private String password;
+    @Column(name= "telNo")
+    private String telNo;
     
     @OneToMany(mappedBy = "receiver")
     private List<Notification> notifications;
@@ -53,18 +55,22 @@ public class Person {
 
     public Person(){}
 
-    public Person ( String name, String email)
+    public Person ( String name, String email,String telNo)
     {
         this.name = name;
         this.email = email;
+        this.telNo= telNo;
 
         notifications = new ArrayList<Notification>();
     }
-    public Person ( String name, String email, String password )
+
+
+    public Person ( String name, String email, String password ,String telNo)
     {
         this.name = name;
         this.email = email;
         this.password = password;
+        this.telNo= telNo;
         notifications = new ArrayList<Notification>();
     }
     
@@ -124,6 +130,10 @@ public class Person {
 
     public void setRandomPassword(int length){
         password = createRandomPassword(length);
+    }
+
+    public void setTelNo(String telNo) {
+        this.telNo = telNo;
     }
 
     public static String createRandomPassword(int length){

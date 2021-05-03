@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -45,7 +47,7 @@ public class DailySchedule {
     @Transient
     LocalDateTime endingTime;
 
-    @OneToMany(mappedBy = "dailySchedule")
+    @OneToMany(mappedBy = "dailySchedule",cascade = CascadeType.ALL)
     List<Appointment> appointments;
 
     // constructors
@@ -81,6 +83,7 @@ public class DailySchedule {
             }
             if (!clashes){
                 appointments.add(app);
+                app.setDailySchedule(this);
             }
             return clashes;
         }

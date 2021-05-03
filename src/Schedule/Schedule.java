@@ -2,6 +2,8 @@ package Schedule;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -25,7 +27,7 @@ public class Schedule {
     @Column(name="id")
     int id;
 
-    @OneToMany(mappedBy = "schedule")
+    @OneToMany(mappedBy = "schedule",cascade = CascadeType.ALL)
     List<DailySchedule> days;
 
     @Column(name = "startingH")

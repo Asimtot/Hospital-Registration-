@@ -164,6 +164,10 @@ public class Appointment implements Comparable{
         endStr = Converter.toString(endingTime);
     }
 
+    public void setDailySchedule(DailySchedule dailySchedule) {
+        this.dailySchedule = dailySchedule;
+    }
+
     public void setName(String name) {
         this.name = name;
     }

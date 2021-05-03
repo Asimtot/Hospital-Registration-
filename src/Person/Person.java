@@ -95,7 +95,11 @@ public class Person {
     {
         return (ArrayList<Notification>) notifications;
     }
-    
+
+    public String getTelNo() {
+        return telNo;
+    }
+
     /**
      * This method sends a notification to a chosen person of any type
      * @param p person to send the notification, @param n the notification to send

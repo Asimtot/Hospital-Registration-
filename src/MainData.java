@@ -14,7 +14,7 @@ public class MainData {
 
 //        Doctor doctor1 = new Doctor("Deniz Yılmaz", "fkfkkf", "dkdkdkd");
 //        Doctor doctor2 = new Doctor("Gamze Yılmaz", "fkfkkf", "dkdkdkd");
-        Doctor doctor3 = new Doctor("Okan Yılmaz", "fkfkkf", "dkdkdkd");
+        //Doctor doctor3 = new Doctor("Okan Yılmaz", "fkfkkf", "dkdkdkd");
 //        Doctor doctor4 = new Doctor("Tekman Yılmaz", "fkfkkf", "dkdkdkd");
 //        Doctor doctor5 = new Doctor("Selçuk Yılmaz", "fkfkkf", "dkdkdkd");
 //

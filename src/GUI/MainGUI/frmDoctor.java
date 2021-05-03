@@ -3164,10 +3164,22 @@ public class frmDoctor extends javax.swing.JFrame {
                         try {
                             jTable5.setHeaders(new String[]{"Hospitals"});
                             hospitalList = database.getAllHospitalsIn(city,county);
+                            jTable5.setList(hospitalList);
                             String[][] hospitalTable = new String[hospitalList.size()][1];
                             for (int i = 0; i < hospitalTable.length; i++) {
                                 hospitalTable[i][0] = hospitalList.get(i).getHospitalName();
                             }
+                            jTable5.addMouseListener(new MouseAdapter() {
+                                @Override
+                                public void mouseReleased(MouseEvent e) {
+                                    super.mouseReleased(e);
+                                    int row = jTable5.getRow();
+                                    HolderPanel.removeAll();
+                                    HolderPanel.add(new pnlHospitalData(jTable5.getList().get(row),database));
+                                    HolderPanel.repaint();
+                                    HolderPanel.revalidate();
+                                }
+                            });
                             jTable5.update(hospitalTable);
                         } catch (SQLException throwables) {
                             throwables.printStackTrace();
@@ -3179,6 +3191,7 @@ public class frmDoctor extends javax.swing.JFrame {
                             hospitalList = database.getAllHospitalsIn(city,county);
                             jTable5.setHeaders(new String[]{"Doctors", "Hospital"});
                             jTable5.setEditable(false,2);
+                            List<Doctor> doctorList = new ArrayList<Doctor>();
                             String[][] doctorTable = new String[150][2];
                             int k = 0;
                             for (int i = 0; i < hospitalList.size(); i++) {
@@ -3189,12 +3202,25 @@ public class frmDoctor extends javax.swing.JFrame {
                                         doctorTable[k][0] = departmentDoctorList.get(j).getName();
                                         doctorTable[k][1] = department1.getDepartmentName();
                                         k++;
+                                        doctorList.add(departmentDoctorList.get(j));
                                     }
                                 }
                                 else{
                                     doctorTable[0][0] = "No doctor found";
                                 }
                             }
+
+                            jTable5.addMouseListener(new MouseAdapter() {
+                                @Override
+                                public void mouseReleased(MouseEvent e) {
+                                    super.mouseReleased(e);
+                                    int row = jTable5.getRow();
+                                    HolderPanel.removeAll();
+                                    HolderPanel.add(new pnlDoctorData(doctorList.get(row),database));
+                                    HolderPanel.repaint();
+                                    HolderPanel.revalidate();
+                                }
+                            });
                             jTable5.update(doctorTable);
                         } catch (SQLException throwables) {
                             throwables.printStackTrace();
@@ -3204,6 +3230,14 @@ public class frmDoctor extends javax.swing.JFrame {
                     default:
                         break;
                 }
+            }
+        });
+
+        jTable5.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                super.mouseReleased(e);
+
             }
         });
 

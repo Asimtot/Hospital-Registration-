@@ -5,12 +5,14 @@ package GUI.MainGUI;/*
  */
 
 import Database.Database;
-import GUI.DoctorGUI.pnlDoctorData;
-import GUI.DoctorGUI.pnlPatientData;
+import GUI.DoctorGUI.*;
 
 import GUI.Helpers.UpdatedTable;
 import GeneralInfo.Consultation;
+import GeneralInfo.Disease;
+import GeneralInfo.Medication;
 import Person.Doctor;
+import Person.Hospital;
 import Person.Patient;
 import Person.Task;
 import Schedule.Appointment;
@@ -3056,6 +3058,80 @@ public class frmDoctor extends javax.swing.JFrame {
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }
+            }
+        });
+
+        // Advanced search
+
+        ButtonGroup group = new ButtonGroup();
+        group.add(jRadioButton1);
+        group.add(jRadioButton2);
+        group.add(jRadioButton3);
+        group.add(jRadioButton4);
+
+        jRadioButton1.setText("Hospital");
+        jRadioButton1.setActionCommand("Hospital");
+
+        jRadioButton2.setText("Doctor");
+        jRadioButton2.setActionCommand("Doctor");
+
+        jRadioButton3.setText("Disease");
+        jRadioButton3.setActionCommand("Disease");
+
+        jRadioButton4.setText("Medication");
+        jRadioButton4.setActionCommand("Medication");
+
+        jButton3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String selection = group.getSelection().getActionCommand();
+                String name = jTextField1.getText();
+                switch (selection){
+                    case "Hospital":
+                        Hospital hospitalFound = null;
+                        try {
+                            hospitalFound = database.getHospital(name);
+                            HolderPanel.removeAll();
+                            HolderPanel.add(new pnlHospitalData(hospitalFound, database));
+                            HolderPanel.repaint();
+                            HolderPanel.revalidate();
+                        } catch (SQLException throwables) {
+                            throwables.printStackTrace();
+                        }
+                        break;
+                    case "Doctor":
+                        try {
+                            Doctor doctorFound = database.getDoctor(name);
+                            HolderPanel.removeAll();
+                            HolderPanel.add(new pnlDoctorData(doctorFound,database));
+                            HolderPanel.repaint();
+                            HolderPanel.revalidate();
+                        } catch (SQLException throwables) {
+                            throwables.printStackTrace();
+                        }
+                        break;
+                    case "Disease":
+                        try {
+                            Disease diseaseFound = database.getDisease(name);
+                            JFrame diseaseFrame = new frmDisease(diseaseFound);
+                            diseaseFrame.setVisible(true);
+                        } catch (SQLException throwables) {
+                            throwables.printStackTrace();
+                        }
+                        break;
+                    case "Medication":
+                        try {
+                            Medication medicationFound = database.getMedication(name);
+                            JFrame diseaseFrame = new frmMedication(medicationFound);
+                            diseaseFrame.setVisible(true);
+                        } catch (SQLException throwables) {
+                            throwables.printStackTrace();
+                        }
+                        break;
+                    default:
+                        break;
+                }
+
             }
         });
 

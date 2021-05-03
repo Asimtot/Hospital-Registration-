@@ -2021,7 +2021,8 @@ public class HospitalMainFrame extends javax.swing.JFrame {
             public String[][] createTable() {
                 ArrayList<Consultation> consultationList = new ArrayList<>();
                 for(Patient patient : hospital.getAllPatients()){
-                    consultationList.add(patient.getLastConsultation());
+                    if (patient.getLastConsultation() != null )
+                        consultationList.add(patient.getLastConsultation());
                 }
                 Collections.sort(consultationList);
                 setList(consultationList);

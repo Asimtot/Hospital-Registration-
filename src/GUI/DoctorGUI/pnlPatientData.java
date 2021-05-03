@@ -5,11 +5,20 @@ package GUI.DoctorGUI;/*
  */
 
 import Database.Database;
+import GUI.Helpers.UpdatedTable;
+import GeneralInfo.Consultation;
+import GeneralInfo.Disease;
+import GeneralInfo.Prescription;
 import Person.Patient;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -19,6 +28,7 @@ public class pnlPatientData extends javax.swing.JPanel {
     Patient patient;
     Database database;
     JPanel HolderPanel;
+    DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
 
     /**
      * Creates new form pnlPatientData
@@ -43,7 +53,7 @@ public class pnlPatientData extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -59,9 +69,8 @@ public class pnlPatientData extends javax.swing.JPanel {
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+
 
         jPanel1.setBackground(new java.awt.Color(52, 88, 130));
 
@@ -305,24 +314,111 @@ public class pnlPatientData extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void componentInitializer(){
+        jTable1 = new UpdatedTable<Consultation>(new String [] {"Disease", "Date"}, false,2) {
+            @Override
+            public String[][] createTable() {
+                List<Consultation> consultationList = patient.getInfo().getConsultations();
+                setList(consultationList);
+                String[][] consultationTable = new String[consultationList.size()][2];
+                for (int i = 0; i < consultationTable.length; i++) {
+                    if (consultationList.get(i).getDiagnosis() != null && consultationList.get(i).getDiagnosis().size() != 0)
+                        consultationTable[i][0] = consultationList.get(i).getDiagnosis().get(0).getName();
+                    consultationTable[i][1] = consultationList.get(i).getDate().format(dateTimeFormatter);
+                }
+                return consultationTable;
+            }
+        };
 
+        jTable2 = new UpdatedTable<Disease>(new String [] { "Diseases" }, false, 1) {
+            @Override
+            public String[][] createTable() {
+                List<Disease> diseaseList = patient.getActiveDiseases(); //FIXME how do we know it's active?
+                setList(diseaseList);
+                String[][] diseaseTable = new String[diseaseList.size()][1];
+                for (int i = 0; i < diseaseTable.length; i++) {
+                    diseaseTable[i][0] = diseaseList.get(i).getName();
+                }
+                return diseaseTable;
+            }
+        };
+
+        jTable3 = new UpdatedTable<Prescription>(new String[]{"Medication"}, false, 1) {
+            @Override
+            public String[][] createTable() {
+                List<Consultation> consultationList = patient.getInfo().getConsultations();
+                List<Prescription> prescriptionList = new ArrayList<>();
+                for(Consultation consultation : consultationList){
+                    prescriptionList.add(consultation.getPrescription());
+                }
+                setList(prescriptionList);
+                String[][] prescriptionTable = new String[prescriptionList.size()][1];
+                for (int i = 0; i < prescriptionTable.length; i++) {
+                    if (prescriptionList.get(i) != null && prescriptionList.get(i).getMedications().size() != 0)
+                        prescriptionTable[i][0] = prescriptionList.get(i).getMedications().get(0).getName();
+                }
+                return prescriptionTable;
+            }
+        };
     }
 
     private void listenerInitializer(){
+        jTable1.update();
+        jTable2.update();
+        jTable3.update();
         jLabel1.setText(patient.getName());
         jLabel10.setText("E-mail: " + patient.getEmail());
         jLabel11.setText("Phone Number: " + patient.getTelNo());
         jLabel12.setText("Address: " + patient.getAddress().getAddress());
 
-//        jButton6.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                HolderPanel.removeAll();
-//                HolderPanel.add(new );
-//                HolderPanel.repaint();
-//                HolderPanel.revalidate();
-//            }
-//        }); //FIXME
+        jTable1.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                int row = jTable1.getRow();
+                JFrame diseaseFrame = new frmDisease(jTable1.getList().get(row).getDiagnosis().get(0));
+                diseaseFrame.setVisible(true);
+                diseaseFrame.setLocationRelativeTo(null);
+            }
+        });
+
+        jTable2.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                int row = jTable2.getRow();
+                JFrame diseaseFrame = new frmDisease(jTable2.getList().get(row));
+                diseaseFrame.setVisible(true);
+                diseaseFrame.setLocationRelativeTo(null);
+            }
+        });
+
+        jTable3.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                int row = jTable3.getRow();
+                JFrame medicationFrame = new frmMedication(jTable3.getList().get(row).getMedications().get(0));
+                medicationFrame.setVisible(true);
+                medicationFrame.setLocationRelativeTo(null);
+            }
+        });
+
+        jButton6.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                HolderPanel.removeAll();
+                HolderPanel.add(new pnlConsultation(patient, database));
+                HolderPanel.repaint();
+                HolderPanel.revalidate();
+            }
+        });
+
+        jButton7.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                HolderPanel.removeAll();
+                HolderPanel.add(new pnlTransferPatient());
+                HolderPanel.repaint();
+                HolderPanel.revalidate();
+            }
+        });
     }
 
 
@@ -345,8 +441,8 @@ public class pnlPatientData extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
+    private UpdatedTable<Consultation> jTable1;
+    private UpdatedTable<Disease> jTable2;
+    private UpdatedTable<Prescription> jTable3;
     // End of variables declaration//GEN-END:variables
 }

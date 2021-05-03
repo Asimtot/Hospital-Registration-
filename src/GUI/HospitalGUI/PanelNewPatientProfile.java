@@ -6,6 +6,8 @@
 package GUI.HospitalGUI;
 
 import Database.Database;
+import GUI.DoctorGUI.frmDisease;
+import GUI.DoctorGUI.frmMedication;
 import GUI.Helpers.UpdatedComboBox;
 import GUI.Helpers.UpdatedTable;
 import GeneralInfo.Consultation;
@@ -14,6 +16,9 @@ import GeneralInfo.Prescription;
 import Person.Department;
 import Person.Patient;
 
+import javax.swing.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -211,8 +216,8 @@ public class PanelNewPatientProfile extends javax.swing.JPanel {
                 setList(consultationList);
                 String[][] consultationTable = new String[consultationList.size()][2];
                 for (int i = 0; i < consultationTable.length; i++) {
-                    //consultationTable[i][0] = consultationList.get(i).getDiagnosis().get(0).getName(); //FIXME (multiple diagnosis)
-                    consultationTable[i][0] = "deneme"; //FIXME Diagnosis
+                    if (consultationList.get(i).getDiagnosis() != null && consultationList.get(i).getDiagnosis().size() != 0)
+                        consultationTable[i][0] = consultationList.get(i).getDiagnosis().get(0).getName();
                     consultationTable[i][1] = consultationList.get(i).getDate().format(dateTimeFormatter);
                 }
                 return consultationTable;
@@ -243,8 +248,8 @@ public class PanelNewPatientProfile extends javax.swing.JPanel {
                 setList(prescriptionList);
                 String[][] prescriptionTable = new String[prescriptionList.size()][1];
                 for (int i = 0; i < prescriptionTable.length; i++) {
-                    //prescriptionTable[i][0] = prescriptionList.get(i).getMedications().get(0).getName(); //FIXME multiple medi
-                    prescriptionTable[i][0] = "deneme"; //FIXME prescription
+                    if (prescriptionList.get(i) != null && prescriptionList.get(i).getMedications().size() != 0)
+                        prescriptionTable[i][0] = prescriptionList.get(i).getMedications().get(0).getName();
                 }
                 return prescriptionTable;
             }
@@ -263,6 +268,35 @@ public class PanelNewPatientProfile extends javax.swing.JPanel {
         jLabel19.setText("Phone Number"); //FIXME
         jTextArea1.setText("ADRESS\n");
 
+        jTable4.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                int row = jTable4.getRow();
+                JFrame diseaseFrame = new frmDisease(jTable4.getList().get(row).getDiagnosis().get(0));
+                diseaseFrame.setVisible(true);
+                diseaseFrame.setLocationRelativeTo(null);
+            }
+        });
+
+        jTable6.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                int row = jTable6.getRow();
+                JFrame diseaseFrame = new frmDisease(jTable6.getList().get(row));
+                diseaseFrame.setVisible(true);
+                diseaseFrame.setLocationRelativeTo(null);
+            }
+        });
+
+        jTable7.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                int row = jTable7.getRow();
+                JFrame medicationFrame = new frmMedication(jTable7.getList().get(row).getMedications().get(0));
+                medicationFrame.setVisible(true);
+                medicationFrame.setLocationRelativeTo(null);
+            }
+        });
 
     }
 

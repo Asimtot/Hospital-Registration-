@@ -1726,6 +1726,7 @@ public class HospitalMainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void btnHospitalDoctorsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHospitalDoctorsActionPerformed
+        updateTables();
         PnlHolder.removeAll();
         PnlHolder.add(PnlHospitalDoctors);
         PnlHolder.repaint();
@@ -1733,6 +1734,7 @@ public class HospitalMainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnHospitalDoctorsActionPerformed
 
     private void btnHomeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeButtonActionPerformed
+        updateTables();
         PnlHolder.removeAll();
         PnlHolder.add(PnlActiontable);
         PnlHolder.repaint();
@@ -1744,6 +1746,7 @@ public class HospitalMainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField4ActionPerformed
 
     private void btnHospitalDepartmentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHospitalDepartmentsActionPerformed
+        updateTables();
         PnlHolder.removeAll();
         PnlHolder.add(pnlIcuandDepartments);
         PnlHolder.repaint();
@@ -1751,6 +1754,7 @@ public class HospitalMainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnHospitalDepartmentsActionPerformed
 
     private void ntnPatientsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ntnPatientsActionPerformed
+        updateTables();
         PnlHolder.removeAll();
         PnlHolder.add(pnlHospitalPatients);
         PnlHolder.repaint();
@@ -1758,6 +1762,7 @@ public class HospitalMainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_ntnPatientsActionPerformed
 
     private void btnStatisticActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStatisticActionPerformed
+        updateTables();
         PnlHolder.removeAll();
         PnlHolder.add(pnlStatistics);
         PnlHolder.repaint();
@@ -1800,7 +1805,8 @@ public class HospitalMainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jTableDepartmentDoctorsMouseClicked
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-       PnlHolder.removeAll();
+        updateTables();
+        PnlHolder.removeAll();
         PnlHolder.add(pnlAddDoctor);
         PnlHolder.repaint();
         PnlHolder.revalidate();
@@ -2110,14 +2116,7 @@ public class HospitalMainFrame extends javax.swing.JFrame {
 
         // department table
 
-        jTable1.update();
-        jTable2.update();
-        jTable3.update();
-        jTable4.update();
-        jTable5.update();
-
-        jTableDepartmentDoctors1.update();
-        jTableDepartmentDoctors.update();
+        updateTables();
 
         jTextField3.setText(String.valueOf(hospital.getIcuCapacity()));
         jTextField4.setText(String.valueOf(hospital.getIcuOccupancy()));
@@ -2271,7 +2270,12 @@ public class HospitalMainFrame extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 Database database = new Database();
-                Hospital hospital = database.getHospital(13);
+                Hospital hospital = null;
+                try {
+                    hospital = database.getHospital("Hacettepe");
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
 //                Hospital hospital = new Hospital();
 //                Department department = new Department();
 //                Doctor doctor = new Doctor();
@@ -2289,6 +2293,16 @@ public class HospitalMainFrame extends javax.swing.JFrame {
                 //System.out.println(hospital.getAllPatients().get(0).getLastConsultation().getDate());
             }
         });
+    }
+
+    private void updateTables(){
+        jTable1.update();
+        jTable2.update();
+        jTable3.update();
+        jTable4.update();
+        jTable5.update();
+        jTableDepartmentDoctors.update();
+        jTableDepartmentDoctors1.update();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

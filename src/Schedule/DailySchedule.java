@@ -228,8 +228,8 @@ public class DailySchedule {
     }
 
     // getters
-    public ArrayList<Appointment> getAppointments() {
-        return (ArrayList<Appointment>) appointments;
+    public List<Appointment> getAppointments() {
+        return appointments;
     }
 
     public LocalDateTime getDate() {

@@ -1,5 +1,7 @@
 package GUI.Helpers;
 
+import Person.Doctor;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
@@ -9,6 +11,7 @@ import java.util.List;
 public abstract class UpdatedTable<E> extends JTable {
     private String[] headers;
     private List<E> list;
+    private List<Doctor> helperList;
     private Object[][] table;
     private boolean[] editable;
     private TableRowSorter<DefaultTableModel> tableRowSorter;
@@ -74,6 +77,10 @@ public abstract class UpdatedTable<E> extends JTable {
     public boolean[] getEditable() {
         return editable;
     }
+
+    public List<Doctor> getHelperList() {
+        return helperList;
+    }
     // setters
 
     public void setEditable(boolean editable, int rowNumber){
@@ -96,5 +103,7 @@ public abstract class UpdatedTable<E> extends JTable {
         this.list = list;
     }
 
-
+    public void setHelperList(List<Doctor> helperList) {
+        this.helperList = helperList;
+    }
 }

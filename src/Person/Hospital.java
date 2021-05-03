@@ -97,6 +97,11 @@ public class Hospital {
     public int getIcuCapacity() {
         return icuCapacity;
     }
+
+    public String getEmail() {
+        return email;
+    }
+
     public String getPhoneNumber() {
         return phoneNumber;
     }
@@ -118,7 +123,13 @@ public class Hospital {
     }
 
     //setters
-    public void setIcuCapacity( int capacity){
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+
+    public void setIcuCapacity(int capacity){
         icuCapacity = capacity;
 
     }

@@ -8,7 +8,6 @@ import Database.Database;
 import GUI.DoctorGUI.*;
 
 import GUI.Helpers.UpdatedTable;
-import GeneralInfo.Consultation;
 import GeneralInfo.Disease;
 import GeneralInfo.Medication;
 import Person.*;
@@ -545,7 +544,7 @@ public class frmDoctor extends javax.swing.JFrame {
             }
         });
 
-        jComboBox9.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "*Year*", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026" }));
+        jComboBox9.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "*Year*", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027","2028" }));
 
         jButton5.setText("Search");
 
@@ -2039,7 +2038,7 @@ public class frmDoctor extends javax.swing.JFrame {
 
         jComboBox11.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "*Month*", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" }));
 
-        jComboBox12.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "*Year*", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026" }));
+        jComboBox12.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "*Year*", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026","2027","2028" }));
 
         jButton19.setText("➞");
         jButton19.addActionListener(new java.awt.event.ActionListener() {
@@ -2791,7 +2790,7 @@ public class frmDoctor extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {//GEN-FIRST:event_jButton7ActionPerformed
-        int row = jTable2.getSelectedRow();
+        int row = jTable2.getRow();
         deletedTasks.add(jTable2.getList().get(row).getName());
         doctor.removeTask(jTable2.getList().get(row));
         jTable2.update();
@@ -2802,7 +2801,9 @@ public class frmDoctor extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-        // TODO add your handling code here:
+        int row = jTable4.getRow();
+        doctor.cancelAppointment(jTable4.getList().get(row));
+        database.update(doctor.getSchedule());
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {//GEN-FIRST:event_jButton12ActionPerformed
@@ -2822,7 +2823,9 @@ public class frmDoctor extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton19ActionPerformed
 
     private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
-        // TODO add your handling code here:
+        int row = jTable7.getRow();
+        doctor.cancelAppointment(jTable7.getList().get(row));
+        database.update(doctor.getSchedule());
     }//GEN-LAST:event_jButton20ActionPerformed
 
     private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton21ActionPerformed
@@ -3192,6 +3195,7 @@ public class frmDoctor extends javax.swing.JFrame {
                             jTable5.setHeaders(new String[]{"Doctors", "Hospital"});
                             jTable5.setEditable(false,2);
                             List<Doctor> doctorList = new ArrayList<Doctor>();
+                            jTable5.setHelperList(doctorList);
                             String[][] doctorTable = new String[150][2];
                             int k = 0;
                             for (int i = 0; i < hospitalList.size(); i++) {
@@ -3216,7 +3220,7 @@ public class frmDoctor extends javax.swing.JFrame {
                                     super.mouseReleased(e);
                                     int row = jTable5.getRow();
                                     HolderPanel.removeAll();
-                                    HolderPanel.add(new pnlDoctorData(doctorList.get(row),database));
+                                    HolderPanel.add(new pnlDoctorData(jTable5.getHelperList().get(row),database));
                                     HolderPanel.repaint();
                                     HolderPanel.revalidate();
                                 }
@@ -3271,7 +3275,7 @@ public class frmDoctor extends javax.swing.JFrame {
         jTable2.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                int row = jTable2.getSelectedRow();
+                int row = jTable2.getRow();
                 jTable2.getList().get(row).setDone((boolean)(jTable2.getValueAt(row, 1)));
             }
         });
@@ -3326,6 +3330,7 @@ public class frmDoctor extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {
                 List<Appointment> appointmentList = doctor.getDateAppointments(LocalDateTime.of(Integer.parseInt((String) (jComboBox12.getSelectedItem())),
                         jComboBox11.getSelectedIndex(), jComboBox10.getSelectedIndex(), 0, 0));
+                jTable7.setList(appointmentList);
                 String[][] appointmentTable = new String[appointmentList.size()][2];
                 for (int i = 0; i < appointmentTable.length; i++) {
                     appointmentTable[i][0] = appointmentList.get(i).getPatient().getName();
@@ -3384,7 +3389,7 @@ public class frmDoctor extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             Database database = new Database();
-            Doctor doctor = database.getDoctor("Elif Albayrak");
+            Doctor doctor = database.getDoctor(40);
             public void run() {
                 JFrame frame = null;
                 try {

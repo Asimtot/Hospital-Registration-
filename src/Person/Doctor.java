@@ -7,7 +7,7 @@ import Schedule.*;
 
 import javax.persistence.*;
 
-import org.hibernate.Hibernate;
+
 
 import Database.Database;
 
@@ -59,9 +59,9 @@ public class Doctor extends Person {
         patients = new ArrayList<>();
     }
     
-    public Doctor ( String name, String email, String password, Hospital hospital, Department department,String telNo )
+    public Doctor ( String name, String email, String password, Hospital hospital, Department department,String telNo,String nationalId, String nationality )
     {
-        super( name, email, password ,telNo);
+        super( name, email, password ,telNo,nationalId,nationality);
         this.hospital = hospital;
         this.department = department;
         schedule = new Schedule();
@@ -69,9 +69,9 @@ public class Doctor extends Person {
         patients = new ArrayList<>();
     }
     
-    public Doctor ( String name, String email, String password ,String telNo)
+    public Doctor ( String name, String email, String password ,String telNo,String nationalId, String nationality)
     {
-        super( name, email, password,telNo );
+        super( name, email, password,telNo,nationalId,nationality);
         schedule = new Schedule();
         tasks = new ArrayList<>();
         patients = new ArrayList<>();

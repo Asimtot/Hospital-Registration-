@@ -41,6 +41,10 @@ public class Person {
     private String password;
     @Column(name= "telNo")
     private String telNo;
+    @Column(name= "nationalId")
+    private String nationalId;
+    @Column(name= "nationality")
+    private String nationality;
     
     @OneToMany(mappedBy = "receiver")
     private List<Notification> notifications;
@@ -55,22 +59,27 @@ public class Person {
 
     public Person(){}
 
-    public Person ( String name, String email,String telNo)
+    public Person ( String name, String email,String telNo, String nationalId, String nationality)
     {
         this.name = name;
         this.email = email;
         this.telNo= telNo;
+        this.nationalId= nationalId;
+        this.nationality= nationality;
 
         notifications = new ArrayList<Notification>();
     }
 
 
-    public Person ( String name, String email, String password ,String telNo)
+    public Person ( String name, String email, String password ,String telNo,String nationalId, String nationality)
     {
         this.name = name;
         this.email = email;
         this.password = password;
         this.telNo= telNo;
+        this.nationalId= nationalId;
+        this.nationality= nationality;
+        
         notifications = new ArrayList<Notification>();
     }
     

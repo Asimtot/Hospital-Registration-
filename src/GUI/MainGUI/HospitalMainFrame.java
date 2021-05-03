@@ -48,6 +48,7 @@ public class HospitalMainFrame extends javax.swing.JFrame {
         componentInitializer();
         initComponents(); // automatic design code
         listenerInitializer();
+        pack();
     }
 
     /**

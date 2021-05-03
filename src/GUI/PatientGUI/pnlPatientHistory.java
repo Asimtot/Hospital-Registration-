@@ -4,17 +4,35 @@ package GUI.PatientGUI;/*
  * and open the template in the editor.
  */
 
+import Database.Database;
+import GUI.Helpers.UpdatedTable;
+import GeneralInfo.Disease;
+import Person.Doctor;
+import Person.Patient;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author enbadem
  */
 public class pnlPatientHistory extends javax.swing.JPanel {
+    Patient patient;
+    Database database;
 
     /**
      * Creates new form pnlPatientHistory
      */
-    public pnlPatientHistory() {
+    public pnlPatientHistory(Patient patient, Database database) {
+        this.patient = patient;
+        this.database = database;
+        componentInitializer();
         initComponents();
+        listenerInitializer();
     }
 
     /**
@@ -138,6 +156,11 @@ public class pnlPatientHistory extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void componentInitializer(){
+    }
+
+    private void listenerInitializer(){
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;

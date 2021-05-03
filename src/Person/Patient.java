@@ -3,6 +3,8 @@ import java.util.ArrayList;
 
 import java.util.List;
 
+import GUI.Helpers.UpdatedTable;
+import GUI.MainGUI.frmDoctor;
 import Schedule.*;
 import GeneralInfo.*;
 
@@ -50,12 +52,17 @@ public class Patient extends Person{
     private Hospital icuHospital;
 
     // constructors
-    public Patient(){}
+    public Patient(){
+        doctors = new ArrayList<Doctor>();
+        appointments = new ArrayList<Appointment>();
+        address = new Address();
+        inIcu = false;
+        activeDiseases = new ArrayList<Disease>();
+    }
     // simple - just initializes
-    public Patient(String name, String email,String telNo,String ID, String nationality){
-        super(name, email,telNo,ID,nationality);
-        
-        //info = new GeneralInfo(this);
+    public Patient(String name, String email,String telNo){
+        super(name, email,telNo);
+
         doctors = new ArrayList<Doctor>();
         appointments = new ArrayList<Appointment>();
         address = new Address();
@@ -64,8 +71,8 @@ public class Patient extends Person{
     }
 
     // complete constructor - if something does not exist, put null (?)
-    public Patient(String name, String email, boolean inIcu, Hospital icuHospital, String city, String country, String address, Disease[] diseases,String telNo,String ID, String nationality){
-        super(name, email,telNo,ID,nationality);
+    public Patient(String name, String email, boolean inIcu, Hospital icuHospital, String city, String country, String address, Disease[] diseases,String telNo){
+        super(name, email,telNo);
         
         this.inIcu = inIcu;
         if(inIcu && icuHospital != null){
@@ -94,14 +101,11 @@ public class Patient extends Person{
 
     // methods
 
-    public void addConsultation(Consultation consultation){
+    public void addConsultation(Consultation consultation) {
         info.addConsultation(consultation);
     }
 
-    public Consultation getLastConsultation(){
-        return info.getLastConsultation();
-    }
-
+    public Consultation getLastConsultation() { return info.getLastConsultation(); }
     public boolean isPatientOf(Doctor doctor){
         return doctors.contains(doctor);
     }

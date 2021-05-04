@@ -14,6 +14,11 @@ import javax.persistence.Table;
 
 import Person.*;
 
+/**
+ * Adress class for properties (Hospitals )
+ * @author Emre Uğur
+ *
+ */
 
 @Entity
 @Table(name = "Address")

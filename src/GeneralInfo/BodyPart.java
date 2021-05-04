@@ -3,6 +3,10 @@ package GeneralInfo;
 import javax.persistence.*;
 import java.util.List;
 
+/**
+ * BodyPart class to be able to show certain parts of body
+ * @author Efe Can Tepe
+ */
 @Entity
 @Table(name = "BodyPart")
 public class BodyPart {
@@ -12,7 +16,7 @@ public class BodyPart {
     @Column(name = "id")
     private int id;
 
-    //DATABASE için gerekliler
+    //necessary for DATABASE
     @ManyToMany(mappedBy = "parts")
     private List<Body> bodys;
 
@@ -25,9 +29,7 @@ public class BodyPart {
         //CONSTRUCTORS
     public BodyPart(){}
 
-        //METHODS
-
-            //GETTERS
+    //GETTERS
 
     public int getId() {
         return id;

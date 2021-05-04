@@ -7,6 +7,11 @@ import Person.Patient;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Body Class
+ * @author Efe Can Tepe
+ */
+
 @Entity
 @Table(name = "Body")
 public class Body {
@@ -17,8 +22,8 @@ public class Body {
     private int id;
 
     @OneToOne
-        @JoinColumn(name = "Patient_id")
-        private Patient owner;
+    @JoinColumn(name = "Patient_id")
+    private Patient owner;
 
     @ManyToMany
     @JoinTable(name = "BodyPartBodyJoin",
@@ -26,13 +31,12 @@ public class Body {
             inverseJoinColumns = @JoinColumn(name="BodyPart_id"))
     private List<BodyPart> parts= new ArrayList<>();
 
-    //DATABASE için gerekliler
+    //necessary for DATABASE
     @OneToOne(mappedBy = "body")
     private GeneralInfo generalInfo;
 
-        //CONSTRUCTORS
+    //CONSTRUCTORS
     public Body(){}
-
 
     public Body(int id, Patient owner, List<BodyPart> parts, GeneralInfo generalInfo) {
         this.id = id;
@@ -46,13 +50,11 @@ public class Body {
     }
     
 
-        //METHODS
+    //METHODS
     void addBodyPart(BodyPart bp){
         parts.add(bp);
     }
-
-
-            //GETTERS
+    //GETTERS
 
     public int getId() {
         return id;

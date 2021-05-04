@@ -79,23 +79,22 @@ public class DailySchedule {
 
     public boolean addAppointment(Appointment app){
         System.out.println("AAAAAAAAAAAÂBBBBBBBBBB");
-        appointments.add(app);
-        app.setDailySchedule(this);
+        
         
         boolean clashes = false;
         // check if the appointment is during the working hours
         if (app.getStartingTime().isAfter(startingTime) && app.getEndingTime().isBefore(endingTime)){
             // check if the given appointment clashes with any of the previous appointments
-            
+            System.out.println("1.TAMAM");
             for (Appointment a : appointments) {
                 if (app.getStartingTime().isAfter(a.getStartingTime()) && app.getStartingTime().isBefore(a.getEndingTime())
                         || (app.getEndingTime().isAfter(a.getStartingTime()) && app.getEndingTime().isBefore(a.getStartingTime()))){
-                    clashes = true;
+                    clashes = true;System.out.println("CLASHES");
                     break;
                 }
             }
-            if (true){
-                System.out.println("AAAAAAAAAAAAAAAAAAAAA");
+            if (!clashes){
+                System.out.println("BAŞARILI");
                 appointments.add(app);
                 app.setDailySchedule(this);
             }

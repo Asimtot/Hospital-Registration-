@@ -114,7 +114,7 @@ public class Database {
         return "";
     }
 
-    public Person getPersonByMail(String mail) throws SQLException{
+    public int getPersonIdByMail(String mail) throws SQLException{
         Statement statement= connection.createStatement();
 
         String sql= "SELECT id FROM Person WHERE email= '"+mail+"';";
@@ -125,38 +125,32 @@ public class Database {
             
             int id= rs.getInt("id");
             statement.close();
-            return getPerson(id);
+            return id;
         }
         
         statement.close();
-        return null;
+        return 0;
     }
 
     public Doctor getDoctorByMail(String mail) throws SQLException{
+        int id= getPersonIdByMail(mail);
+        Doctor doctor= getDoctor(id);
+        return doctor;
+    }
 
-        Person doc= getPersonByMail(mail);
+    public Admin getAdminByMail(String mail) throws SQLException{
+        int id= getPersonIdByMail(mail);
 
-        if(doc instanceof Doctor){
-            return (Doctor) doc;
-        }
-        return null;
-
-
+        Admin admin= getAdmin(id);
+        return admin;
     }
     public Patient getPatientByMail(String mail) throws SQLException{
+        int id= getPersonIdByMail(mail);
 
-        Person pat= getPersonByMail(mail);
-
-        if(pat instanceof Patient){
-            return (Patient) pat;
-        }
-        return null;
-
+        Patient patient= getPatient(id);
+        return patient;
     }
 
-
-
-    
     public ArrayList<String> getAvailableCity(String objectName) throws SQLException{
         Statement statement= connection.createStatement();
         
@@ -616,14 +610,16 @@ public class Database {
         Database database= new Database();
 
 
-        Hospital bayındır= new Hospital("Bayındır", 100, "0532 4545 6785", "bayındır@bayındır.com.tr");
+        //Hospital bayındır= new Hospital("Bayındır", 100, "0532 4545 6785", "bayındır@bayındır.com.tr");
 
-        Hospital hacettepe= new Hospital("Hacettepe", 150, "0532 7548 7795", "hacettepe@hacettepe.com.tr");
+        //Hospital hacettepe= new Hospital("Hacettepe", 150, "0532 7548 7795", "hacettepe@hacettepe.com.tr");
 
         //Hospital hacettepe= new Hospital("Hacettepe", 150, "0532 7548 7795", "hacettepe@hacettepe.com.tr");
         
         
-       
+       Doctor d= database.getDoctorByMail("mailmail");
+
+       System.out.println(d.getEmail());
         
         
         

@@ -15,6 +15,7 @@ public abstract class UpdatedTable<E> extends JTable {
     private Object[][] table;
     private boolean[] editable;
     private TableRowSorter<DefaultTableModel> tableRowSorter;
+    private Object holder;
 
     public UpdatedTable(String[] headers, boolean editable, int rowNumber) {
         this.headers = headers;
@@ -81,6 +82,10 @@ public abstract class UpdatedTable<E> extends JTable {
     public List<Doctor> getHelperList() {
         return helperList;
     }
+
+    public Object getHolder() {
+        return holder;
+    }
     // setters
 
     public void setEditable(boolean editable, int rowNumber){
@@ -105,5 +110,9 @@ public abstract class UpdatedTable<E> extends JTable {
 
     public void setHelperList(List<Doctor> helperList) {
         this.helperList = helperList;
+    }
+
+    public void setHolder(Object holder) {
+        this.holder = holder;
     }
 }

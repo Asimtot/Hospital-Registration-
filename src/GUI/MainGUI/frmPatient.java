@@ -726,11 +726,11 @@ public class frmPatient extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Medical History");
 
-        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\enbadem\\Desktop\\ProjeDeneme\\src\\main\\java\\images\\Body.png")); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon("/GUI/images/Body.png")); // NOI18N
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Blood T.");
+        jLabel7.setText("");
 
         javax.swing.GroupLayout pnlPatientHistoryLayout = new javax.swing.GroupLayout(pnlPatientHistory);
         pnlPatientHistory.setLayout(pnlPatientHistoryLayout);

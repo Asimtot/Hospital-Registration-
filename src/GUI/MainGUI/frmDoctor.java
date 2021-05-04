@@ -307,7 +307,7 @@ public class frmDoctor extends javax.swing.JFrame {
 
         pnlDoctorMain.setBackground(new java.awt.Color(52, 88, 130));
 
-        jLabel13.setIcon(new javax.swing.ImageIcon("C:\\Users\\enbadem\\Desktop\\ProjeDeneme\\src\\main\\java\\images\\AppLogoSmall.png")); // NOI18N
+        jLabel13.setIcon(new ImageIcon(this.getClass().getResource("/GUI/images/AppLogoSmall.png"))); // NOI18N
         jLabel13.setText("jLabel4");
 
         btnSeeSchedule.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -1382,7 +1382,7 @@ public class frmDoctor extends javax.swing.JFrame {
 
         jLabel39.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel39.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel39.setIcon(new javax.swing.ImageIcon("C:\\Users\\enbadem\\Desktop\\ProjeDeneme\\src\\main\\java\\images\\HospitalLogo.png")); // NOI18N
+        jLabel39.setIcon(new ImageIcon(this.getClass().getResource("/GUI/images/HospitalLogo.png"))); // NOI18N
         jLabel39.setText("   Hospital's Name");
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -3029,7 +3029,8 @@ public class frmDoctor extends javax.swing.JFrame {
     private void listenerInitializer() throws SQLException {
         updateTables();
         // doctorMain
-        jLabel14.setText(doctor.getHospital().getHospitalName());
+        jLabel13.setIcon(new ImageIcon(this.getClass().getResource("/GUI/images/AppLogoSmall.png")));
+        jLabel14.setText("HEALTH CHECK");
         jLabel15.setText("Today's Appointments " + LocalDateTime.now().format(dateFormatter));
         jLabel16.setText("Hello " + doctor.getName() + " what would you like to");
 

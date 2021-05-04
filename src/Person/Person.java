@@ -114,6 +114,9 @@ public class Person {
     {
         return password;
     }
+    public int getId() {
+        return id;
+    }
     
     public ArrayList<Notification> getNotifications()
     {

@@ -855,10 +855,11 @@ public class frmPatient extends javax.swing.JFrame {
                     this.setList(consultationsList);
 
                     for (int i = 0; i < consultationTable.length; ++i) {
-                            consultationTable[i][0] = ((Consultation) consultationsList.get(i)).getDoctor().getHospital().getHospitalName();
-                            consultationTable[i][1] = ((Consultation) consultationsList.get(i)).getDiagnosis().toString();
-                            consultationTable[i][2] = ((Consultation) consultationsList.get(i)).getPrescription().toString();
-                            consultationTable[i][3] = ((Consultation) consultationsList.get(i)).getDate().format(dateTimeFormatter);
+                            consultationTable[i][0] = consultationsList.get(i).getDoctor().getHospital().getHospitalName();
+                            consultationTable[i][1] = consultationsList.get(i).getDiagnosis().get(0).getName();
+                            consultationTable[i][2] = consultationsList.get(i).getPrescription().getMedications().get(0).getName()
+                                    + " " + consultationsList.get(i).getPrescription().getFrequency();
+                            consultationTable[i][3] = consultationsList.get(i).getDate().format(dateTimeFormatter);
                     }
 
                     return consultationTable;

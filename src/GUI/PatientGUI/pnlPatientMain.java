@@ -4,6 +4,8 @@ package GUI.PatientGUI;/*
  * and open the template in the editor.
  */
 
+import javax.swing.*;
+
 /**
  *
  * @author enbadem
@@ -46,7 +48,7 @@ public class pnlPatientMain extends javax.swing.JPanel {
 
         jPanel1.setBackground(new java.awt.Color(52, 88, 130));
 
-        jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\enbadem\\Desktop\\ProjeDeneme\\src\\main\\java\\images\\AppLogoSmall.png")); // NOI18N
+        jLabel4.setIcon(new ImageIcon(this.getClass().getResource("/GUI/images/AppLogoSmall.png")));
         jLabel4.setText("jLabel4");
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N

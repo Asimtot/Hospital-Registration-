@@ -7,6 +7,7 @@ package GUI.DoctorGUI;/*
 import Database.Database;
 import Person.Doctor;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDateTime;
@@ -66,7 +67,7 @@ public class pnlDoctorData extends javax.swing.JPanel {
         jLayeredPane1.setBackground(new java.awt.Color(255, 255, 255));
         jLayeredPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jLabel5.setIcon(new javax.swing.ImageIcon("C:\\Users\\enbadem\\Desktop\\ProjeDeneme\\src\\main\\java\\images\\Webp.net-resizeimage.png")); // NOI18N
+        jLabel5.setIcon(new ImageIcon(this.getClass().getResource("/GUI/images/ProfilePic.png"))); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 

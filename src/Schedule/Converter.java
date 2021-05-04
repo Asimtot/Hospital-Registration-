@@ -3,12 +3,17 @@ package Schedule;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Converter class that convert time to necessary format for DATABASE
+ * @author  Emre Uğur
+ */
 public class Converter {
 
     // do not change the pattern to uppercase/lowercase
     final static DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     /**
+     * it converts formatted type of time to LocalDateTime object
      * @param str must be of the form YYYY-MM-DD hh:mm:ss[.nnn] (SQL dateTime format)
      */
     public static LocalDateTime toLocalDateTime(String str){

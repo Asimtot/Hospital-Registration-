@@ -18,6 +18,10 @@ import javax.persistence.Transient;
 import Database.Database;
 import Person.*;
 
+/**
+ * Schedule class
+ * @author Kardelen Ceren
+ */
 @Entity
 @Table(name = "Schedule")
 public class Schedule {
@@ -68,6 +72,12 @@ public class Schedule {
 
     // methods
 
+    /**
+     * adds apoointment to schecule of person
+     * @param app Appointment object
+     * @return boolean if it is added successfullye
+     *         false otherwise
+     */
     public boolean addAppointment(Appointment app){
         
         DailySchedule day = findDay(app.getStartingTime());
@@ -87,6 +97,12 @@ public class Schedule {
         }
     }
 
+    /**
+     *
+     * @param app Appointmnet object
+     * @return boolean if it is cancelled successfully
+     *         false otherwise
+     */
     public boolean cancelAppointment(Appointment app){
         DailySchedule day = findDay(app.getStartingTime());
         if (day == null){
@@ -97,6 +113,17 @@ public class Schedule {
         }
     }
 
+    /**
+     *
+     * @param app Appointment object
+     * @param newYear as int
+     * @param newMonth as int
+     * @param newDayOfMonth as int
+     * @param newHour as int
+     * @param newMinute as int
+     * @return boolean if it is postponed successfully
+     *         false otherwise
+     */
     public boolean postponeAppointment(Appointment app, int newYear, int newMonth, int newDayOfMonth, int newHour, int newMinute){
         DailySchedule day = findDay(app.getStartingTime());
         if (day == null){
@@ -116,6 +143,13 @@ public class Schedule {
         }
     }
 
+    /**
+     * postpone the appointment
+     * @param app Appointment object
+     * @param newDate LocalDateTime
+     * @return boolean if it is postponed successfully
+     *         false otherwise
+     */
     public boolean postponeAppointment(Appointment app, LocalDateTime newDate){
         DailySchedule day = findDay(app.getStartingTime());
         if (day == null){
@@ -135,6 +169,11 @@ public class Schedule {
         }
     }
 
+    /**
+     * gives the available time intervals of the person
+     * @param date LocalDateTime  object
+     * @return available intervals as LocalDateTime list
+     */
     public ArrayList<LocalDateTime> getAvailableIntervals(LocalDateTime date){
         DailySchedule day = findDay(date);
         if (day == null){
@@ -146,6 +185,11 @@ public class Schedule {
         return day.getAvailableIntervals();
     }
 
+    /**
+     * gives the appointments at given date
+     * @param date LocalDateTime Object
+     * @return appointments as Appointment list
+     */
     public List<Appointment> getDateAppointments(LocalDateTime date){
         DailySchedule day = findDay(date);
         if (day != null){
@@ -161,6 +205,11 @@ public class Schedule {
         }
     }
 
+    /**
+     *  it gives the daily schedule object at given date
+     * @param appDate as LocalDateTime Object
+     * @return list of DailySchedule
+     */
     private DailySchedule findDay(LocalDateTime appDate){
         LocalDateTime date;
         //((List<DailySchedule>)days).trimToSize();

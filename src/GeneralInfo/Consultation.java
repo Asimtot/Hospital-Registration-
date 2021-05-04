@@ -12,6 +12,10 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Consultation Class
+ * @author Efe Can Tepe
+ */
 @Entity
 @Table(name = "Consultation")
 public class Consultation implements Comparable{
@@ -54,7 +58,7 @@ public class Consultation implements Comparable{
 
 
 
-    //DATABASE için gerekli
+    //necessary for DATABASE
     @ManyToOne
     @JoinColumn(name = "GeneralInfo_id", referencedColumnName = "id")
     private GeneralInfo generalInfo;
@@ -165,7 +169,7 @@ public class Consultation implements Comparable{
     public String getTreatment() {
         return treatment;
     }
-    //****
+
 
     
     public String showSendable() { //FIXME (not everything has toString)

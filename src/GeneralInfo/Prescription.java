@@ -4,6 +4,10 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Prescription class
+ * @author efe can tepe
+ */
 @Entity
 @Table(name = "Prescription")
 public class Prescription {
@@ -34,11 +38,11 @@ public class Prescription {
         //METHODS
     public void addMedication(Medication e){
         medications.add(e);
-    }
+    } //adding medicines to prescription
 
     public void setFrequency(String frequency) {
         this.frequency = frequency;
-    }
+    }// frequency of usage for medicine as string
 
         //GETTERS
     public int getId() {

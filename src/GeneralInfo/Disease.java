@@ -7,6 +7,10 @@ import Person.Patient;
 
 import java.util.List;
 
+/**
+ * Disease Class that holds the information about a specific disease like name, body part, related department
+ * @author Eylül Badem
+ */
 @Entity
 @Table(name = "Disease")
 public class Disease {
@@ -32,7 +36,7 @@ public class Disease {
     private Department relatedField;
 
 
-        //DATABASE için gerekliler
+    // necessary for DATABASE
     @ManyToMany(mappedBy = "dClashes")
     private List<Medication> clashingMedication;
 
@@ -44,9 +48,8 @@ public class Disease {
 
     
 
-        //CONSTRUCTORS
+    //CONSTRUCTORS
     Disease(){};
-
 
     public Disease(String info, String name) {
         this.info = info;
@@ -56,7 +59,7 @@ public class Disease {
 
     
 
-        //METHODS
+    //METHODS
     public void setRelatedBodyPart(BodyPart bp){
         relatedBodyPart= bp;
     }
@@ -69,7 +72,7 @@ public class Disease {
         this.relatedField = relatedField;
     }
 
-            //GETTERS
+    //GETTERS
     public int getId() {
         return id;
     }

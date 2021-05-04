@@ -95,10 +95,10 @@ public class frmLogin extends javax.swing.JFrame {
             }
         });
 
-        labelLogin.setFont(new java.awt.Font("Segoe UI Symbol", 1, 40)); // NOI18N
+        labelLogin.setFont(new java.awt.Font("Noto Sans", 1, 40)); // NOI18N
         labelLogin.setForeground(new java.awt.Color(255, 255, 255));
-        labelLogin.setIcon(new javax.swing.ImageIcon("C:\\Users\\enbadem\\Desktop\\ProjeDeneme\\src\\main\\java\\images\\AppLogoSmall.png")); // NOI18N
-        labelLogin.setText("    H2H Registration System ");
+        labelLogin.setText("  HEALTH CHECK ");
+        labelLogin.setIcon(new javax.swing.ImageIcon("/GUI/images/AppLogoSmall.png"));
 
         labelVersion.setForeground(new java.awt.Color(255, 255, 255));
         labelVersion.setText("version 1.0");

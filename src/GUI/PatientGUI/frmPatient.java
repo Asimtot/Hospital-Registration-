@@ -5,21 +5,67 @@ package GUI.PatientGUI;/*
  */
 
 import Database.Database;
+import GUI.MainGUI.frmDoctor;
 import GeneralInfo.Address;
 import GeneralInfo.Consultation;
+import GeneralInfo.Disease;
 import GeneralInfo.Notification;
+import Person.*;
+import Database.Database;
+import GUI.DoctorGUI.pnlDoctorData;
+import GUI.DoctorGUI.pnlPatientData;
 import GUI.Helpers.UpdatedTable;
-import Person.Patient;
+import Person.Doctor;
 import Schedule.Appointment;
-
+import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.Component;
+import java.awt.Cursor;
+import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
+import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.AbstractListModel;
+import javax.swing.BorderFactory;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.DropMode;
+import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
+import javax.swing.JList;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JPanel;
+import javax.swing.JProgressBar;
+import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JSeparator;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.UIManager.LookAndFeelInfo;
+import javax.swing.table.DefaultTableModel;
+
+import java.time.format.DateTimeFormatter;
 
 /**
  *
@@ -36,7 +82,6 @@ public class frmPatient extends javax.swing.JFrame {
     private javax.swing.JButton btnSeeOrAdd;
     private javax.swing.JButton btnSeeOrAdd1;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JComboBox<String> jComboBox12;
@@ -81,7 +126,7 @@ public class frmPatient extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
-    private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JButton jButton5;
     private javax.swing.JPanel pnlAppointmentsList;
     private javax.swing.JPanel pnlGetAppointment;
     private javax.swing.JPanel pnlNotifications;
@@ -92,7 +137,7 @@ public class frmPatient extends javax.swing.JFrame {
     /**
      * Creates new form frmPatient
      */
-    public frmPatient(Patient patient, Database database) {
+    public frmPatient(Patient patient, Database database) throws SQLException {
         this.patient = patient;
         this.database = database;
         componentInitializer();
@@ -125,7 +170,6 @@ public class frmPatient extends javax.swing.JFrame {
         jTextField2 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
         btnSeeOrAdd1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         pnlGetAppointment = new javax.swing.JPanel();
         jComboBox3 = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
@@ -133,7 +177,7 @@ public class frmPatient extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        jToggleButton1 = new javax.swing.JToggleButton();
+        jButton5 = new javax.swing.JButton();
         jLabel26 = new javax.swing.JLabel();
         jComboBox12 = new javax.swing.JComboBox<>();
         jComboBox13 = new javax.swing.JComboBox<>();
@@ -173,7 +217,7 @@ public class frmPatient extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Name");
+        jLabel5.setText("Health Check");
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
@@ -283,15 +327,6 @@ public class frmPatient extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Trebuchet MS", 1, 80)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(153, 0, 0));
-        jButton2.setText("!");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout pnlPatientMainLayout = new javax.swing.GroupLayout(pnlPatientMain);
         pnlPatientMain.setLayout(pnlPatientMainLayout);
         pnlPatientMainLayout.setHorizontalGroup(
@@ -305,8 +340,7 @@ public class frmPatient extends javax.swing.JFrame {
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18))
                     .addGroup(pnlPatientMainLayout.createSequentialGroup()
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -333,8 +367,7 @@ public class frmPatient extends javax.swing.JFrame {
                     .addGroup(pnlPatientMainLayout.createSequentialGroup()
                         .addGap(39, 39, 39)
                         .addGroup(pnlPatientMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
                 .addGroup(pnlPatientMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlPatientMainLayout.createSequentialGroup()
@@ -374,11 +407,11 @@ public class frmPatient extends javax.swing.JFrame {
         jLabel19.setForeground(new java.awt.Color(255, 255, 255));
         jLabel19.setText("Starting Time");
 
-        jToggleButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jToggleButton1.setText("Find Appointment");
-        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButton5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton5.setText("Find Appointment");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton1ActionPerformed(evt);
+                jButton5ActionPerformed(evt);
             }
         });
 
@@ -470,7 +503,7 @@ public class frmPatient extends javax.swing.JFrame {
                                 .addComponent(jComboBox16, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addContainerGap()))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlGetAppointmentLayout.createSequentialGroup()
-                        .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(186, 186, 186))))
         );
         pnlGetAppointmentLayout.setVerticalGroup(
@@ -510,7 +543,7 @@ public class frmPatient extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jComboBox16, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(224, 224, 224))
         );
 
@@ -839,24 +872,17 @@ public class frmPatient extends javax.swing.JFrame {
         HolderPanel.revalidate();
     }//GEN-LAST:event_btnSeeOrAdd1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        HolderPanel.removeAll();
-        HolderPanel.add(pnlNotifications);
-        HolderPanel.repaint();
-        HolderPanel.revalidate();
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton51ActionPerformed
         HolderPanel.removeAll();
         HolderPanel.add(pnlAppointmentsList);
         HolderPanel.repaint();
         HolderPanel.revalidate();
-    }//GEN-LAST:event_jToggleButton1ActionPerformed
+    }//GEN-LAST:event_jButton51ActionPerformed
 
     private void componentInitializer() {
         this.jTable1 = new UpdatedTable<Consultation>(new String[]{"Hospital", "Disease", "Medication", "Date"}, false, 2) {
             public String[][] createTable() {
-                if (frmPatient.this.patient.getInfo().getConsultations() != null) {
+                if (frmPatient.this.patient.getInfo() != null && frmPatient.this.patient.getInfo().getConsultations() != null) {
                     List<Consultation> consultationsList = frmPatient.this.patient.getInfo().getConsultations();
                     String[][] consultationTable = new String[consultationsList.size()][2];
                     this.setList(consultationsList);
@@ -866,7 +892,6 @@ public class frmPatient extends javax.swing.JFrame {
                             consultationTable[i][1] = ((Consultation) consultationsList.get(i)).getDiagnosis().toString();
                             consultationTable[i][2] = ((Consultation) consultationsList.get(i)).getPrescription().toString();
                             consultationTable[i][3] = ((Consultation) consultationsList.get(i)).getDate().format(dateTimeFormatter);
-
                     }
 
                     return consultationTable;
@@ -880,14 +905,14 @@ public class frmPatient extends javax.swing.JFrame {
                 return new String[0][];
             }
         };
-        this.jTable3 = new UpdatedTable<Appointment>(new String[]{"Date", "Starting Hour", "Time Interval", "Hospital", "Department", "Doctor"}, false, 2) {
+        this.jTable3 = new UpdatedTable<Appointment>(new String[]{"Date", "Time Interval", "Hospital",  "Doctor"}, false, 2) {
             public String[][] createTable() {
                 return new String[0][];
             }
         };
     }
 
-    private void listenerInitializer() {
+    private void listenerInitializer() throws SQLException {
         this.updateTables();
         this.jLabel12.setText("" + LocalDateTime.now().format(this.dateFormatter));
         this.jLabel13.setText("Hello " + this.patient.getName() + " what would you like to");
@@ -895,7 +920,7 @@ public class frmPatient extends javax.swing.JFrame {
         this.jLabel14.setText(this.patient.getName());
         this.jTextField2.setText(this.patient.getTelNo());
         this.jTextField1.setText(this.patient.getEmail());
-        this.jTextField3.setText(this.patient.getAddress() + "");
+        this.jTextField3.setText(this.patient.getAddress().getAddress() + "");
         this.jButton1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String telNo = frmPatient.this.jTextField2.getText();
@@ -904,6 +929,70 @@ public class frmPatient extends javax.swing.JFrame {
                 frmPatient.this.patient.setTelNo(telNo);
                 frmPatient.this.patient.setEmail(email);
                 frmPatient.this.patient.setAddress(address);
+            }
+        });
+
+        // Get Appointments
+        String[] cities = database.getAvailableCity("Hospital").toArray(new String[0]);
+        jComboBox14.setModel(new javax.swing.DefaultComboBoxModel<>(cities));
+        jComboBox14.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    String[] counties = database.getAvailableCounty("Hospital",
+                            (String) jComboBox15.getSelectedItem()).toArray(new String[0]);
+                    jComboBox15.setModel(new DefaultComboBoxModel<>(counties));
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        });
+
+        jComboBox16.setModel(new javax.swing.DefaultComboBoxModel<>(database.getAllDepartments().toArray(new String[0])));
+
+        jButton5.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String city = (String) jComboBox14.getSelectedItem();
+                String county = (String) jComboBox15.getSelectedItem();
+                String department = (String) jComboBox16.getSelectedItem();
+                LocalDateTime currentDate = LocalDateTime.of(Integer.parseInt((String) (jComboBox12.getSelectedItem())),
+                        jComboBox13.getSelectedIndex(), jComboBox3.getSelectedIndex(), 0, 0);
+                List<Doctor> doctorsList = new ArrayList<Doctor>();
+                try {
+                    List<Hospital> hospitalsList = database.getAllHospitalsIn(city, county);
+                    for ( int i = 0; i < hospitalsList.size(); i ++) {
+                        Hospital currentHospital = hospitalsList.get(i);
+                        Department currentDepartment = hospitalsList.get(i).getSpecificDepartment(department);
+                        if ( currentDepartment != null ) {
+                            for (int j = 0; j < currentDepartment.getDepartmentDoctors().size(); j++) {
+                                doctorsList.add(currentDepartment.getDepartmentDoctors().get(j));
+                            }
+                        }
+                    }
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+
+                String[][] appointmentTable = new String[doctorsList.size()][2];
+                for (int i = 0; i < appointmentTable.length; i++) {
+                    appointmentTable[i][0] = currentDate + "";
+
+                    ArrayList<LocalDateTime> intervals = doctorsList.get(i).getAvailableIntervals(currentDate);
+                    String[] intervalStr = new String[intervals.size() / 2 + 1];
+                    for (int k = 0, j = 0; k < intervals.size(); k = k + 2, k++) {
+                        intervalStr[j] = intervals.get(i).format(timeFormatter) + "-" + intervals.get(k + 1).format(timeFormatter);
+                    }
+                    String currentInterval = "";
+                    for ( int j = 0; i < doctorsList.get(i).getAvailableIntervals(currentDate).size(); i++) {
+                        currentInterval = currentInterval + intervalStr[j] + ",";
+                    }
+
+                    appointmentTable[i][1] = currentInterval;
+                    appointmentTable[i][2] = doctorsList.get(i).getHospital() + "";
+                    appointmentTable[i][3] = doctorsList.get(i) + "";
+                }
+                jTable3.update(appointmentTable);
             }
         });
     }
@@ -945,17 +1034,20 @@ public class frmPatient extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             Database database = new Database();
             Patient patient;
-            /*
-            Patient patient = new Patient("Melis Doğan", "melisbdogan@hotmail.com", false, null,
-                "İzmir", "Turkey", "Menderes", null, "05554443322");
-             */
-
-            {
-                this.patient = this.database.getPatient("Melis Doğan");
-            }
 
             public void run() {
-                JFrame frame = new frmPatient(this.patient, this.database);
+                JFrame frame = null;
+
+                try {
+                    this.patient = this.database.getPatient("Kağan Ünal");
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+                try {
+                    frame = new frmPatient(this.patient, this.database);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
                 frame.setVisible(true);
                 frame.setLocationRelativeTo((Component)null);
             }

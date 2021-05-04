@@ -81,7 +81,7 @@ public class frmPatient extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator5;
     private UpdatedTable jTable1;
     private UpdatedTable jTable2;
-    private UpdatedTable jTable3;
+    private UpdatedTable<Doctor> jTable3;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
@@ -871,7 +871,7 @@ public class frmPatient extends javax.swing.JFrame {
                 return new String[0][];
             }
         };
-        this.jTable3 = new UpdatedTable<Appointment>(new String[]{"Date", "Time Interval", "Hospital",  "Doctor"}, false, 2) {
+        this.jTable3 = new UpdatedTable<Doctor>(new String[]{"Date", "Available Time Intervals", "Hospital",  "Doctor"}, false, 4) {
             public String[][] createTable() {
                 return new String[0][];
             }
@@ -879,6 +879,7 @@ public class frmPatient extends javax.swing.JFrame {
     }
 
     private void listenerInitializer() throws SQLException {
+        jLabel10.setIcon(new ImageIcon(this.getClass().getResource("/GUI/images/ProfilePic.png")));
         this.updateTables();
         this.jLabel12.setText("" + LocalDateTime.now().format(this.dateFormatter));
         this.jLabel13.setText("Hello " + this.patient.getName() + " what would you like to");
@@ -929,41 +930,43 @@ public class frmPatient extends javax.swing.JFrame {
                 String city = (String) jComboBox14.getSelectedItem();
                 String county = (String) jComboBox15.getSelectedItem();
                 String department = (String) jComboBox16.getSelectedItem();
-                LocalDateTime currentDate = LocalDateTime.of(Integer.parseInt((String) (jComboBox12.getSelectedItem())),
-                        jComboBox13.getSelectedIndex(), jComboBox3.getSelectedIndex(), 0, 0);
+                LocalDateTime currentDate = LocalDateTime.of(Integer.parseInt((String) (jComboBox3.getSelectedItem())),
+                        jComboBox13.getSelectedIndex(), jComboBox12.getSelectedIndex(), 0, 0);
                 List<Doctor> doctorsList = new ArrayList<Doctor>();
+                jTable3.setList(doctorsList);
+                jTable3.setHolder(currentDate);
                 try {
                     List<Hospital> hospitalsList = database.getAllHospitalsIn(city, county);
                     for ( int i = 0; i < hospitalsList.size(); i ++) {
                         Hospital currentHospital = hospitalsList.get(i);
                         Department currentDepartment = hospitalsList.get(i).getSpecificDepartment(department);
                         if ( currentDepartment != null ) {
-                            for (int j = 0; j < currentDepartment.getDepartmentDoctors().size(); j++) {
-                                doctorsList.add(currentDepartment.getDepartmentDoctors().get(j));
-                            }
+                            doctorsList.addAll(currentDepartment.getDepartmentDoctors());
                         }
                     }
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }
 
-                String[][] appointmentTable = new String[doctorsList.size()][2];
+                String[][] appointmentTable = new String[doctorsList.size()][4];
                 for (int i = 0; i < appointmentTable.length; i++) {
-                    appointmentTable[i][0] = currentDate + "";
+                    appointmentTable[i][0] = currentDate.format(dateFormatter);
 
                     ArrayList<LocalDateTime> intervals = doctorsList.get(i).getAvailableIntervals(currentDate);
-                    String[] intervalStr = new String[intervals.size() / 2 + 1];
-                    for (int k = 0, j = 0; k < intervals.size(); k = k + 2, k++) {
-                        intervalStr[j] = intervals.get(i).format(timeFormatter) + "-" + intervals.get(k + 1).format(timeFormatter);
-                    }
-                    String currentInterval = "";
-                    for ( int j = 0; i < doctorsList.get(i).getAvailableIntervals(currentDate).size(); i++) {
-                        currentInterval = currentInterval + intervalStr[j] + ",";
+                    String[] intervalStr;
+                    if(intervals.size() % 2 == 0)
+                        intervalStr = new String[intervals.size() / 2];
+                    else
+                        intervalStr = new String[intervals.size() / 2 + 1];
+                    for (int k = 0, j = 0; k < intervals.size(); k = k + 2, j++) {
+                        intervalStr[j] = intervals.get(k).format(timeFormatter) + "-" + intervals.get(k + 1).format(timeFormatter);
                     }
 
+                    String currentInterval = String.join(",", intervalStr);
+
                     appointmentTable[i][1] = currentInterval;
-                    appointmentTable[i][2] = doctorsList.get(i).getHospital() + "";
-                    appointmentTable[i][3] = doctorsList.get(i) + "";
+                    appointmentTable[i][2] = doctorsList.get(i).getHospital().getHospitalName();
+                    appointmentTable[i][3] = doctorsList.get(i).getName();
                 }
                 jTable3.update(appointmentTable);
             }
@@ -974,15 +977,16 @@ public class frmPatient extends javax.swing.JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 int row = jTable3.getRow();
-                Doctor doctor = (Doctor) jTable1.getCellRenderer(row, 3);
+                Doctor doctor = jTable3.getList().get(row);
                 JFrame approvalFrame = null;
                 try {
-                    approvalFrame = new AppointmentApproval(doctor, patient, database);
-                } catch (SQLException | ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException throwables) {
+                    approvalFrame = new AppointmentApproval(doctor, patient, database, ((LocalDateTime)jTable3.getHolder()));
+                    approvalFrame.setVisible(true);
+                    approvalFrame.setLocationRelativeTo(null);
+                } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }
-                approvalFrame.setVisible(true);
-                approvalFrame.setLocationRelativeTo(null);
+
             }
         });
     }

@@ -1,8 +1,11 @@
 import Database.Database;
+import GUI.PatientGUI.AppointmentApproval;
 import Person.*;
 
 import javax.swing.*;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) throws SQLException {
@@ -45,7 +48,10 @@ public class Main {
 //        doctor1.addTask(task2);
 
 //        Database database = new Database();
-//        Doctor doctor = database.getDoctor("Deniz Yılmaz");
+//        Doctor doctor = database.getDoctor("Hasan Pak");
+//        System.out.println(Arrays.toString(AppointmentApproval.appointmentParser(doctor.getAvailableIntervals(LocalDateTime.now()))));
+//
+
 
     }
 }

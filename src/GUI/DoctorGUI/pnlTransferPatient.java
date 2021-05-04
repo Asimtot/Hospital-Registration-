@@ -362,7 +362,6 @@ public class pnlTransferPatient extends javax.swing.JPanel {
                 int row = jTable1.getRow();
                 if(jTable1.getList() != null){
                     doctor.referPatient(patient,jTable1.getList().get(row),jCheckBox1.isSelected());
-                    System.out.println(patient.isPatientOf(jTable1.getList().get(row)));
                     database.update(patient);
                 }
                 // FIXME successful message and then back to the panel?

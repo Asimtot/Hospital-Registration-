@@ -10,6 +10,7 @@ import GeneralInfo.Consultation;
 import GeneralInfo.GeneralInfo;
 import Person.Doctor;
 import Person.Patient;
+import Schedule.Appointment;
 import net.bytebuddy.asm.Advice;
 
 import java.awt.event.KeyAdapter;
@@ -21,8 +22,10 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.sql.SQLException;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 /**
  *
@@ -33,6 +36,7 @@ public class AppointmentApproval extends javax.swing.JFrame {
     Doctor doctor;
     Patient patient;
     Database database;
+    LocalDateTime date;
     DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
     DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
     DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
@@ -40,10 +44,11 @@ public class AppointmentApproval extends javax.swing.JFrame {
     /**
      * Creates new form AppointmentApproval
      */
-    public AppointmentApproval(Doctor doctor, Patient patient, Database database) throws SQLException, ClassNotFoundException, IllegalAccessException, InstantiationException, UnsupportedLookAndFeelException {
+    public AppointmentApproval(Doctor doctor, Patient patient, Database database, LocalDateTime date) throws SQLException {
         this.doctor = doctor;
         this.patient = patient;
         this.database = database;
+        this.date = date;
         initComponents();
         listenerInitializer();
     }
@@ -81,7 +86,7 @@ public class AppointmentApproval extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Appointment Detils");
+        jLabel1.setText("Appointment Details");
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -89,7 +94,7 @@ public class AppointmentApproval extends javax.swing.JFrame {
 
         jLabel3.setText("Hospital: " + doctor.getHospital().getHospitalName());
 
-        jLabel4.setText("Date: " + LocalDateTime.now().format(this.dateFormatter));
+        jLabel4.setText("Date: " + date.format(this.dateFormatter));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -181,60 +186,86 @@ public class AppointmentApproval extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        Consultation newConsultation = new Consultation(doctor, LocalDateTime.now());
-        patient.addConsultation(newConsultation);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void listenerInitializer() throws SQLException {
-        jComboBox1.addActionListener(new ActionListener() {
+        jButton1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                doctor.getAvailableIntervals(LocalDateTime.now()).toArray(new String[0]);
+                String name = "Appointment between " + patient.getName() + " and " + doctor.getName();
+                String startingTime = (String) jComboBox1.getSelectedItem();
+                int startingHour = Integer.parseInt(startingTime.substring(0,2));
+                int startingMinute = Integer.parseInt(startingTime.substring(3,5));
+                LocalDateTime appDate = LocalDateTime.of(date.getYear(), date.getMonth(), date.getDayOfYear(), startingHour,startingMinute);
+                Appointment appointment = new Appointment(name,doctor,patient,doctor.getHospital(),doctor.getDepartment(),30,appDate);
+                doctor.addAppointment(appointment);
+                database.add(appointment);
+                database.update(doctor.getSchedule());
+                dispose();
             }
         });
-    }
+       jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(appointmentParser(doctor.getAvailableIntervals(date))));
 
-    /**
-    public static void main(String args[]) {
-        Database database = new Database();
-        Patient patient;
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-    /**
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
+    }
+    private String[] appointmentParser(ArrayList<LocalDateTime> availableIntervals){
+        String result;
+        ArrayList<String> resultList = new ArrayList<>();
+        Duration appointmentDuration = Duration.ofMinutes(30);
+        int k = 0;
+        for (int i = 0; i < availableIntervals.size() - 1; i = i + 2) {
+            LocalDateTime start = availableIntervals.get(i);
+            LocalDateTime end = availableIntervals.get(i+1);
+            while(start.isBefore(end)){
+                result = start.format(timeFormatter) + "-";
+                start = start.plus(appointmentDuration);
+                result = result + start.format(timeFormatter);
+                resultList.add(result);
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AppointmentApproval.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AppointmentApproval.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AppointmentApproval.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AppointmentApproval.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-
-        /* Create and display the form */
-    /**
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    new AppointmentApproval(doctor, patient, database).setVisible(true);
-                } catch (SQLException throwables) {
-                    throwables.printStackTrace();
-                }
-            }
-        });
+        return resultList.toArray(new String[0]);
     }
-    */
+
+
+//    public static void main(String args[]) {
+//        Database database = new Database();
+//        Patient patient = new Patient();
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
+//         */
+//
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(AppointmentApproval.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(AppointmentApproval.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(AppointmentApproval.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(AppointmentApproval.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                Doctor doctor = new Doctor();
+//                try {
+//                    new AppointmentApproval(doctor, patient, database).setVisible(true);
+//                } catch (SQLException | ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException throwables) {
+//                    throwables.printStackTrace();
+//                }
+//            }
+//        });
+//    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

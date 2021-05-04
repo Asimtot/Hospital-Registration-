@@ -122,6 +122,14 @@ public class Hospital {
         return id;
     }
 
+    public Department getSpecificDepartment(String department) {
+        for ( int i = 0; i < getDepartments().size(); i++ ) {
+            if (getDepartments().get(i).getDepartmentName().equals(department))
+                return getDepartments().get(i);
+        }
+        return null;
+    }
+
     //setters
 
     public void setEmail(String email) {
@@ -212,6 +220,5 @@ public class Hospital {
             return 0;
     }
 
-    
-    
+
 }

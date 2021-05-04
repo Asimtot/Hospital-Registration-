@@ -4,17 +4,30 @@ package GUI.DoctorGUI;/*
  * and open the template in the editor.
  */
 
+import Database.Database;
+import Person.Doctor;
+import Person.Patient;
+
 /**
  *
  * @author enbadem
  */
 public class pnlTransferPatient extends javax.swing.JPanel {
 
+    Doctor doctor;
+    Patient patient;
+    Database database;
     /**
      * Creates new form pnlTransferPatient
      */
-    public pnlTransferPatient() {
-        initComponents();
+    public pnlTransferPatient(Doctor doctor, Patient patient, Database database) {
+        this.doctor = doctor;
+        this.patient = patient;
+        this.database = database;
+
+        componentInitializer();
+        initComponents(); // automatic design code
+        listenerInitializer();
     }
 
     /**
@@ -64,7 +77,7 @@ public class pnlTransferPatient extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 40)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Transfer *Patient Name*");
+
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "*Choose*", "Item 2", "Item 3", "Item 4" }));
 
@@ -113,7 +126,7 @@ public class pnlTransferPatient extends javax.swing.JPanel {
         jCheckBox1.setBackground(new java.awt.Color(52, 88, 130));
         jCheckBox1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jCheckBox1.setForeground(new java.awt.Color(255, 255, 255));
-        jCheckBox1.setText("Unnasign Yourself");
+
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
@@ -235,6 +248,14 @@ public class pnlTransferPatient extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
 
+    private void componentInitializer(){
+
+    }
+    private void listenerInitializer(){
+        jCheckBox1.setText("Unassign Yourself");
+        jLabel1.setText("Transfer *Patient Name*");
+
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

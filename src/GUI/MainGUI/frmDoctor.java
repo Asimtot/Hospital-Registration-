@@ -3050,10 +3050,21 @@ public class frmDoctor extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {
                 String name = jTextField14.getText();
                 try {
-                    HolderPanel.removeAll();
-                    HolderPanel.add(new pnlPatientData(doctor, database.getPatient(name), database, HolderPanel));
-                    HolderPanel.repaint();
-                    HolderPanel.revalidate();
+                    Patient patient = database.getPatient(name);
+                    if(patient == null){
+                        System.out.println("No patient found");
+                    }
+                    else if(patient.isPatientOf(doctor)){
+                        HolderPanel.removeAll();
+                        HolderPanel.add(new pnlPatientData(doctor, patient, database, HolderPanel));
+                        HolderPanel.repaint();
+                        HolderPanel.revalidate();
+                    }
+                    else{
+                        JFrame assignFrame = new frmAssignPatient(doctor, patient, database);
+                        assignFrame.setVisible(true);
+                        assignFrame.setLocationRelativeTo(null);
+                    }
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }

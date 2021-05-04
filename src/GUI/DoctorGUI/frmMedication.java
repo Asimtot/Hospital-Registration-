@@ -63,7 +63,8 @@ public class frmMedication extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel3.setText("Related Field:" + medication.getRelatedField().getDepartmentName());
+        if (medication.getRelatedField() != null)
+            jLabel3.setText("Related Field:" + medication.getRelatedField().getDepartmentName());
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);

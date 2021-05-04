@@ -117,6 +117,14 @@ public class Person {
         return telNo;
     }
 
+    public String getNationalId() {
+        return nationalId;
+    }
+
+    public String getNationality() {
+        return nationality;
+    }
+
     /**
      * This method sends a notification to a chosen person of any type
      * @param p person to send the notification, @param n the notification to send
@@ -143,6 +151,14 @@ public class Person {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public void setNationalId(String nationalId) {
+        this.nationalId = nationalId;
+    }
+
+    public void setNationality(String nationality) {
+        this.nationality = nationality;
     }
 
     public void setRandomPassword(){

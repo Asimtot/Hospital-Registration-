@@ -2946,7 +2946,7 @@ public class frmDoctor extends javax.swing.JFrame {
             @Override
             public String[][] createTable() {
                 List<Appointment> appointmentList = doctor.getDateAppointments(LocalDateTime.now());
-                String[][] appointmentTable = new String[appointmentList.size()][2];
+                String[][] appointmentTable = new String[appointmentList.size()][3];
                 setList(appointmentList);
                 for (int i = 0; i < appointmentTable.length; i++) {
                     appointmentTable[i][0] = appointmentList.get(i).getPatient().getName();

@@ -619,7 +619,7 @@ public class Database {
         Hospital hacettepe= new Hospital("Hacettepe",200,"0312 123 3232","hacettepe@hacettepe.com.tr");
         Address hacettepeAddress= new Address("Ankara", "Altındağ", "1234.sok");
 
-        Hospital 
+        //Hospital 
         
         
        

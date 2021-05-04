@@ -1,5 +1,13 @@
 {
     "java.project.sourcePaths": [
         "src"
-    ]
+    ],
+    "java.project.referencedLibraries": {
+        "include": [
+            "lib/**/*.jar"
+        ],
+        "exclude": [
+            "lib/jcommon-0.8.3.jar"
+        ]
+    }
 }

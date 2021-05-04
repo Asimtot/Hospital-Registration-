@@ -211,6 +211,13 @@ public class Hospital {
         else
             return 0;
     }
+    public Department getSpecificDepartment(String department) {
+        for ( int i = 0; i < getDepartments().size(); i++ ) {
+            if (getDepartments().get(i).getDepartmentName().equals(department))
+                return getDepartments().get(i);
+        }
+        return null;
+    }
 
     
     

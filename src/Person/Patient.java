@@ -60,8 +60,10 @@ public class Patient extends Person{
         activeDiseases = new ArrayList<Disease>();
     }
     // simple - just initializes
-    public Patient(String name, String email,String telNo){
-        super(name, email,telNo);
+
+
+    public Patient(String name, String email,String telNo,  String nationalId, String nationality){
+        super(name, email,telNo, nationalId, nationality);
 
         doctors = new ArrayList<Doctor>();
         appointments = new ArrayList<Appointment>();
@@ -71,8 +73,8 @@ public class Patient extends Person{
     }
 
     // complete constructor - if something does not exist, put null (?)
-    public Patient(String name, String email, boolean inIcu, Hospital icuHospital, String city, String country, String address, Disease[] diseases,String telNo){
-        super(name, email,telNo);
+    public Patient(String name, String email, boolean inIcu, Hospital icuHospital, String city, String country, String address, Disease[] diseases,String telNo, String nationalId, String nationality){
+        super(name, email,telNo,nationalId,nationality);
         
         this.inIcu = inIcu;
         if(inIcu && icuHospital != null){

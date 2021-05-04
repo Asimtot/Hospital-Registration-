@@ -206,19 +206,14 @@ public class Doctor extends Person {
     /**
      * This method refers a wanted patient from the doctor's patients list to another doctor
      * @param p any patient in the dostor's list
-     * @return true if the referring process was successful
      */
-    public boolean referPatient( Patient p, Doctor d, boolean unnasign )
+    public void referPatient( Patient p, Doctor d, boolean unassign )
     {
         boolean check = false;
-        
-        if ( unnasign ) 
-            d.getPatients().add( p );
-        
-        if ( d.getPatients().contains( p ) && !patients.contains( p ) )
-            check = true;
-            
-        return check;
+
+        d.assignPatient(p);
+        if(unassign)
+            this.unassignPatient(p);
     }
     
      /**
@@ -270,24 +265,4 @@ public class Doctor extends Person {
     {
         return schedule.getAvailableIntervals(d);
     }
-    
-//    /**
-//     * This method sends a document from the doctor to another doctor
-//     * @param d a choosen doctor to send the document,
-//     * @return true if the sending process was successful
-//     */
-//    public boolean sendDocuments( Doctor d,  )
-//    {
-//        //??
-//    }
-//
-//    /**
-//     * This method views an already sent document to the doctor
-//     * @param d any date
-//     * @return hour interval as String
-//     */
-//    public boolean viewDocument(  )
-//    {
-//        //??
-//    }
 }

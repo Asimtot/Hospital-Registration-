@@ -427,7 +427,11 @@ public class pnlPatientData extends javax.swing.JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 HolderPanel.removeAll();
-                HolderPanel.add(new pnlTransferPatient(doctor,patient,database));
+                try {
+                    HolderPanel.add(new pnlTransferPatient(doctor,patient,database));
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
                 HolderPanel.repaint();
                 HolderPanel.revalidate();
             }

@@ -3215,7 +3215,7 @@ public class frmDoctor extends javax.swing.JFrame {
                                     List<Doctor> departmentDoctorList = department1.getDepartmentDoctors();
                                     for (int j = 0; j < departmentDoctorList.size(); j++) {
                                         doctorTable[k][0] = departmentDoctorList.get(j).getName();
-                                        doctorTable[k][1] = department1.getDepartmentName();
+                                        doctorTable[k][1] = hospitalList.get(i).getHospitalName();
                                         k++;
                                         doctorList.add(departmentDoctorList.get(j));
                                     }

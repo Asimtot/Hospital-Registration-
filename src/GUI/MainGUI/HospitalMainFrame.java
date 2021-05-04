@@ -2271,7 +2271,7 @@ public class HospitalMainFrame extends javax.swing.JFrame {
                 Database database = new Database();
                 Hospital hospital = null;
                 try {
-                    hospital = database.getHospital("Hacettepe");
+                    hospital = database.getHospital("FirstHospital");
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }

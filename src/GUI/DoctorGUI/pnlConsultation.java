@@ -297,11 +297,16 @@ public class pnlConsultation extends javax.swing.JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Consultation consultation = new Consultation(doctor, LocalDateTime.now(), jTextField4.getText(), jTextField3.getText());
-                consultation.addDiseaseToDiagnosis(jComboBox1.getList().get(jComboBox1.getSelectedIndex()));
                 consultation.getPrescription().addMedication(jComboBox2.getList().get(jComboBox2.getSelectedIndex()));
                 String frequency = jTextField2.getText() + " per " + jTextField5.getText() + " " + jComboBox3.getSelectedItem();
                 consultation.getPrescription().setFrequency(frequency);
                 patient.addConsultation(consultation);
+
+                Disease disease = jComboBox1.getList().get(jComboBox1.getSelectedIndex());
+                consultation.addDiseaseToDiagnosis(disease);
+                patient.addActiveDisease(disease);
+
+                database.update(patient);
                 database.update(patient.getInfo());
                 // go back to the previous panel
                 ((pnlPatientData)priorPanel).updateTables();

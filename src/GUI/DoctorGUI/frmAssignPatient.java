@@ -5,8 +5,11 @@ package GUI.DoctorGUI;/*
  */
 
 import Database.Database;
+import GUI.MainGUI.frmDoctor;
 import Person.Doctor;
 import Person.Patient;
+
+import javax.swing.*;
 
 /**
  *
@@ -17,14 +20,16 @@ public class frmAssignPatient extends javax.swing.JFrame {
     Doctor doctor;
     Patient patient;
     Database database;
+    JFrame container;
 
     /**
      * Creates new form frmAssignPatient
      */
-    public frmAssignPatient(Doctor doctor, Patient patient, Database database) {
+    public frmAssignPatient(Doctor doctor, Patient patient, Database database, JFrame container) {
         this.doctor = doctor;
         this.patient = patient;
         this.database = database;
+        this.container = container;
         initComponents();
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
@@ -143,6 +148,7 @@ public class frmAssignPatient extends javax.swing.JFrame {
         // proceed
         doctor.assignPatient(patient);
         database.update(patient);
+        ((frmDoctor)container).updatePatientTable();
         dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 

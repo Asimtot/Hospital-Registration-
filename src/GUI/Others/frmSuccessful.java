@@ -4,6 +4,9 @@ package GUI.Others;/*
  * and open the template in the editor.
  */
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 /**
  *
  * @author enbadem
@@ -15,6 +18,7 @@ public class frmSuccessful extends javax.swing.JFrame {
      */
     public frmSuccessful() {
         initComponents();
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 
     /**
@@ -68,9 +72,19 @@ public class frmSuccessful extends javax.swing.JFrame {
                 .addComponent(jButton1)
                 .addContainerGap(49, Short.MAX_VALUE))
         );
+        jButton1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+            }
+        });
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    public void setMessage(String message){
+        jLabel1.setText(message);
+    }
 
     /**
      * @param args the command line arguments

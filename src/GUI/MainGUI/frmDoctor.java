@@ -3067,7 +3067,7 @@ public class frmDoctor extends javax.swing.JFrame {
                         HolderPanel.revalidate();
                     }
                     else{
-                        JFrame assignFrame = new frmAssignPatient(doctor, patient, database);
+                        JFrame assignFrame = new frmAssignPatient(doctor, patient, database, doctorFrame);
                         assignFrame.setVisible(true);
                         assignFrame.setLocationRelativeTo(null);
                     }
@@ -3374,6 +3374,9 @@ public class frmDoctor extends javax.swing.JFrame {
         jTable11.update();
         jTable12.update();
     }
+    public void updatePatientTable(){
+        jTable6.update();
+    }
 
 
     /**
@@ -3406,7 +3409,7 @@ public class frmDoctor extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             Database database = new Database();
-            Doctor doctor = database.getDoctor(140);
+            Doctor doctor = database.getDoctor(134);
             public void run() {
                 JFrame frame = null;
                 try {
@@ -3416,13 +3419,13 @@ public class frmDoctor extends javax.swing.JFrame {
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }
-
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     List<String> deletedTasks;
+    private final JFrame doctorFrame = this;
     private javax.swing.JPanel HolderPanel;
     private javax.swing.JButton btnAdvanced;
     private javax.swing.JButton btnSeeOrAdd;

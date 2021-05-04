@@ -26,6 +26,9 @@ public class Patient extends Person{
                 inverseJoinColumns= @JoinColumn(name = "Doctor_id"))
     private List<Doctor> doctors;
 
+    @Column(name= "sex")
+    private String sex;
+
     @OneToMany(mappedBy = "patient")
     private List<Appointment> appointments;
     
@@ -62,9 +65,9 @@ public class Patient extends Person{
     // simple - just initializes
 
 
-    public Patient(String name, String email,String telNo,  String nationalId, String nationality){
+    public Patient(String name, String email,String telNo,  String nationalId, String nationality,String sex){
         super(name, email,telNo, nationalId, nationality);
-
+        this.sex= sex;
         doctors = new ArrayList<Doctor>();
         appointments = new ArrayList<Appointment>();
         address = new Address();
@@ -73,13 +76,14 @@ public class Patient extends Person{
     }
 
     // complete constructor - if something does not exist, put null (?)
-    public Patient(String name, String email, boolean inIcu, Hospital icuHospital, String city, String country, String address, Disease[] diseases,String telNo, String nationalId, String nationality){
+    public Patient(String name, String email, boolean inIcu, Hospital icuHospital, String city, String country, String address, Disease[] diseases,String telNo, String nationalId, String nationality,String sex){
         super(name, email,telNo,nationalId,nationality);
         
         this.inIcu = inIcu;
         if(inIcu && icuHospital != null){
             this.icuHospital = icuHospital;
         }
+        this.sex= sex;
 
         // if any one address field is not null, then create an instance of Address
         if (city != null || country != null || address != null){

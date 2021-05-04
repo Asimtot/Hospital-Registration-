@@ -80,6 +80,7 @@ public class Schedule {
             System.out.println(date.getYear());
             DailySchedule newDay = new DailySchedule(date.getYear(),date.getMonthValue(), date.getDayOfMonth(),
                     startingHour, startingMinute, endingHour, endingMinute);
+            System.out.println("SSSSSSSSSSSS");
             days.add(newDay);
             newDay.setSchedule(this);
             return newDay.addAppointment(app);

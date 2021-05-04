@@ -16,6 +16,7 @@ import Person.*;
 import Database.Database;
 import Statistics.StatisticsTab;
 
+import java.awt.*;
 import java.awt.event.*;
 import java.sql.SQLException;
 import java.time.format.DateTimeFormatter;
@@ -2289,6 +2290,7 @@ public class frmHospital extends javax.swing.JFrame {
                 frame.setVisible(true);
                 frame.setLocationRelativeTo(null); // centers the window
                 //System.out.println(hospital.getAllPatients().get(0).getLastConsultation().getDate());
+
             }
         });
     }

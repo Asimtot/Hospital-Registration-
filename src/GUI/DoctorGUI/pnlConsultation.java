@@ -235,18 +235,13 @@ public class pnlConsultation extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void componentInitializer(){
-        jComboBox1 = new UpdatedComboBox<Disease>() {
+        jComboBox1 = new UpdatedComboBox<>() {
             @Override
             public String[] createOptions() {
-                List<Disease> diseaseList = null;
                 try {
-                    diseaseList = database.getAllDisease();
-                    setList(diseaseList);
-                    String[] diseaseNames = new String[diseaseList.size()];
-                    for (int i = 0; i < diseaseNames.length; i++) {
-                        diseaseNames[i] = diseaseList.get(i).getName();
-                    }
-                    return diseaseNames;
+                    List<String> diseaseNames = database.getAllDiseaseName();
+                    setList(diseaseNames);
+                    return diseaseNames.toArray(new String[0]);
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }
@@ -254,18 +249,13 @@ public class pnlConsultation extends javax.swing.JPanel {
             }
         };
 
-        jComboBox2 = new UpdatedComboBox<Medication>() {
+        jComboBox2 = new UpdatedComboBox<>() {
             @Override
             public String[] createOptions() {
-                List<Medication> medicationList = null;
                 try {
-                    medicationList = database.getAllMedication();
-                    setList(medicationList);
-                    String[] medicationNames = new String[medicationList.size()];
-                    for (int i = 0; i < medicationNames.length; i++) {
-                        medicationNames[i] = medicationList.get(i).getName();
-                    }
-                    return medicationNames;
+                    List<String> medicationNames = database.getAllMedicationName();
+                    setList(medicationNames);
+                    return medicationNames.toArray(new String[0]);
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }
@@ -297,12 +287,21 @@ public class pnlConsultation extends javax.swing.JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Consultation consultation = new Consultation(doctor, LocalDateTime.now(), jTextField4.getText(), jTextField3.getText());
-                consultation.getPrescription().addMedication(jComboBox2.getList().get(jComboBox2.getSelectedIndex()));
+                try {
+                    consultation.getPrescription().addMedication(database.getMedication(jComboBox2.getList().get(jComboBox2.getSelectedIndex())));
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
                 String frequency = jTextField2.getText() + " per " + jTextField5.getText() + " " + jComboBox3.getSelectedItem();
                 consultation.getPrescription().setFrequency(frequency);
                 patient.addConsultation(consultation);
 
-                Disease disease = jComboBox1.getList().get(jComboBox1.getSelectedIndex());
+                Disease disease = null;
+                try {
+                    disease = database.getDisease(jComboBox1.getList().get(jComboBox1.getSelectedIndex()));
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
                 consultation.addDiseaseToDiagnosis(disease);
                 patient.addActiveDisease(disease);
 
@@ -321,8 +320,8 @@ public class pnlConsultation extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private UpdatedComboBox<Disease> jComboBox1;
-    private UpdatedComboBox<Medication> jComboBox2;
+    private UpdatedComboBox<String> jComboBox1;
+    private UpdatedComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

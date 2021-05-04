@@ -851,7 +851,7 @@ public class frmPatient extends javax.swing.JFrame {
             public String[][] createTable() {
                 if (frmPatient.this.patient.getInfo() != null && frmPatient.this.patient.getInfo().getConsultations() != null) {
                     List<Consultation> consultationsList = frmPatient.this.patient.getInfo().getConsultations();
-                    String[][] consultationTable = new String[consultationsList.size()][2];
+                    String[][] consultationTable = new String[consultationsList.size()][4];
                     this.setList(consultationsList);
 
                     for (int i = 0; i < consultationTable.length; ++i) {

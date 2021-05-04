@@ -3409,7 +3409,7 @@ public class frmDoctor extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             Database database = new Database();
-            Doctor doctor = database.getDoctor(134);
+            Doctor doctor = database.getDoctor(140);
             public void run() {
                 JFrame frame = null;
                 try {

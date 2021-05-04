@@ -1033,11 +1033,8 @@ public class frmPatient extends javax.swing.JFrame {
             public void run() {
                 JFrame frame = null;
 
-                try {
-                    this.patient = this.database.getPatient("Kağan Ünal");
-                } catch (SQLException throwables) {
-                    throwables.printStackTrace();
-                }
+                    this.patient = this.database.getPatient(170);
+
                 try {
                     frame = new frmPatient(this.patient, this.database);
                 } catch (SQLException throwables) {

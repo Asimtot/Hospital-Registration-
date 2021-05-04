@@ -89,13 +89,14 @@ public class DailySchedule {
 
         boolean clashes = false;
         // check if the appointment is during the working hours
-        if (app.getStartingTime().isAfter(startingTime) && app.getEndingTime().isBefore(endingTime)){
+        if ((app.getStartingTime().isEqual(startingTime) || app.getStartingTime().isAfter(startingTime) )&& app.getEndingTime().isBefore(endingTime)){
             // check if the given appointment clashes with any of the previous appointments
             System.out.println("1.TAMAM");
             for (Appointment a : appointments) {
                 if (app.getStartingTime().isAfter(a.getStartingTime()) && app.getStartingTime().isBefore(a.getEndingTime())
                         || (app.getEndingTime().isAfter(a.getStartingTime()) && app.getEndingTime().isBefore(a.getStartingTime()))){
-                    clashes = true;System.out.println("CLASHES");
+                    clashes = true;
+                    System.out.println("CLASHES");
                     break;
                 }
             }

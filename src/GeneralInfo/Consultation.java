@@ -29,7 +29,7 @@ public class Consultation implements Comparable{
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "Prescription_id",
             referencedColumnName = "id")
-    private Prescription prescription;
+    private Prescription prescription = new Prescription();
 
     @ManyToOne
     @JoinColumn(name = "BodyPart_id")
@@ -49,7 +49,7 @@ public class Consultation implements Comparable{
     @Column(name = "notes")
     private String notes;
     @Column(name = "type")
-    private String type;
+    private String treatment; // we didnt need type but treatment (column name may change as well
 
 
 
@@ -64,13 +64,12 @@ public class Consultation implements Comparable{
     public Consultation(){
     }
 
-    public Consultation(Doctor d, LocalDateTime date, String notes, String type){
+    public Consultation(Doctor d, LocalDateTime date, String notes, String treatment){
         this.date= date;
         dateStr= Converter.toString(date);
-
         doctor= d;
         this.notes= notes;
-        this.type= type;
+        this.treatment = treatment;
 
     }
 
@@ -121,8 +120,8 @@ public class Consultation implements Comparable{
         this.notes = notes;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setTreatment(String treatment) {
+        this.treatment = treatment;
     }
 
     //GETTERS
@@ -153,6 +152,10 @@ public class Consultation implements Comparable{
 
     public GeneralInfo getGeneralInfo() {
         return generalInfo;
+    }
+
+    public String getTreatment() {
+        return treatment;
     }
     //****
 

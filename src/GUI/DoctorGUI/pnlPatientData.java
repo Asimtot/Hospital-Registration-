@@ -9,6 +9,7 @@ import GUI.Helpers.UpdatedTable;
 import GeneralInfo.Consultation;
 import GeneralInfo.Disease;
 import GeneralInfo.Prescription;
+import Person.Doctor;
 import Person.Patient;
 
 import javax.swing.*;
@@ -16,8 +17,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -25,6 +28,7 @@ import java.util.List;
  * @author enbadem
  */
 public class pnlPatientData extends javax.swing.JPanel {
+    Doctor doctor;
     Patient patient;
     Database database;
     JPanel HolderPanel;
@@ -33,7 +37,8 @@ public class pnlPatientData extends javax.swing.JPanel {
     /**
      * Creates new form pnlPatientData
      */
-    public pnlPatientData(Patient patient, Database database, JPanel HolderPanel) {
+    public pnlPatientData(Doctor doctor, Patient patient, Database database, JPanel HolderPanel) {
+        this.doctor = doctor;
         this.patient = patient;
         this.database = database;
         this.HolderPanel = HolderPanel;
@@ -314,10 +319,12 @@ public class pnlPatientData extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void componentInitializer(){
+        panel = this;
         jTable1 = new UpdatedTable<Consultation>(new String [] {"Disease", "Date"}, false,2) {
             @Override
             public String[][] createTable() {
                 List<Consultation> consultationList = patient.getInfo().getConsultations();
+                Collections.sort(consultationList, Collections.reverseOrder());
                 setList(consultationList);
                 String[][] consultationTable = new String[consultationList.size()][2];
                 for (int i = 0; i < consultationTable.length; i++) {
@@ -362,9 +369,8 @@ public class pnlPatientData extends javax.swing.JPanel {
     }
 
     private void listenerInitializer(){
-        jTable1.update();
-        jTable2.update();
-        jTable3.update();
+        updateTables();
+
         jLabel1.setText(patient.getName());
         jLabel10.setText("E-mail: " + patient.getEmail());
         jLabel11.setText("Phone Number: " + patient.getTelNo());
@@ -400,15 +406,22 @@ public class pnlPatientData extends javax.swing.JPanel {
             }
         });
 
+
         jButton6.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                HolderPanel.removeAll();
-                HolderPanel.add(new pnlConsultation(patient, database));
-                HolderPanel.repaint();
-                HolderPanel.revalidate();
+                try {
+                    HolderPanel.removeAll();
+                    HolderPanel.add(new pnlConsultation(doctor, patient, database, HolderPanel, panel));
+                    HolderPanel.repaint();
+                    HolderPanel.revalidate();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+
             }
         });
+
 
         jButton7.addActionListener(new ActionListener() {
             @Override
@@ -421,8 +434,15 @@ public class pnlPatientData extends javax.swing.JPanel {
         });
     }
 
+    public void updateTables(){
+        jTable1.update();
+        jTable2.update();
+        jTable3.update();
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private JPanel panel;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;

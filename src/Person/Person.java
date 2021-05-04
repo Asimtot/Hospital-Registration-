@@ -59,6 +59,12 @@ public class Person {
 
     public Person(){}
 
+    public Person(String name, String email, String telNo) {
+        this.name = name;
+        this.email = email;
+        this.telNo= telNo;
+    }
+
     public Person ( String name, String email,String telNo, String nationalId, String nationality)
     {
         this.name = name;
@@ -82,7 +88,9 @@ public class Person {
         
         notifications = new ArrayList<Notification>();
     }
-    
+
+
+
     // Methods
     
     public String getName()

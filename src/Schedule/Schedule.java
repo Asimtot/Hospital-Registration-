@@ -141,6 +141,7 @@ public class Schedule {
             day = new DailySchedule(date.getYear(),date.getMonthValue(), date.getDayOfMonth(),
                     startingHour, startingMinute, endingHour, endingMinute);
             days.add(day);
+            day.setSchedule(this);
         }
         return day.getAvailableIntervals();
     }

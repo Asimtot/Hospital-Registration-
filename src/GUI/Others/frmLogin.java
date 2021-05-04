@@ -7,10 +7,9 @@ package GUI.Others;
  */
 
 import Database.Database;
-import GUI.MainGUI.HospitalMainFrame;
 import GUI.MainGUI.frmDoctor;
-import GUI.PatientGUI.frmPatient;
-import Person.Person;
+import GUI.MainGUI.frmHospital;
+import GUI.MainGUI.frmPatient;
 import Person.*;
 import javax.swing.*;
 import java.sql.SQLException;
@@ -233,39 +232,43 @@ public class frmLogin extends javax.swing.JFrame {
             new JOptionPane().showMessageDialog(null,"Invalid Entry Attempt");
         }
 
+        if(btnPatient.isSelected()){
+            Patient patient = database.getPatientByMail(txtUsername.getText());
 
-
-        String password = database.getPassword(txtUsername.getText());
-
-        if(password == txtPassword.getText()){
-            Person person = database.getPersonByMail(txtUsername.getText());
-
-            if(person instanceof Admin){
-                Admin admin = (Admin) person;
-
-                HospitalMainFrame a = new HospitalMainFrame(admin, admin.getHospital(), database);
-                a.setVisible(true);
+            if(patient != null && patient.getPassword().equals(txtPassword.getText())){
+               frmPatient a = new frmPatient(patient, database);
+               a.setVisible(true);
             }
+        }
 
-            else if( person instanceof Doctor ){
-                Doctor doctor = (Doctor) person;
+        else if(btnDoctor.isSelected()){
+            Doctor doctor = database.getDoctorByMail(txtUsername.getText());
 
+            System.out.println(doctor.getPassword());
+
+            System.out.println(txtPassword.getText());
+
+            if(doctor != null && doctor.getPassword().equals(new String(txtPassword.getPassword()))){
                 frmDoctor a = new frmDoctor(doctor, database);
                 a.setVisible(true);
             }
 
-            else if( person instanceof Patient){
-                Patient patient = (Patient) person;
+            else{
+                System.out.println("hata");
+            }
+        }
 
-                frmPatient a = new frmPatient();
-                a.setVisible(true);
+        else if(btnAdmin.isSelected()){
+            Admin admin = database.getAdminByMail(txtUsername.getText());
+
+            if(admin!=null && admin.getPassword().equals(txtPassword.getText())){
+                frmHospital a = new frmHospital(admin,admin.getHospital(), database);
             }
         }
 
 
-
-
     }
+
 
     private void closeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
 

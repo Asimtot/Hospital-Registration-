@@ -41,7 +41,7 @@ public class frmInvalid extends JFrame {
 
         jButton1.setText("Ok");
 
-        jLabel2.setIcon(new ImageIcon(this.getClass().getResource("GUI/images/Invalid.png"))); // NOI18N
+        jLabel2.setIcon(new ImageIcon(this.getClass().getResource("/GUI/images/Invalid.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

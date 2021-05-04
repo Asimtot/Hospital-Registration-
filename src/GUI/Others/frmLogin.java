@@ -1,5 +1,7 @@
 import Database.*;
 import Person.*;
+
+import javax.swing.*;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -84,7 +86,7 @@ public class frmLogin extends javax.swing.JFrame {
 
         labelLogin.setFont(new java.awt.Font("Segoe UI Symbol", 1, 36)); // NOI18N
         labelLogin.setForeground(new java.awt.Color(255, 255, 255));
-        labelLogin.setIcon(new javax.swing.ImageIcon("C:\\Users\\enbadem\\Desktop\\ProjeDeneme\\src\\main\\java\\images\\AppLogoSmall.png")); // NOI18N
+        labelLogin.setIcon(new ImageIcon(this.getClass().getResource("/GUI/images/AppLogoSmall.png"))); // NOI18N
         labelLogin.setText("   Name ");
 
         labelVersion.setForeground(new java.awt.Color(255, 255, 255));

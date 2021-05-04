@@ -3039,7 +3039,7 @@ public class frmDoctor extends javax.swing.JFrame {
             public void mouseClicked(MouseEvent e) {
                 int row = jTable6.getRow();
                 HolderPanel.removeAll();
-                HolderPanel.add(new pnlPatientData(jTable6.getList().get(row), database, HolderPanel));
+                HolderPanel.add(new pnlPatientData(doctor, jTable6.getList().get(row), database, HolderPanel));
                 HolderPanel.repaint();
                 HolderPanel.revalidate();
             }
@@ -3051,7 +3051,7 @@ public class frmDoctor extends javax.swing.JFrame {
                 String name = jTextField14.getText();
                 try {
                     HolderPanel.removeAll();
-                    HolderPanel.add(new pnlPatientData(database.getPatient(name), database, HolderPanel));
+                    HolderPanel.add(new pnlPatientData(doctor, database.getPatient(name), database, HolderPanel));
                     HolderPanel.repaint();
                     HolderPanel.revalidate();
                 } catch (SQLException throwables) {

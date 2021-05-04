@@ -5,7 +5,20 @@ package GUI.DoctorGUI;/*
  */
 
 import Database.Database;
+import GUI.Helpers.UpdatedComboBox;
+import GeneralInfo.Consultation;
+import GeneralInfo.Disease;
+import GeneralInfo.Medication;
+import Person.Doctor;
 import Person.Patient;
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 /**
  *
@@ -13,15 +26,24 @@ import Person.Patient;
  */
 public class pnlConsultation extends javax.swing.JPanel {
 
+    Doctor doctor;
     Patient patient;
     Database database;
+    JPanel HolderPanel;
+    JPanel priorPanel;
+    DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
     /**
      * Creates new form pnlConsultation
      */
-    public pnlConsultation(Patient patient, Database database) {
+    public pnlConsultation(Doctor doctor, Patient patient, Database database, JPanel HolderPanel, JPanel priorPanel) throws SQLException {
+        this.doctor = doctor;
         this.patient = patient;
         this.database = database;
-        initComponents();
+        this.HolderPanel = HolderPanel;
+        this.priorPanel = priorPanel;
+        componentInitializer();
+        initComponents(); // automatic design code
+        listenerInitializer();
     }
 
     /**
@@ -34,14 +56,14 @@ public class pnlConsultation extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+
         jTextField4 = new javax.swing.JTextField();
         jComboBox3 = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+
         jButton2 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -54,11 +76,7 @@ public class pnlConsultation extends javax.swing.JPanel {
 
         jPanel1.setBackground(new java.awt.Color(52, 88, 130));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "*Drug*", "Item 2", "Item 3", "Item 4" }));
-
         jTextField4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "*Day(s)*", "Item 2", "Item 3", "Item 4" }));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -75,9 +93,7 @@ public class pnlConsultation extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Consultation");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "*Disease*", "Item 2", "Item 3", "Item 4" }));
-
-        jButton2.setText("➞");
+        jButton2.setText("Add");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -99,12 +115,12 @@ public class pnlConsultation extends javax.swing.JPanel {
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Patient Name");
+
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel2.setText("Date");
+
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
@@ -218,12 +234,90 @@ public class pnlConsultation extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void componentInitializer(){
+        jComboBox1 = new UpdatedComboBox<Disease>() {
+            @Override
+            public String[] createOptions() {
+                List<Disease> diseaseList = null;
+                try {
+                    diseaseList = database.getAllDisease();
+                    setList(diseaseList);
+                    String[] diseaseNames = new String[diseaseList.size()];
+                    for (int i = 0; i < diseaseNames.length; i++) {
+                        diseaseNames[i] = diseaseList.get(i).getName();
+                    }
+                    return diseaseNames;
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+                return new String[0];
+            }
+        };
+
+        jComboBox2 = new UpdatedComboBox<Medication>() {
+            @Override
+            public String[] createOptions() {
+                List<Medication> medicationList = null;
+                try {
+                    medicationList = database.getAllMedication();
+                    setList(medicationList);
+                    String[] medicationNames = new String[medicationList.size()];
+                    for (int i = 0; i < medicationNames.length; i++) {
+                        medicationNames[i] = medicationList.get(i).getName();
+                    }
+                    return medicationNames;
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+                return new String[0];
+            }
+        };
+
+    }
+    private void listenerInitializer() throws SQLException {
+        jComboBox1.update();
+        jComboBox2.update();
+
+        jLabel2.setText(LocalDateTime.now().format(dateFormatter));
+        jLabel7.setText(patient.getName());
+
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hours","Days","Weeks"}));
+
+        jButton1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                HolderPanel.removeAll();
+                HolderPanel.add(priorPanel);
+                HolderPanel.repaint();
+                HolderPanel.revalidate();
+            }
+        });
+
+        jButton2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Consultation consultation = new Consultation(doctor, LocalDateTime.now(), jTextField4.getText(), jTextField3.getText());
+                consultation.addDiseaseToDiagnosis(jComboBox1.getList().get(jComboBox1.getSelectedIndex()));
+                consultation.getPrescription().addMedication(jComboBox2.getList().get(jComboBox2.getSelectedIndex()));
+                String frequency = jTextField2.getText() + " per " + jTextField5.getText() + " " + jComboBox3.getSelectedItem();
+                consultation.getPrescription().setFrequency(frequency);
+                patient.addConsultation(consultation);
+                database.update(patient.getInfo());
+                // go back to the previous panel
+                ((pnlPatientData)priorPanel).updateTables();
+                HolderPanel.removeAll();
+                HolderPanel.add(priorPanel);
+                HolderPanel.repaint();
+                HolderPanel.revalidate();
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private UpdatedComboBox<Disease> jComboBox1;
+    private UpdatedComboBox<Medication> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

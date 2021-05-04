@@ -21,6 +21,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -213,6 +214,7 @@ public class PanelNewPatientProfile extends javax.swing.JPanel {
             @Override
             public String[][] createTable() {
                 List<Consultation> consultationList = patient.getInfo().getConsultations();
+                Collections.sort(consultationList, Collections.reverseOrder());
                 setList(consultationList);
                 String[][] consultationTable = new String[consultationList.size()][2];
                 for (int i = 0; i < consultationTable.length; i++) {

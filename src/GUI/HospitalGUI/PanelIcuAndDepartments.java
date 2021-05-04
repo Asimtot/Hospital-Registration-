@@ -98,8 +98,7 @@ public class PanelIcuAndDepartments extends javax.swing.JPanel {
         jLabel1.setText("Icu Capcity");
 
         jTextField3.setText("100");
-
-        jLabel2.setText("jLabel2");
+        
 
         jTextField4.setText("68");
         jTextField4.addActionListener(new java.awt.event.ActionListener() {

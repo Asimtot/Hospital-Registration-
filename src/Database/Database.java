@@ -572,6 +572,21 @@ public class Database {
 
         return arr;
     }
+    public ArrayList<String> getAllDiseaseName() throws SQLException{
+        Statement statement= connection.createStatement();
+
+        String sql= "SELECT name FROM Disease;";
+
+        ResultSet rs= statement.executeQuery(sql);
+        ArrayList<String> arr= new ArrayList<>();
+
+        while(rs.next()){
+            arr.add(rs.getString("name"));
+        }
+        statement.close();
+
+        return arr;
+    }
     /**
     * kullanan hasta sayısı için medication.getPrescriptions.size()
     * 
@@ -588,6 +603,22 @@ public class Database {
 
         while(rs.next()){
             arr.add(getMedication(rs.getInt("id")));
+        }
+        statement.close();
+
+        return arr;
+    }
+
+    public ArrayList<String> getAllMedicationName() throws SQLException{
+        Statement statement= connection.createStatement();
+
+        String sql= "SELECT name FROM Medication;";
+
+        ResultSet rs= statement.executeQuery(sql);
+        ArrayList<String> arr= new ArrayList<>();
+
+        while(rs.next()){
+            arr.add(rs.getString("name"));
         }
         statement.close();
 

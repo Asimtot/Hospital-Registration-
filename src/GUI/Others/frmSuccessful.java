@@ -38,7 +38,7 @@ public class frmSuccessful extends javax.swing.JFrame {
 
         jButton1.setText("Ok");
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Successful.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/images/Successful.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

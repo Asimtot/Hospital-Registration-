@@ -12,6 +12,10 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import Person.*;
+/**
+ * Appointment class that enables patients get appointment from wished doctor or hospital
+ * @author Kardelen Ceren
+ */
 
 @Entity
 @Table(name = "Appointment")
@@ -57,7 +61,7 @@ public class Appointment implements Comparable{
 
     
 
-    //DATABASE için gerekli
+    //necessary for DATABASE
     @ManyToOne
     @JoinColumn(name = "DailySchedule_id")
     DailySchedule dailySchedule;
@@ -203,6 +207,12 @@ public class Appointment implements Comparable{
         startingTime = LocalDateTime.of(year,month,dayOfMonth,hourOfDay,minute);
     }
 
+    /**
+     * this method set ending time with LocalDateTime option
+     * @param endingTime
+     * @return true if it is ended
+     *         false otherwise
+     */
     public boolean setEndingTime(LocalDateTime endingTime) {
         if(endingTime.isAfter(startingTime)) {
             this.endingTime = endingTime;
@@ -212,6 +222,16 @@ public class Appointment implements Comparable{
             return false;
     }
 
+    /**
+     *
+     * @param year as int
+     * @param month as int
+     * @param dayOfMonth as int
+     * @param hourOfDay as int
+     * @param minute as int
+     * @return true if it is ended
+     *         false otherwise
+     */
     public boolean setEndingTime(int year, int month, int dayOfMonth, int hourOfDay, int minute) {
         if(endingTime.isAfter(startingTime)) {
             endingTime = LocalDateTime.of(year,month,dayOfMonth,hourOfDay,minute);

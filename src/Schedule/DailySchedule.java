@@ -19,9 +19,11 @@ import javax.persistence.Transient;
 
 
 /**
+ * Daily Schedule Class
  * Simulates one day of the schedule
  * IMPORTANT: if the simple constructor is used, then the setting order must be:
  *            setDate - setStartingTime - setEndingTime
+ * @author Kardelen Ceren
  */
 @Entity
 @Table(name = "DailySchedule")
@@ -47,7 +49,7 @@ public class DailySchedule {
     @Transient
     LocalDateTime endingTime;
 
-    //DATABASE için gerekli
+    //necessary for DATABASE
 
     @ManyToOne
     @JoinColumn(name = "Schedule_id")
@@ -77,10 +79,14 @@ public class DailySchedule {
         dateStr= Converter.toString(date);
     }
 
+    /**
+     * adding appointment to DailySchedule
+     * @param app Appointment object
+     * @return true if it is added successfully
+     *         false otherwise
+     */
     public boolean addAppointment(Appointment app){
-        System.out.println("AAAAAAAAAAAÂBBBBBBBBBB");
-        
-        
+
         boolean clashes = false;
         // check if the appointment is during the working hours
         if (app.getStartingTime().isAfter(startingTime) && app.getEndingTime().isBefore(endingTime)){
@@ -104,6 +110,13 @@ public class DailySchedule {
             return false;
     }
 
+    /**
+     * cancel the appointment from appointmnents list
+     * @param app
+     * @param app Appointment object
+     * @return true if it is cancelled successfully
+     *         false otherwise
+     */
     public boolean cancelAppointment(Appointment app){
         int index = appointments.indexOf(app);
         if (index < 0)
@@ -114,6 +127,10 @@ public class DailySchedule {
         }
     }
 
+    /**
+     * it gives the free LocalDateTime objects
+     * @return available time as List object
+     */
     public ArrayList<LocalDateTime> getAvailableIntervals(){
         ArrayList<LocalDateTime> intervals = new ArrayList<>();
         if (appointments.size() > 0) {

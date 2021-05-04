@@ -883,7 +883,7 @@ public class frmPatient extends javax.swing.JFrame {
         jLabel10.setIcon(new ImageIcon(this.getClass().getResource("/GUI/images/ProfilePic.png")));
         this.updateTables();
         this.jLabel12.setText("" + LocalDateTime.now().format(this.dateFormatter));
-        this.jLabel13.setText("Hello " + this.patient.getName() + " what would you like to");
+        this.jLabel13.setText("Hello " + this.patient.getName() + ", what would you like to");
         Address address = this.patient.getAddress();
         this.jLabel14.setText(this.patient.getName());
         this.jTextField2.setText(this.patient.getTelNo());

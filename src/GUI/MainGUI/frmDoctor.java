@@ -692,7 +692,7 @@ public class frmDoctor extends javax.swing.JFrame {
         jLabel29.setForeground(new java.awt.Color(255, 255, 255));
         jLabel29.setText("Patient Name, Age, Sex, Dead (If so)");
 
-        jLabel30.setIcon(new javax.swing.ImageIcon("C:\\Users\\enbadem\\Desktop\\ProjeDeneme\\src\\main\\java\\images\\Body.png")); // NOI18N
+        jLabel30.setIcon(new javax.swing.ImageIcon("/GUI/images/Body.png")); // NOI18N
 
         jLabel31.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel31.setForeground(new java.awt.Color(255, 255, 255));
@@ -1123,6 +1123,7 @@ public class frmDoctor extends javax.swing.JFrame {
         jLabel28.setText("Contact Info:");
 
         jLabel32.setText("jLabel10");
+        jLabel32.setIcon(new ImageIcon(this.getClass().getResource("/GUI/images/ProfilePic.png")));
 
         jTable4.setRowHeight(25);
         jScrollPane9.setViewportView(jTable4);
@@ -3032,7 +3033,7 @@ public class frmDoctor extends javax.swing.JFrame {
         jLabel13.setIcon(new ImageIcon(this.getClass().getResource("/GUI/images/AppLogoSmall.png")));
         jLabel14.setText("HEALTH CHECK");
         jLabel15.setText("Today's Appointments " + LocalDateTime.now().format(dateFormatter));
-        jLabel16.setText("Hello " + doctor.getName() + " what would you like to");
+        jLabel16.setText("Hello " + doctor.getName() + ", what would you like to");
 
         // search patient
         jTable6.addMouseListener(new MouseAdapter() {

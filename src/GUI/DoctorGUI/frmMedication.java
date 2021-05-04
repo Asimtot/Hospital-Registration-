@@ -68,6 +68,7 @@ public class frmMedication extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+
         jLabel5.setText("Side Effects/Clashes:  FIX");
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));

@@ -131,6 +131,31 @@ public class Database {
         statement.close();
         return null;
     }
+
+    public Doctor getDoctorByMail(String mail) throws SQLException{
+
+        Person doc= getPersonByMail(mail);
+
+        if(doc instanceof Doctor){
+            return (Doctor) doc;
+        }
+        return null;
+
+
+    }
+    public Patient getPatientByMail(String mail) throws SQLException{
+
+        Person pat= getPersonByMail(mail);
+
+        if(pat instanceof Patient){
+            return (Patient) pat;
+        }
+        return null;
+
+    }
+
+
+
     
     public ArrayList<String> getAvailableCity(String objectName) throws SQLException{
         Statement statement= connection.createStatement();
@@ -591,35 +616,14 @@ public class Database {
         Database database= new Database();
 
 
+        Hospital bayındır= new Hospital("Bayındır", 100, "0532 4545 6785", "bayındır@bayındır.com.tr");
 
+        Hospital hacettepe= new Hospital("Hacettepe", 150, "0532 7548 7795", "hacettepe@hacettepe.com.tr");
+
+        //Hospital hacettepe= new Hospital("Hacettepe", 150, "0532 7548 7795", "hacettepe@hacettepe.com.tr");
         
         
-        //Doctor d= database.getDoctor(40);
-
-        //Hospital h= database.getHospital(18);
-        //Department department= database.getDepartment("KBB", h);
-
-        
-
-        //Patient patient= database.getPatient("Kemal Ak");
-
-       // LocalDateTime date= LocalDateTime.of(2030, 02, 22, 12, 30, 00);
-
-        //Appointment appointment= getAppointment
-
-        //d.addAppointment(appointment);
-        
-        //database.update(d.getSchedule());
-
-        Doctor doctor= database.getDoctor(40);
-        Patient p= database.getPatient("Kemal Ak");
-
-        Consultation c= new Consultation(doctor, LocalDateTime.now(), "Very Bad", "Cancer");
-
-        p.addConsultation(c);
-
-        database.update(p.getInfo());
-
+       
         
         
         

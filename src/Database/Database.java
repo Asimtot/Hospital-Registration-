@@ -612,18 +612,17 @@ public class Database {
     public static void main(String[] args) throws SQLException {
         Database database= new Database();
 
+        //ANKARA
+        Hospital bayındır= new Hospital("Bayındır", 100, "0312345565656", "bayındır@bayındır.com.tr");
+        Address bayındırAdress= new Address("Ankara", "Sögütözü", "3056 sok");
 
-        //Hospital bayındır= new Hospital("Bayındır", 100, "0532 4545 6785", "bayındır@bayındır.com.tr");
+        Hospital hacettepe= new Hospital("Hacettepe",200,"0312 123 3232","hacettepe@hacettepe.com.tr");
+        Address hacettepeAddress= new Address("Ankara", "Altındağ", "1234.sok");
 
-        //Hospital hacettepe= new Hospital("Hacettepe", 150, "0532 7548 7795", "hacettepe@hacettepe.com.tr");
-
-        //Hospital hacettepe= new Hospital("Hacettepe", 150, "0532 7548 7795", "hacettepe@hacettepe.com.tr");
+        Hospital 
         
         
-       Doctor d= database.getDoctor(43);
-       Patient p= database.getPatient(41);
-
-       database.deletePatientFromDoctor(d, p);
+       
         
         
         

@@ -26,6 +26,7 @@ public class frmAssignPatient extends javax.swing.JFrame {
         this.patient = patient;
         this.database = database;
         initComponents();
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 
     /**

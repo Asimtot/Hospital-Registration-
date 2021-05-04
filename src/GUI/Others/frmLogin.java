@@ -23,9 +23,8 @@ public class frmLogin extends javax.swing.JFrame {
     private Database database;
 
     public frmLogin() {
+        database = new Database();
         initComponents();
-
-        database = new Database(); // Getting the database for usage
 
     }
 
@@ -98,7 +97,7 @@ public class frmLogin extends javax.swing.JFrame {
         labelLogin.setFont(new java.awt.Font("Noto Sans", 1, 40)); // NOI18N
         labelLogin.setForeground(new java.awt.Color(255, 255, 255));
         labelLogin.setText("  HEALTH CHECK ");
-        labelLogin.setIcon(new javax.swing.ImageIcon("/GUI/images/AppLogoSmall.png"));
+        labelLogin.setIcon(new javax.swing.ImageIcon(this.getClass().getResource("/GUI/images/AppLogoSmall.png")));
 
         labelVersion.setForeground(new java.awt.Color(255, 255, 255));
         labelVersion.setText("version 1.0");
@@ -238,24 +237,21 @@ public class frmLogin extends javax.swing.JFrame {
             if(patient != null && patient.getPassword().equals(txtPassword.getText())){
                frmPatient a = new frmPatient(patient, database);
                a.setVisible(true);
+               a.setLocationRelativeTo(null);
+               dispose();
             }
         }
 
         else if(btnDoctor.isSelected()){
             Doctor doctor = database.getDoctorByMail(txtUsername.getText());
 
-            System.out.println(doctor.getPassword());
-
-            System.out.println(txtPassword.getText());
-
             if(doctor != null && doctor.getPassword().equals(new String(txtPassword.getPassword()))){
                 frmDoctor a = new frmDoctor(doctor, database);
                 a.setVisible(true);
+                a.setLocationRelativeTo(null);
+                dispose();
             }
 
-            else{
-                System.out.println("hata");
-            }
         }
 
         else if(btnAdmin.isSelected()){
@@ -263,6 +259,9 @@ public class frmLogin extends javax.swing.JFrame {
 
             if(admin!=null && admin.getPassword().equals(txtPassword.getText())){
                 frmHospital a = new frmHospital(admin,admin.getHospital(), database);
+                a.setVisible(true);
+                a.setLocationRelativeTo(null);
+                dispose();
             }
         }
 

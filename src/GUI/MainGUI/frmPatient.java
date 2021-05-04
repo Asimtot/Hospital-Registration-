@@ -242,6 +242,7 @@ public class frmPatient extends javax.swing.JFrame {
         });
 
         jLabel10.setText("jLabel10");
+        jLabel10.setIcon(new ImageIcon(this.getClass().getResource("/GUI/images/ProfilePic.png")));
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);

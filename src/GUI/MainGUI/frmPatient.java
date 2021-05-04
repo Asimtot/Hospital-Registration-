@@ -304,7 +304,7 @@ public class frmPatient extends javax.swing.JFrame {
                     .addGroup(pnlPatientMainLayout.createSequentialGroup()
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18))
@@ -656,9 +656,9 @@ public class frmPatient extends javax.swing.JFrame {
         pnlAppointmentsListLayout.setHorizontalGroup(
             pnlAppointmentsListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlAppointmentsListLayout.createSequentialGroup()
-                .addGap(76, 76, 76)
+                .addGap(46, 46, 46)
                 .addGroup(pnlAppointmentsListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1033, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(204, Short.MAX_VALUE))
         );
@@ -1034,8 +1034,11 @@ public class frmPatient extends javax.swing.JFrame {
             public void run() {
                 JFrame frame = null;
 
-                    this.patient = this.database.getPatient(170);
-
+                try {
+                    this.patient = this.database.getPatient("Esra Erol");
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
                 try {
                     frame = new frmPatient(this.patient, this.database);
                 } catch (SQLException throwables) {

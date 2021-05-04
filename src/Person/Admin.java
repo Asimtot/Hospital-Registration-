@@ -14,6 +14,11 @@ public class Admin extends Person{
     @JoinColumn(name = "Hospital_id")
     Hospital hospital;
 
+    public Admin(String name, String email, String password, Hospital hospital){
+        super(name,email,password);
+        this.hospital= hospital;
+    }
+
     public Admin(){}
 
     public Admin(Hospital hospital){

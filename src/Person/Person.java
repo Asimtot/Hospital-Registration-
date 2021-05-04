@@ -61,13 +61,17 @@ public class Person {
 
     public Person(){}
 
-    public Person(String name, String email, String telNo) {
+    
+
+    //for admin
+    public Person(String name, String email, String password) {
         this.name = name;
         this.email = email;
-        this.telNo= telNo;
+        this.password = password;
     }
 
 
+    //for patient&Doctopr
     public Person ( String name, String email,String telNo, String nationalId, String nationality)
     {
         this.name = name;
@@ -79,7 +83,7 @@ public class Person {
         notifications = new ArrayList<Notification>();
     }
 
-
+    //for patient&Doctopr
     public Person ( String name, String email, String password ,String telNo,String nationalId, String nationality)
     {
         this.name = name;

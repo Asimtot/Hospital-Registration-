@@ -297,7 +297,7 @@ public class pnlNewPatient extends javax.swing.JPanel {
                     frmSuccessful frame = new frmSuccessful();
                     frame.setVisible(true);
                     frame.setLocationRelativeTo(null);
-                    frame.setMessage(patient.getName() + "successfully added.");
+                    frame.setMessage("<html> " + patient.getName() + "successfully added. </br> Patient's password: " + patient.getPassword() + "</html>");
                     database.add(patient);
                 }
             }

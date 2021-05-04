@@ -594,17 +594,20 @@ public class Database {
         return arr;
     }
 
+    public void deletePatientFromDoctor(Doctor d, Patient p) throws SQLException{
+        Statement statement= connection.createStatement();
+        int d_id= d.getId();
+        int p_id= p.getID();
+        String sql= "DELETE FROM DoctorPatientJoin WHERE Doctor_id="+d_id+" AND Patient_id="+p_id+";";
+
+        System.out.println(sql);
+
+        statement.executeUpdate(sql);
+        statement.close();
+
+    }
+
     
-
-
-
-    
-
-    
-
-
-
-
 
     public static void main(String[] args) throws SQLException {
         Database database= new Database();
@@ -617,9 +620,10 @@ public class Database {
         //Hospital hacettepe= new Hospital("Hacettepe", 150, "0532 7548 7795", "hacettepe@hacettepe.com.tr");
         
         
-       Doctor d= database.getDoctorByMail("mailmail");
+       Doctor d= database.getDoctor(43);
+       Patient p= database.getPatient(41);
 
-       System.out.println(d.getEmail());
+       database.deletePatientFromDoctor(d, p);
         
         
         

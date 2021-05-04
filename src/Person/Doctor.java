@@ -83,6 +83,7 @@ public class Doctor extends Person {
     {
         return hospital;
     }
+    
    
     public Department getDepartment()
     {
@@ -103,6 +104,7 @@ public class Doctor extends Person {
     {
         return  patients;
     }
+    
     
     public void setHospital( Hospital hospital )
     {

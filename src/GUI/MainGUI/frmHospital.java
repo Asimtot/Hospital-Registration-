@@ -14,6 +14,7 @@ import GUI.Others.FrmNewPasworrd;
 import GeneralInfo.Consultation;
 import Person.*;
 import Database.Database;
+import Statistics.StatisticsTab;
 
 import java.awt.event.*;
 import java.sql.SQLException;
@@ -1759,11 +1760,10 @@ public class frmHospital extends javax.swing.JFrame {
     }//GEN-LAST:event_ntnPatientsActionPerformed
 
     private void btnStatisticActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStatisticActionPerformed
-        updateTables();
-        PnlHolder.removeAll();
-        PnlHolder.add(pnlStatistics);
-        PnlHolder.repaint();
-        PnlHolder.revalidate();
+        JFrame frame = new StatisticsTab();
+        frame.setVisible(true);
+        frame.setLocationRelativeTo(null);
+        frame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_btnStatisticActionPerformed
 
     private void jTextField13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField13ActionPerformed

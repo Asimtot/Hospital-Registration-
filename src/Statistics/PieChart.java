@@ -35,8 +35,8 @@ import org.jfree.chart.plot.PiePlot;
 import org.jfree.chart.title.TextTitle;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
-import org.jfree.ui.HorizontalAlignment;
-import org.jfree.ui.RectangleInsets;
+//import org.jfree.ui.HorizontalAlignment;
+//import org.jfree.ui.RectangleInsets;
 
 public class PieChart extends GeneralChartClass {
 
@@ -84,8 +84,8 @@ public class PieChart extends GeneralChartClass {
 
 
         TextTitle t = chart.getTitle();
-        t.setHorizontalAlignment(HorizontalAlignment.LEFT);
-        t.setPaint(new Color(240, 240, 240));
+//        t.setHorizontalAlignment(HorizontalAlignment.LEFT);
+//        t.setPaint(new Color(240, 240, 240));
         t.setFont(new Font("Arial", Font.BOLD, 26));
 
         // Pie Plot
@@ -123,7 +123,7 @@ public class PieChart extends GeneralChartClass {
 
     public JPanel createDemoPanel() throws SQLException {
         JFreeChart chart = createChart(createDataset());
-        chart.setPadding(new RectangleInsets(4, 8, 2, 2));
+//        chart.setPadding(new RectangleInsets(4, 8, 2, 2));
         ChartPanel panel = new ChartPanel(chart, false);
         panel.setMouseWheelEnabled(true);
         panel.setPreferredSize(new Dimension(600, 300));

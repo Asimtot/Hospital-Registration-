@@ -140,7 +140,11 @@ public class StatisticsTab extends javax.swing.JFrame {
     }// </editor-fold>
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
-        new StatisticsCreate(this);
+        JFrame frame = new StatisticsCreate(this);
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+        frame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+
 
     }
 

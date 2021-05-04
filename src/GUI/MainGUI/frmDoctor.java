@@ -12,6 +12,7 @@ import GeneralInfo.Disease;
 import GeneralInfo.Medication;
 import Person.*;
 import Schedule.Appointment;
+import Statistics.StatisticsTab;
 
 import javax.swing.*;
 import java.awt.event.*;
@@ -2859,10 +2860,10 @@ public class frmDoctor extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSeeScheduleActionPerformed
 
     private void btnViewCreateStatisticsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewCreateStatisticsActionPerformed
-        HolderPanel.removeAll();
-        HolderPanel.add(pnlStatisticsCreate);
-        HolderPanel.repaint();
-        HolderPanel.revalidate();
+        JFrame frame = new StatisticsTab();
+        frame.setVisible(true);
+        frame.setLocationRelativeTo(null);
+        frame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_btnViewCreateStatisticsActionPerformed
 
     private void jTextField17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField17ActionPerformed

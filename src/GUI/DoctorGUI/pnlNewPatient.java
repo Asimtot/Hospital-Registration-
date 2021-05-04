@@ -289,6 +289,7 @@ public class pnlNewPatient extends javax.swing.JPanel {
                     patient.setInIcu(inICU, doctor.getHospital());
                     Address address1 = new Address("","",address);
                     patient.setAddress(address1);
+                    doctor.assignPatient(patient);
                     frmSuccessful frame = new frmSuccessful();
                     frame.setMessage("<html>Patient successfully added. </br> Patient password: " + patient.getPassword() + "</html>");
                     frame.setVisible(true);

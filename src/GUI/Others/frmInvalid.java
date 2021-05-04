@@ -5,18 +5,18 @@ package GUI.Others;/*
  */
 
 import javax.swing.*;
+import java.awt.*;
 
 /**
  *
  * @author enbadem
  */
-public class frmInvalid extends javax.swing.JFrame {
+public class frmInvalid extends JFrame {
 
     /**
      * Creates new form frmInvalid
      */
     public frmInvalid() {
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         initComponents();
     }
 
@@ -29,19 +29,19 @@ public class frmInvalid extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
+        jLabel1 = new JLabel();
+        jButton1 = new JButton();
+        jLabel2 = new JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setFont(new Font("Tahoma", 0, 14)); // NOI18N
+        jLabel1.setHorizontalAlignment(SwingConstants.CENTER);
         jLabel1.setText("Invalid Request");
 
         jButton1.setText("Ok");
 
-        jLabel2.setIcon(new ImageIcon(this.getClass().getResource("/GUI/images/Invalid.png"))); // NOI18N
+        jLabel2.setIcon(new ImageIcon(this.getClass().getResource("GUI/images/Invalid.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -66,7 +66,7 @@ public class frmInvalid extends javax.swing.JFrame {
                 .addGap(36, 36, 36)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(23, 23, 23)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
                 .addContainerGap(49, Short.MAX_VALUE))
@@ -108,10 +108,6 @@ public class frmInvalid extends javax.swing.JFrame {
                 new frmInvalid().setVisible(true);
             }
         });
-    }
-
-    public void setMessage(String message){
-        jLabel1.setText(message);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

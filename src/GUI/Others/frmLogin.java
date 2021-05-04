@@ -1,12 +1,19 @@
-import Database.*;
-import Person.*;
+package GUI.Others;
 
-import javax.swing.*;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
+import Database.Database;
+import GUI.MainGUI.HospitalMainFrame;
+import GUI.MainGUI.frmDoctor;
+import GUI.PatientGUI.frmPatient;
+import Person.Person;
+import Person.*;
+import javax.swing.*;
+import java.sql.SQLException;
 
 /**
  *
@@ -14,15 +21,13 @@ import javax.swing.*;
  */
 public class frmLogin extends javax.swing.JFrame {
 
-    Admin admin;
-    Hospital hospital;
-    Database database;
+    private Database database;
 
-    /**
-     * Creates new form frmLogin
-     */
     public frmLogin() {
         initComponents();
+
+        database = new Database(); // Getting the database for usage
+
     }
 
     /**
@@ -43,10 +48,17 @@ public class frmLogin extends javax.swing.JFrame {
         labelLogin = new javax.swing.JLabel();
         labelVersion = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        login = new javax.swing.JButton();
+        close = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+
+        ButtonGroup userGroup = new ButtonGroup();
+        userGroup.add(btnAdmin);
+        userGroup.add(btnDoctor);
+        userGroup.add(btnPatient);
+
+        btnAdmin.setSelected(true);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Login Page");
@@ -84,25 +96,29 @@ public class frmLogin extends javax.swing.JFrame {
             }
         });
 
-        labelLogin.setFont(new java.awt.Font("Segoe UI Symbol", 1, 36)); // NOI18N
+        labelLogin.setFont(new java.awt.Font("Segoe UI Symbol", 1, 40)); // NOI18N
         labelLogin.setForeground(new java.awt.Color(255, 255, 255));
-        labelLogin.setIcon(new ImageIcon(this.getClass().getResource("/GUI/images/AppLogoSmall.png"))); // NOI18N
-        labelLogin.setText("   Name ");
+        labelLogin.setIcon(new javax.swing.ImageIcon("C:\\Users\\enbadem\\Desktop\\ProjeDeneme\\src\\main\\java\\images\\AppLogoSmall.png")); // NOI18N
+        labelLogin.setText("    H2H Registration System ");
 
         labelVersion.setForeground(new java.awt.Color(255, 255, 255));
         labelVersion.setText("version 1.0");
 
-        jButton1.setText("Login");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        login.setText("Login");
+        login.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                try {
+                    loginActionPerformed(evt);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
             }
         });
 
-        jButton3.setText("Close");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        close.setText("Close");
+        close.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                closeActionPerformed(evt);
             }
         });
 
@@ -128,7 +144,7 @@ public class frmLogin extends javax.swing.JFrame {
                             .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addGap(318, 318, 318)
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(close, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(94, 94, 94)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -140,7 +156,7 @@ public class frmLogin extends javax.swing.JFrame {
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(login, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(89, 89, 89)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -179,8 +195,8 @@ public class frmLogin extends javax.swing.JFrame {
                             .addComponent(jLabel2))
                         .addGap(51, 51, 51)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
-                            .addComponent(jButton3))
+                            .addComponent(login)
+                            .addComponent(close))
                         .addGap(62, 62, 62)))
                 .addComponent(labelVersion)
                 .addContainerGap())
@@ -200,65 +216,75 @@ public class frmLogin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    String userName;
-    char[] password;
-
     private void txtUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsernameActionPerformed
-        // TODO add your handling code here:
-        userName = txtUsername.getText();
-    }//GEN-LAST:event_txtUsernameActionPerformed
 
-    private void TxtPasswordActionPerformed(java.awt.event.ActionEvent evt){
-        // TODO add your handling code here:
-        password = txtPassword.getPassword();
     }
 
     private void btnAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminActionPerformed
-        // TODO add your handling code here:
 
-        btnDoctor.setSelected(false);
-        btnPatient.setSelected(false);
-
-
-
-    }//GEN-LAST:event_btnAdminActionPerformed
-
-    private void btnDoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminActionPerformed
-        // TODO add your handling code here:
-
-            btnAdmin.setSelected(false);
-            btnPatient.setSelected(false);
-
-
-    }//GEN-LAST:event_btnDoctorActionPerformed
+    }
 
     private void btnPatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPatientActionPerformed
-        // TODO add your handling code here:
 
-            btnDoctor.setSelected(false);
-            btnAdmin.setSelected(false);
+    }
+
+    private void loginActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {//GEN-FIRST:event_jButton1ActionPerformed
+        if(txtUsername.getText().length() == 0 || txtPassword.getText().length() == 0){
+            new JOptionPane().showMessageDialog(null,"Invalid Entry Attempt");
+        }
 
 
-    }//GEN-LAST:event_btnPatientActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String password = database.getPassword(txtUsername.getText());
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+        if(password == txtPassword.getText()){
+            Person person = database.getPersonByMail(txtUsername.getText());
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-        dispose();
-    }//GEN-LAST:event_jButton3ActionPerformed
+            if(person instanceof Admin){
+                Admin admin = (Admin) person;
+
+                HospitalMainFrame a = new HospitalMainFrame(admin, admin.getHospital(), database);
+                a.setVisible(true);
+            }
+
+            else if( person instanceof Doctor ){
+                Doctor doctor = (Doctor) person;
+
+                frmDoctor a = new frmDoctor(doctor, database);
+                a.setVisible(true);
+            }
+
+            else if( person instanceof Patient){
+                Patient patient = (Patient) person;
+
+                frmPatient a = new frmPatient();
+                a.setVisible(true);
+            }
+        }
+
+
+
+
+    }
+
+    private void closeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+
+        JOptionPane optionPane = new JOptionPane();
+
+        int dialogButton = optionPane.showConfirmDialog(null, "Do You Want To Exit?", "", JOptionPane.YES_NO_OPTION);
+
+        if(dialogButton == JOptionPane.NO_OPTION){
+            return;
+        }
+
+        System.exit(3); // Exiting the app
+    }
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -282,16 +308,15 @@ public class frmLogin extends javax.swing.JFrame {
             public void run() {
                 new frmLogin().setVisible(true);
             }
-        }
-        );
+        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton btnAdmin;
     private javax.swing.JRadioButton btnDoctor;
     private javax.swing.JRadioButton btnPatient;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton login;
+    private javax.swing.JButton close;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

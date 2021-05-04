@@ -1292,13 +1292,6 @@ public class frmHospital extends javax.swing.JFrame {
             }
         });
 
-        jButton50.setText("Send Message");
-        jButton50.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton43ActionPerformed(evt);
-            }
-        });
-
         jLabel40.setText("Surname");
 
         jLabel41.setText("Mail");
@@ -1862,7 +1855,6 @@ public class frmHospital extends javax.swing.JFrame {
         btnHospitalDepartments = new javax.swing.JButton();
         btnHomeButton = new javax.swing.JButton();
 
-        jButton50 = new javax.swing.JButton();
         PnlHolder = new javax.swing.JPanel();
         PnlActiontable = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -2452,7 +2444,6 @@ public class frmHospital extends javax.swing.JFrame {
     private javax.swing.JLabel lblTitle;
     private javax.swing.JButton ntnPatients;
     private javax.swing.JPanel pnlAction;
-    private javax.swing.JButton jButton50;
     private javax.swing.JPanel pnlAction3;
     private javax.swing.JPanel pnlAction4;
     private javax.swing.JPanel pnlAddDoctor;

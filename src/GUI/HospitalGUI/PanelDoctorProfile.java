@@ -56,7 +56,6 @@ public class PanelDoctorProfile extends javax.swing.JPanel {
         jLayeredPane12 = new javax.swing.JLayeredPane();
         jTextField22 = new javax.swing.JTextField();
         jButton37 = new javax.swing.JButton();
-        jButton50 = new javax.swing.JButton();
         jTextField24 = new javax.swing.JTextField();
         jLayeredPane15 = new javax.swing.JLayeredPane();
         jTextField25 = new javax.swing.JTextField();
@@ -439,7 +438,6 @@ public class PanelDoctorProfile extends javax.swing.JPanel {
                                     .addComponent(jLabel34, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(pnlDoctorProfileeLayout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(jButton50, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(pnlDoctorProfileeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -476,7 +474,6 @@ public class PanelDoctorProfile extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel37)
                 .addGap(18, 18, 18)
-                .addComponent(jButton50)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(pnlDoctorProfileeLayout.createSequentialGroup()
                 .addGap(43, 43, 43)
@@ -538,7 +535,6 @@ public class PanelDoctorProfile extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
-    private javax.swing.JButton jButton50;
     private javax.swing.JLayeredPane jLayeredPane11;
     private javax.swing.JLayeredPane jLayeredPane12;
     private javax.swing.JLayeredPane jLayeredPane15;

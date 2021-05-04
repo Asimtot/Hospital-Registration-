@@ -2269,7 +2269,7 @@ public class frmHospital extends javax.swing.JFrame {
                 Database database = new Database();
                 Hospital hospital = null;
                 try {
-                    hospital = database.getHospital("FirstHospital");
+                    hospital = database.getHospital("hacettepe");
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }

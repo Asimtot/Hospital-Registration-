@@ -196,10 +196,10 @@ public class AppointmentApproval extends javax.swing.JFrame {
                 String startingTime = (String) jComboBox1.getSelectedItem();
                 int startingHour = Integer.parseInt(startingTime.substring(0,2));
                 int startingMinute = Integer.parseInt(startingTime.substring(3,5));
-                LocalDateTime appDate = LocalDateTime.of(date.getYear(), date.getMonth(), date.getDayOfYear(), startingHour,startingMinute);
+                LocalDateTime appDate = LocalDateTime.of(date.getYear(), date.getMonth(), date.getDayOfMonth(), startingHour,startingMinute);
                 Appointment appointment = new Appointment(name,doctor,patient,doctor.getHospital(),doctor.getDepartment(),30,appDate);
-                doctor.addAppointment(appointment);
                 database.add(appointment);
+                doctor.addAppointment(appointment);
                 database.update(doctor.getSchedule());
                 dispose();
             }

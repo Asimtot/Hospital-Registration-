@@ -79,6 +79,9 @@ public class DailySchedule {
 
     public boolean addAppointment(Appointment app){
         System.out.println("AAAAAAAAAAAÂBBBBBBBBBB");
+        appointments.add(app);
+        app.setDailySchedule(this);
+        
         boolean clashes = false;
         // check if the appointment is during the working hours
         if (app.getStartingTime().isAfter(startingTime) && app.getEndingTime().isBefore(endingTime)){
@@ -91,7 +94,7 @@ public class DailySchedule {
                     break;
                 }
             }
-            if (!clashes){
+            if (true){
                 System.out.println("AAAAAAAAAAAAAAAAAAAAA");
                 appointments.add(app);
                 app.setDailySchedule(this);

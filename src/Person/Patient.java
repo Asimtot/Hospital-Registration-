@@ -46,9 +46,6 @@ public class Patient extends Person{
     @OneToOne(mappedBy = "owner")
     private Body body;
 
-    @Column(name= "sex")
-    private String sex;
-
 
     @ManyToOne
     @JoinColumn(name = "Hospital_id")
@@ -65,21 +62,20 @@ public class Patient extends Person{
     // simple - just initializes
 
 
-    public Patient(String name, String email,String telNo,  String nationalId, String nationality,String sex){
+    public Patient(String name, String email,String telNo,  String nationalId, String nationality){
         super(name, email,telNo, nationalId, nationality);
 
         doctors = new ArrayList<Doctor>();
         appointments = new ArrayList<Appointment>();
         address = new Address();
         inIcu = false;
-        this.sex= sex;
         activeDiseases = new ArrayList<Disease>();
     }
 
     // complete constructor - if something does not exist, put null (?)
-    public Patient(String name, String email, boolean inIcu, Hospital icuHospital, String city, String country, String address, Disease[] diseases,String telNo, String nationalId, String nationality, String sex){
+    public Patient(String name, String email, boolean inIcu, Hospital icuHospital, String city, String country, String address, Disease[] diseases,String telNo, String nationalId, String nationality){
         super(name, email,telNo,nationalId,nationality);
-        this.sex= sex;
+        
         this.inIcu = inIcu;
         if(inIcu && icuHospital != null){
             this.icuHospital = icuHospital;

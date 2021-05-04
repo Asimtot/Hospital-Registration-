@@ -74,8 +74,11 @@ public class pnlPatientData extends javax.swing.JPanel {
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
+
         jScrollPane4 = new javax.swing.JScrollPane();
 
+        jCheckBox1 = new javax.swing.JCheckBox();
+        jButton1 = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(52, 88, 130));
 
@@ -111,16 +114,15 @@ public class pnlPatientData extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-
-        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\enbadem\\Desktop\\ProjeDeneme\\src\\main\\java\\images\\Body.png")); // NOI18N
+        jLabel1.setText("Patient Name, Sex");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Diseases:");
+        jLabel3.setText("Current diseases:");
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Current Medication:");
+        jLabel4.setText("Medication:");
 
         jButton6.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jButton6.setText("+");
@@ -136,7 +138,12 @@ public class pnlPatientData extends javax.swing.JPanel {
         jButton7.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jButton7.setText(">");
 
-        jButton5.setText("Add");
+        jButton5.setText("Apply Changes");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
@@ -148,14 +155,15 @@ public class pnlPatientData extends javax.swing.JPanel {
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-
+        jLabel10.setText("E-mail");
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
-
+        jLabel11.setText("Phone Number");
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel12.setText("Address");
 
         jTable2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
@@ -203,6 +211,16 @@ public class pnlPatientData extends javax.swing.JPanel {
         jTable3.setRowHeight(25);
         jScrollPane4.setViewportView(jTable3);
 
+        jCheckBox1.setBackground(new java.awt.Color(0, 102, 153));
+        jCheckBox1.setText("inICU");
+
+        jButton1.setText("Remove");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -212,7 +230,9 @@ public class pnlPatientData extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 685, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
+                        .addGap(133, 133, 133)
+                        .addComponent(jCheckBox1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(241, 241, 241))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -250,20 +270,29 @@ public class pnlPatientData extends javax.swing.JPanel {
                                         .addGap(100, 100, 100))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jButton1)
+                                .addGap(395, 395, 395)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(90, 90, 90))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(145, 145, 145))))))
+                                .addComponent(jButton5)
+                                .addGap(123, 123, 123))))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(64, 64, 64)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(64, 64, 64)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jCheckBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -282,7 +311,9 @@ public class pnlPatientData extends javax.swing.JPanel {
                                 .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(38, 38, 38)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1)
+                        .addGap(7, 7, 7)
                         .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -318,6 +349,14 @@ public class pnlPatientData extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     private void componentInitializer(){
         panel = this;
         jTable1 = new UpdatedTable<Consultation>(new String [] {"Disease", "Date"}, false,2) {
@@ -339,7 +378,7 @@ public class pnlPatientData extends javax.swing.JPanel {
         jTable2 = new UpdatedTable<Disease>(new String [] { "Diseases" }, false, 1) {
             @Override
             public String[][] createTable() {
-                List<Disease> diseaseList = patient.getActiveDiseases(); //FIXME how do we know it's active?
+                List<Disease> diseaseList = patient.getActiveDiseases();
                 setList(diseaseList);
                 String[][] diseaseTable = new String[diseaseList.size()][1];
                 for (int i = 0; i < diseaseTable.length; i++) {
@@ -436,6 +475,37 @@ public class pnlPatientData extends javax.swing.JPanel {
                 HolderPanel.revalidate();
             }
         });
+        jButton1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int row = jTable2.getRow();
+                patient.removeActiveDisease(jTable2.getList().get(row));
+                jTable2.update();
+            }
+        });
+
+        jCheckBox1.setSelected(patient.getInIcu());
+        jCheckBox1.setText("in ICU");
+        if (jCheckBox1.isSelected())
+            jCheckBox1.setText("in ICU in" + patient.getIcuHospital().getHospitalName() + "Hospital");
+        jCheckBox1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                patient.setInIcu(jCheckBox1.isSelected(), doctor.getHospital());
+                if (jCheckBox1.isSelected())
+                    jCheckBox1.setText("in ICU in" + patient.getIcuHospital().getHospitalName() + " Hospital");
+                else
+                    jCheckBox1.setText("in ICU");
+            }
+        });
+
+        jButton5.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                updateTables();
+                database.update(patient);
+            }
+        });
     }
 
     public void updateTables(){
@@ -447,9 +517,11 @@ public class pnlPatientData extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private JPanel panel;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
+    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

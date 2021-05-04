@@ -155,7 +155,13 @@ public class Patient extends Person{
     public int getID() {
         return super.id;
     }
+    public boolean getInIcu() {
+        return inIcu;
+    }
 
+    public Hospital getIcuHospital() {
+        return icuHospital;
+    }
     // *** setters ***
 
     public void setAddress(Address address) {
@@ -199,6 +205,7 @@ public class Patient extends Person{
         else
             icuHospital = null;
     }
+
 
   
     public String showSendable() { //FIXME this is temporary

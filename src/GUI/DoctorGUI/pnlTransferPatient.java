@@ -94,7 +94,7 @@ public class pnlTransferPatient extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Transfer *Patient Name*");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "*Choose*", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "*Choose*"}));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -147,13 +147,13 @@ public class pnlTransferPatient extends javax.swing.JPanel {
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("County");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "*Choose*", "Item 2", "Item 3", "Item 4" }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "*Choose*"}));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Department:");
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "*Choose*", "Item 2", "Item 3", "Item 4" }));
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "*Choose*"}));
 
         jButton2.setText("⌕");
 

@@ -1104,10 +1104,10 @@ public class frmHospital extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(pnlDoctorProfileeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlDoctorProfileeLayout.createSequentialGroup()
-                                .addComponent(jLabel30, javax.swing.GroupLayout.DEFAULT_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel30, javax.swing.GroupLayout.DEFAULT_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(63, 63, 63))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlDoctorProfileeLayout.createSequentialGroup()
-                                .addComponent(jLabel31, javax.swing.GroupLayout.DEFAULT_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel31, javax.swing.GroupLayout.DEFAULT_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(77, 77, 77))
                             .addComponent(jLabel29, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(16, 16, 16))
@@ -1289,6 +1289,13 @@ public class frmHospital extends javax.swing.JFrame {
         jTextField33.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField33ActionPerformed(evt);
+            }
+        });
+
+        jButton50.setText("Send Message");
+        jButton50.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton43ActionPerformed(evt);
             }
         });
 
@@ -1854,6 +1861,8 @@ public class frmHospital extends javax.swing.JFrame {
         btnHospitalDoctors = new javax.swing.JButton();
         btnHospitalDepartments = new javax.swing.JButton();
         btnHomeButton = new javax.swing.JButton();
+
+        jButton50 = new javax.swing.JButton();
         PnlHolder = new javax.swing.JPanel();
         PnlActiontable = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -2443,6 +2452,7 @@ public class frmHospital extends javax.swing.JFrame {
     private javax.swing.JLabel lblTitle;
     private javax.swing.JButton ntnPatients;
     private javax.swing.JPanel pnlAction;
+    private javax.swing.JButton jButton50;
     private javax.swing.JPanel pnlAction3;
     private javax.swing.JPanel pnlAction4;
     private javax.swing.JPanel pnlAddDoctor;

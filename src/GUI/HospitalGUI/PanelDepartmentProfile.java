@@ -71,6 +71,7 @@ public class PanelDepartmentProfile extends javax.swing.JPanel {
             }
         });
 
+        jButton4.setVisible(false);
         jButton4.setText("Remove Doctor");
 
         javax.swing.GroupLayout pnlDepartmentPageLayout = new javax.swing.GroupLayout(pnlDepartmentPage);
@@ -78,7 +79,7 @@ public class PanelDepartmentProfile extends javax.swing.JPanel {
         pnlDepartmentPageLayout.setHorizontalGroup(
             pnlDepartmentPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlDepartmentPageLayout.createSequentialGroup()
-                .addGap(30, 30, 30)
+                .addGap(230, 230, 230)
                 .addGroup(pnlDepartmentPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlDepartmentPageLayout.createSequentialGroup()
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -92,7 +93,7 @@ public class PanelDepartmentProfile extends javax.swing.JPanel {
         pnlDepartmentPageLayout.setVerticalGroup(
             pnlDepartmentPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlDepartmentPageLayout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addGap(64, 64, 64)
                 .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlDepartmentPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

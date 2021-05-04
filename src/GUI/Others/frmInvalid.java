@@ -6,6 +6,8 @@ package GUI.Others;/*
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  *
@@ -18,6 +20,7 @@ public class frmInvalid extends JFrame {
      */
     public frmInvalid() {
         initComponents();
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 
     /**
@@ -41,7 +44,7 @@ public class frmInvalid extends JFrame {
 
         jButton1.setText("Ok");
 
-        jLabel2.setIcon(new ImageIcon(this.getClass().getResource("GUI/images/Invalid.png"))); // NOI18N
+        jLabel2.setIcon(new ImageIcon(this.getClass().getResource("/GUI/images/Invalid.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -73,8 +76,17 @@ public class frmInvalid extends JFrame {
         );
 
         pack();
+        jButton1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+            }
+        });
     }// </editor-fold>//GEN-END:initComponents
 
+    public void setMessage(String message){
+        jLabel1.setText(message);
+    }
     /**
      * @param args the command line arguments
      */

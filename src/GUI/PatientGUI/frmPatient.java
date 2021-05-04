@@ -5,6 +5,7 @@ package GUI.PatientGUI;/*
  */
 
 import Database.Database;
+import GUI.DoctorGUI.frmAssignPatient;
 import GUI.MainGUI.frmDoctor;
 import GeneralInfo.Address;
 import GeneralInfo.Consultation;
@@ -17,6 +18,8 @@ import GUI.DoctorGUI.pnlPatientData;
 import GUI.Helpers.UpdatedTable;
 import Person.Doctor;
 import Schedule.Appointment;
+import GUI.PatientGUI.AppointmentApproval;
+
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -91,6 +94,7 @@ public class frmPatient extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBox16;
     private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -169,6 +173,7 @@ public class frmPatient extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
         btnSeeOrAdd1 = new javax.swing.JButton();
         pnlGetAppointment = new javax.swing.JPanel();
         jComboBox3 = new javax.swing.JComboBox<>();
@@ -236,7 +241,6 @@ public class frmPatient extends javax.swing.JFrame {
 
         btnSeeOrAdd.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnSeeOrAdd.setText("History");
-        btnSeeOrAdd.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnSeeOrAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSeeOrAddActionPerformed(evt);
@@ -282,6 +286,8 @@ public class frmPatient extends javax.swing.JFrame {
             }
         });
 
+        jLabel10.setText("jLabel10");
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -299,11 +305,17 @@ public class frmPatient extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(22, 22, 22))
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                    .addGap(60, 60, 60)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap(180, Short.MAX_VALUE)
+                .addGap(33, 33, 33)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel14)
                 .addGap(44, 44, 44)
                 .addComponent(jLabel11)
@@ -320,7 +332,6 @@ public class frmPatient extends javax.swing.JFrame {
 
         btnSeeOrAdd1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnSeeOrAdd1.setText("Get An Appointment");
-        btnSeeOrAdd1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnSeeOrAdd1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSeeOrAdd1ActionPerformed(evt);
@@ -620,9 +631,9 @@ public class frmPatient extends javax.swing.JFrame {
 
         pnlAppointmentsList.setBackground(new java.awt.Color(52, 88, 130));
 
-        jLabel29.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel29.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel29.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel29.setText("AVAILABLE APPOINTMENTS");
+        jLabel29.setText("Available Appointments");
 
         jTable3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
@@ -956,6 +967,7 @@ public class frmPatient extends javax.swing.JFrame {
 
         jComboBox16.setModel(new javax.swing.DefaultComboBoxModel<>(database.getAllDepartments().toArray(new String[0])));
 
+        Doctor currentDoctor;
         jButton5.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -999,6 +1011,23 @@ public class frmPatient extends javax.swing.JFrame {
                     appointmentTable[i][3] = doctorsList.get(i) + "";
                 }
                 jTable3.update(appointmentTable);
+            }
+        });
+
+        // Appointments List
+        jTable3.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int row = jTable3.getRow();
+                Doctor doctor = (Doctor) jTable1.getCellRenderer(row, 3);
+                JFrame approvalFrame = null;
+                try {
+                    approvalFrame = new AppointmentApproval(doctor, patient, database);
+                } catch (SQLException | ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException throwables) {
+                    throwables.printStackTrace();
+                }
+                approvalFrame.setVisible(true);
+                approvalFrame.setLocationRelativeTo(null);
             }
         });
     }

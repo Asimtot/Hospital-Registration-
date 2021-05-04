@@ -3,6 +3,7 @@ package GeneralInfo;
 import javax.persistence.*;
 
 import Person.Doctor;
+import Person.Hospital;
 import Schedule.Appointment;
 import Schedule.Converter;
 
@@ -62,6 +63,13 @@ public class Consultation implements Comparable{
 
     // CONSTRUCTORS
     public Consultation(){
+    }
+
+    public Consultation(Doctor d, LocalDateTime date){
+        this.date= date;
+        dateStr= Converter.toString(date);
+        doctor = d;
+
     }
 
     public Consultation(Doctor d, LocalDateTime date, String notes, String treatment){

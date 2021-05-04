@@ -215,9 +215,9 @@ public class frmPatient extends javax.swing.JFrame {
         jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\enbadem\\Desktop\\ProjeDeneme\\src\\main\\java\\images\\AppLogoSmall.png")); // NOI18N
         jLabel4.setText("jLabel4");
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Noto Sans", 1, 36)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Health Check");
+        jLabel5.setText("HEALTH CHECK");
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
@@ -337,7 +337,7 @@ public class frmPatient extends javax.swing.JFrame {
                     .addGroup(pnlPatientMainLayout.createSequentialGroup()
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18))
@@ -441,7 +441,7 @@ public class frmPatient extends javax.swing.JFrame {
         jComboBox14.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Choose", "2021", "2022", "2023", "2024", "2025" }));
 
         jComboBox15.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jComboBox15.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Choose", "2021", "2022", "2023", "2024", "2025" }));
+        jComboBox15.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {}));
 
         jComboBox16.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jComboBox16.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Choose", "2021", "2022", "2023", "2024", "2025" }));
@@ -850,7 +850,7 @@ public class frmPatient extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSeeOrAddActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        database.update(patient);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -933,6 +933,12 @@ public class frmPatient extends javax.swing.JFrame {
         });
 
         // Get Appointments
+        jComboBox12.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "*Day*", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
+
+        jComboBox13.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "*Month*", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" }));
+
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "*Year*", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027" }));
+
         String[] cities = database.getAvailableCity("Hospital").toArray(new String[0]);
         jComboBox14.setModel(new javax.swing.DefaultComboBoxModel<>(cities));
         jComboBox14.addActionListener(new ActionListener() {
@@ -940,7 +946,7 @@ public class frmPatient extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {
                 try {
                     String[] counties = database.getAvailableCounty("Hospital",
-                            (String) jComboBox15.getSelectedItem()).toArray(new String[0]);
+                            (String) jComboBox14.getSelectedItem()).toArray(new String[0]);
                     jComboBox15.setModel(new DefaultComboBoxModel<>(counties));
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();

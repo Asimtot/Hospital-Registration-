@@ -5,71 +5,21 @@ package GUI.PatientGUI;/*
  */
 
 import Database.Database;
-import GUI.MainGUI.frmDoctor;
 import GeneralInfo.Address;
 import GeneralInfo.Consultation;
-import GeneralInfo.Disease;
 import GeneralInfo.Notification;
-import Person.Doctor;
-import Database.Database;
-import GUI.DoctorGUI.pnlDoctorData;
-import GUI.DoctorGUI.pnlPatientData;
 import GUI.Helpers.UpdatedTable;
-import Person.Doctor;
 import Person.Patient;
-import Person.Task;
 import Schedule.Appointment;
-import java.awt.CardLayout;
-import java.awt.Color;
+
 import java.awt.Component;
-import java.awt.Cursor;
-import java.awt.EventQueue;
-import java.awt.Font;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.AbstractListModel;
-import javax.swing.BorderFactory;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.DropMode;
-import javax.swing.GroupLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JLayeredPane;
-import javax.swing.JList;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JPanel;
-import javax.swing.JProgressBar;
-import javax.swing.JRadioButton;
-import javax.swing.JScrollPane;
-import javax.swing.JSeparator;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.UIManager.LookAndFeelInfo;
-import javax.swing.table.DefaultTableModel;
-
-import java.time.format.DateTimeFormatter;
 
 /**
  *

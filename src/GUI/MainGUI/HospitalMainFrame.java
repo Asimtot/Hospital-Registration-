@@ -5,8 +5,6 @@ package GUI.MainGUI;/*
  */
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableRowSorter;
 
 import GUI.DoctorGUI.pnlDoctorData;
 import GUI.Helpers.*;

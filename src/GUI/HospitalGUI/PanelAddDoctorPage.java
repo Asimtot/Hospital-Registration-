@@ -291,7 +291,9 @@ public class PanelAddDoctorPage extends javax.swing.JPanel {
                 doctor.setName(jTextField33.getText() + " " + jTextField34.getText());
                 doctor.setEmail(jTextField35.getText());
                 doctor.setPassword(jTextField36.getText());
-                //doctor.setID() //FIXME Doctor ID, phoneNumber, Nationality
+                doctor.setNationalId(jTextField37.getText());
+                doctor.setNationality(jTextField38.getText());
+                doctor.setTelNo(jTextField39.getText());
                 department.getHospital().addDoctor(doctor,department);
                 database.add(doctor);
                 jTableDepartmentDoctors1.update();

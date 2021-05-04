@@ -427,7 +427,7 @@ public class pnlPatientData extends javax.swing.JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 HolderPanel.removeAll();
-                HolderPanel.add(new pnlTransferPatient());
+                HolderPanel.add(new pnlTransferPatient(doctor,patient,database));
                 HolderPanel.repaint();
                 HolderPanel.revalidate();
             }

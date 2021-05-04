@@ -4,17 +4,39 @@ package GUI.DoctorGUI;/*
  * and open the template in the editor.
  */
 
+import Database.Database;
+import GUI.Others.frmSuccessful;
+import GeneralInfo.Address;
+import Person.Doctor;
+import Person.Patient;
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 /**
  *
  * @author enbadem
  */
 public class pnlNewPatient extends javax.swing.JPanel {
 
+    Doctor doctor;
+    Database database;
+    JPanel HolderPanel;
+    JPanel priorPanel;
+    String name;
     /**
      * Creates new form pnlNewPatient
      */
-    public pnlNewPatient() {
-        initComponents();
+    public pnlNewPatient(Doctor doctor, Database database, JPanel HolderPanel, JPanel priorPanel, String name) {
+        this.doctor = doctor;
+        this.database = database;
+        this.HolderPanel = HolderPanel;
+        this.priorPanel = priorPanel;
+        this.name = name;
+        componentInitializer();
+        initComponents(); // automatic design code
+        listenerInitializer();
     }
 
     /**
@@ -88,7 +110,6 @@ public class pnlNewPatient extends javax.swing.JPanel {
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Demographic Information");
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
@@ -231,6 +252,52 @@ public class pnlNewPatient extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void componentInitializer(){}
+    private void listenerInitializer(){
+        jTextField1.setText(name);
+        jLabel12.setText("Address:");
+        jLabel14.setText("Tel No:");
+        jButton1.addActionListener(new ActionListener() {
+            // "cancel" button
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                HolderPanel.removeAll();
+                HolderPanel.add(priorPanel);
+                HolderPanel.repaint();
+                HolderPanel.revalidate();
+            }
+        });
+        jButton2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String name = jTextField1.getText();
+                String nationalId = jTextField2.getText();
+                String email = jTextField3.getText();
+                String sex = jTextField4.getText();
+
+                String telNo = jTextField12.getText();
+                String nationality = jTextField9.getText();
+                String address = jTextField10.getText();
+                boolean inICU = jCheckBox1.isSelected();
+
+                if (name.equals("") || nationalId.equals("") || email.equals("")){
+                    // FIXME error message
+                }
+                else{
+                    Patient patient = new Patient(name, email, telNo, nationalId, nationality, sex);
+                    patient.setRandomPassword();
+                    patient.setInIcu(inICU, doctor.getHospital());
+                    Address address1 = new Address("","",address);
+                    patient.setAddress(address1);
+                    frmSuccessful frame = new frmSuccessful();
+                    frame.setMessage("<html>Patient successfully added. </br> Patient password: " + patient.getPassword() + "</html>");
+                    frame.setVisible(true);
+                    frame.setLocationRelativeTo(null);
+                    database.add(patient);
+                }
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

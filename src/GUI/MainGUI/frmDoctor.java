@@ -3053,7 +3053,10 @@ public class frmDoctor extends javax.swing.JFrame {
                 try {
                     Patient patient = database.getPatient(name);
                     if(patient == null){
-                        System.out.println("No patient found");
+                        HolderPanel.removeAll();
+                        HolderPanel.add(new pnlNewPatient(doctor,database,HolderPanel, pnlPatientSearch, name));
+                        HolderPanel.repaint();
+                        HolderPanel.revalidate();
                     }
                     else if(patient.isPatientOf(doctor)){
                         HolderPanel.removeAll();

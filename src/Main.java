@@ -44,11 +44,8 @@ public class Main {
 //        doctor1.addTask(task1);
 //        doctor1.addTask(task2);
 
-        Database database = new Database();
-        Doctor doctor = database.getDoctor("Deniz Yılmaz");
+//        Database database = new Database();
+//        Doctor doctor = database.getDoctor("Deniz Yılmaz");
 
-        JFrame frame = new MainDoctorJFrame(doctor, database);
-        frame.setVisible(true);
-        frame.setLocationRelativeTo(null); // centers the window
     }
 }

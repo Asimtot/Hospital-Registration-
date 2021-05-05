@@ -52,7 +52,7 @@ public class Database {
 
 
 
-            System.out.println("Bağlandı");
+            System.out.println("Connected To");
         }
         catch (Exception e){
             System.out.println("Bağlanamadı");
@@ -76,8 +76,8 @@ public class Database {
     }
 
     /**
-    *Sadece name olanlarda kullanın
-    * hem name hem surnamei olanlarda name uyuşan ilk idyi verir
+    *   Just use with name
+    *   If you want to use both name and surname it will return the id first matched with name
     */
     public int getIdByName(String name,String objectName) throws SQLException{
         Statement statement= connection.createStatement();
@@ -275,8 +275,15 @@ public class Database {
         return true;
     }
 
-    
 
+    /**
+     *  @author Emre Uğur
+     *  @param
+     *  @return
+     *
+     *  Below all the methods created for getting the information from the database
+     *  You can find out which info we are taking from the database by looking the return type
+     */
 
     public Address getAddress(int i){
         session= factory.getCurrentSession();
@@ -530,9 +537,9 @@ public class Database {
         return p;
     }
     /**
-    * Kapasite almak için hospital.getIcu
-    * Doktor sayısı için hospital.getHospitalDoctors.size()
-    * Departman sayısı için hospital.getDepartments.size()
+    * For capacity hospital.getIcu
+    * For Number of doctors hospital.getHospitalDoctors.size()
+    * For department count hospital.getDepartments.size()
     */
     public ArrayList<Hospital>getAllHospital() throws SQLException{
         Statement statement= connection.createStatement();
@@ -552,7 +559,7 @@ public class Database {
 
     }
     /**
-    * Hasta sayısı için disease.getPatients.size()
+    * For patient number disease.getPatients.size()
     * 
     * 
     */
@@ -573,9 +580,7 @@ public class Database {
         return arr;
     }
     /**
-    * kullanan hasta sayısı için medication.getPrescriptions.size()
-    * 
-    * 
+    * For patient currently using the medication medication.getPrescriptions.size()
     */
     public ArrayList<Medication> getAllMedication() throws SQLException{
         Statement statement= connection.createStatement();
@@ -607,8 +612,14 @@ public class Database {
 
     }
 
-    
 
+    /**
+     *  @author Emre Uğur
+     *  @param args
+     *  @throws SQLException
+     *
+     *  Main method is just created for maintaining the tests
+     */
     public static void main(String[] args) throws SQLException {
         Database database= new Database();
 
@@ -619,18 +630,7 @@ public class Database {
         Hospital hacettepe= new Hospital("Hacettepe",200,"0312 123 3232","hacettepe@hacettepe.com.tr");
         Address hacettepeAddress= new Address("Ankara", "Altındağ", "1234.sok");
 
-        //Hospital 
-        
-        
-       
-        
-        
-        
-        
-
-        
-
-            
+        //Hospital
     } 
 
 

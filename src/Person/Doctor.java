@@ -16,6 +16,10 @@ import Database.Database;
  * Doctor class
  * @author Eylul Badem
  * @version 1.0, 21.04.2021
+ *
+ * This is class is reperesenting the Doctor.
+ * Doctor can use its method via Doctor GUI
+ * Doctor can manipulate the database by using the methods in this class via Doctor GUI.
 */
 @Entity
 @PrimaryKeyJoinColumn(name = "id")

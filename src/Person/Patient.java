@@ -1,3 +1,11 @@
+/**
+ *  @authors Eylül Badem, Emre Uğur, Kardelen Ceren, Yusuf Doğan
+ *  This class is created for representing the Patient which is recorded on the Database
+ *  After the user login as a patient,
+ *  Patient can use this class methods via Patient GUI which he can read and write the info on database
+ *  and manipulate the data.
+ */
+
 package Person;
 import java.util.ArrayList;
 

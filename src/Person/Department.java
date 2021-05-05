@@ -21,6 +21,8 @@ import Schedule.Appointment;
  * Department Class
  * @author Yusuf Doğan
  * @version 20/04/2021
+ *
+ * This class is created for representing the department info
  */
 
 @Entity

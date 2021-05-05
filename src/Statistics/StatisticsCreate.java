@@ -1,10 +1,10 @@
+/**
+ *  @author Efe Can Tepe
+ *  It is a pop up frame for user to interact which graph he wants to use
+ */
+
 package Statistics;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 import java.awt.event.*;
 import java.sql.SQLException;
@@ -12,7 +12,7 @@ import javax.swing.*;
 
 /**
  *
- * @author Lenovo
+ *  @author Efe Can Tepe
  */
 public class StatisticsCreate extends javax.swing.JFrame implements WindowListener{
 
@@ -22,7 +22,10 @@ public class StatisticsCreate extends javax.swing.JFrame implements WindowListen
     ButtonGroup dimensionChart;
     StatisticsTab stat;
 
-
+    /*
+        Constructor takes the stat as a parameter since we need to add
+        panels into JTabbedPane
+    */
     public StatisticsCreate(StatisticsTab stat){
 
         this.stat = stat;

@@ -1,3 +1,14 @@
+/**
+ * Hospital Class
+ * @author Yusuf Doğan
+ * @version 20/04/2021
+ *
+ * This class is created for representing the information of the Hospital.
+ * A doctor can read the data of the Hospital.
+ * A Admin can both read and write the data of the Hospital
+ * A Patient mainly does not access of the information of the Hospital though they are some exceptions
+ */
+
 package Person;
 import java.util.List;
 import java.util.ArrayList;
@@ -7,11 +18,7 @@ import javax.persistence.*;
 import GeneralInfo.*;
 import Schedule.Appointment;
 
-/**
- * Hospital Class
- * @author Yusuf Doğan
- * @version 20/04/2021
- */
+
 @Entity
 @Table(name = "Hospital")
 public class Hospital {

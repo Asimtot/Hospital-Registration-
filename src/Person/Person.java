@@ -21,7 +21,10 @@ import GeneralInfo.*;
  * Person class
  * @author Eylul Badem
  * @version 1.0, 21.04.2021
+ *
+ * Person class is created for being the parent class of the 3 user type: Admin, Doctor, Patient
 */
+
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "Person")
@@ -47,7 +50,7 @@ public class Person {
     private String nationalId;
     @Column(name= "nationality")
     private String nationality;
-    
+
     @OneToMany(mappedBy = "receiver")
     private List<Notification> notifications;
 
@@ -83,7 +86,7 @@ public class Person {
         notifications = new ArrayList<Notification>();
     }
 
-    //for patient&Doctopr
+    //for patient and Doctor
     public Person ( String name, String email, String password ,String telNo,String nationalId, String nationality)
     {
         this.name = name;
@@ -98,7 +101,7 @@ public class Person {
 
 
 
-    // Methods
+    // Getter Methods for instance variables
     
     public String getName()
     {
@@ -151,6 +154,11 @@ public class Person {
         return check;
     }
 
+    /**
+     *   @author Eylül Badem
+     *   Basic setters for the instance variables
+     */
+
     public void setName(String name) {
         this.name = name;
     }
@@ -183,6 +191,13 @@ public class Person {
         this.telNo = telNo;
     }
 
+    /**
+     *  @author Eylül Badem, Kardelen Ceren
+     *  @param length
+     *  @return
+     *
+     *  For better testing and finding out edge cases we are creating the password of the people randomly
+     */
     public static String createRandomPassword(int length){
         final char[] CHARS = {'0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f','g','h','j','k',
                 'l','m','n','o', 'p','q','r','s','t','u','v','w','x','y','z', 'A','B','C','D','E','F','G','H','J',

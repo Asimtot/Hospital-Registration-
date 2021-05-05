@@ -364,7 +364,8 @@ public class pnlTransferPatient extends javax.swing.JPanel {
                     doctor.referPatient(patient,jTable1.getList().get(row),jCheckBox1.isSelected());
                     database.update(patient);
                 }
-                // FIXME successful message and then back to the panel?
+                JOptionPane optionPane = new JOptionPane();
+                optionPane.showMessageDialog(frame, "Transfer Successful");
             }
         });
 
@@ -385,6 +386,7 @@ public class pnlTransferPatient extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
+    private JFrame frame;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;

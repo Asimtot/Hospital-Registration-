@@ -1,6 +1,10 @@
+/**
+ * Task class is create for representing the tasks multiple user can be assigned
+ * @author Eylul Badem
+ * @version 1.0, 21.04.2021
+ */
+
 package Person;
-
-
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,11 +16,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-/**
- * Task class
- * @author Eylul Badem
- * @version 1.0, 21.04.2021
-*/
+
 @Entity
 @Table(name = "Task")
 public class Task {

@@ -1,19 +1,16 @@
-package Statistics;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ *  @author Efe Can Tepe
+ *  This is the Tabbed Frame for user to wander around multiple Graphics at one Pane
+ *  It is a created for showing the graphs on the pane.
+ *  Also user can create chart via using create button in StatisticsTab
  */
 
+package Statistics;
 
 import java.awt.Color;
 import javax.swing.*;
 
-/**
- *
- * @author Lenovo
- */
 public class StatisticsTab extends javax.swing.JFrame {
 
     public JPanel returnPanel;
@@ -143,17 +140,17 @@ public class StatisticsTab extends javax.swing.JFrame {
         JFrame frame = new StatisticsCreate(this);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-        frame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-
-
+        frame.setDefaultCloseOperation(DISPOSE_ON_CLOSE); // We set dispose on close since we do not want to exit from all application
     }
 
+    //Changing the color of the button when mouse enter in that frame
     private void jButton1MouseEntered(java.awt.event.MouseEvent evt) {
         jButton1.setBackground(Color.red);
         jButton1.setForeground(Color.white);
 
     }
 
+    // re-Change the color of the button when the user exit the button
     private void jButton1MouseExited(java.awt.event.MouseEvent evt) {
         jButton1.setBackground(null);
         jButton1.setForeground(null);
@@ -165,7 +162,11 @@ public class StatisticsTab extends javax.swing.JFrame {
 
 
     /**
-     * @param args the command line arguments
+     *  @param args the command line arguments
+     *  @author Efe Can Tepe
+     *
+     *  main method was kept due to maintaining the application much more easier
+     *  in the future.
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

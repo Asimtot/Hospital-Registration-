@@ -210,7 +210,7 @@ public class Schedule {
      * @param appDate as LocalDateTime Object
      * @return list of DailySchedule
      */
-    private DailySchedule findDay(LocalDateTime appDate){
+    public DailySchedule findDay(LocalDateTime appDate){
         LocalDateTime date;
         //((List<DailySchedule>)days).trimToSize();
         for (int i = days.size() - 1; i >= 0; i--) {

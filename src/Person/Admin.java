@@ -18,6 +18,9 @@ public class Admin extends Person{
         super(name,email,password);
         this.hospital= hospital;
     }
+    public Admin(String name, String email, String password){
+        super(name,email,password);
+    }
 
     public Admin(){}
 

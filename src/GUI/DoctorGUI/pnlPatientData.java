@@ -487,13 +487,13 @@ public class pnlPatientData extends javax.swing.JPanel {
         jCheckBox1.setSelected(patient.getInIcu());
         jCheckBox1.setText("in ICU");
         if (jCheckBox1.isSelected())
-            jCheckBox1.setText("in ICU in" + patient.getIcuHospital().getHospitalName() + "Hospital");
+            jCheckBox1.setText("in ICU in " + patient.getIcuHospital().getHospitalName() + " Hospital");
         jCheckBox1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 patient.setInIcu(jCheckBox1.isSelected(), doctor.getHospital());
                 if (jCheckBox1.isSelected())
-                    jCheckBox1.setText("in ICU in" + patient.getIcuHospital().getHospitalName() + " Hospital");
+                    jCheckBox1.setText("in ICU in " + patient.getIcuHospital().getHospitalName() + " Hospital");
                 else
                     jCheckBox1.setText("in ICU");
             }

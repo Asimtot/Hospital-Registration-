@@ -363,6 +363,13 @@ public class pnlTransferPatient extends javax.swing.JPanel {
                 if(jTable1.getList() != null){
                     doctor.referPatient(patient,jTable1.getList().get(row),jCheckBox1.isSelected());
                     database.update(patient);
+                    if (jCheckBox1.isSelected()){
+                        try {
+                            database.deletePatientFromDoctor(doctor,patient);
+                        } catch (SQLException throwables) {
+                            throwables.printStackTrace();
+                        }
+                    }
                 }
                 JOptionPane optionPane = new JOptionPane();
                 optionPane.showMessageDialog(frame, "Transfer Successful");

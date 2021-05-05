@@ -12,6 +12,7 @@ import GUI.MainGUI.frmHospital;
 import GUI.MainGUI.frmPatient;
 import Person.*;
 import javax.swing.*;
+import java.awt.*;
 import java.sql.SQLException;
 
 /**
@@ -240,6 +241,13 @@ public class frmLogin extends javax.swing.JFrame {
                a.setLocationRelativeTo(null);
                dispose();
             }
+            else {
+                JOptionPane optionPane = new JOptionPane();
+                optionPane.showMessageDialog(frame, "Invalid Username/Password", "", JOptionPane.ERROR_MESSAGE);
+
+                txtPassword.setText("");
+                txtUsername.setText("");
+            }
         }
 
         else if(btnDoctor.isSelected()){
@@ -251,7 +259,13 @@ public class frmLogin extends javax.swing.JFrame {
                 a.setLocationRelativeTo(null);
                 dispose();
             }
+            else {
+                JOptionPane optionPane = new JOptionPane();
+                optionPane.showMessageDialog(frame, "Invalid Username/Password", "", JOptionPane.ERROR_MESSAGE);
 
+                txtPassword.setText("");
+                txtUsername.setText("");
+            }
         }
 
         else if(btnAdmin.isSelected()){
@@ -262,6 +276,13 @@ public class frmLogin extends javax.swing.JFrame {
                 a.setVisible(true);
                 a.setLocationRelativeTo(null);
                 dispose();
+            }
+            else {
+                JOptionPane optionPane = new JOptionPane();
+                optionPane.showMessageDialog(frame, "Invalid Username/Password", "", JOptionPane.ERROR_MESSAGE);
+
+                txtPassword.setText("");
+                txtUsername.setText("");
             }
         }
 
@@ -320,6 +341,7 @@ public class frmLogin extends javax.swing.JFrame {
     private javax.swing.JButton login;
     private javax.swing.JButton close;
     private javax.swing.JLabel jLabel1;
+    private JFrame frame = new JFrame();
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;

@@ -15,6 +15,10 @@ import javax.persistence.Transient;
 import Person.*;
 import Schedule.Converter;
 
+/**
+ * Notication class that enable communication and informing between users
+ * @author Emre Uğur
+ */
 @Entity
 @Table(name = "Notification")
 public class Notification{

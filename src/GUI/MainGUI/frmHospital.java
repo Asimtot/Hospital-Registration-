@@ -16,6 +16,7 @@ import Person.*;
 import Database.Database;
 import Statistics.StatisticsTab;
 
+import java.awt.*;
 import java.awt.event.*;
 import java.sql.SQLException;
 import java.time.format.DateTimeFormatter;
@@ -59,6 +60,7 @@ public class frmHospital extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        setSize(750, 400);
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(52, 88, 130));
 
@@ -1281,6 +1283,7 @@ public class frmHospital extends javax.swing.JFrame {
             }
         });
 
+        jButton14.setVisible(false);
         jButton14.setText("REMOVE DOCTOR");
 
         pnlAddDoctorr1.setBackground(new java.awt.Color(52, 88, 130));
@@ -2269,7 +2272,7 @@ public class frmHospital extends javax.swing.JFrame {
                 Database database = new Database();
                 Hospital hospital = null;
                 try {
-                    hospital = database.getHospital("FirstHospital");
+                    hospital = database.getHospital("hacettepe");
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }
@@ -2288,6 +2291,7 @@ public class frmHospital extends javax.swing.JFrame {
                 frame.setVisible(true);
                 frame.setLocationRelativeTo(null); // centers the window
                 //System.out.println(hospital.getAllPatients().get(0).getLastConsultation().getDate());
+
             }
         });
     }

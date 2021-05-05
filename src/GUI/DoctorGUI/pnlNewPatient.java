@@ -5,6 +5,7 @@ package GUI.DoctorGUI;/*
  */
 
 import Database.Database;
+import GUI.Others.frmInvalid;
 import GUI.Others.frmSuccessful;
 import GeneralInfo.Address;
 import Person.Doctor;
@@ -281,7 +282,10 @@ public class pnlNewPatient extends javax.swing.JPanel {
                 boolean inICU = jCheckBox1.isSelected();
 
                 if (name.equals("") || nationalId.equals("") || email.equals("")){
-                    // FIXME error message
+                    frmInvalid frame = new frmInvalid();
+                    frame.setVisible(true);
+                    frame.setLocationRelativeTo(null);
+                    frame.setMessage("Name, ID and email must be filled in");
                 }
                 else{
                     Patient patient = new Patient(name, email, telNo, nationalId, nationality, sex);
@@ -293,6 +297,7 @@ public class pnlNewPatient extends javax.swing.JPanel {
                     frmSuccessful frame = new frmSuccessful();
                     frame.setVisible(true);
                     frame.setLocationRelativeTo(null);
+                    frame.setMessage("<html> " + patient.getName() + "successfully added. </br> Patient's password: " + patient.getPassword() + "</html>");
                     database.add(patient);
                 }
             }

@@ -12,6 +12,7 @@ import GUI.MainGUI.frmHospital;
 import GUI.MainGUI.frmPatient;
 import Person.*;
 import javax.swing.*;
+import java.awt.*;
 import java.sql.SQLException;
 
 /**
@@ -23,9 +24,8 @@ public class frmLogin extends javax.swing.JFrame {
     private Database database;
 
     public frmLogin() {
+        database = new Database();
         initComponents();
-
-        database = new Database(); // Getting the database for usage
 
     }
 
@@ -98,7 +98,7 @@ public class frmLogin extends javax.swing.JFrame {
         labelLogin.setFont(new java.awt.Font("Noto Sans", 1, 40)); // NOI18N
         labelLogin.setForeground(new java.awt.Color(255, 255, 255));
         labelLogin.setText("  HEALTH CHECK ");
-        labelLogin.setIcon(new javax.swing.ImageIcon("/GUI/images/AppLogoSmall.png"));
+        labelLogin.setIcon(new javax.swing.ImageIcon(this.getClass().getResource("/GUI/images/AppLogoSmall.png")));
 
         labelVersion.setForeground(new java.awt.Color(255, 255, 255));
         labelVersion.setText("version 1.0");
@@ -164,7 +164,7 @@ public class frmLogin extends javax.swing.JFrame {
                             .addComponent(btnPatient, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(52, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 70, Short.MAX_VALUE)
                 .addComponent(labelLogin)
                 .addGap(161, 161, 161))
         );
@@ -172,7 +172,7 @@ public class frmLogin extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(38, Short.MAX_VALUE)
-                .addComponent(labelLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(labelLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -238,23 +238,33 @@ public class frmLogin extends javax.swing.JFrame {
             if(patient != null && patient.getPassword().equals(txtPassword.getText())){
                frmPatient a = new frmPatient(patient, database);
                a.setVisible(true);
+               a.setLocationRelativeTo(null);
+               dispose();
+            }
+            else {
+                JOptionPane optionPane = new JOptionPane();
+                optionPane.showMessageDialog(frame, "Invalid Username/Password", "", JOptionPane.ERROR_MESSAGE);
+
+                txtPassword.setText("");
+                txtUsername.setText("");
             }
         }
 
         else if(btnDoctor.isSelected()){
             Doctor doctor = database.getDoctorByMail(txtUsername.getText());
 
-            System.out.println(doctor.getPassword());
-
-            System.out.println(txtPassword.getText());
-
             if(doctor != null && doctor.getPassword().equals(new String(txtPassword.getPassword()))){
                 frmDoctor a = new frmDoctor(doctor, database);
                 a.setVisible(true);
+                a.setLocationRelativeTo(null);
+                dispose();
             }
+            else {
+                JOptionPane optionPane = new JOptionPane();
+                optionPane.showMessageDialog(frame, "Invalid Username/Password", "", JOptionPane.ERROR_MESSAGE);
 
-            else{
-                System.out.println("hata");
+                txtPassword.setText("");
+                txtUsername.setText("");
             }
         }
 
@@ -263,6 +273,16 @@ public class frmLogin extends javax.swing.JFrame {
 
             if(admin!=null && admin.getPassword().equals(txtPassword.getText())){
                 frmHospital a = new frmHospital(admin,admin.getHospital(), database);
+                a.setVisible(true);
+                a.setLocationRelativeTo(null);
+                dispose();
+            }
+            else {
+                JOptionPane optionPane = new JOptionPane();
+                optionPane.showMessageDialog(frame, "Invalid Username/Password", "", JOptionPane.ERROR_MESSAGE);
+
+                txtPassword.setText("");
+                txtUsername.setText("");
             }
         }
 
@@ -321,6 +341,7 @@ public class frmLogin extends javax.swing.JFrame {
     private javax.swing.JButton login;
     private javax.swing.JButton close;
     private javax.swing.JLabel jLabel1;
+    private JFrame frame = new JFrame();
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;

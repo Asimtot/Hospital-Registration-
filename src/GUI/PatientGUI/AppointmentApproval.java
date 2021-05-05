@@ -192,7 +192,7 @@ public class AppointmentApproval extends javax.swing.JFrame {
         jButton1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String name = "Appointment between " + patient.getName() + " and " + doctor.getName();
+                String name = "Appointment";
                 String startingTime = (String) jComboBox1.getSelectedItem();
                 int startingHour = Integer.parseInt(startingTime.substring(0,2));
                 int startingMinute = Integer.parseInt(startingTime.substring(3,5));

@@ -7,6 +7,10 @@ import Person.Department;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Medication Class
+ * Efe Can Tepe
+ */
 @Entity
 @Table(name = "Medication")
 public class Medication {
@@ -40,11 +44,11 @@ public class Medication {
                inverseJoinColumns = @JoinColumn(name="Disease_id"))
     private List<Disease> dClashes= new ArrayList<>();
 
-        //DATABASE için gerekli parametreler
+    //necessary parameters for DATABASE
     @ManyToMany(mappedBy = "medications")
     private List<Prescription> prescriptions;
 
-        //CONSTRUCTORS
+    //CONSTRUCTORS
     Medication(){}
 
     public Medication(String name, String info){
@@ -55,25 +59,25 @@ public class Medication {
         //METHODS
     public void addClasshingDisease(Disease d){
         dClashes.add(d);
-    }
+    }  //adding disease to medication
 
     public void addClashingMedication(Medication m){
         mClashes.add(m);
-    }
+    } //adding disease to medication
 
     public void setName(String name) {
         this.name = name;
-    }
+    } //medication name
 
     public void setInfo(String info) {
         this.info = info;
-    }
+    } // information abt medication
 
     public void setRelatedField(Department relatedField) {
         this.relatedField = relatedField;
     }
 
-            //GETTERS
+    //GETTERS
     public int getId() {
         return id;
     }

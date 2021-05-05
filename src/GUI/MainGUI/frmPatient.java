@@ -304,7 +304,7 @@ public class frmPatient extends javax.swing.JFrame {
                     .addGroup(pnlPatientMainLayout.createSequentialGroup()
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18))
@@ -656,9 +656,9 @@ public class frmPatient extends javax.swing.JFrame {
         pnlAppointmentsListLayout.setHorizontalGroup(
             pnlAppointmentsListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlAppointmentsListLayout.createSequentialGroup()
-                .addGap(76, 76, 76)
+                .addGap(46, 46, 46)
                 .addGroup(pnlAppointmentsListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1033, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(204, Short.MAX_VALUE))
         );
@@ -726,11 +726,11 @@ public class frmPatient extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Medical History");
 
-        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\enbadem\\Desktop\\ProjeDeneme\\src\\main\\java\\images\\Body.png")); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon("/GUI/images/Body.png")); // NOI18N
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Blood T.");
+        jLabel7.setText("");
 
         javax.swing.GroupLayout pnlPatientHistoryLayout = new javax.swing.GroupLayout(pnlPatientHistory);
         pnlPatientHistory.setLayout(pnlPatientHistoryLayout);
@@ -851,14 +851,15 @@ public class frmPatient extends javax.swing.JFrame {
             public String[][] createTable() {
                 if (frmPatient.this.patient.getInfo() != null && frmPatient.this.patient.getInfo().getConsultations() != null) {
                     List<Consultation> consultationsList = frmPatient.this.patient.getInfo().getConsultations();
-                    String[][] consultationTable = new String[consultationsList.size()][2];
+                    String[][] consultationTable = new String[consultationsList.size()][4];
                     this.setList(consultationsList);
 
                     for (int i = 0; i < consultationTable.length; ++i) {
-                            consultationTable[i][0] = ((Consultation) consultationsList.get(i)).getDoctor().getHospital().getHospitalName();
-                            consultationTable[i][1] = ((Consultation) consultationsList.get(i)).getDiagnosis().toString();
-                            consultationTable[i][2] = ((Consultation) consultationsList.get(i)).getPrescription().toString();
-                            consultationTable[i][3] = ((Consultation) consultationsList.get(i)).getDate().format(dateTimeFormatter);
+                            consultationTable[i][0] = consultationsList.get(i).getDoctor().getHospital().getHospitalName();
+                            consultationTable[i][1] = consultationsList.get(i).getDiagnosis().get(0).getName();
+                            consultationTable[i][2] = consultationsList.get(i).getPrescription().getMedications().get(0).getName()
+                                    + " " + consultationsList.get(i).getPrescription().getFrequency();
+                            consultationTable[i][3] = consultationsList.get(i).getDate().format(dateTimeFormatter);
                     }
 
                     return consultationTable;
@@ -1034,7 +1035,7 @@ public class frmPatient extends javax.swing.JFrame {
                 JFrame frame = null;
 
                 try {
-                    this.patient = this.database.getPatient("Kağan Ünal");
+                    this.patient = this.database.getPatient("Esra Erol");
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }

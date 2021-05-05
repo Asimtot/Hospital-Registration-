@@ -28,6 +28,8 @@ public class FrmNewPasworrd extends javax.swing.JFrame {
         componentInitializer();
         initComponents();
         listenerInitializer();
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setLocationRelativeTo(null);
     }
 
     /**

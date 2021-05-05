@@ -2226,13 +2226,43 @@ public class frmHospital extends javax.swing.JFrame {
             }
         });
 
+        jTextField12.setText(admin.getEmail());
         jToggleButton1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 admin.setEmail(jTextField12.getText());
-                database.update(admin); // FIXME test this
+                database.update(admin);
             }
         });
+
+        jTextField11.setText(hospital.getEmail());
+        jToggleButton3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                hospital.setEmail(jTextField11.getText());
+                database.update(hospital);
+            }
+        });
+
+        jTextField13.setText(hospital.getPhoneNumber());
+        jToggleButton4.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                hospital.setPhoneNumber(jTextField13.getText());
+                database.update(hospital);
+            }
+        });
+
+        jTextField14.setText(admin.getTelNo());
+
+        jToggleButton5.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                admin.setTelNo(jTextField14.getText());
+                database.update(admin);
+            }
+        });
+        
 
     }
 
@@ -2271,12 +2301,8 @@ public class frmHospital extends javax.swing.JFrame {
             public void run() {
                 Database database = new Database();
                 Hospital hospital = null;
-                try {
-                    hospital = database.getHospital("hacettepe");
-                } catch (SQLException throwables) {
-                    throwables.printStackTrace();
-                }
-//                Hospital hospital = new Hospital();
+                hospital = database.getHospital(48);
+                //                Hospital hospital = new Hospital();
 //                Department department = new Department();
 //                Doctor doctor = new Doctor();
 //                hospital.addDepartment(department);

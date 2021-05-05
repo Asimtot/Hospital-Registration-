@@ -2804,8 +2804,12 @@ public class frmDoctor extends javax.swing.JFrame {
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         int row = jTable4.getRow();
-        doctor.cancelAppointment(jTable4.getList().get(row));
-        database.update(doctor.getSchedule());
+        Appointment app = jTable4.getList().get(row);
+        doctor.cancelAppointment(app);
+        database.update(app);
+        jTable7.update();
+        jTable4.update();
+        jTable1.update();
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {//GEN-FIRST:event_jButton12ActionPerformed
@@ -2826,8 +2830,12 @@ public class frmDoctor extends javax.swing.JFrame {
 
     private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
         int row = jTable7.getRow();
-        doctor.cancelAppointment(jTable7.getList().get(row));
-        database.update(doctor.getSchedule());
+        Appointment app = jTable7.getList().get(row);
+        doctor.cancelAppointment(app);
+        database.update(app);
+        jTable7.update();
+        jTable4.update();
+        jTable1.update();
     }//GEN-LAST:event_jButton20ActionPerformed
 
     private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton21ActionPerformed
@@ -3409,7 +3417,7 @@ public class frmDoctor extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             Database database = new Database();
-            Doctor doctor = database.getDoctor(140);
+            Doctor doctor = database.getDoctor("Emre Ugur");
             public void run() {
                 JFrame frame = null;
                 try {

@@ -847,7 +847,7 @@ public class frmPatient extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton51ActionPerformed
 
     private void componentInitializer() {
-        this.jTable1 = new UpdatedTable<Consultation>(new String[]{"Hospital", "Disease", "Medication", "Date"}, false, 2) {
+        this.jTable1 = new UpdatedTable<Consultation>(new String[]{"Hospital", "Disease", "Medication", "Date"}, false, 4) {
             public String[][] createTable() {
                 if (frmPatient.this.patient.getInfo() != null && frmPatient.this.patient.getInfo().getConsultations() != null) {
                     List<Consultation> consultationsList = frmPatient.this.patient.getInfo().getConsultations();

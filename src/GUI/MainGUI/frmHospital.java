@@ -2033,10 +2033,10 @@ public class frmHospital extends javax.swing.JFrame {
                 Collections.sort(consultationList);
                 setList(consultationList);
                 String[][] consultationTable = new String[consultationList.size()][3];
-                for (int i = 0; i < consultationTable.length; i++) { //FIXME
-//                    consultationTable[i][0] = consultationList.get(i).getDate().format(dateTimeFormatter);
-//                    consultationTable[i][1] = consultationList.get(i).getDoctor().getName();
-//                    consultationTable[i][2] = consultationList.get(i).getGeneralInfo().getPatient().getName();
+                for (int i = 0; i < consultationTable.length; i++) {
+                    consultationTable[i][0] = consultationList.get(i).getDate().format(dateTimeFormatter);
+                    consultationTable[i][1] = consultationList.get(i).getDoctor().getName();
+                    consultationTable[i][2] = consultationList.get(i).getGeneralInfo().getPatient().getName();
                 }
                 return consultationTable;
             }
@@ -2262,7 +2262,7 @@ public class frmHospital extends javax.swing.JFrame {
                 database.update(admin);
             }
         });
-        
+
 
     }
 
@@ -2302,22 +2302,10 @@ public class frmHospital extends javax.swing.JFrame {
                 Database database = new Database();
                 Hospital hospital = null;
                 hospital = database.getHospital(48);
-                //                Hospital hospital = new Hospital();
-//                Department department = new Department();
-//                Doctor doctor = new Doctor();
-//                hospital.addDepartment(department);
-//                hospital.addDoctor(doctor,department);
-//                Patient patient = new Patient("hasta ismi", "epost");
-//                doctor.assignPatient(patient);
-//                Consultation consultation = new Consultation();
-//                consultation.setDate(LocalDateTime.now());
-//                consultation.setDoctor(doctor);
-//                patient.addConsultation(consultation);
-                JFrame frame = new frmHospital(null, hospital,database);
+                Admin admin = new Admin();
+                JFrame frame = new frmHospital(admin, hospital,database);
                 frame.setVisible(true);
                 frame.setLocationRelativeTo(null); // centers the window
-                //System.out.println(hospital.getAllPatients().get(0).getLastConsultation().getDate());
-
             }
         });
     }

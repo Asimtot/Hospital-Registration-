@@ -910,6 +910,9 @@ public class frmPatient extends javax.swing.JFrame {
 
         String[] cities = database.getAvailableCity("Hospital").toArray(new String[0]);
         jComboBox14.setModel(new javax.swing.DefaultComboBoxModel<>(cities));
+        String[] counties = database.getAvailableCounty("Hospital",
+                (String) jComboBox14.getSelectedItem()).toArray(new String[0]);
+        jComboBox15.setModel(new DefaultComboBoxModel<>(counties));
         jComboBox14.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

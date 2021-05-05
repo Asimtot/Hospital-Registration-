@@ -281,6 +281,9 @@ public class pnlTransferPatient extends javax.swing.JPanel {
 
         String[] cities = database.getAvailableCity("Hospital").toArray(new String[0]);
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(cities));
+        String[] counties = database.getAvailableCounty("Hospital",
+                (String) jComboBox1.getSelectedItem()).toArray(new String[0]);
+        jComboBox2.setModel(new DefaultComboBoxModel<>(counties));
         jComboBox1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

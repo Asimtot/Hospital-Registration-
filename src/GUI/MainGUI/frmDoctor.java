@@ -3112,6 +3112,11 @@ public class frmDoctor extends javax.swing.JFrame {
 
         String[] cities = database.getAvailableCity("Hospital").toArray(new String[0]);
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(cities));
+        // first selection
+        String[] counties = database.getAvailableCounty("Hospital",
+                (String) jComboBox2.getSelectedItem()).toArray(new String[0]);
+        jComboBox1.setModel(new DefaultComboBoxModel<>(counties));
+
         jComboBox2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -3386,6 +3391,7 @@ public class frmDoctor extends javax.swing.JFrame {
     }
     public void updatePatientTable(){
         jTable6.update();
+        jTable6.search(jTextField14.getText());
     }
 
 
@@ -3419,7 +3425,7 @@ public class frmDoctor extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             Database database = new Database();
-            Doctor doctor = database.getDoctor("Emre Ugur");
+            Doctor doctor = database.getDoctor("Eris Han");
             public void run() {
                 JFrame frame = null;
                 try {

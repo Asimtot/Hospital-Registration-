@@ -260,7 +260,9 @@ public class pnlHospitalData extends javax.swing.JPanel {
     private void listenerInitializer(){
         jTable1.update();
         if (hospital.getAddress() != null)
-            jLabel33.setText("Address:" + hospital.getAddress().getAddress());
+            jLabel33.setText("Address:" + hospital.getAddress().getAddress() + " "
+                    + hospital.getAddress().getCounty() + " "
+                    + hospital.getAddress().getCity());
         jLabel34.setText("<html>Email: " + hospital.getEmail() + "<br/>Phone Number: " + hospital.getPhoneNumber() + "</html>");
         jLabel35.setText("Intensive Care Unit Beds");
         jLabel36.setText("Occupancy:" + hospital.getIcuOccupancy());

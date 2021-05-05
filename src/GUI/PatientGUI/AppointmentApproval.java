@@ -201,6 +201,7 @@ public class AppointmentApproval extends javax.swing.JFrame {
                 database.add(appointment);
                 doctor.addAppointment(appointment);
                 database.update(doctor.getSchedule());
+                
                 dispose();
             }
         });

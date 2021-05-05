@@ -124,6 +124,7 @@ public class DailySchedule {
             return false;
         else{
             appointments.remove(index);
+            app.setDailySchedule(null);
             return true;
         }
     }

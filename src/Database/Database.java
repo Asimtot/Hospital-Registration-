@@ -640,7 +640,19 @@ public class Database {
 
         statement.executeUpdate(sql);
         statement.close();
+    }
 
+    public boolean isPatientOf(Doctor d, Patient p) throws SQLException {
+        Statement statement= connection.createStatement();
+        int d_id= d.getId();
+        int p_id= p.getID();
+
+        String sql= "SELECT * FROM DoctorPatientJoin WHERE Doctor_id=" + d_id + " AND Patient_id=" + p_id + ";";
+        System.out.println(sql);
+
+        ResultSet rs= statement.executeQuery(sql);
+
+        return rs.next();
     }
 
 

@@ -2761,6 +2761,7 @@ public class frmDoctor extends javax.swing.JFrame {
         HolderPanel.repaint();
         HolderPanel.revalidate();
     }//GEN-LAST:event_jMenu1MouseClicked
+    //GEN-LAST:event_jMenu1MouseClicked
 
     private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
 
@@ -2775,6 +2776,7 @@ public class frmDoctor extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btnSeeOrAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeeOrAddActionPerformed
+        jTable6.update();
         HolderPanel.removeAll();
         HolderPanel.add(pnlPatientSearch);
         HolderPanel.repaint();
@@ -3068,7 +3070,7 @@ public class frmDoctor extends javax.swing.JFrame {
                         HolderPanel.repaint();
                         HolderPanel.revalidate();
                     }
-                    else if(patient.isPatientOf(doctor)){
+                    else if(database.isPatientOf(doctor,patient)){
                         HolderPanel.removeAll();
                         HolderPanel.add(new pnlPatientData(doctor, patient, database, HolderPanel));
                         HolderPanel.repaint();

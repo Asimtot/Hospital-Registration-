@@ -40,7 +40,7 @@ public class Department {
     @Column(name= "equipment")
     String equipment;
 
-    @OneToMany(mappedBy = "department")
+    @OneToMany(mappedBy = "department",cascade = CascadeType.ALL)
     List<Doctor> doctors= new ArrayList<>();
 
     //DATABASE için gerekli
@@ -78,7 +78,7 @@ public class Department {
      *
      * @param d
      */
-    void addDocToDepartment( Doctor d){
+    public void addDocToDepartment( Doctor d){
         doctors.add(d);
         d.setDepartment(this);
         d.setHospital(hospital);

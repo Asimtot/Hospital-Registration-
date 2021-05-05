@@ -126,7 +126,7 @@ public class PanelNewPatientProfile extends javax.swing.JPanel {
                         .addGroup(pnlPatientProfileeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(127, 127, 127)
                         .addGroup(pnlPatientProfileeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -266,8 +266,16 @@ public class PanelNewPatientProfile extends javax.swing.JPanel {
 
         jLabel24.setText(patient.getName());
         jLabel17.setText("Contact Info:");
-        jLabel18.setText("E-mail" + patient.getEmail());
-        jLabel19.setText("Phone Number"); //FIXME
+        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel18.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel19.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel18.setText("E-mail:   " + patient.getEmail());
+
+        if ( patient.getTelNo() != null )
+            jLabel19.setText("Phone Number:   " + patient.getTelNo()); //FIXME
+        else
+            jLabel19.setText("Phone Number:   ");
+
         jTextArea1.setText("ADRESS\n");
 
         jTable4.addMouseListener(new MouseAdapter() {
